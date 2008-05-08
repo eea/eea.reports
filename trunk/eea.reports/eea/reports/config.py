@@ -1,0 +1,10 @@
+
+__author__ = """European Environment Agency <alin.voinea@eaudeweb.ro>"""
+__docformat__ = 'plaintext'
+
+PROJECTNAME = "eea.reports"
+product_globals = globals()
+
+AUTHOR = u"European Environment Agency"
+DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
+COPYRIGHTS = u'(c) Copyrights - EEA (European Environment Agency)'

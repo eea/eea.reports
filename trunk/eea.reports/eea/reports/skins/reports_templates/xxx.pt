@@ -1,0 +1,3 @@
+<tal:block content="string:Hurray!">
+
+</tal:block>

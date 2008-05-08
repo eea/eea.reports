@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="eea.reports">
+    
+  <page
+      name="file_view"
+      template="report.pt"
+      for="eea.reports.interfaces.IReportEnhanced"
+      class="slc.publications.browser.publication.PublicationPageView"
+      permission="zope2.View"
+      />
+
+</configure>

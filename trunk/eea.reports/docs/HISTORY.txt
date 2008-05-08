@@ -1,0 +1,9 @@
+Changelog for eea.reports
+
+    (name of developer listed in brackets)
+
+eea.reports - 0.1 Unreleased
+
+    - Initial package structure.
+      [zopeskel]
+

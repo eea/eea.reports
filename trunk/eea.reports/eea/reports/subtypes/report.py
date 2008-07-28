@@ -1,13 +1,15 @@
 """ Subtyping
 """
 from Products.CMFPlone import PloneMessageFactory as _
-from Products.Archetypes import atapi 
+from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from Products.Archetypes import atapi
 from zope.interface import implements
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.field import ExtensionField
 from slc.publications.subtypes.publication import SchemaExtender as PublicationSchemaExtender
 from slc.publications.subtypes.publication import ExtensionFieldMixin
 from eea.reports.config import COPYRIGHTS
+from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 
 class ReportTypeFiled(ExtensionField, ExtensionFieldMixin, atapi.StringField):
     """ """
@@ -63,6 +65,7 @@ class SchemaExtender(PublicationSchemaExtender):
                 schemata='report',
                 languageIndependent=False,
                 default=u'',
+                vocabulary=NamedVocabulary("report_types"),
                 widget=atapi.SelectionWidget(
                     label=_(u'label_reporttype', default=u'Serial title (Report type)'),
                     description=_(u'description_reporttype', default=u'Fill in report-type'),
@@ -81,6 +84,7 @@ class SchemaExtender(PublicationSchemaExtender):
                 schemata='report',
                 languageIndependent=False,
                 default=u'',
+                vocabulary=ReportYearsVocabulary(),
                 widget=atapi.SelectionWidget(
                     label=_(u'label_series_year', default=u'Serial title (Report year)'),
                     description=_(u'description_series_year', default=u'Fill in report-year'),
@@ -97,6 +101,7 @@ class SchemaExtender(PublicationSchemaExtender):
             CreatorsOrgsField('creators_orgs',
                 schemata='report',
                 languageIndependent=False,
+                vocabulary=NamedVocabulary("report_creators"),
                 widget=atapi.MultiSelectionWidget(
                     label=_(u'label_creators_orgs', default=u'Authors (organisations)'),
                     description=_(u'description_creators_orgs', default=u'Fill in authors(organisations)'),
@@ -113,6 +118,7 @@ class SchemaExtender(PublicationSchemaExtender):
             PublishersOrgsField('publishers_orgs',
                 schemata='report',
                 languageIndependent=False,
+                vocabulary=NamedVocabulary("report_publishers"),
                 widget=atapi.MultiSelectionWidget(
                     label=_(u'label_publishers_orgs', default=u'Publishers'),
                     description=_(u'description_publishers_orgs', default=u'Fill in publishers'),
@@ -128,11 +134,17 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ThemesField('themes',
                 schemata='report',
-                languageIndependent=False,
-                widget=atapi.MultiSelectionWidget(
-                    label=_(u'label_themes', default=u'Themes'),
-                    description=_(u'description_themes', default=u'Fill in themes'),
+                validators=('maxValues',),
+                vocabulary=ReportThemesVocabulary(),
+                widget=atapi.InAndOutWidget(
+                    maxValues=3,
+                    label=_(u'EEAContentTypes_label_themes', default=u'Themes'),
+                    description=_(u'EEAContentTypes_help_themes', default=u'Choose max 3 themes go with this Highlight.'),
+                    i18n_domain='EEAContentTypes',
                 ),
+                languageIndependent=True,
+                index="KeywordIndex:brains",
+                enforceVocabulary=1
             ),
             PriceField('price',
                 schemata='report',

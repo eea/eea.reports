@@ -38,12 +38,12 @@ def formatExport(data):
 
 #TODO:
 #   - export multilingual
-#   - export capitole
-#   - fix encoding problems
+#   - fix encoding and cleanup of content
 
 # Export content
 res_add("""<?xml version="1.0" encoding="utf-8"?>""")
 res_add('\n<reports>')
+
 for report in root.objectValues(report_metatype):
     if report.series_year in reports_year:
         res_add('\n<report>')
@@ -104,7 +104,8 @@ for report in root.objectValues(report_metatype):
         res_add('\n<Replaces>%s</Replaces>' % formatExport(report.Replaces))                      #lines
 
 
-        #CoverImage objects
+        ###CoverImage objects
+        #####################
         #TODO: put binary image data here?
         for img in report.objectValues('CoverImage'):
             res_add('\n<cover_image url="%s">' % img.absolute_url())
@@ -132,12 +133,14 @@ for report in root.objectValues(report_metatype):
             res_add('\n</cover_image>')
 
 
-        #Redirect objects
+        ###Redirect objects
+        ###################
         for rdr in report.objectValues('Redirect'):
             res_add('\n<redirect redirect_to="%s" />' % formatExport(rdr.redirect_to))  #string
 
 
-        #Tag objects
+        ###Tag objects
+        ##############
         for tag in report.objectValues('Report Tag'):
             res_add('\n<tag>')
 
@@ -153,14 +156,19 @@ for report in root.objectValues(report_metatype):
 
             res_add('\n</tag>')
 
-        #Language Report objects
+        ###Language Report objects
+        ##########################
         for lang in report.objectValues('Language Report'):
             res_add('\n<language_report>')
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(lang.id))                                                     #string
             res_add('\n<language>%s</language>' % formatExport(lang.language))                                   #string
             res_add('\n<title>%s</title>' % formatExport(lang.title))                                            #string
-            res_add('\n<description>%s</description>' % formatExport(lang.description))                          #text
+            try:
+                res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8'))      #text
+            except:
+                #TODO: fix exceptions
+                res_add('\n<description>ERR</description>')
             res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
             res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                          #string
             res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
@@ -174,23 +182,99 @@ for report in root.objectValues(report_metatype):
 
             #Manager Property Sheet
             res_add('\n<langreleased>%s</langreleased>' % formatExport(lang.langreleased))   #boolean
-            res_add('\n</language_report>')
 
-            #Report Chapter objects
+            ###Report Chapter objects
+            #########################
             for chp in lang.objectValues('Report Chapter'):
                 res_add('\n<report_chapter>')
+                #Basic Property Sheet
+                res_add('\n<id>%s</id>' % formatExport(chp.id))                             #string
+                res_add('\n<title>%s</title>' % formatExport(chp.title))                    #text
+                res_add('\n<content>%s</content>' % formatExport(chp.content))              #string
+                res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
+                res_add('\n<pagenumber>%s</pagenumber>' % formatExport(chp.pagenumber))     #int
+                res_add('\n<categories>%s</categories>' % formatExport(chp.categories))     #lines
+                res_add('\n<section>%s</section>' % formatExport(chp.section))              #string
+                res_add('\n<tags>%s</tags>' % formatExport(chp.tags))                       #lines
+                res_add('\n<TOC_page>%s</TOC_page>' % formatExport(chp.TOC_page))           #boolean
 
+                #Extra Property Sheet
+                res_add('\n<relations>%s</relations>' % formatExport(chp.relations))            #string
+                res_add('\n<only_links>%s</only_links>' % formatExport(chp.only_links))         #string
+                res_add('\n<external_url>%s</external_url>' % formatExport(chp.external_url))   #string
                 res_add('\n</report_chapter>')
 
-#TODO: export this objects
-###Language Report
-###     Report Chapter
-###     Report File
-###     File (zope)
-###     ReportOrder
-###     ReportOrder2
-###     Search
+            ###Report File objects
+            #########################
+            for rep_file in lang.objectValues('Report File'):
+                res_add('\n<report_file url="%s">' % rep_file.absolute_url())
+                #Basic Property Sheet
+                res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))                                       #string
+                res_add('\n<title>%s</title>' % formatExport(rep_file.title))                                   #string
+                res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))                                      #lines
+                res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
+                res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                    #int
+                res_add('\n</report_file>')
 
+            ###ReportOrder objects
+            #########################
+            for ord in lang.objectValues('ReportOrder'):
+                res_add('\n<report_order>')
+                #Basic Property Sheet
+                res_add('\n<title>%s</title>' % formatExport(ord.title))                                                    #string
+                res_add('\n<order_id>%s</order_id>' % formatExport(ord.order_id))                                           #string
+                res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord.customer_mail))                            #string
+                res_add('\n<order_date>%s</order_date>' % formatExport(ord.order_date))                                     #date
+                res_add('\n<order_confirm_date>%s</order_confirm_date>' % formatExport(ord.order_confirm_date))             #date
+                res_add('\n<customer_nameandadress>%s</customer_nameandadress>' % formatExport(ord.customer_nameandadress)) #text
+                res_add('\n<order_shipping_date>%s</order_shipping_date>' % formatExport(ord.order_shipping_date))          #date
+                res_add('\n<name>%s</name>' % formatExport(ord.name))                                                       #string
+                res_add('\n<organisation>%s</organisation>' % formatExport(ord.organisation))                               #string
+                res_add('\n<address>%s</address>' % formatExport(ord.address))                                              #string
+                res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
+                res_add('\n<city>%s</city>' % formatExport(ord.city))                                                       #string
+                res_add('\n<country>%s</country>' % formatExport(ord.country))                                              #string
+                res_add('\n</report_order>')
+
+            ###ReportOrder2 objects
+            #########################
+            for ord2 in lang.objectValues('ReportOrder2'):
+                res_add('\n<report_order2>')
+                #Basic Property Sheet
+                res_add('\n<title>%s</title>' % formatExport(ord2.title))                                                       #string
+                res_add('\n<order_id>%s</order_id>' % formatExport(ord2.order_id))                                              #string
+                res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord2.customer_mail))                               #string
+                res_add('\n<order_date>%s</order_date>' % formatExport(ord2.order_date))                                        #date
+                res_add('\n<order_confirm_date>%s</order_confirm_date>' % formatExport(ord2.order_confirm_date))                #date
+                res_add('\n<customer_nameandadress>%s</customer_nameandadress>' % formatExport(ord2.customer_nameandadress))    #text
+                res_add('\n<order_shipping_date>%s</order_shipping_date>' % formatExport(ord2.order_shipping_date))             #date
+                res_add('\n<report_order2>')
+
+            ###Search objects
+            #########################
+            for search in lang.objectValues('Search'):
+                res_add('\n<search>')
+                #Basic Property Sheet
+                res_add('\n<title>%s</title>' % formatExport(search.title))             #string
+                res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate)) #date
+                res_add('\n</search>')
+
+            ###Zope File objects
+            #########################
+            for file in lang.objectValues('File'):
+                res_add('\n<zope_file url="%s">' % file.absolute_url())
+                res_add('\n<id>%s</id>' % formatExport(file.getId()))
+                res_add('\n</zope_file>')
+
+            ###Zope Image objects
+            #########################
+            for img in lang.objectValues('Image'):
+                res_add('\n<zope_image url="%s">' % img.absolute_url())
+                res_add('\n<id>%s</id>' % formatExport(img.getId()))
+                res_add('\n</zope_image>')
+
+
+            res_add('\n</language_report>')
         res_add('\n</report>')
 
 res_add('\n</reports>')

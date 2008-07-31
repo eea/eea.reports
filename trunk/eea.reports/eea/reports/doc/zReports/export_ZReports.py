@@ -77,8 +77,15 @@ for report in root.objectValues(report_metatype):
         res_add('\n<publishers>%s</publishers>' % formatExport(report.publishers))                                    #lines
         res_add('\n<coverage_time_from>%s</coverage_time_from>' % formatExport(report.coverage_time_from))            #date
         res_add('\n<coverage_time_to>%s</coverage_time_to>' % formatExport(report.coverage_time_to))                  #date
-        res_add('\n<copyright>%s</copyright>' % formatExport(report.copyright))                                       #text
-        res_add('\n<description>%s</description>' % formatExport(report.description))                                 #text
+
+        tmp_find = report.copyright.find('EEA, Copenhagen')
+        if tmp_find > 0:
+            res_add('\n<copyright>%s</copyright>' % formatExport(report.copyright[tmp_find:]))  #text
+        else:
+            res_add('\n<copyright>%s</copyright>' % formatExport(report.copyright[tmp_find:]))  #text
+
+        res_add('\n<description>%s</description>' % container.unescape(formatExport(report.description)).encode('utf-8'))   #text
+
         res_add('\n<Subjects_terms>%s</Subjects_terms>' % formatExport(report.Subjects_terms))                        #lines
         res_add('\n<SpatialCoverage_terms>%s</SpatialCoverage_terms>' % formatExport(report.SpatialCoverage_terms))   #lines
         res_add('\n<series_year>%s</series_year>' % formatExport(report.series_year))                                 #selection
@@ -164,11 +171,12 @@ for report in root.objectValues(report_metatype):
             res_add('\n<id>%s</id>' % formatExport(lang.id))                                                     #string
             res_add('\n<language>%s</language>' % formatExport(lang.language))                                   #string
             res_add('\n<title>%s</title>' % formatExport(lang.title))                                            #string
-            try:
-                res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8'))      #text
-            except:
-                #TODO: fix exceptions
-                res_add('\n<description>ERR</description>')
+
+            if lang.isbn == '978-92-9167-919-5':
+                res_add('\n<description>%s</description>' % unicode(formatExport(lang.description), 'latin1').encode('utf-8'))  #text
+            else:
+                res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
+
             res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
             res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                          #string
             res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
@@ -212,7 +220,10 @@ for report in root.objectValues(report_metatype):
                 res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))                                       #string
                 res_add('\n<title>%s</title>' % formatExport(rep_file.title))                                   #string
                 res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))                                      #lines
-                res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
+                if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
+                    res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'latin1').encode('utf8'))  #text
+                else:
+                    res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
                 res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                    #int
                 res_add('\n</report_file>')
 

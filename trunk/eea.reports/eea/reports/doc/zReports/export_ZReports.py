@@ -24,21 +24,7 @@ def formatExport(data):
     if len(res) > 5:
         if '%' in res:
             res = '<![CDATA[%s]]>' % res
-
     return res
-
-#def htmlEncode(data):
-#    res = str(data)
-#    res = res.replace('&', '&amp;')
-#    res = res.replace('<', '&lt;')
-#    res = res.replace('"', '&quot;')
-#    res = res.replace('\'', '&apos;')
-#    res = res.replace('>', '&gt;')
-#    return res
-
-#TODO:
-#   - export multilingual
-#   - fix encoding and cleanup of content
 
 # Export content
 res_add("""<?xml version="1.0" encoding="utf-8"?>""")

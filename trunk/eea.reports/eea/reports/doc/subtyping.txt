@@ -72,3 +72,31 @@ Now we load a demonstration pdf file from doc/test.pdf which has the following m
 
     >>> docpdf = self.loadfile('doc/test.pdf')
     >>> myreport.setFile(docpdf)
+
+Edit report like properties:
+
+    >>> form = {
+    ... 'serial_title_type': 'Briefing',
+    ... 'serial_title_number': 20,
+    ... 'serial_title_year': 1999,
+    ... 'serial_title_alt': '',
+    ... 'creators_keywords': ('new creator',),
+    ... 'creators_existing_keywords': ('EEA (European Environment Agency)',),
+    ... }
+    >>> myreport.processForm(values=form)
+    >>> myreport.getField('serial_title').getAccessor(myreport)()
+    ('Briefing', 20, 1999, '')
+    >>> myreport.getField('creators').getAccessor(myreport)()
+    ('EEA (European Environment Agency)', 'new creator')
+
+Test alternative serial title:
+
+    >>> form = {
+    ... 'serial_title_type': 'Briefing',
+    ... 'serial_title_number': 20,
+    ... 'serial_title_year': 1999,
+    ... 'serial_title_alt': u'Save me, only !',
+    ... }
+    >>> myreport.processForm(values=form)
+    >>> myreport.getField('serial_title').getAccessor(myreport)()
+    ('N/A', 0, -1, 'Save me, only !')

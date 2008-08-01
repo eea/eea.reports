@@ -10,6 +10,8 @@ from slc.publications.subtypes.publication import SchemaExtender as PublicationS
 from slc.publications.subtypes.publication import ExtensionFieldMixin
 from eea.reports.config import COPYRIGHTS
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
+from eea.reports.field import SerialTitleField
+from eea.reports.widget import SerialTitleWidget
 
 class ReportStringField(ExtensionField, ExtensionFieldMixin, atapi.StringField):
     """ """
@@ -26,52 +28,30 @@ class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
 class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
     """ """
 
+class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleField):
+    """ """
+
 class SchemaExtender(PublicationSchemaExtender):
     """ Schema extender
     """
     implements(IOrderableSchemaExtender)
     _fields = PublicationSchemaExtender._fields + [
-            ReportStringField('reporttype',
-                schemata='report',
-                languageIndependent=False,
-                default=u'',
-                vocabulary=NamedVocabulary("report_types"),
-                widget=atapi.SelectionWidget(
-                    label=_(u'label_reporttype', default=u'Serial title (Report type)'),
-                    description=_(u'description_reporttype', default=u'Fill in report-type'),
-                ),
-            ),
-            ReportIntegerField('reportnum',
-                schemata='report',
-                languageIndependent=False,
-                default=1,
-                widget=atapi.IntegerWidget(
-                    label=_(u'label_reportnum', default=u'Serial title (Report number)'),
-                    description=_(u'description_reportnum', default=u'Fill in report-number'),
-                ),
-            ),
-            ReportIntegerField('series_year',
-                schemata='report',
-                languageIndependent=False,
-                default=u'',
-                vocabulary=ReportYearsVocabulary(),
-                widget=atapi.SelectionWidget(
-                    label=_(u'label_series_year', default=u'Serial title (Report year)'),
-                    description=_(u'description_series_year', default=u'Fill in report-year'),
-                ),
-            ),
-            ReportStringField('series_title',
-                schemata='report',
-                languageIndependent=True,
-                widget=atapi.StringWidget(
-                    label=_(u'label_series_title', default=u'Serial title (Alternative)'),
-                    description=_(u'description_reporttype', default=u'Fill in report-type'),
+        ReportSerialTitleField('serial_title',
+            schemata='report',
+            languageIndependent=False,
+            types_vocabulary=NamedVocabulary("report_types"),
+            years_vocabulary=ReportYearsVocabulary(),
+            default=(u'', 0, -1, u''),
+            widget=SerialTitleWidget(
+                label=_(u'label_serial_title', default=u'Serial title'),
+                description=_(u'description_serial_title', default=u'Fill in serial title'),
                 ),
             ),
             ReportLinesField('creators',
                 schemata='report',
                 languageIndependent=True,
                 multiValued=1,
+                default=(u'EEA (European Environment Agency)',),
                 vocabulary=NamedVocabulary("report_creators"),
                 widget=atapi.KeywordWidget(
                     label=_(u'label_creators', default=u'Creators/Authors'),
@@ -83,6 +63,7 @@ class SchemaExtender(PublicationSchemaExtender):
                 schemata='report',
                 languageIndependent=True,
                 multiValued=1,
+                default=(u'EEA (European Environment Agency)',),
                 vocabulary=NamedVocabulary("report_publishers"),
                 widget=atapi.KeywordWidget(
                     label=_(u'label_publishers', default=u'Publishers'),
@@ -150,7 +131,7 @@ class SchemaExtender(PublicationSchemaExtender):
                 languageIndependent=True,
                 widget=atapi.RichWidget(
                     label = _(u'label_trailer', default=u'Trailer'),
-                    description=_(u'description_trailer', default=u'Fill in the trailer.')
+                    description=_(u'description_trailer', default=u'Fill in the trailer.'),
                 )
             ),
     ]
@@ -158,10 +139,7 @@ class SchemaExtender(PublicationSchemaExtender):
     def getOrder(self, original):
         order = original.get('report', [])
         new_order = [
-            'reporttype',
-            'reportnum',
-            'series_year',
-            'series_title',
+            'serial_title',
             'creators',
             'publishers',
             'themes',

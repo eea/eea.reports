@@ -32,13 +32,11 @@ class Report(object):
             @param metadata_upload:        File;
             @param owner_password:         String;
             @param user_password:          String;
-            @param reporttype:             String;
-            @param reportnum:              Integer;
-            @param series_year:            String;
-            @param series_title:           String;
-            @param creators_orgs:          Tuple;
+            @param serial_title_type:      String;
+            @param serial_title_number:    Integer;
+            @param serial_title_year:      String;
+            @param serial_title_alt:       String;
             @param creators:               Tuple;
-            @param publishers_orgs:        Tuple;
             @param publishers:             Tuple;
             @param themes:                 Tuple;
             @param price:                  Float;
@@ -68,50 +66,97 @@ class Report(object):
     def language(self, default='en'):
         return self.get('lang', default)
 
-SUB_OBJECTS = ['cover_image', 'redirect', 'tag', 'language_report']
+REPORT_SUB_OBJECTS = ['cover_image', 'redirect', 'tag', 'language_report']
+LANGUAGE_REPORT_SUB_OBJECTS = ['report_chapter', 'report_file', 'report_order', 'report_order2', 'search', 'zope_file', 'zope_image']
+
+LANGUAGE_REPORT_PROPS = ['reporttitle', 'language', 'description', 'isbn', 'catalogue', 'pages', 'trailer']
+
 class zreports_handler(ContentHandler):
     """ """
 
     def __init__(self):
         """ constructor """
         self.__reports = []
-        self.__currentTag = ''
         self.__data = []
 
         self.__report_context = 0
         self.__report_current = ''
+        self.__language_report_context = 0
+        self.__language_report_current = ''
 
     def get_reports(self):
         return self.__reports
 
     def startElement(self, name, attrs):
-        self.__currentTag = name
-
         if name == 'report':
             self.__report_context = 1
             self.__report_current = Report()
 
-        if name in SUB_OBJECTS:
+        if name == 'cover_image':
+            self.__report_current.set('rep_cover_image', attrs['url'])
+
+        if name == 'language_report':
+            self.__language_report_context = 1
+            self.__language_report_current = Report()
+
+        if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
+        if name in LANGUAGE_REPORT_SUB_OBJECTS:
+            self.__language_report_context = 0
 
     def endElement(self, name):
         if name == 'report':
             self.__report_context = 0
-            self.__reports.append(self.__report_current)
+            ###OLD
+            #self.__reports.append(self.__report_current)
             self.__report_current = ''
 
-        if name in SUB_OBJECTS:
+        if name == 'language_report':
+            self.__language_report_context = 0
+            #set properties from Report object
+            self.__language_report_current.set('id', self.__report_current.get('id'))
+            self.__language_report_current.set('themes', self.__report_current.get('categories'))
+            self.__language_report_current.set('author', self.__report_current.get('author'))
+            self.__language_report_current.set('for_sale', self.__report_current.get('order_override'))
+            self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype'))
+            self.__language_report_current.set('serial_title_number', self.__report_current.get('reportnum'))
+            self.__language_report_current.set('serial_title_year', self.__report_current.get('series_year'))
+            self.__language_report_current.set('serial_title_alt', self.__report_current.get('series_title'))
+            self.__language_report_current.set('price', self.__report_current.get('price_euro'))
+            self.__language_report_current.set('order_override_text', self.__report_current.get('order_override_text'))
+            self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text'))
+            self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
+            self.__language_report_current.set('cover_image', self.__report_current.get('rep_cover_image'))
+
+            #add language report to results
+            self.__reports.append(self.__language_report_current)
+            self.__language_report_context = ''
+
+        if name in REPORT_SUB_OBJECTS:
             self.__report_context = 1
+        if name in LANGUAGE_REPORT_SUB_OBJECTS:
+            self.__language_report_context = 1
 
         if self.__report_context:
             data = u''.join(self.__data).strip()
             self.__data = []
             self.__report_current.set(name, data)
 
-        self.__currentTag = ''
+        if self.__language_report_context:
+            if name in LANGUAGE_REPORT_PROPS:
+                data = u''.join(self.__data).strip()
+                self.__data = []
+                if name == 'reporttitle':
+                    self.__language_report_current.set('title', data)
+                elif name == 'language':
+                    self.__language_report_current.set('lang', data)
+                elif name == 'catalogue':
+                    self.__language_report_current.set('order_id', data)
+                else:
+                    self.__language_report_current.set(name, data)
 
     def characters(self, content):
-        if self.__report_context:
+        if self.__report_context or self.__language_report_context:
             self.__data.append(content)
 
 class zreports_parser:
@@ -161,3 +206,5 @@ parser = zreports_parser()
 data = parser.parseHeader(s)
 
 res = data.get_reports()
+
+for k in res: print k.cover_image

@@ -103,8 +103,8 @@ for report in root.objectValues(report_metatype):
         for img in report.objectValues('CoverImage'):
             res_add('\n<cover_image url="%s">' % img.absolute_url())
             #Zope file properties
-            res_add('\n<id>%s</id>' % formatExport(img.getId()))                                 #string
-            res_add('\n<title>%s</title>' % formatExport(img.title))                                 #string
+            res_add('\n<id>%s</id>' % formatExport(img.getId()))        #string
+            res_add('\n<title>%s</title>' % formatExport(img.title))    #string
 
             #Atlas Property Sheet
             res_add('\n<result1>%s</result1>' % formatExport(img.result1))                           #string
@@ -252,8 +252,8 @@ for report in root.objectValues(report_metatype):
             for search in lang.objectValues('Search'):
                 res_add('\n<search>')
                 #Basic Property Sheet
-                res_add('\n<title>%s</title>' % formatExport(search.title))             #string
-                res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate)) #date
+                res_add('\n<title>%s</title>' % formatExport(search.title))                     #string
+                res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate))   #date
                 res_add('\n</search>')
 
             ###Zope File objects

@@ -7,6 +7,7 @@ from zope.interface import implements
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.field import ExtensionField
 from slc.publications.subtypes.publication import SchemaExtender as PublicationSchemaExtender
+from slc.publications.subtypes.publication import AuthorField
 from slc.publications.subtypes.publication import ExtensionFieldMixin
 from eea.reports.config import COPYRIGHTS
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
@@ -35,10 +36,20 @@ class SchemaExtender(PublicationSchemaExtender):
     """ Schema extender
     """
     implements(IOrderableSchemaExtender)
-    _fields = PublicationSchemaExtender._fields + [
+    _fields = PublicationSchemaExtender._fields[0:1] + \
+              PublicationSchemaExtender._fields[2:] + [
+        AuthorField('author',
+            schemata='publication',
+            languageIndependent=True,
+            default=u'European Environment Agency',
+            widget=atapi.StringWidget(
+                label = _(u'label_author', default=u'Author'),
+                description=_(u'description_author', default=u'Fill in the Name of the Author of this Publication.'),
+            ),
+        ),
         ReportSerialTitleField('serial_title',
             schemata='report',
-            languageIndependent=False,
+            languageIndependent=True,
             types_vocabulary=NamedVocabulary("report_types"),
             years_vocabulary=ReportYearsVocabulary(),
             default=(u'', 0, -1, u''),
@@ -87,7 +98,7 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportFloatField('price',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 widget=atapi.DecimalWidget(
                     label=_(u'label_price', default=u'Price'),
                     description=_(u'description_price', default=u'Fill in price'),
@@ -95,7 +106,7 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportTextField('order_override_text',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 widget=atapi.RichWidget(
                     label=_(u'label_order_override_text', default=u'Override the order text with your own text'),
                     description=_(u'description_order_override_text', default=u'Fill in to override the order text'),
@@ -103,7 +114,7 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportTextField('order_extra_text',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 widget=atapi.RichWidget(
                     label=_(u'label_order_extra_text', default=u'OR add some text to the order screen'),
                     description=_(u'description_order_extra_text', default=u'Fill in to add this text to the order text'),
@@ -111,7 +122,7 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportIntegerField('pages',
                 schemata='report',
-                lanaguageIndependent=False,
+                lanaguageIndependent=True,
                 widget=atapi.IntegerWidget(
                     label=_(u'label_pages', default=u'Pages'),
                     description=_(u'description_pages', default=u'Fill in pages'),
@@ -128,7 +139,7 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportTextField('trailer',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 widget=atapi.RichWidget(
                     label = _(u'label_trailer', default=u'Trailer'),
                     description=_(u'description_trailer', default=u'Fill in the trailer.'),

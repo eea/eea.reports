@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/browser"
     xmlns:zope="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="eea.reports">
     
   <page
@@ -10,6 +11,13 @@
       for="eea.reports.interfaces.IReportEnhanced"
       class="slc.publications.browser.publication.PublicationPageView"
       permission="zope2.View"
+      />
+      
+  <browser:page
+      for="*"
+      name="migrate_reports"
+      class="eea.reports.migration.migrate.MigrateReports"
+      permission="cmf.ModifyPortalContent"
       />
 
 </configure>

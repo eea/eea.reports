@@ -48,7 +48,7 @@ class Report(object):
         if all:
             return self.__dict__
         return dict((key, value) for key, value in self.items()
-                    if key not in ('id', 'lang', 'title'))
+                    if key not in ('id', 'lang', 'title', 'cover_image'))
 
     def get(self, key, default=None):
         return getattr(self, key, default)
@@ -117,7 +117,7 @@ class zreports_handler(ContentHandler):
             self.__language_report_context = 0
             #set properties from Report object
             self.__language_report_current.set('id', self.__report_current.get('id'))
-            self.__language_report_current.set('themes', self.__report_current.get('categories'))
+            self.__language_report_current.set('themes', self.__report_current.get('categories').split('###'))
             self.__language_report_current.set('author', self.__report_current.get('author'))
             self.__language_report_current.set('for_sale', self.__report_current.get('order_override'))
             self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype'))
@@ -141,13 +141,11 @@ class zreports_handler(ContentHandler):
 
         if self.__report_context:
             data = u''.join(self.__data).strip()
-            self.__data = []
             self.__report_current.set(name, data)
 
         if self.__language_report_context:
             if name in LANGUAGE_REPORT_PROPS:
                 data = u''.join(self.__data).strip()
-                self.__data = []
                 if name == 'reporttitle':
                     self.__language_report_current.set('title', data)
                 elif name == 'language':
@@ -156,10 +154,10 @@ class zreports_handler(ContentHandler):
                     self.__language_report_current.set('order_id', data)
                 else:
                     self.__language_report_current.set(name, data)
+        self.__data = []
 
     def characters(self, content):
-        if self.__report_context or self.__language_report_context:
-            self.__data.append(content)
+        self.__data.append(content)
 
 class zreports_parser:
     """ """
@@ -207,7 +205,7 @@ def get_reports():
     s = f.read()
     parser = zreports_parser()
     data = parser.parseHeader(s)
-    res = data.get_reports()
+    return data.get_reports()
 
 if __name__ == '__main__':
     print len(get_reports())

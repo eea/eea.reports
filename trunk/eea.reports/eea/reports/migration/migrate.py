@@ -8,6 +8,7 @@ from Products.LinguaPlone import config
 from Products.CMFPlone.utils import _createObjectByType
 from Products.LinguaPlone import events
 from zExceptions import BadRequest
+from eea.reports.migration.zReports.parser import get_reports
 
 class MigrateReports(object):
     """ Class used to migrate reports.
@@ -18,19 +19,6 @@ class MigrateReports(object):
     #
     # Getters
     #
-    def get_old_reports(self):
-        """ Yields old reports
-        """
-        for report in range(2):
-            for lang in ['en', 'fr']:
-                yield ReportDataModel(
-                    'myreport-%d' % report, lang,
-                    title='My report %s %s' % (report, lang),
-                    isbn='32234543',
-                    serial_title_type='Briefing',
-                    serial_title_number=134,
-                    serial_title_year=1990)
-    
     def _get_container(self, *args, **kwargs):
         """ Creates folder structure to import old reports
         """
@@ -116,15 +104,15 @@ class MigrateReports(object):
     def update_properties(self, report, datamodel):
         """ Update report properties
         """
-        wftool = getToolByName(self.context, 'portal_workflow')
         form = datamodel()
         report.processForm(values=form)
         report.setTitle(datamodel.get('title', ''))
-        wftool.doActionFor(report, 'publish')
     #
     # Browser interface
     #
     def __call__(self):
         container = self._get_container()
-        for report in self.get_old_reports():
+        for index, report in enumerate(get_reports()):
+            print 'Adding report id: %s lang: %s' % (report.getId(), report.language())
             self.add_report(container, report)
+        return '%d language reports imported' % index

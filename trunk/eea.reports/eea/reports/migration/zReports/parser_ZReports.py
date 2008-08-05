@@ -7,14 +7,7 @@ from types import StringType, UnicodeType
 
 class Report(object):
     """ Encapsulate report
-        >>> report = Report(id='myreport', title="My Title", for_sale=True)
-        >>> isbn = report.get('isbn')
-        >>> isbn is None
-        True
-        >>> report.get('for_sale', False)
-        True
     """
-    #def __init__(self, id, lang='en', **kwargs):
     def __init__(self):
         """
             @param id:                     String;
@@ -46,23 +39,32 @@ class Report(object):
             @param copyrights:             String;
             @param trailer:                String;
         """
-#        self.id = id
-#        self.lang = lang
-#        for key, value in kwargs.items():
-#            setattr(self, key, value)
+        pass
 
     def set(self, key, value):
         return setattr(self, key, value)
+
+    def __call__(self, all=False):
+        if all:
+            return self.__dict__
+        return dict((key, value) for key, value in self.items()
+                    if key not in ('id', 'lang', 'title'))
+
     def get(self, key, default=None):
         return getattr(self, key, default)
+
     def items(self):
         return self.__dict__.items()
+
     def keys(self):
         return self.__dict__.keys()
+
     def values(self):
         return self.__dict__.values()
+
     def getId(self):
         return self.id
+
     def language(self, default='en'):
         return self.get('lang', default)
 
@@ -199,12 +201,13 @@ class zreports_parser:
         except:
             return None
 
-#Parse exported ZReports data
-f = urllib2.urlopen("http://10.0.0.24:8080/export_ZReports")
-s = f.read()
-parser = zreports_parser()
-data = parser.parseHeader(s)
+def get_reports():
+    #Parse exported ZReports data
+    f = urllib2.urlopen("http://10.0.0.24:8080/export_ZReports")
+    s = f.read()
+    parser = zreports_parser()
+    data = parser.parseHeader(s)
+    res = data.get_reports()
 
-res = data.get_reports()
-
-for k in res: print k.cover_image
+if __name__ == '__main__':
+    print len(get_reports())

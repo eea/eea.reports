@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reports>
+<report>
+<id>state_of_environment_report_2007_1</id>
+<title>Europe's environment  &#8212; The fourth assessment</title>
+<categories>agriculture###air###air_quality###biodiversity###chemicals###climate###coast_sea###energy###human###soil###tourism###transport###waste###water</categories>
+
+<weighting>1</weighting>
+<author></author>
+<publisher></publisher>
+<source></source>
+<publishdate>2007/10/10 10:00:00 GMT+2</publishdate>
+<updatedate>2007/10/10</updatedate>
+<createdate>2007/09/26</createdate>
+<released>True</released>
+<reporttype>State of the environment report</reporttype>
+<reportnum>1</reportnum>
+
+<external_url></external_url>
+<order_override>False</order_override>
+<order_override_text></order_override_text>
+<order_extra_text></order_extra_text>
+<expiry_date>2099/12/31</expiry_date>
+<version_number></version_number>
+<price_euro>50</price_euro>
+<creators_orgs>EEA (European Environment Agency)</creators_orgs>
+<creators>                                                                                                                                                         ###                                                                                                                                                                                                                                                       ###                                                                                                                                                                                                                           ###                                                                                                                                                                                               ###                                                                                                                                                                   ###                                                                                                                                       ###                                                                                                           ###                                                                               ###                                                   ###                       </creators>
+<publishers_orgs>EEA (European Environment Agency)###OPOCE (Office for Official Publications of the European Communities)</publishers_orgs>
+
+<publishers></publishers>
+<coverage_time_from>1900/01/01</coverage_time_from>
+<coverage_time_to>2099/12/31</coverage_time_to>
+<copyright>EEA, Copenhagen 2007</copyright>
+<description>The 'Environment for Europe' process now brings together 56 countries across three continents to jointly address environmental challenges. In support of this process, the European Environment Agency has prepared a series of assessments of the environment for the pan European region to provide policy relevant, up to date and reliable information on the interactions between the environment and society.
+This is the fourth report in the series. Where possible the report evaluates progress, primarily against the objectives of the Sixth Environment Action Programme of the European Community and the Environment Strategy for Countries of Eastern Europe, Caucasus and Central Asia.
+The report has been prepared in close partnership with a range of international organisations, governmental institutions and non governmental organisations across the region.</description>
+<Subjects_terms></Subjects_terms>
+<SpatialCoverage_terms>10.20.160</SpatialCoverage_terms>
+<series_year>2007</series_year>
+<version_date>2099/12/31</version_date>
+<sort_title>europe's environment &#8212; the fourth assessment</sort_title>
+
+<serial_title>State of the environment report No 1/2007</serial_title>
+<series_title></series_title>
+<catalogue_text>Prepared by:
+
+
+
+
+
+
+
+
+</catalogue_text>
+<main_entry>True</main_entry>
+<report_kind>Full Report</report_kind>
+<product_version>2.2</product_version>
+<IsRequiredBy></IsRequiredBy>
+<Requires></Requires>
+<IsPartOf></IsPartOf>
+<HasPart>http://reports.eea.europa.eu/state_of_environment_report_2007_2</HasPart>
+<IsReferencedBy></IsReferencedBy>
+
+<References></References>
+<IsReplacedBy></IsReplacedBy>
+<Replaces></Replaces>
+<cover_image url="http://10.0.0.24:8080/state_of_environment_report_2007_1/Cover">
+<id>Cover</id>
+<title></title>
+<result1>received the xml-rpc file from service (15)</result1>
+<result2>Created new atlas entry</result2>
+<result3>Assigned referenceId (not if it was already done)</result3>
+<result4>Updated meta data</result4>
+<result5>http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover uploaded</result5>
+
+<result6></result6>
+<result7></result7>
+<result8></result8>
+<result9></result9>
+<result10></result10>
+<hardreference>6584831E-7409-4E78-9757-209AEF991BD0</hardreference>
+<softreference>http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover</softreference>
+<totalresult>5</totalresult>
+<totalmembers>13</totalmembers>
+<status>ok</status>
+<synch_timestamp>2007/10/01 11:07:04.906 GMT+2</synch_timestamp>
+
+</cover_image>
+<tag>
+<title>Environment and health an the quality of life</title>
+<categories>human</categories>
+<tag_description></tag_description>
+<chapter>http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter2.pdf</chapter>
+<Subjects_terms></Subjects_terms>
+<SpatialCoverage_terms></SpatialCoverage_terms>
+</tag>
+<language_report>
+<id>en</id>
+<language>en</language>
+
+<title>English</title>
+<description>The 'Environment for Europe' process now brings together 56 countries across three continents to jointly address environmental challenges. In support of this process, the European Environment Agency has prepared a series of assessments of the environment for the pan European region to provide policy relevant, up to date and reliable information on the interactions between the environment and society.
+This is the fourth report in the series. Where possible the report evaluates progress, primarily against the objectives of the Sixth Environment Action Programme of the European Community and the Environment Strategy for Countries of Eastern Europe, Caucasus and Central Asia.
+The report has been prepared in close partnership with a range of international organisations, governmental institutions and non governmental organisations across the region.</description>
+<trailer><![CDATA[<h2>See also</h2>
+<p><a href="http://www.eea.europa.eu/pan-european/">The EEA pan-European website</a></p>
+<p>
+<a  href="http://dataservice.eea.europa.eu/atlas/available2.asp?type=findkeyword&theme=State%20of%20the%20environment%20report%20No%201/2007">Maps/Graphs included Europe's environment - The fourth assessment</a>
+</p>]]></trailer>
+<reporttitle>Europe's environment  &#8212; The fourth assessment</reporttitle>
+<sections></sections>
+<order_override_lang>False</order_override_lang>
+<pages>0</pages>
+<isbn>978-92-9167-932-4</isbn>
+<catalogue>TH-78-07-127-EN-C</catalogue>
+
+<sort_title>Europe's environment  &#8212; The fourth assessment</sort_title>
+<langreleased>True</langreleased>
+<search>
+<title>Europe's environment  &#8212; The fourth assessment</title>
+<publishdate>2007/10/10 10:00:00 GMT+2</publishdate>
+</search>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter5.pdf">
+<id>chapter5.pdf</id>
+
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter1.pdf">
+<id>chapter1.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter2.pdf">
+<id>chapter2.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter3.pdf">
+<id>chapter3.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter4.pdf">
+<id>chapter4.pdf</id>
+</zope_file>
+
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter6.pdf">
+<id>chapter6.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter7.pdf">
+<id>chapter7.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter8.pdf">
+<id>chapter8.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter9.pdf">
+<id>chapter9.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/cover.pdf">
+
+<id>cover.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter0.pdf">
+<id>chapter0.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter7.1.pdf">
+<id>chapter7.1.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/Belgrade_EN_all_chapters_incl_cover.pdf">
+<id>Belgrade_EN_all_chapters_incl_cover.pdf</id>
+</zope_file>
+</language_report>
+<language_report>
+
+<id>ru</id>
+<language>ru</language>
+<title>Russian</title>
+<description>Процесс «Окружающая среда для Европы» в настоящий момент объединяет для совместного изучения проблем окружающей среды 56 стран на трех континентах. В целях содействия этому процессу, для обеспечения стратегической, достоверной и актуальной информации о взаимодействии окружающей среды и общества, Европейское Агентство по Окружающей Среде подготовило целый ряд докладов, оценивающих состояние окружающей среды.</description>
+<trailer><a href="http://www.eea.europa.eu/pan-european/">&#1055;&#1086;&#1089;&#1077;&#1090;&#1080;&#1090;&#1077;&#32;&#1041;&#1077;&#1083;&#1075;&#1088;&#1072;&#1076;&#1089;&#1082;&#1080;&#1081;&#32;&#1074;&#1077;&#1073;&#45;&#1089;&#1072;&#1081;&#1090;&#33;</a></trailer>
+<reporttitle>&#1047;&#1072;&#1097;&#1080;&#1090;&#1072;&#32;&#1086;&#1082;&#1088;&#1091;&#1078;&#1072;&#1102;&#1097;&#1077;&#1081;&#32;&#1089;&#1088;&#1077;&#1076;&#1099;&#32;&#1045;&#1074;&#1088;&#1086;&#1087;&#1099;&#32;&#8212;&#32;&#1063;&#1077;&#1090;&#1074;&#1077;&#1088;&#1090;&#1072;&#1103;&#32;&#1086;&#1094;&#1077;&#1085;&#1082;&#1072;</reporttitle>
+<sections></sections>
+<order_override_lang>False</order_override_lang>
+<pages>452</pages>
+<isbn>978-92-9167-933-1</isbn>
+
+<catalogue>TH-78-07-127-RU-C</catalogue>
+<sort_title>&#1047;&#1072;&#1097;&#1080;&#1090;&#1072;&#32;&#1086;&#1082;&#1088;&#1091;&#1078;&#1072;&#1102;&#1097;&#1077;&#1081;&#32;&#1089;&#1088;&#1077;&#1076;&#1099;&#32;&#1045;&#1074;&#1088;&#1086;&#1087;&#1099;&#32;&#8212;&#32;&#1063;&#1077;&#1090;&#1074;&#1077;&#1088;&#1090;&#1072;&#1103;&#32;&#1086;&#1094;&#1077;&#1085;&#1082;&#1072;</sort_title>
+<langreleased>True</langreleased>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/cover.pdf">
+<id>cover.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/Chapter0.pdf">
+<id>Chapter0.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter1.pdf">
+<id>chapter1.pdf</id>
+</zope_file>
+
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter2.pdf">
+<id>chapter2.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter3.pdf">
+<id>chapter3.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter5.pdf">
+<id>chapter5.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter4.pdf">
+<id>chapter4.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter6.pdf">
+
+<id>chapter6.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter7.pdf">
+<id>chapter7.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter7.1.pdf">
+<id>chapter7.1.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter8.pdf">
+<id>chapter8.pdf</id>
+</zope_file>
+<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter9.pdf">
+<id>chapter9.pdf</id>
+
+</zope_file>
+</language_report>
+</report>
+</reports>

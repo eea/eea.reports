@@ -4,40 +4,44 @@ from xml.sax.handler import ContentHandler
 from xml.sax import *
 from cStringIO import StringIO
 from types import StringType, UnicodeType
+from cgi import FieldStorage
+from ZPublisher.HTTPRequest import FileUpload
 
 class Report(object):
     """ Encapsulate report
     """
     def __init__(self):
         """
-            @param id:                     String;
-            @param lang:                   String;
-            @param title:                  String;
-            @param description:            String;
-            @param file                    File;
-            @param relatedItems:           Tuple;
-            @param cover_image:            Image;
-            @param author:                 String;
-            @param isbn:                   String;
-            @param order_id:               String;
-            @param for_sale:               Boolean;
-            @param chapters:               Tuple;
-            @param metadata_upload:        File;
-            @param owner_password:         String;
-            @param user_password:          String;
-            @param serial_title_type:      String;
-            @param serial_title_number:    Integer;
-            @param serial_title_year:      String;
-            @param serial_title_alt:       String;
-            @param creators:               Tuple;
-            @param publishers:             Tuple;
-            @param themes:                 Tuple;
-            @param price:                  Float;
-            @param order_override_text:    String;
-            @param order_extra_text:       String;
-            @param pages:                  Integer;
-            @param copyrights:             String;
-            @param trailer:                String;
+            @param id:                                String;
+            @param lang:                              String;
+            @param title:                             String;
+            @param description:                       String;
+            @param file                               File;
+            @param relatedItems:                      Tuple;
+            @param cover_image_file:                  ImageFile;
+            @param author:                            String;
+            @param isbn:                              String;
+            @param order_id:                          String;
+            @param for_sale:                          Boolean;
+            @param chapters:                          Tuple;
+            @param metadata_upload:                   File;
+            @param owner_password:                    String;
+            @param user_password:                     String;
+            @param serial_title_type:                 String;
+            @param serial_title_number:               Integer;
+            @param serial_title_year:                 String;
+            @param serial_title_alt:                  String;
+            @param creators_existing_keywords:        Tuple;
+            @param creators_keywords                  Tuple;
+            @param publishers_existing_keywords:      Tuple;
+            @param publishers_keywords:               Tuple;
+            @param themes:                            Tuple;
+            @param price:                             Float;
+            @param order_override_text:               String;
+            @param order_extra_text:                  String;
+            @param pages:                             Integer;
+            @param copyrights:                        String;
+            @param trailer:                           String;
         """
         pass
 
@@ -85,6 +89,8 @@ class zreports_handler(ContentHandler):
         self.__report_current = ''
         self.__language_report_context = 0
         self.__language_report_current = ''
+        self.__chapter_context = 0
+        self.__chapter_titles = []
 
     def get_reports(self):
         return self.__reports
@@ -101,6 +107,9 @@ class zreports_handler(ContentHandler):
             self.__language_report_context = 1
             self.__language_report_current = Report()
 
+        if name == 'report_chapter':
+            self.__chapter_context = 1
+
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
         if name in LANGUAGE_REPORT_SUB_OBJECTS:
@@ -109,8 +118,6 @@ class zreports_handler(ContentHandler):
     def endElement(self, name):
         if name == 'report':
             self.__report_context = 0
-            ###OLD
-            #self.__reports.append(self.__report_current)
             self.__report_current = ''
 
         if name == 'language_report':
@@ -128,11 +135,31 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('order_override_text', self.__report_current.get('order_override_text'))
             self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text'))
             self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
-            self.__language_report_current.set('cover_image', self.__report_current.get('rep_cover_image'))
+            cover_image_url = self.__report_current.get('rep_cover_image')
+            cover_image_file = grab_file_from_url(cover_image_url)
+            self.__language_report_current.set('cover_image_file', cover_image_file)
+            self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
+            creators = self.__report_current.get('creators').replace('\n', '').split('###')
+            creators = [x.strip() for x in creators if x.strip()]
+            self.__language_report_current.set('creators_keywords', creators)
+            self.__language_report_current.set('publishers_existing_keywords', self.__report_current.get('publishers_orgs').split('###'))
+            publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
+            publishers = [x.strip() for x in publishers if x.strip()]
+            self.__language_report_current.set('publishers_keywords', publishers)
+
 
             #add language report to results
+            self.__language_report_current.set('chapters', self.__chapter_titles)
             self.__reports.append(self.__language_report_current)
             self.__language_report_context = ''
+            self.__chapter_titles = []
+            
+        if name == 'report_chapter':
+            self.__chapter_context = 0
+        
+        if name == 'title' and self.__chapter_context:
+            data = u''.join(self.__data).strip()
+            self.__chapter_titles.append(data)
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 1
@@ -171,7 +198,7 @@ class zreports_parser:
         chandler = zreports_handler()
         parser = make_parser()
         parser.setContentHandler(chandler)
-        parser.setFeature(handler.feature_external_ges, 0)
+        parser.setFeature(chandler.feature_external_ges, 0)
         inpsrc = InputSource()
         inpsrc.setByteStream(StringIO(xml_string))
         try:
@@ -184,7 +211,7 @@ class zreports_parser:
         parser = make_parser()
         chandler = zreports_handler()
         parser.setContentHandler(chandler)
-        try:    parser.setFeature(handler.feature_external_ges, 0)
+        try:    parser.setFeature(chandler.feature_external_ges, 0)
         except: pass
         inputsrc = InputSource()
 
@@ -199,13 +226,34 @@ class zreports_parser:
         except:
             return None
 
-def get_reports():
-    #Parse exported ZReports data
-    f = urllib2.urlopen("http://10.0.0.24:8080/export_ZReports")
+def get_reports(url="http://10.0.0.24:8080/export_ZReports"):
+    """ Returns a list of Report instances.
+    """
+    f = urllib2.urlopen(url)
     s = f.read()
     parser = zreports_parser()
     data = parser.parseHeader(s)
     return data.get_reports()
+
+def grab_file_from_url(url, ctype='image/jpg', zope=True):
+    """ Returns a FileUpload instance with data from given url.
+    """
+    try:
+        url_file = urllib2.urlopen(url)
+    except:
+        return None
+    filename = url.split('/')[-1]
+    data = url_file.read()
+    size = len(data)
+    if not zope:
+        return data
+    fp = StringIO(data)
+    env = {'REQUEST_METHOD':'PUT'}
+    headers = {'content-type' : ctype,
+               'content-length': size,
+               'content-disposition':'attachment; filename=%s' % filename}
+    fs = FieldStorage(fp=fp, environ=env, headers=headers)
+    return FileUpload(fs)
 
 if __name__ == '__main__':
     print len(get_reports())

@@ -8,12 +8,12 @@ from Products.LinguaPlone import config
 from Products.CMFPlone.utils import _createObjectByType
 from Products.LinguaPlone import events
 from zExceptions import BadRequest
-from eea.reports.migration.zReports.parser import get_reports
+from eea.reports.migration.zReports.parser import get_reports, grab_file_from_url
 
 class MigrateReports(object):
     """ Class used to migrate reports.
     """
-    def __init__(self, context, request):
+    def __init__(self, context, request=None):
         self.context = context
         self.request = request
     #

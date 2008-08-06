@@ -84,10 +84,8 @@ class SchemaExtender(PublicationSchemaExtender):
             ),
             ReportLinesField('themes',
                 schemata='report',
-                validators=('maxValues',),
                 vocabulary=ReportThemesVocabulary(),
                 widget=atapi.InAndOutWidget(
-                    maxValues=3,
                     label=_(u'EEAContentTypes_label_themes', default=u'Themes'),
                     description=_(u'EEAContentTypes_help_themes', default=u'Choose max 3 themes go with this Highlight.'),
                     i18n_domain='EEAContentTypes',

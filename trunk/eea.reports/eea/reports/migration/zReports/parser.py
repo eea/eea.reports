@@ -69,9 +69,6 @@ class Report(object):
     def getId(self):
         return self.id
 
-    def language(self, default='en'):
-        return self.get('lang', default)
-
 REPORT_SUB_OBJECTS = ['cover_image', 'redirect', 'tag', 'language_report']
 LANGUAGE_REPORT_SUB_OBJECTS = ['report_chapter', 'report_file', 'report_order', 'report_order2', 'search', 'zope_file', 'zope_image']
 
@@ -126,10 +123,19 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('id', self.__report_current.get('id'))
             self.__language_report_current.set('themes', self.__report_current.get('categories').split('###'))
             self.__language_report_current.set('author', self.__report_current.get('author'))
-            self.__language_report_current.set('for_sale', self.__report_current.get('order_override'))
+            for_sale = self.__report_current.get('order_override', False)
+            self.__language_report_current.set('for_sale', for_sale in (u'True', 'True', True))
             self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype'))
-            self.__language_report_current.set('serial_title_number', self.__report_current.get('reportnum'))
-            self.__language_report_current.set('serial_title_year', self.__report_current.get('series_year'))
+            try:
+                serial_number = int(self.__report_current.get('reportnum'))
+            except (ValueError, TypeError):
+                serial_number = 0
+            self.__language_report_current.set('serial_title_number', serial_number)
+            try:
+                serial_year = int(self.__report_current.get('series_year'))
+            except ValueError, TypeError:
+                serial_year = 1990
+            self.__language_report_current.set('serial_title_year', serial_year)
             self.__language_report_current.set('serial_title_alt', self.__report_current.get('series_title'))
             self.__language_report_current.set('price', self.__report_current.get('price_euro'))
             self.__language_report_current.set('order_override_text', self.__report_current.get('order_override_text'))
@@ -179,6 +185,12 @@ class zreports_handler(ContentHandler):
                     self.__language_report_current.set('lang', data)
                 elif name == 'catalogue':
                     self.__language_report_current.set('order_id', data)
+                if name == 'pages':
+                    try:
+                        pages = int(data)
+                    except (TypeError, ValueError):
+                        pages = 0
+                    self.__language_report_current.set(name, pages)
                 else:
                     self.__language_report_current.set(name, data)
         self.__data = []

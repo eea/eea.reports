@@ -64,7 +64,7 @@ The report has been prepared in close partnership with a range of international 
 <References></References>
 <IsReplacedBy></IsReplacedBy>
 <Replaces></Replaces>
-<cover_image url="http://10.0.0.24:8080/state_of_environment_report_2007_1/Cover">
+<cover_image url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover">
 <id>Cover</id>
 <title></title>
 <result1>received the xml-rpc file from service (15)</result1>
@@ -120,48 +120,94 @@ The report has been prepared in close partnership with a range of international 
 <title>Europe's environment  &#8212; The fourth assessment</title>
 <publishdate>2007/10/10 10:00:00 GMT+2</publishdate>
 </search>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter5.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter5.pdf">
 <id>chapter5.pdf</id>
 
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter1.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter1.pdf">
 <id>chapter1.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter2.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter2.pdf">
 <id>chapter2.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter3.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter3.pdf">
 <id>chapter3.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter4.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter4.pdf">
 <id>chapter4.pdf</id>
 </zope_file>
 
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter6.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter6.pdf">
 <id>chapter6.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter7.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter7.pdf">
 <id>chapter7.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter8.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter8.pdf">
 <id>chapter8.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter9.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter9.pdf">
 <id>chapter9.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/cover.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/cover.pdf">
 
 <id>cover.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter0.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter0.pdf">
 <id>chapter0.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/chapter7.1.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter7.1.pdf">
 <id>chapter7.1.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/en/Belgrade_EN_all_chapters_incl_cover.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/Belgrade_EN_all_chapters_incl_cover.pdf">
 <id>Belgrade_EN_all_chapters_incl_cover.pdf</id>
 </zope_file>
+<report_chapter>
+<id>page010.html</id>
+<title>
+Group 1: Combustion in energy and transformation industries
+</title>
+<content><![CDATA[<p><hr size="1"><p class="head2">Group 1:</p><br>
+<p class="head1">Combustion in energy and transformation industries</p>
+<br>
+<br>
+<table border="0" width="99%" cellspacing="0" cellpadding="3" style="border-top: 1 dotted #003366; border-bottom: 1 dotted #003366">
+  <tr>
+    <td width="4%"><a onFocus="blur()" href="group_01.pdf" onFocus="blur()" onFocus="blur()"><img border="0" src="img_downloadpic.gif" width="24" height="19"></a></td>
+    <td width="96%"><p class="head0">Download: <a href="group_01.pdf" onFocus="blur()">Group 1: Combustion in Energy and Transformation Industries</a></p></td>
+  </tr>
+</table>
+<br>
+<table border="1" cellspacing="0" cellpadding="3" style="border-collapse:collapse;
+ mso-table-layout-alt:fixed;mso-padding-alt:0in 1.5pt 0in 1.5pt" width="99%" bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0">
+  <thead>
+    <tr style="height:12.35pt">
+      <td width="59" valign="top" style="width:44.05pt;padding:0in 1.5pt 0in 1.5pt;
+   height:12.35pt">
+        <p class="MsoNormal" align="left" style="text-align:left">
+]]></content>
+</report_chapter>
+<report_chapter>
+<id>page011.html</id>
+<title>Group 2: Non-industrial combustion plants</title>
+<content><![CDATA[
+<p><hr size="1">
+<p class="head2">Group 2:</p>
+<br>
+<table border="0" width="99%" cellspacing="0" cellpadding="3" style="border-top: 1 dotted #003366; border-bottom: 1 dotted #003366">
+  <tr>
+    <td width="4%"><a onFocus="blur()" href=group_02.pdf" onFocus="blur()"><img border="0" src="img_downloadpic.gif" width="24" height="19"></a></td>
+    <td width="96%">
+      <p class="head0">Download: <a href="group_02.pdf" onFocus="blur()">Group
+      2: Non-industrial combustion plants </a></p></td>
+  </tr>
+</table>
+<br>
+<table border="1" cellspacing="0" cellpadding="3" style="border-collapse: collapse; mso-table-layout-alt: fixed; mso-padding-alt: 0in 1.5pt 0in 1.5pt" width="99%" bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0">
+  <tr style="height:24.7pt">
+    <td width="74" valign="top" style="height: 24.7pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 0in; padding-bottom: 0in">
+]]></content>
+</report_chapter>
 </language_report>
 <language_report>
 
@@ -179,42 +225,42 @@ The report has been prepared in close partnership with a range of international 
 <catalogue>TH-78-07-127-RU-C</catalogue>
 <sort_title>&#1047;&#1072;&#1097;&#1080;&#1090;&#1072;&#32;&#1086;&#1082;&#1088;&#1091;&#1078;&#1072;&#1102;&#1097;&#1077;&#1081;&#32;&#1089;&#1088;&#1077;&#1076;&#1099;&#32;&#1045;&#1074;&#1088;&#1086;&#1087;&#1099;&#32;&#8212;&#32;&#1063;&#1077;&#1090;&#1074;&#1077;&#1088;&#1090;&#1072;&#1103;&#32;&#1086;&#1094;&#1077;&#1085;&#1082;&#1072;</sort_title>
 <langreleased>True</langreleased>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/cover.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/cover.pdf">
 <id>cover.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/Chapter0.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/Chapter0.pdf">
 <id>Chapter0.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter1.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter1.pdf">
 <id>chapter1.pdf</id>
 </zope_file>
 
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter2.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter2.pdf">
 <id>chapter2.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter3.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter3.pdf">
 <id>chapter3.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter5.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter5.pdf">
 <id>chapter5.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter4.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter4.pdf">
 <id>chapter4.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter6.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter6.pdf">
 
 <id>chapter6.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter7.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter7.pdf">
 <id>chapter7.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter7.1.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter7.1.pdf">
 <id>chapter7.1.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter8.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter8.pdf">
 <id>chapter8.pdf</id>
 </zope_file>
-<zope_file url="http://10.0.0.24:8080/state_of_environment_report_2007_1/ru/chapter9.pdf">
+<zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter9.pdf">
 <id>chapter9.pdf</id>
 
 </zope_file>

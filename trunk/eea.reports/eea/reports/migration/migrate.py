@@ -68,7 +68,7 @@ class MigrateReports(object):
         """ Add new report
         """
         report_id = datamodel.getId()
-        lang = datamodel.language()
+        lang = datamodel.get('lang')
         
         # Add translation for existing reports
         canonical = None
@@ -92,7 +92,7 @@ class MigrateReports(object):
     def add_translation(self, report, datamodel):
         """ Add a new language for an existing report
         """
-        lang = datamodel.language()
+        lang = datamodel.get('lang')
         if not report.hasTranslation(lang):
             report.addTranslation(lang)
         
@@ -113,6 +113,6 @@ class MigrateReports(object):
     def __call__(self):
         container = self._get_container()
         for index, report in enumerate(get_reports()):
-            print 'Adding report id: %s lang: %s' % (report.getId(), report.language())
+            print 'Adding report id: %s lang: %s' % (report.getId(), report.get('lang'))
             self.add_report(container, report)
         return '%d language reports imported' % index

@@ -37,13 +37,9 @@
         </tal:lang>
     </div>
     
-    <div tal:replace="here/cover_image|string:aaa" />
-    <div class="figure-left"
-         tal:condition="here/cover_image|nothing">
+    <div class="figure-left" tal:condition="here/cover_image|nothing">
          <div class="figure">
-            <img border="0" tal:attributes="
-               src string:${here/absolute_url}/cover_image;
-               alt here/Title" />
+            <img tal:replace="structure here/cover_image" />
         </div>
     </div>
 
@@ -59,9 +55,11 @@
             tal:condition="themes">
             <li tal:content="python:field.widget.Label(here)" />
             <li tal:repeat="theme themes">
-                <a tal:define="value python:here.translate(vocab.getMsgId(theme), default=vocab.getValue(theme))"
+                <a tal:define="
+                    have_key python:theme in vocab.keys();
+                    value python:have_key and here.translate(vocab.getMsgId(theme), default=vocab.getValue(theme)) or theme"
                     tal:attributes="href string:http://www.eea.europa.eu/themes/${theme}; title value"
-                    tal:content="value" />
+                    tal:omit-tag="not:have_key" tal:content="value" />
                 <span tal:condition="not:repeat/theme/end" tal:content="string:|" />
             </li>
         </ul>
@@ -85,7 +83,10 @@
             publishers python:field.getAccessor(here)();
             vocab python:field.Vocabulary(here);">
             <li tal:repeat="publisher publishers">
-                <tal:publishers replace="python:here.translate(vocab.getMsgId(publisher), default=vocab.getValue(publisher))" />
+                <tal:publishers tal:define="
+                    have_key python:publisher in vocab.keys();
+                    value python:have_key and here.translate(vocab.getMsgId(publisher), default=vocab.getValue(publisher)) or publisher"
+                    tal:replace="value" />
             </li>
         </ul>
         

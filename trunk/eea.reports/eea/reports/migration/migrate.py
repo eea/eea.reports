@@ -53,8 +53,8 @@ class MigrateReports(object):
             
             if ob.getCanonical() != canonical:
                 ob.addTranslationReference(canonical)
-            en.invalidateTranslationCache()
 
+        en.invalidateTranslationCache()
         # Publish folders
         wftool.doActionFor(en, 'publish')
         wftool.doActionFor(publications, 'publish')

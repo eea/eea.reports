@@ -99,7 +99,6 @@ for report in root.objectValues(report_metatype):
 
         ###CoverImage objects
         #####################
-        #TODO: put binary image data here?
         for img in report.objectValues('CoverImage'):
             res_add('\n<cover_image url="%s">' % img.absolute_url())
             #Zope file properties

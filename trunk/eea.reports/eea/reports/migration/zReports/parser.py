@@ -88,6 +88,7 @@ class zreports_handler(ContentHandler):
         self.__language_report_current = ''
         self.__chapter_context = 0
         self.__chapter_titles = []
+        self.__report_files = []
 
     def get_reports(self):
         return self.__reports
@@ -106,6 +107,12 @@ class zreports_handler(ContentHandler):
 
         if name == 'report_chapter':
             self.__chapter_context = 1
+
+        if name == 'report_file':
+            self.__report_files.append(attrs['url'])
+
+        if name == 'zope_file':
+            self.__report_files.append(attrs['url'])
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
@@ -152,17 +159,32 @@ class zreports_handler(ContentHandler):
             publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
+            self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
+            self.__language_report_current.set('creators_keywords', self.__report_current.get('creators').split('###'))
+            self.__language_report_current.set('publishers_existing_keywords', self.__report_current.get('publishers_orgs').split('###'))
+            self.__language_report_current.set('publishers_keywords', self.__report_current.get('publishers').split('###'))
 
+            #set files
+            self.__language_report_current.set('file', self.__report_files)
 
             #add language report to results
             self.__language_report_current.set('chapters', self.__chapter_titles)
             self.__reports.append(self.__language_report_current)
             self.__language_report_context = ''
+
             self.__chapter_titles = []
-            
+            self.__report_files = []
+
         if name == 'report_chapter':
             self.__chapter_context = 0
         
+        if name == 'title' and self.__chapter_context:
+            data = u''.join(self.__data).strip()
+            self.__chapter_titles.append(data)
+
+        if name == 'report_chapter':
+            self.__chapter_context = 0
+
         if name == 'title' and self.__chapter_context:
             data = u''.join(self.__data).strip()
             self.__chapter_titles.append(data)

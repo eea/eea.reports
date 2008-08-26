@@ -63,6 +63,14 @@ Cover image:
     >>> data = cover_ru.read()
     >>> data[:10]
     '\xff\xd8\xff\xe0\x00\x10JFIF'
+
+PDF File:
+    >>> file_en = report_en.get('file')
+    >>> len(file_en)
+    13
+    >>> file_ru = report_ru.get('file')
+    >>> len(file_ru)
+    12
     
 Creators:
 
@@ -102,3 +110,9 @@ Other properties:
     u'EEA, Copenhagen 2007'
     >>> report_en.get('trailer')
     u'<h2>See also</h2>\n<p><a href="http://www.eea.europa.eu/pan-european/">The EEA pan-European website</a></p>\n<p>\n<a  href="http://dataservice.eea.europa.eu/atlas/available2.asp?type=findkeyword&theme=State%20of%20the%20environment%20report%20No%201/2007">Maps/Graphs included Europe\'s environment - The fourth assessment</a>\n</p>'
+    >>> report_en.get('description')
+    u"The 'Environment for Europe' process now brings together 56 countries across three continents to jointly address environmental challenges. In support of this process, the European Environment Agency has prepared a series of assessments of the environment for the pan European region to provide policy relevant, up to date and reliable information on the interactions between the environment and society.\nThis is the fourth report in the series. Where possible the report evaluates progress, primarily against the objectives of the Sixth Environment Action Programme of the European Community and the Environment Strategy for Countries of Eastern Europe, Caucasus and Central Asia.\nThe report has been prepared in close partnership with a range of international organisations, governmental institutions and non governmental organisations across the region."
+    >>> report_ru.get('effectiveDate')
+    u'2007/10/10 10:00:00 GMT+2'
+    >>> report_ru.get('expirationDate')
+    u'2099/12/31'

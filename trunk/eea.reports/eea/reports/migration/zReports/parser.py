@@ -1,5 +1,6 @@
 import urllib2
 import sys
+from DateTime import DateTime
 from xml.sax.handler import ContentHandler
 from xml.sax import *
 from cStringIO import StringIO
@@ -16,7 +17,7 @@ class Report(object):
             @param lang:                              String;
             @param title:                             String;
             @param description:                       String;
-            @param file                               File;
+            @param file                               Tuple;
             @param relatedItems:                      Tuple;
             @param cover_image_file:                  ImageFile;
             @param author:                            String;
@@ -42,17 +43,23 @@ class Report(object):
             @param pages:                             Integer;
             @param copyrights:                        String;
             @param trailer:                           String;
+            @param effectiveDate                      String
+            @param expirationDate                     String;
         """
         pass
 
     def set(self, key, value):
         return setattr(self, key, value)
+    
+    def delete(self, key):
+        if hasattr(self, key):
+            return delattr(self, key)
 
     def __call__(self, all=False):
         if all:
             return self.__dict__
         return dict((key, value) for key, value in self.items()
-                    if key not in ('id', 'lang', 'title', 'cover_image'))
+                    if key not in ('id', 'lang', 'title', 'cover_image', 'file'))
 
     def get(self, key, default=None):
         return getattr(self, key, default)
@@ -159,11 +166,12 @@ class zreports_handler(ContentHandler):
             publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
-            self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
-            self.__language_report_current.set('creators_keywords', self.__report_current.get('creators').split('###'))
-            self.__language_report_current.set('publishers_existing_keywords', self.__report_current.get('publishers_orgs').split('###'))
-            self.__language_report_current.set('publishers_keywords', self.__report_current.get('publishers').split('###'))
-
+            
+            # Effective date
+            self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate'))
+            # Expiration date
+            self.__language_report_current.set('expirationDate', self.__report_current.get('expiry_date'))
+            
             #set files
             self.__language_report_current.set('file', self.__report_files)
 
@@ -178,13 +186,6 @@ class zreports_handler(ContentHandler):
         if name == 'report_chapter':
             self.__chapter_context = 0
         
-        if name == 'title' and self.__chapter_context:
-            data = u''.join(self.__data).strip()
-            self.__chapter_titles.append(data)
-
-        if name == 'report_chapter':
-            self.__chapter_context = 0
-
         if name == 'title' and self.__chapter_context:
             data = u''.join(self.__data).strip()
             self.__chapter_titles.append(data)

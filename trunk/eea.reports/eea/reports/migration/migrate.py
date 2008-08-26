@@ -8,7 +8,12 @@ from Products.LinguaPlone import config
 from Products.CMFPlone.utils import _createObjectByType
 from Products.LinguaPlone import events
 from zExceptions import BadRequest
-from eea.reports.migration.zReports.parser import get_reports, grab_file_from_url
+from eea.reports.migration.zReports.parser import (
+    get_reports,
+    grab_file_from_url
+)
+import logging
+logger = logging.getLogger('eea.reports.migration')
 
 class MigrateReports(object):
     """ Class used to migrate reports.
@@ -23,6 +28,7 @@ class MigrateReports(object):
         """ Creates folder structure to import old reports
         """
         wftool = getToolByName(self.context, 'portal_workflow')
+        ctool = getToolByName(self.context, 'portal_catalog')
         site = getattr(self.context, 'SITE', self.context)
         # Add publications folder
         if 'publications' not in site.objectIds():
@@ -44,7 +50,8 @@ class MigrateReports(object):
             kwargs['language'] = lang
             kwargs['title'] = en.Title()
             try:
-                ob = _createObjectByType(en.portal_type, publications, lang, *args, **kwargs)
+                ob = _createObjectByType(en.portal_type, publications,
+                                         lang, *args, **kwargs)
             except BadRequest:
                 continue
             
@@ -53,14 +60,38 @@ class MigrateReports(object):
             
             if ob.getCanonical() != canonical:
                 ob.addTranslationReference(canonical)
+            ctool.reindexObject(ob)
 
         en.invalidateTranslationCache()
         # Publish folders
         wftool.doActionFor(en, 'publish')
         wftool.doActionFor(publications, 'publish')
         
+        # Reindex objects
+        ctool.reindexObject(en)
+        ctool.reindexObject(publications)
         # Returns
         return publications
+    #
+    # Handlers
+    #
+    def _process_datamodel(self, datamodel):
+        """ Process datamodel properties before adding new file
+        """
+        # Handle datamodel file property
+        file_url = datamodel.get('file', ())
+        if not file_url:
+            logger.warn('Skip file property for %s, lang %s: files = %s',
+                        datamodel.getId(), datamodel.get('lang'), file_url)
+            return datamodel
+        if len(file_url) > 1:
+            # XXX Handle more files
+            logger.warn('Skip file property for %s, lang %s: file = %s',
+                        datamodel.getId(), datamodel.get('lang'), file_url)
+            return datamodel
+        file_url = file_url[0]
+        datamodel.set('file_file', grab_file_from_url(file_url, 'application/pdf'))
+        return datamodel
     #
     # Update methods
     #
@@ -100,19 +131,33 @@ class MigrateReports(object):
         subtyper = getUtility(ISubtyper)
         subtyper.change_type(translated, 'eea.reports.Report')
         self.update_properties(translated, datamodel)
-    
+
     def update_properties(self, report, datamodel):
         """ Update report properties
         """
+        datamodel = self._process_datamodel(datamodel)
         form = datamodel()
-        report.processForm(values=form)
+        report.processForm(data=1, metadata=1, values=form)
         report.setTitle(datamodel.get('title', ''))
+        # Publish
+        wftool = getToolByName(self.context, 'portal_workflow')
+        ctool = getToolByName(self.context, 'portal_catalog')
+        try:
+            wftool.doActionFor(report, 'publish',
+                               comment='Auto published by migration script.')
+        except Exception, err:
+            logger.warn('Could not publish report %s, lang %s: %s',
+                        datamodel.getId(), datamodel.get('lang'), err)
+        ctool.reindexObject(report)
     #
     # Browser interface
     #
     def __call__(self):
         container = self._get_container()
         for index, report in enumerate(get_reports()):
-            print 'Adding report id: %s lang: %s' % (report.getId(), report.get('lang'))
+            logger.info('Adding report id: %s lang: %s',
+                        report.getId(), report.get('lang'))
             self.add_report(container, report)
-        return '%d language reports imported' % index
+        done = '%d language reports imported !' % index
+        logger.info(done)
+        return done

@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+﻿# -*- coding: utf8 -*-
 
 # Get the HTML request and response objects
 request = container.REQUEST
@@ -24,7 +24,27 @@ def formatExport(data):
     if len(res) > 5:
         if '%' in res:
             res = '<![CDATA[%s]]>' % res
+
+    res  = res.replace('&oslash;', 'ø')
+    res  = res.replace('&egrave;', 'è')
+    res  = res.replace('&eacute;', 'é')
+    res  = res.replace('&Egrave;', 'È')
+    res  = res.replace('&ouml;', 'ö')
+    res  = res.replace('&auml;', 'ä')
+    res  = res.replace('&ccedil;', 'ç')
+    res  = res.replace('&atilde;', 'ã')
+    res  = res.replace('&oacute;', 'ó')
+
     return res
+
+#Exceptions
+tr_reporttitle = "Avrupa’nın çevresi — Dördüncü değerlendirme. İdari özet"
+it_reporttitle = "L’ambiente in Europa — La quarta valutazione"
+et_reporttitle = "6 Säästev tarbimine ja tootmine"
+is_reporttitle = "Umhverfi Evrópu - Fjórða úttekt: 6 Sjálfbær neysla og framleiðsla"
+hu_reporttitle = "Európa környezete Negyedik értékelés: 6 Fenntartható fogyasztás és termelés"
+fi_reporttitle = "Euroopan ympäristö - Neljäs arviointi: 6 Kestävä kulutus ja tuotanto"
+lt_reporttitle = "Europos aplinka - Ketvirtasis ávertinimas: 6 Tausojantis vartojimas ir gamyba"
 
 # Export content
 res_add("""<?xml version="1.0" encoding="utf-8"?>""")
@@ -54,15 +74,15 @@ for report in root.objectValues(report_metatype):
         res_add('\n<order_extra_text>%s</order_extra_text>' % formatExport(report.order_extra_text))           #text
 
         #Extra Property Sheet
-        res_add('\n<expiry_date>%s</expiry_date>' % formatExport(report.expiry_date))                                 #date
-        res_add('\n<version_number>%s</version_number>' % formatExport(report.version_number))                        #string
-        res_add('\n<price_euro>%s</price_euro>' % formatExport(report.price_euro))                                    #string
-        res_add('\n<creators_orgs>%s</creators_orgs>' % formatExport(report.creators_orgs))                           #multiple selection
-        res_add('\n<creators>%s</creators>' % formatExport(report.creators))                                          #lines
-        res_add('\n<publishers_orgs>%s</publishers_orgs>' % formatExport(report.publishers_orgs))                     #multiple selection
-        res_add('\n<publishers>%s</publishers>' % formatExport(report.publishers))                                    #lines
-        res_add('\n<coverage_time_from>%s</coverage_time_from>' % formatExport(report.coverage_time_from))            #date
-        res_add('\n<coverage_time_to>%s</coverage_time_to>' % formatExport(report.coverage_time_to))                  #date
+        res_add('\n<expiry_date>%s</expiry_date>' % formatExport(report.expiry_date))                       #date
+        res_add('\n<version_number>%s</version_number>' % formatExport(report.version_number))              #string
+        res_add('\n<price_euro>%s</price_euro>' % formatExport(report.price_euro))                          #string
+        res_add('\n<creators_orgs>%s</creators_orgs>' % formatExport(report.creators_orgs))                 #multiple selection
+        res_add('\n<creators>%s</creators>' % formatExport(report.creators))                                #lines
+        res_add('\n<publishers_orgs>%s</publishers_orgs>' % formatExport(report.publishers_orgs))           #multiple selection
+        res_add('\n<publishers>%s</publishers>' % formatExport(report.publishers))                          #lines
+        res_add('\n<coverage_time_from>%s</coverage_time_from>' % formatExport(report.coverage_time_from))  #date
+        res_add('\n<coverage_time_to>%s</coverage_time_to>' % formatExport(report.coverage_time_to))        #date
 
         tmp_find = report.copyright.find('EEA, Copenhagen')
         if tmp_find > 0:
@@ -102,8 +122,8 @@ for report in root.objectValues(report_metatype):
         for img in report.objectValues('CoverImage'):
             res_add('\n<cover_image url="%s">' % img.absolute_url())
             #Zope file properties
-            res_add('\n<id>%s</id>' % formatExport(img.getId()))        #string
-            res_add('\n<title>%s</title>' % formatExport(img.title))    #string
+            res_add('\n<id>%s</id>' % formatExport(img.getId()))                                 #string
+            res_add('\n<title>%s</title>' % formatExport(img.title))                                 #string
 
             #Atlas Property Sheet
             res_add('\n<result1>%s</result1>' % formatExport(img.result1))                           #string
@@ -153,9 +173,9 @@ for report in root.objectValues(report_metatype):
         for lang in report.objectValues('Language Report'):
             res_add('\n<language_report>')
             #Basic Property Sheet
-            res_add('\n<id>%s</id>' % formatExport(lang.id))                                                     #string
-            res_add('\n<language>%s</language>' % formatExport(lang.language))                                   #string
-            res_add('\n<title>%s</title>' % formatExport(lang.title))                                            #string
+            res_add('\n<id>%s</id>' % formatExport(lang.id))                    #string
+            res_add('\n<language>%s</language>' % formatExport(lang.language))  #string
+            res_add('\n<title>%s</title>' % formatExport(lang.title))           #string
 
             if lang.isbn == '978-92-9167-919-5':
                 res_add('\n<description>%s</description>' % unicode(formatExport(lang.description), 'latin1').encode('utf-8'))  #text
@@ -163,7 +183,23 @@ for report in root.objectValues(report_metatype):
                 res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
 
             res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
-            res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                          #string
+            if report.id == 'state_of_environment_report_2007_1' and lang.id == 'tr':
+                res_add('\n<reporttitle>%s</reporttitle>' % tr_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'it':
+                res_add('\n<reporttitle>%s</reporttitle>' % it_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'et':
+                res_add('\n<reporttitle>%s</reporttitle>' % et_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'is':
+                res_add('\n<reporttitle>%s</reporttitle>' % is_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'hu':
+                res_add('\n<reporttitle>%s</reporttitle>' % hu_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'fi':
+                res_add('\n<reporttitle>%s</reporttitle>' % fi_reporttitle)                      #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
+                res_add('\n<reporttitle>%s</reporttitle>' % lt_reporttitle)                      #string
+            else:
+                res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                      #string
+                
             res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
             res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
@@ -171,7 +207,23 @@ for report in root.objectValues(report_metatype):
             res_add('\n<pages>%s</pages>' % formatExport(lang.pages))                    #int
             res_add('\n<isbn>%s</isbn>' % formatExport(lang.isbn))                       #string
             res_add('\n<catalogue>%s</catalogue>' % formatExport(lang.catalogue))        #string
-            res_add('\n<sort_title>%s</sort_title>' % formatExport(lang.sort_title))     #string
+
+            if report.id == 'state_of_environment_report_2007_1' and lang.id == 'tr':
+                res_add('\n<sort_title>%s</sort_title>' % tr_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'it':
+                res_add('\n<sort_title>%s</sort_title>' % it_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'et':
+                res_add('\n<sort_title>%s</sort_title>' % et_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'is':
+                res_add('\n<sort_title>%s</sort_title>' % is_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'hu':
+                res_add('\n<sort_title>%s</sort_title>' % hu_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'fi':
+                res_add('\n<sort_title>%s</sort_title>' % fi_reporttitle)                #string
+            elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
+                res_add('\n<sort_title>%s</sort_title>' % lt_reporttitle)                #string
+            else:
+                res_add('\n<sort_title>%s</sort_title>' % formatExport(lang.sort_title)) #string
 
             #Manager Property Sheet
             res_add('\n<langreleased>%s</langreleased>' % formatExport(lang.langreleased))   #boolean
@@ -183,7 +235,7 @@ for report in root.objectValues(report_metatype):
                 #Basic Property Sheet
                 res_add('\n<id>%s</id>' % formatExport(chp.id))                             #string
                 res_add('\n<title>%s</title>' % formatExport(chp.title))                    #text
-                res_add('\n<content>%s</content>' % formatExport(chp.content))              #string
+                res_add('\n<content>%s</content>' % formatExport(chp.content))  #string
                 res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
                 res_add('\n<pagenumber>%s</pagenumber>' % formatExport(chp.pagenumber))     #int
                 res_add('\n<categories>%s</categories>' % formatExport(chp.categories))     #lines
@@ -202,14 +254,14 @@ for report in root.objectValues(report_metatype):
             for rep_file in lang.objectValues('Report File'):
                 res_add('\n<report_file url="%s">' % rep_file.absolute_url())
                 #Basic Property Sheet
-                res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))                                       #string
-                res_add('\n<title>%s</title>' % formatExport(rep_file.title))                                   #string
-                res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))                                      #lines
+                res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))       #string
+                res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+                res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
                 if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                     res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'latin1').encode('utf8'))  #text
                 else:
                     res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
-                res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                    #int
+                res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                        #int
                 res_add('\n</report_file>')
 
             ###ReportOrder objects
@@ -251,8 +303,8 @@ for report in root.objectValues(report_metatype):
             for search in lang.objectValues('Search'):
                 res_add('\n<search>')
                 #Basic Property Sheet
-                res_add('\n<title>%s</title>' % formatExport(search.title))                     #string
-                res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate))   #date
+                res_add('\n<title>%s</title>' % formatExport(search.title))                   #string
+                res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate)) #date
                 res_add('\n</search>')
 
             ###Zope File objects
@@ -269,11 +321,9 @@ for report in root.objectValues(report_metatype):
                 res_add('\n<id>%s</id>' % formatExport(img.getId()))
                 res_add('\n</zope_image>')
 
-
             res_add('\n</language_report>')
         res_add('\n</report>')
 
 res_add('\n</reports>')
 print ''.join(res)
 return printed
-

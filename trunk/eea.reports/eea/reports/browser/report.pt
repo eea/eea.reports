@@ -37,6 +37,23 @@
         </tal:lang>
     </div>
     
+    <div class="documentDescription" tal:define="
+        field python:here.getField('serial_title');
+        serial_title python:field.getAccessor(here)();
+        serial_alt python:len(serial_title) > 3 and serial_title[3];
+        vocab python:field.Vocabulary(here);">
+        <tal:serial_alt condition="serial_alt" replace="serial_alt" />
+        <tal:serial_title condition="not:serial_alt" tal:define="
+            report_type python:len(serial_title) and serial_title[0];
+            report_type python:report_type and here.translate(vocab.getMsgId(report_type),
+                        default=vocab.getValue(report_type)) or report_type;
+            report_num python:len(serial_title)>1 and serial_title[1];
+            report_year python:len(serial_title)>2 and serial_title[2];"
+            tal:replace="string:${report_type} No ${report_num}/${report_year}">
+            Report No 7/2000
+        </tal:serial_title>
+    </div>
+    
     <div class="figure-left" tal:condition="here/cover_image|nothing">
          <div class="figure">
             <img tal:replace="structure here/cover_image" />

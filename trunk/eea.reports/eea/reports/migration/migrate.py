@@ -12,6 +12,7 @@ from eea.reports.migration.zReports.parser import (
     get_reports,
     grab_file_from_url
 )
+from config import DEFAULT_FILE, REPORTS_XML
 import logging
 logger = logging.getLogger('eea.reports.migration')
 
@@ -75,22 +76,39 @@ class MigrateReports(object):
     #
     # Handlers
     #
+    def _get_file_url(self, datamodel):
+        """
+        """
+        file_urls = datamodel.get('file', ())
+        # Handle empty list
+        if not file_urls:
+            logger.warn('Skip file property for %s, lang %s: files = %s',
+                        datamodel.getId(), datamodel.get('lang'), file_urls)
+            return None
+        # Handle one file
+        if len(file_urls) == 1:
+            return file_urls[0]
+        # More than one file
+        # Check for mapping
+        default_url = DEFAULT_FILE.get('%s/%s' % (
+            datamodel.get('lang'), datamodel.getId()), None)
+        if not default_url:
+            logger.warn('Skip file property for %s, lang %s: file = %s',
+                        datamodel.getId(), datamodel.get('lang'), file_urls)
+            return None
+        
+        file_urls = [url for url in file_urls if url.endswith(default_url)]
+        if not file_urls:
+            return None
+        return file_urls[0]
+        
     def _process_datamodel(self, datamodel):
         """ Process datamodel properties before adding new file
         """
         # Handle datamodel file property
-        file_url = datamodel.get('file', ())
-        if not file_url:
-            logger.warn('Skip file property for %s, lang %s: files = %s',
-                        datamodel.getId(), datamodel.get('lang'), file_url)
-            return datamodel
-        if len(file_url) > 1:
-            # XXX Handle more files
-            logger.warn('Skip file property for %s, lang %s: file = %s',
-                        datamodel.getId(), datamodel.get('lang'), file_url)
-            return datamodel
-        file_url = file_url[0]
-        datamodel.set('file_file', grab_file_from_url(file_url, 'application/pdf'))
+        file_url = self._get_file_url(datamodel)
+        if file_url:
+            datamodel.set('file_file', grab_file_from_url(file_url, 'application/pdf'))
         return datamodel
     #
     # Update methods
@@ -154,7 +172,7 @@ class MigrateReports(object):
     #
     def __call__(self):
         container = self._get_container()
-        for index, report in enumerate(get_reports()):
+        for index, report in enumerate(get_reports(REPORTS_XML)):
             logger.info('Adding report id: %s lang: %s',
                         report.getId(), report.get('lang'))
             self.add_report(container, report)

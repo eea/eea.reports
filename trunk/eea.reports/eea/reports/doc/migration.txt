@@ -71,7 +71,13 @@ PDF File:
     >>> file_ru = report_ru.get('file')
     >>> len(file_ru)
     12
-    
+    >>> from eea.reports.migration.migrate import MigrateReports
+    >>> migration = MigrateReports(self.portal)
+    >>> migration._get_file_url(report_en)
+    u'http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/Belgrade_EN_all_chapters_incl_cover.pdf'
+    >>> migration._get_file_url(report_ru)
+    u'http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/cover.pdf'
+
 Creators:
 
     >>> report_ru.get('creators_existing_keywords')

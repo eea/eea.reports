@@ -6,18 +6,22 @@ from Products.Archetypes import atapi
 from zope.interface import implements
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.field import ExtensionField
-from slc.publications.subtypes.publication import SchemaExtender as PublicationSchemaExtender
-from slc.publications.subtypes.publication import AuthorField
-from slc.publications.subtypes.publication import ExtensionFieldMixin
 from eea.reports.config import COPYRIGHTS
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
-from eea.reports.field import SerialTitleField
-from eea.reports.widget import SerialTitleWidget
+from eea.reports.subtypes.field import SerialTitleField
+from eea.reports.subtypes.widget import SerialTitleWidget
+
+class ExtensionFieldMixin:
+    def translationMutator(self, instance):
+        return self.getMutator(instance)
 
 class ReportStringField(ExtensionField, ExtensionFieldMixin, atapi.StringField):
     """ """
 
 class ReportIntegerField(ExtensionField, ExtensionFieldMixin, atapi.IntegerField):
+    """ """
+
+class ReportBooleanField(ExtensionField, ExtensionFieldMixin, atapi.BooleanField):
     """ """
 
 class ReportLinesField(ExtensionField, ExtensionFieldMixin, atapi.LinesField):
@@ -26,36 +30,80 @@ class ReportLinesField(ExtensionField, ExtensionFieldMixin, atapi.LinesField):
 class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
     """ """
 
+class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
+    """ """
+
+class ReportImageField(ExtensionField, ExtensionFieldMixin, atapi.ImageField):
+    """ """
+
 class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
     """ """
 
 class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleField):
     """ """
 
-class SchemaExtender(PublicationSchemaExtender):
+class SchemaExtender(object):
     """ Schema extender
     """
     implements(IOrderableSchemaExtender)
-    _fields = PublicationSchemaExtender._fields[0:1] + \
-              PublicationSchemaExtender._fields[2:] + [
-        AuthorField('author',
-            schemata='publication',
-            languageIndependent=True,
-            default=u'European Environment Agency',
-            widget=atapi.StringWidget(
-                label = _(u'label_author', default=u'Author'),
-                description=_(u'description_author', default=u'Fill in the Name of the Author of this Publication.'),
+    _fields = [
+            ReportFileField('file',
+                schemata='default',
+                languageIndependent=False,
+                widget=atapi.FileWidget(
+                    label = _(u'label_report_file', default=u'Report File'),
+                    description=_(u'description_report_file', default=u'Fill in the Report file'),
+                ),
             ),
-        ),
-        ReportSerialTitleField('serial_title',
-            schemata='report',
-            languageIndependent=True,
-            types_vocabulary=NamedVocabulary("report_types"),
-            years_vocabulary=ReportYearsVocabulary(),
-            default=(u'', 0, -1, u''),
-            widget=SerialTitleWidget(
-                label=_(u'label_serial_title', default=u'Serial title'),
-                description=_(u'description_serial_title', default=u'Fill in serial title'),
+            ReportImageField('cover_image',
+                schemata='report',
+                languageIndependent=False,
+                widget=atapi.ImageWidget(
+                    label = _(u'label_cover_image', default=u'Cover Image'),
+                    description=_(u'description_cover_image', default=u'Upload a cover image. Leave empty to have the system autogenerate one for you.'),
+                ),
+            ),
+            ReportStringField('isbn',
+                schemata='report',
+                languageIndependent=False,
+                widget=atapi.StringWidget(
+                    label = _(u'label_isbn', default=u'ISBN'),
+                    description=_(u'description_isbn', default=u'Fill in the ISBN Number of this Report.'),
+                ),
+            ),
+            ReportStringField('order_id',
+                schemata='report',
+                languageIndependent=False,
+                widget=atapi.StringWidget(
+                    label = _(u'label_order_id', default=u'Order ID'),
+                    description=_(u'description_order_id', default=u'Fill in the Order ID of this Report.'),
+                ),
+            ),
+            ReportBooleanField('for_sale',
+                schemata='report',
+                languageIndependent=True,
+                widget=atapi.BooleanWidget(
+                    label = _(u'label_for_sale', default=u'For sale?'),
+                    description=_(u'description_for_sale', default=u'Is this Report for sale?'),
+                ),
+            ),
+            ReportFileField('metadata_upload',
+                schemata='report',
+                languageIndependent=True,
+                widget=atapi.FileWidget(
+                    label = _(u'label_metadata_upload', default=u'Metadata INI upload'),
+                    description=_(u'description_metadata_upload', default=u'Upload Metadata in INI style format.'),
+                ),
+            ),
+            ReportSerialTitleField('serial_title',
+                schemata='report',
+                languageIndependent=True,
+                types_vocabulary=NamedVocabulary("report_types"),
+                years_vocabulary=ReportYearsVocabulary(),
+                default=(u'', 0, -1, u''),
+                widget=SerialTitleWidget(
+                    label=_(u'label_serial_title', default=u'Serial title'),
+                    description=_(u'description_serial_title', default=u'Fill in serial title'),
                 ),
             ),
             ReportLinesField('creators',
@@ -144,22 +192,32 @@ class SchemaExtender(PublicationSchemaExtender):
                 )
             ),
     ]
-    
+
+    def __init__(self, context):
+        self.context = context
+
+    def getFields(self):
+        return self._fields
+
     def getOrder(self, original):
         order = original.get('report', [])
         new_order = [
             'serial_title',
+            'isbn',
             'creators',
             'publishers',
             'themes',
+            'copyrights',
+            'metadata_upload',
+            'for_sale',
+            'order_id',
             'price',
             'pages',
-            'copyrights',
             'trailer',
             'order_override_text',
             'order_extra_text',
         ]
         new_order.extend([x for x in order if x not in new_order])
         original['report'] = new_order
-        
+
         return original

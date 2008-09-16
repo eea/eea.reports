@@ -29,5 +29,5 @@ registerWidget(
     SerialTitleWidget,
     title='Serial Title',
     description=('Renders report serial title'),
-    used_for=('eea.reports.field.SerialTitleField',)
+    used_for=('eea.reports.subtypes.field.SerialTitleField',)
 )

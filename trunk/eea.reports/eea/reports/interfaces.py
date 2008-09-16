@@ -6,17 +6,17 @@ from zope.app.content import interfaces as contentifaces
 class IAnyReportCapable(Interface):
     """Any aspect of report/content capable.
     """
-    
-class IPossibleReport(IAnyReportCapable):
+
+class IPossibleReportContainer(IAnyReportCapable):
     """ All objects that should have the ability to be converted to some
         form of report should implement this interface.
     """
 
-class IReportEnhanced(Interface):
+class IReportContainerEnhanced(Interface):
     """ Marker interface for reports
     """
+alsoProvides(IReportContainerEnhanced, contentifaces.IContentType)
 
-alsoProvides(IReportEnhanced, contentifaces.IContentType)
 class IReport(Interface):
     """ Objects which have report information.
     """

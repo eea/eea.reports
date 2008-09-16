@@ -7,19 +7,17 @@ from Products.ATContentTypes import interface as atctifaces
 from eea.reports import interfaces
 
 @interface.implementer(interfaces.IReport)
-@component.adapter(atctifaces.IATFile)
+@component.adapter(atctifaces.IATFolder)
 def ATCTFileReport(context):
     if not interfaces.IReportEnhanced.providedBy(context):
         return None
     return _ATCTReport(context)
 
-_marker=[]
-
 class _ATCTReport(object):
     """ Report
     """
     interface.implements(interfaces.IReport)
-    component.adapts(atctifaces.IATFile)
+    component.adapts(atctifaces.IATFolder)
 
     def __init__(self, context):
         self.context = context

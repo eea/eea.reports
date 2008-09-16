@@ -6,28 +6,8 @@
     <five:registerPackage package="." initialize=".initialize" />
 
     <include package=".browser" />
+    <include package=".adapter" />
+    <include package=".subtypes" />
     <include file="profiles.zcml" />
-
-    <class class="Products.ATContentTypes.content.file.ATFile">
-      <implements interface="eea.reports.interfaces.IPossibleReport" />
-    </class>
-
-    <adapter factory=".adapter.report.ATCTFileReport" />
-
-    <utility
-        name="eea.reports.Report"
-        factory=".descriptors.ReportDescriptor"
-        />
-
-    <adapter
-        name="eea.reports.subtypes.report"
-        for="eea.reports.interfaces.IReportEnhanced"
-        factory=".subtypes.report.SchemaExtender" />
-
-    <adapter
-        for=".interfaces.IPossibleReport"
-        provides="zope.app.annotation.interfaces.IAnnotations"
-        factory="zope.app.annotation.attribute.AttributeAnnotations"
-        />
 
 </configure>

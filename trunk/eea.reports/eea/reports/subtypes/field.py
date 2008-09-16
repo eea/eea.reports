@@ -1,5 +1,5 @@
 import logging
-logger = logging.getLogger('eea.reports.field')
+logger = logging.getLogger('eea.reports.subtypes.field')
 
 from types import ListType, TupleType, StringType, UnicodeType
 from AccessControl import ClassSecurityInfo
@@ -9,7 +9,7 @@ from Products.Archetypes.Field import decode, encode
 from Products.Archetypes.utils import DisplayList, mapply, Vocabulary
 from Products.Archetypes.Registry import registerField
 from Products.Archetypes.Registry import registerPropertyType
-from eea.reports.widget import SerialTitleWidget
+from eea.reports.subtypes.widget import SerialTitleWidget
 
 STRING_TYPES = [StringType, UnicodeType]
 

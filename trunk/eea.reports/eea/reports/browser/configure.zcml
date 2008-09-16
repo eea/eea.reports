@@ -6,13 +6,14 @@
     i18n_domain="eea.reports">
     
   <page
-      name="file_view"
+      name="report_view"
       template="report.pt"
-      for="eea.reports.interfaces.IReportEnhanced"
-      class="slc.publications.browser.publication.PublicationPageView"
+      for="eea.reports.interfaces.IReportContainerEnhanced"
       permission="zope2.View"
       />
-      
+
+  <zope:adapter factory=".displays.ReportContainerDynamicViews" />
+
   <browser:page
       for="*"
       name="migrate_reports"

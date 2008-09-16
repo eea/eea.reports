@@ -26,8 +26,8 @@
         lockable python: hasattr(here, 'wl_isLocked');
         isLocked python: lockable and here.wl_isLocked();
         mode string:view;
-        ">
-    
+">
+
     <h1>
         <span tal:replace="here/Title">Title of the Publication</span>
     </h1>
@@ -36,7 +36,6 @@
             <metal:lang use-macro="here/global_languageselector/macros/language" />
         </tal:lang>
     </div>
-    
     <div class="documentDescription" tal:define="
         field python:here.getField('serial_title');
         serial_title python:field.getAccessor(here)();
@@ -53,7 +52,7 @@
             Report No 7/2000
         </tal:serial_title>
     </div>
-    
+
     <div class="figure-left" tal:condition="here/cover_image|nothing">
          <div class="figure">
             <img tal:replace="structure here/cover_image" />
@@ -64,7 +63,6 @@
         <div class="publicationDescription">
             <strong tal:content="here/Description" />
         </div>
-        
         <ul class="visualNoMarker relatedLinks publicationThemes"  tal:define="
             field python:here.getField('themes');
             themes python:field.getAccessor(here)();
@@ -80,20 +78,22 @@
                 <span tal:condition="not:repeat/theme/end" tal:content="string:|" />
             </li>
         </ul>
-
         <div class="discreet">
             <tal:publishdate metal:use-macro="here/document_byline/macros/publishdate" />
         </div>
 
-        <div class="publicationField">
+        <div class="publicationFile" tal:define="
+            field python:here.getField('file');
+            value python:field.getAccessor(here)()"
+            tal:condition="value/get_size">
 
-            <a href="" tal:attributes="href string:${here/absolute_url}">
-                <strong i18n:domain="eea.reports" 
+            <a href="" tal:attributes="href string:${here/absolute_url}/at_download/file">
+                <strong i18n:domain="eea.reports"
                        i18n:translate="label_download_full_publication">Download the full publication as PDF</strong>
             </a>
-            <tal:size content="structure python:', %s KB' % (here.get_size() / 1024)">0Kb</tal:size>
+            <tal:size content="structure python:', %s KB' % (value.get_size() / 1024)">0Kb</tal:size>
         </div>
-        
+
         <p class="documentByLine"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
@@ -106,21 +106,21 @@
                     tal:replace="value" />
             </li>
         </ul>
-        
-        <div class="publicationOrder" 
-             tal:define="field python:here.getField('order_id'); 
+
+        <div class="publicationOrder"
+             tal:define="field python:here.getField('order_id');
                          value python:field.getAccessor(here)()"
              tal:condition="value">
-            
+
             <div class="publicationField" style="float:left">
                 <div class="label">
                     <label for="field.name" title="The widget's hint"
                            tal:attributes="for python:field.widget.Label(here); title python:field.widget.Label(here)"
-                           tal:content="python:field.widget.Label(here)"></label>: 
-                </div>       
+                           tal:content="python:field.widget.Label(here)"></label>:
+                </div>
                 <div tal:replace="structure value"></div>
                 <br />
-                <div i18n:translate="help_order_id">Order a printed copy of this document!</div>        
+                <div i18n:translate="help_order_id">Order a printed copy of this document!</div>
             </div>
 
             <div style="float:left" class="publicationOrderButton">
@@ -133,7 +133,7 @@
                                title="EU Bookshop: You can order a printed copy of this document">
                </a>
             </div>
-            <div class="visualClear"></div>                   
+            <div class="visualClear"></div>
         </div>
     </div>
 

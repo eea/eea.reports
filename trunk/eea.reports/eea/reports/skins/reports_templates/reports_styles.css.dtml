@@ -1,11 +1,11 @@
 .publicationText{
-  background-color: transparent; 
-  border-bottom: 1px dotted gray; 
+  background-color: transparent;
+  border-bottom: 1px dotted gray;
   margin-bottom: 1em;
   padding-bottom: 1em;
   clear: right;
   margin-left: 0px;
-} 
+}
 
 .publicationImage{
 float:left; width: 90px;
@@ -24,6 +24,11 @@ margin-bottom: 0em;
 
 .publicationField {
 margin-bottom: 0.5em;
+}
+
+.publicationFile {
+margin-bottom: 0.5em;
+margin-top: 1em;
 }
 
 .publicationDate {

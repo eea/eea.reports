@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="eea.reports">
+
+    <adapter factory=".report.ATCTFileReport" />
+    <!-- XXX Debug
+
+    <subscriber
+       for="..interfaces.IPossibleReportContainer
+            zope.app.event.interfaces.IObjectEvent"
+       handler=".events.printEvent"
+    />
+
+    <subscriber
+       for="..interfaces.IPossibleReportContainer
+            p4a.subtyper.interfaces.ISubtypeEvent"
+       handler=".events.printEvent"
+    />
+
+    Debug -->
+
+    <adapter
+        for="..interfaces.IPossibleReportContainer"
+        provides="zope.app.annotation.interfaces.IAnnotations"
+        factory="zope.app.annotation.attribute.AttributeAnnotations"
+        />
+
+</configure>

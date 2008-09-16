@@ -173,9 +173,10 @@ for report in root.objectValues(report_metatype):
         for lang in report.objectValues('Language Report'):
             res_add('\n<language_report>')
             #Basic Property Sheet
-            res_add('\n<id>%s</id>' % formatExport(lang.id))                    #string
-            res_add('\n<language>%s</language>' % formatExport(lang.language))  #string
-            res_add('\n<title>%s</title>' % formatExport(lang.title))           #string
+            res_add('\n<id>%s</id>' % formatExport(lang.id))                           #string
+            res_add('\n<eeaid>%s</eeaid>' % formatExport(getattr(lang, 'eeaid', '0'))) #integer
+            res_add('\n<language>%s</language>' % formatExport(lang.language))         #string
+            res_add('\n<title>%s</title>' % formatExport(lang.title))                  #string
 
             if lang.isbn == '978-92-9167-919-5':
                 res_add('\n<description>%s</description>' % unicode(formatExport(lang.description), 'latin1').encode('utf-8'))  #text

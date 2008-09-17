@@ -107,7 +107,7 @@
             </li>
         </ul>
 
-        <div class="publicationOrder" tal:define="
+        <tal:order define="
             oid_field       python:here.getField('order_id');
             oid_value       python:oid_field.getAccessor(here)();
             fs_field        python:here.getField('for_sale');
@@ -115,41 +115,36 @@
             isbn_filed      python:here.getField('isbn');
             isbn_value      python:isbn_filed.getAccessor(here)();
             price_field     python:here.getField('price');
-            price_value     python:price_field.getAccessor(here)();
-            "
-             tal:condition="fs_value">
+            price_value     python:price_field.getAccessor(here)();"
+            tal:condition="fs_value">
+        <h2 i18n:translate="help_order_id">Order a printed copy of this document</h2>
 
-            <div class="publicationField orderEubookshop" style="float:left">
-                <strong i18n:translate="help_order_id">Order a printed copy of this document:</strong>
-                <br />
-                <div class="label">
+        <div class="publicationOrder">
+            <div class="publicationField" style="float:left">
+                <div>
                     <label for="isbn_filed.name" title="The widget's hint"
                            tal:attributes="
                                for python:isbn_filed.widget.Label(here);
                                title python:isbn_filed.widget.Label(here)"
                            tal:content="python:isbn_filed.widget.Label(here)"></label>:
+                    <span tal:content="isbn_value" />
                 </div>
-                <span tal:content="isbn_value" />
-
-                <br />
-                <div class="label">
+                <div>
                     <label for="oid_field.name" title="The widget's hint"
                            tal:attributes="
                                for python:oid_field.widget.Label(here);
                                title python:oid_field.widget.Label(here)"
                            tal:content="python:oid_field.widget.Label(here)"></label>:
+                    <span tal:content="oid_value" />
                 </div>
-                <span tal:content="oid_value" />
-
-                <br />
-                <div class="label">
+                <div>
                     <label for="price_field.name" title="The widget's hint"
                            tal:attributes="
                                for python:price_field.widget.Label(here);
                                title python:price_field.widget.Label(here)"
                            tal:content="python:price_field.widget.Label(here)"></label>:
+                    <span tal:content="python:'EUR %.02f' % price_value" />
                 </div>
-                <span tal:content="python:'EUR %.02f' % price_value" />
             </div>
 
             <div style="float:left" class="publicationOrderButton">
@@ -164,6 +159,11 @@
             </div>
             <div class="visualClear"></div>
         </div>
+        <div>
+            <strong i18n:translate="nearst_locations_label">You can also obtain a copy from</strong>
+            <a href="/sales_agent_redirect" i18n:translate="nearst_locations_link">your nearest sales agent</a>
+        </div>
+        </tal:order>
     </div>
 
     <br clear="all" />

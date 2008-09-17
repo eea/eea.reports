@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vdex orderSignificant="true">
+  <vocabName>
+    <langstring language="en">Publications Groups</langstring>
+  </vocabName>
+  <vocabIdentifier>eea.reports.publications_groups</vocabIdentifier>
+  <term>
+    <termIdentifier>Sample Group 1</termIdentifier>
+      <caption>
+        <langstring language="en">Sample Group 1</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Sample Group 2</termIdentifier>
+      <caption>
+        <langstring language="en">Sample Group 2</langstring>
+      </caption>
+  </term>
+</vdex>

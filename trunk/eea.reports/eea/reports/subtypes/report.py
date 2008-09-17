@@ -52,7 +52,8 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 widget=atapi.FileWidget(
                     label = _(u'label_report_file', default=u'Report File'),
-                    description=_(u'description_report_file', default=u'Fill in the Report file'),
+                    description=_(u'description_report_file', default=u'Fill in the publication file'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportImageField('cover_image',
@@ -61,6 +62,7 @@ class SchemaExtender(object):
                 widget=atapi.ImageWidget(
                     label = _(u'label_cover_image', default=u'Cover Image'),
                     description=_(u'description_cover_image', default=u'Upload a cover image. Leave empty to have the system autogenerate one for you.'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportStringField('isbn',
@@ -68,7 +70,8 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 widget=atapi.StringWidget(
                     label = _(u'label_isbn', default=u'ISBN'),
-                    description=_(u'description_isbn', default=u'Fill in the ISBN Number of this Report.'),
+                    description=_(u'description_isbn', default=u'Fill in the ISBN Number of this publication.'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportIntegerField('eeaid',
@@ -78,6 +81,7 @@ class SchemaExtender(object):
                 widget=atapi.IntegerWidget(
                     label=_(u'label_eeaid', default=u'EEA Publication Internal ID'),
                     description=_(u'description_eeaid', default=u'Fill in EEA publication internal id'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportStringField('order_id',
@@ -85,7 +89,8 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 widget=atapi.StringWidget(
                     label = _(u'label_order_id', default=u'Order ID'),
-                    description=_(u'description_order_id', default=u'Fill in the Order ID of this Report.'),
+                    description=_(u'description_order_id', default=u'Fill in the Order ID of this publication.'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportBooleanField('for_sale',
@@ -93,7 +98,8 @@ class SchemaExtender(object):
                 languageIndependent=True,
                 widget=atapi.BooleanWidget(
                     label = _(u'label_for_sale', default=u'For sale?'),
-                    description=_(u'description_for_sale', default=u'Is this Report for sale?'),
+                    description=_(u'description_for_sale', default=u'Is this publication for sale?'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportFileField('metadata_upload',
@@ -102,6 +108,7 @@ class SchemaExtender(object):
                 widget=atapi.FileWidget(
                     label = _(u'label_metadata_upload', default=u'Metadata INI upload'),
                     description=_(u'description_metadata_upload', default=u'Upload Metadata in INI style format.'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportSerialTitleField('serial_title',
@@ -113,6 +120,7 @@ class SchemaExtender(object):
                 widget=SerialTitleWidget(
                     label=_(u'label_serial_title', default=u'Serial title'),
                     description=_(u'description_serial_title', default=u'Fill in serial title'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportLinesField('creators',
@@ -125,6 +133,7 @@ class SchemaExtender(object):
                     label=_(u'label_creators', default=u'Creators/Authors'),
                     description=_(u'description_creators', default=u'Fill in additional creators/authors'),
                     macro='report_keywords',
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportLinesField('publishers',
@@ -137,6 +146,7 @@ class SchemaExtender(object):
                     label=_(u'label_publishers', default=u'Publishers'),
                     description=_(u'description_publishers', default=u'Fill in additional publishers'),
                     macro='report_keywords',
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportLinesField('themes',
@@ -144,19 +154,29 @@ class SchemaExtender(object):
                 vocabulary=ReportThemesVocabulary(),
                 widget=atapi.InAndOutWidget(
                     label=_(u'EEAContentTypes_label_themes', default=u'Themes'),
-                    description=_(u'EEAContentTypes_help_themes', default=u'Choose max 3 themes go with this Highlight.'),
+                    description=_(u'EEAContentTypes_help_themes', default=u'Choose publication themes'),
                     i18n_domain='EEAContentTypes',
                 ),
                 languageIndependent=True,
                 index="KeywordIndex:brains",
                 enforceVocabulary=1
             ),
+            ReportLinesField('publication_groups',
+                schemata='report',
+                vocabulary=NamedVocabulary("publications_groups"),
+                widget=atapi.InAndOutWidget(
+                    label=_(u'label_publication_groups', default=u'Publication groups'),
+                    description=_(u'description_publication_groups', default=u'Fill in publication groups'),
+                    i18n_domain='eea.reports',
+                ),
+            ),
             ReportFloatField('price',
                 schemata='report',
                 languageIndependent=True,
                 widget=atapi.DecimalWidget(
                     label=_(u'label_price', default=u'Price'),
-                    description=_(u'description_price', default=u'Fill in price'),
+                    description=_(u'description_price', default=u'Fill in publication price'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportTextField('order_override_text',
@@ -165,6 +185,7 @@ class SchemaExtender(object):
                 widget=atapi.RichWidget(
                     label=_(u'label_order_override_text', default=u'Override the order text with your own text'),
                     description=_(u'description_order_override_text', default=u'Fill in to override the order text'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportTextField('order_extra_text',
@@ -173,6 +194,7 @@ class SchemaExtender(object):
                 widget=atapi.RichWidget(
                     label=_(u'label_order_extra_text', default=u'OR add some text to the order screen'),
                     description=_(u'description_order_extra_text', default=u'Fill in to add this text to the order text'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportIntegerField('pages',
@@ -181,6 +203,7 @@ class SchemaExtender(object):
                 widget=atapi.IntegerWidget(
                     label=_(u'label_pages', default=u'Pages'),
                     description=_(u'description_pages', default=u'Fill in pages'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportStringField('copyrights',
@@ -190,6 +213,7 @@ class SchemaExtender(object):
                 widget=atapi.StringWidget(
                     label=_(u'label_copyrights', default=u'Copyrights'),
                     description=_(u'description_copyrights', default=u'Fill in copyrights'),
+                    i18n_domain='eea.reports',
                 ),
             ),
             ReportTextField('trailer',
@@ -198,6 +222,7 @@ class SchemaExtender(object):
                 widget=atapi.RichWidget(
                     label = _(u'label_trailer', default=u'Trailer'),
                     description=_(u'description_trailer', default=u'Fill in the trailer.'),
+                    i18n_domain='eea.reports',
                 )
             ),
     ]
@@ -216,6 +241,7 @@ class SchemaExtender(object):
             'creators',
             'publishers',
             'themes',
+            'publication_groups',
             'copyrights',
             'metadata_upload',
             'for_sale',

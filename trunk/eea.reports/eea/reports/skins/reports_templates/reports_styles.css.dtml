@@ -26,10 +26,6 @@ margin-bottom: 0em;
 margin-bottom: 0.5em;
 }
 
-.orderEubookshop .label{
-  padding-left: 1em;
-}
-
 .publicationFile {
 margin-bottom: 0.5em;
 margin-top: 1em;

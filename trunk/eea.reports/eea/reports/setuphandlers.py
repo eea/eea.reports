@@ -8,7 +8,7 @@ logger = logging.getLogger('eea.reports: setuphandlers')
 
 def installVocabularies(context):
     """creates/imports the atvm vocabs."""
-    
+
     site = context.getSite()
     # Create vocabularies in vocabulary lib
     atvm = getToolByName(site, ATVOCABULARYTOOL)
@@ -16,6 +16,7 @@ def installVocabularies(context):
         'report_types': ('VdexVocabulary', 'VdexTerm'),
         'report_creators': ('VdexVocabulary', 'VdexTerm'),
         'report_publishers': ('VdexVocabulary', 'VdexTerm'),
+        'publications_groups': ('VdexVocabulary', 'VdexTerm'),
     }
     for vocabname in vocabmap.keys():
         if not vocabname in atvm.contentIds():

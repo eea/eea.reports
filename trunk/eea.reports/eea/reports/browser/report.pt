@@ -85,7 +85,7 @@
         <div class="publicationFile" tal:define="
             field python:here.getField('file');
             value python:field.getAccessor(here)()"
-            tal:condition="value/get_size">
+            tal:condition="python:value and value.get_size()">
 
             <a href="" tal:attributes="href string:${here/absolute_url}/at_download/file">
                 <strong i18n:domain="eea.reports"
@@ -107,27 +107,56 @@
             </li>
         </ul>
 
-        <div class="publicationOrder"
-             tal:define="field python:here.getField('order_id');
-                         value python:field.getAccessor(here)()"
-             tal:condition="value">
+        <div class="publicationOrder" tal:define="
+            oid_field       python:here.getField('order_id');
+            oid_value       python:oid_field.getAccessor(here)();
+            fs_field        python:here.getField('for_sale');
+            fs_value        python:fs_field.getAccessor(here)();
+            isbn_filed      python:here.getField('isbn');
+            isbn_value      python:isbn_filed.getAccessor(here)();
+            price_field     python:here.getField('price');
+            price_value     python:price_field.getAccessor(here)();
+            "
+             tal:condition="fs_value">
 
-            <div class="publicationField" style="float:left">
-                <div class="label">
-                    <label for="field.name" title="The widget's hint"
-                           tal:attributes="for python:field.widget.Label(here); title python:field.widget.Label(here)"
-                           tal:content="python:field.widget.Label(here)"></label>:
-                </div>
-                <div tal:replace="structure value"></div>
+            <div class="publicationField orderEubookshop" style="float:left">
+                <strong i18n:translate="help_order_id">Order a printed copy of this document:</strong>
                 <br />
-                <div i18n:translate="help_order_id">Order a printed copy of this document!</div>
+                <div class="label">
+                    <label for="isbn_filed.name" title="The widget's hint"
+                           tal:attributes="
+                               for python:isbn_filed.widget.Label(here);
+                               title python:isbn_filed.widget.Label(here)"
+                           tal:content="python:isbn_filed.widget.Label(here)"></label>:
+                </div>
+                <span tal:content="isbn_value" />
+
+                <br />
+                <div class="label">
+                    <label for="oid_field.name" title="The widget's hint"
+                           tal:attributes="
+                               for python:oid_field.widget.Label(here);
+                               title python:oid_field.widget.Label(here)"
+                           tal:content="python:oid_field.widget.Label(here)"></label>:
+                </div>
+                <span tal:content="oid_value" />
+
+                <br />
+                <div class="label">
+                    <label for="price_field.name" title="The widget's hint"
+                           tal:attributes="
+                               for python:price_field.widget.Label(here);
+                               title python:price_field.widget.Label(here)"
+                           tal:content="python:price_field.widget.Label(here)"></label>:
+                </div>
+                <span tal:content="python:'EUR %.02f' % price_value" />
             </div>
 
             <div style="float:left" class="publicationOrderButton">
                <a href=""
                       target="_blank"
                       alt="Order a printed copy at EU-Bookshop"
-                      tal:attributes="href     string:http://bookshop.europa.eu/eGetRecords?Template=Test_EUB/en_publication_details&amp;CATNBR=$value" >
+                      tal:attributes="href string:http://bookshop.europa.eu/eGetRecords?Template=en_search_identifiers" >
                           <img src="eu_bookshop.gif"
                                alt="EU Bookshop: You can order a printed copy of this document"
                                title="EU Bookshop: You can order a printed copy of this document">

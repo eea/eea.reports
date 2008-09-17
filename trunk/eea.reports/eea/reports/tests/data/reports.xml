@@ -96,6 +96,7 @@ The report has been prepared in close partnership with a range of international 
 </tag>
 <language_report>
 <id>en</id>
+<eeaid>0</eeaid>
 <language>en</language>
 
 <title>English</title>
@@ -212,6 +213,7 @@ Group 1: Combustion in energy and transformation industries
 <language_report>
 
 <id>ru</id>
+<eeaid>1605</eeaid>
 <language>ru</language>
 <title>Russian</title>
 <description>Процесс «Окружающая среда для Европы» в настоящий момент объединяет для совместного изучения проблем окружающей среды 56 стран на трех континентах. В целях содействия этому процессу, для обеспечения стратегической, достоверной и актуальной информации о взаимодействии окружающей среды и общества, Европейское Агентство по Окружающей Среде подготовило целый ряд докладов, оценивающих состояние окружающей среды.</description>

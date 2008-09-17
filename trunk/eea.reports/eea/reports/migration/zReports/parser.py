@@ -50,7 +50,7 @@ class Report(object):
 
     def set(self, key, value):
         return setattr(self, key, value)
-    
+
     def delete(self, key):
         if hasattr(self, key):
             return delattr(self, key)
@@ -79,7 +79,7 @@ class Report(object):
 REPORT_SUB_OBJECTS = ['cover_image', 'redirect', 'tag', 'language_report']
 LANGUAGE_REPORT_SUB_OBJECTS = ['report_chapter', 'report_file', 'report_order', 'report_order2', 'search', 'zope_file', 'zope_image']
 
-LANGUAGE_REPORT_PROPS = ['reporttitle', 'language', 'description', 'isbn', 'catalogue', 'pages', 'trailer']
+LANGUAGE_REPORT_PROPS = ['reporttitle', 'language', 'description', 'isbn', 'catalogue', 'pages', 'trailer', 'eeaid']
 
 class zreports_handler(ContentHandler):
     """ """
@@ -166,12 +166,12 @@ class zreports_handler(ContentHandler):
             publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
-            
+
             # Effective date
             self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate'))
             # Expiration date
             self.__language_report_current.set('expirationDate', self.__report_current.get('expiry_date'))
-            
+
             #set files
             self.__language_report_current.set('file', self.__report_files)
 
@@ -185,7 +185,7 @@ class zreports_handler(ContentHandler):
 
         if name == 'report_chapter':
             self.__chapter_context = 0
-        
+
         if name == 'title' and self.__chapter_context:
             data = u''.join(self.__data).strip()
             self.__chapter_titles.append(data)
@@ -208,12 +208,12 @@ class zreports_handler(ContentHandler):
                     self.__language_report_current.set('lang', data)
                 elif name == 'catalogue':
                     self.__language_report_current.set('order_id', data)
-                if name == 'pages':
+                if name in ('pages', 'eeaid'):
                     try:
-                        pages = int(data)
+                        data = int(data)
                     except (TypeError, ValueError):
-                        pages = 0
-                    self.__language_report_current.set(name, pages)
+                        data = 0
+                    self.__language_report_current.set(name, data)
                 else:
                     self.__language_report_current.set(name, data)
         self.__data = []

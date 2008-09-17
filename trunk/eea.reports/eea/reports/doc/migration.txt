@@ -122,3 +122,7 @@ Other properties:
     u'2007/10/10 10:00:00 GMT+2'
     >>> report_ru.get('expirationDate')
     u'2099/12/31'
+    >>> report_en.get('eeaid')
+    0
+    >>> report_ru.get('eeaid')
+    1605

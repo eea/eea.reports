@@ -21,12 +21,14 @@ from Products.PloneTestCase.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Products.PloneTestCase.layer import onsetup
+from cgi import FieldStorage
+from ZPublisher.HTTPRequest import FileUpload
 
 
 @onsetup
 def setup_eea_reports():
     """Set up the additional products required for the Report Content.
-    
+
     The @onsetup decorator causes the execution of this body to be deferred
     until the setup of the Plone site testing layer.
     """
@@ -37,15 +39,15 @@ def setup_eea_reports():
     zcml.load_config('configure.zcml', Products.FiveSite)
     # Load the ZCML configuration for the eea.reports package.
     # This includes the other products below as well.
-    
+
     import eea.reports
     zcml.load_config('configure.zcml', eea.reports)
     fiveconfigure.debug_mode = False
-    
+
     # We need to tell the testing framework that these products
     # should be available. This can't happen until after we have loaded
     # the ZCML.
-    
+
     # It seems that files are automatically blobs, but my test won't
     # run without this. (Plone3.1?)
     try:
@@ -55,9 +57,9 @@ def setup_eea_reports():
     except AttributeError:
         # Old ZopeTestCase
         pass
-    
+
 # The order here is important: We first call the (deferred) function which
-# installs the products we need for the Optilux package. Then, we let 
+# installs the products we need for the Optilux package. Then, we let
 # PloneTestCase set up this product on installation.
 
 setup_eea_reports()
@@ -89,12 +91,20 @@ class ReportTestCase(PloneTestCase):
 class ReportFunctionalTestCase(FunctionalTestCase, ReportTestCase):
     """Base class for functional integration tests for the 'Report' product.
     """
-
-    def loadfile(self, rel_filename):
+    def loadfile(self, rel_filename, ctype='application/pdf'):
         """ load a file
         """
         home = package_home(product_globals)
         filename = os.path.sep.join([home, rel_filename])
-        data = StringIO(open(filename, 'r').read())
-        data.filename = os.path.basename(rel_filename)
-        return data
+        data = open(filename, 'r').read()
+
+        fp = StringIO(data)
+        fp.seek(0)
+
+        env = {'REQUEST_METHOD':'PUT'}
+        headers = {'content-type' : ctype,
+                   'content-length': len(data),
+                   'content-disposition':'attachment; filename=test.txt'}
+
+        fs = FieldStorage(fp=fp, environ=env, headers=headers)
+        return FileUpload(fs)

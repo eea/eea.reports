@@ -57,7 +57,7 @@ class SchemaExtender(object):
             ),
             ReportImageField('cover_image',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 widget=atapi.ImageWidget(
                     label = _(u'label_cover_image', default=u'Cover Image'),
                     description=_(u'description_cover_image', default=u'Upload a cover image. Leave empty to have the system autogenerate one for you.'),
@@ -69,6 +69,15 @@ class SchemaExtender(object):
                 widget=atapi.StringWidget(
                     label = _(u'label_isbn', default=u'ISBN'),
                     description=_(u'description_isbn', default=u'Fill in the ISBN Number of this Report.'),
+                ),
+            ),
+            ReportIntegerField('eeaid',
+                schemata='report',
+                lanaguageIndependent=False,
+                default=0,
+                widget=atapi.IntegerWidget(
+                    label=_(u'label_eeaid', default=u'EEA Publication Internal ID'),
+                    description=_(u'description_eeaid', default=u'Fill in EEA publication internal id'),
                 ),
             ),
             ReportStringField('order_id',
@@ -89,7 +98,7 @@ class SchemaExtender(object):
             ),
             ReportFileField('metadata_upload',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 widget=atapi.FileWidget(
                     label = _(u'label_metadata_upload', default=u'Metadata INI upload'),
                     description=_(u'description_metadata_upload', default=u'Upload Metadata in INI style format.'),
@@ -211,6 +220,7 @@ class SchemaExtender(object):
             'metadata_upload',
             'for_sale',
             'order_id',
+            'eeaid',
             'price',
             'pages',
             'trailer',

@@ -1,6 +1,5 @@
 import urllib2
 import sys
-from DateTime import DateTime
 from xml.sax.handler import ContentHandler
 from xml.sax import *
 from cStringIO import StringIO
@@ -137,8 +136,8 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('id', self.__report_current.get('id'))
             self.__language_report_current.set('themes', self.__report_current.get('categories').split('###'))
             self.__language_report_current.set('author', self.__report_current.get('author'))
-            for_sale = self.__report_current.get('order_override', False)
-            self.__language_report_current.set('for_sale', for_sale in (u'True', 'True', True))
+            for_sale = self.__report_current.get('order_override', True)
+            self.__language_report_current.set('for_sale', for_sale in (u'False', 'False', False, 0))
             self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype'))
             try:
                 serial_number = int(self.__report_current.get('reportnum'))

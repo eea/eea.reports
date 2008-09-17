@@ -96,6 +96,7 @@ class SchemaExtender(object):
             ReportBooleanField('for_sale',
                 schemata='report',
                 languageIndependent=True,
+                default=False,
                 widget=atapi.BooleanWidget(
                     label = _(u'label_for_sale', default=u'For sale?'),
                     description=_(u'description_for_sale', default=u'Is this publication for sale?'),
@@ -173,6 +174,7 @@ class SchemaExtender(object):
             ReportFloatField('price',
                 schemata='report',
                 languageIndependent=True,
+                default=0,
                 widget=atapi.DecimalWidget(
                     label=_(u'label_price', default=u'Price'),
                     description=_(u'description_price', default=u'Fill in publication price'),
@@ -200,6 +202,7 @@ class SchemaExtender(object):
             ReportIntegerField('pages',
                 schemata='report',
                 lanaguageIndependent=True,
+                default=0,
                 widget=atapi.IntegerWidget(
                     label=_(u'label_pages', default=u'Pages'),
                     description=_(u'description_pages', default=u'Fill in pages'),

@@ -35,13 +35,13 @@ class MigrateReports(object):
         if 'publications' not in site.objectIds():
             site.invokeFactory('Folder', id='publications', title='Publications')
         publications = getattr(site, 'publications')
-        
+
         # Add default language folder: en
         if 'en' not in publications.objectIds():
             publications.invokeFactory('Folder', id='en', title='Publications')
         en = getattr(publications, 'en')
         canonical = en.getCanonical()
-        
+
         # Add translation folders for en
         langs = publications.portal_languages.getSupportedLanguages()
         for lang in langs:
@@ -55,10 +55,10 @@ class MigrateReports(object):
                                          lang, *args, **kwargs)
             except BadRequest:
                 continue
-            
+
             ob.setExcludeFromNav(True)
             wftool.doActionFor(ob, 'publish')
-            
+
             if ob.getCanonical() != canonical:
                 ob.addTranslationReference(canonical)
             ctool.reindexObject(ob)
@@ -67,7 +67,7 @@ class MigrateReports(object):
         # Publish folders
         wftool.doActionFor(en, 'publish')
         wftool.doActionFor(publications, 'publish')
-        
+
         # Reindex objects
         ctool.reindexObject(en)
         ctool.reindexObject(publications)
@@ -96,12 +96,12 @@ class MigrateReports(object):
             logger.warn('Skip file property for %s, lang %s: file = %s',
                         datamodel.getId(), datamodel.get('lang'), file_urls)
             return None
-        
+
         file_urls = [url for url in file_urls if url.endswith(default_url)]
         if not file_urls:
             return None
         return file_urls[0]
-        
+
     def _process_datamodel(self, datamodel):
         """ Process datamodel properties before adding new file
         """
@@ -118,7 +118,7 @@ class MigrateReports(object):
         """
         report_id = datamodel.getId()
         lang = datamodel.get('lang')
-        
+
         # Add translation for existing reports
         canonical = None
         for lang_folder in context.objectValues():
@@ -127,27 +127,27 @@ class MigrateReports(object):
                 break
         if canonical:
             return self.add_translation(canonical, datamodel)
-        
+
         # Add report if it doesn't exists
         context = getattr(context, lang)
-        context.invokeFactory('File', id=report_id)
+        context.invokeFactory('Folder', id=report_id)
         report = getattr(context, report_id)
         report.setLanguage(lang)
         subtyper = getUtility(ISubtyper)
-        subtyper.change_type(report, 'eea.reports.Report')
+        subtyper.change_type(report, 'eea.reports.FolderReport')
         self.update_properties(report, datamodel)
         return report_id
-    
+
     def add_translation(self, report, datamodel):
         """ Add a new language for an existing report
         """
         lang = datamodel.get('lang')
         if not report.hasTranslation(lang):
             report.addTranslation(lang)
-        
+
         translated = report.getTranslation(lang)
         subtyper = getUtility(ISubtyper)
-        subtyper.change_type(translated, 'eea.reports.Report')
+        subtyper.change_type(translated, 'eea.reports.FolderReport')
         self.update_properties(translated, datamodel)
 
     def update_properties(self, report, datamodel):

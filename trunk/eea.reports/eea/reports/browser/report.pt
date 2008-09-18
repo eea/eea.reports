@@ -88,10 +88,11 @@
             tal:condition="python:value and value.get_size()">
 
             <a href="" tal:attributes="href string:${here/absolute_url}/at_download/file">
+                <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
                 <strong i18n:domain="eea.reports"
                        i18n:translate="label_download_full_publication">Download the full publication as PDF</strong>
             </a>
-            <tal:size content="structure python:', %s KB' % (value.get_size() / 1024)">0Kb</tal:size>
+            <span tal:content="python:'[%s]' % value.getObjSize(value)" />
         </div>
 
         <p class="documentByLine"> Published by: </p>
@@ -106,6 +107,61 @@
                     tal:replace="value" />
             </li>
         </ul>
+
+        <!-- Additional files content -->
+        <tal:foldercontents define="
+            folderContents python:here.getFolderContents({'portal_type': 'File'});"
+            condition="folderContents">
+        <h2>Contents - Free download</h2>
+        <ul>
+            <li tal:repeat="item folderContents">
+            <tal:file define="
+                item_type item/portal_type;
+                item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+                item_wf_state_class  python:'state-' + normalizeString(item_wf_state);
+                item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+                item_object item/getObject|item;
+                item_title_or_id item/pretty_title_or_id;">
+                <a tal:attributes="
+                    class item_wf_state_class;
+                    href item_object/absolute_url;
+                    title item_title_or_id">
+                    <img tal:define="icon python:item_object.getIcon(1)"
+                        tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
+                    <span tal:content="item_title_or_id" />
+                </a>
+                <span tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
+            </tal:file>
+            </li>
+        </ul>
+        </tal:foldercontents>
+
+        <!-- Additional links content -->
+        <tal:foldercontents define="
+            folderContents python:here.getFolderContents({'portal_type': 'Link'});"
+            condition="folderContents">
+        <h2>Links</h2>
+        <ul>
+            <li tal:repeat="item folderContents">
+            <tal:link define="
+                item_type item/portal_type;
+                item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+                item_wf_state_class  python:'state-' + normalizeString(item_wf_state);
+                item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+                item_object item/getObject|item;
+                item_title_or_id item/pretty_title_or_id;">
+                <a tal:attributes="
+                    class item_wf_state_class;
+                    href item_object/remote_url;
+                    title item_title_or_id">
+                    <img tal:define="icon python:item_object.getIcon(1)"
+                        tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
+                    <span tal:content="item_title_or_id" />
+                </a>
+            </tal:link>
+            </li>
+        </ul>
+        </tal:foldercontents>
 
         <tal:order define="
             oid_field       python:here.getField('order_id');

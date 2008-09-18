@@ -8,6 +8,7 @@ from Products.LinguaPlone import config
 from Products.CMFPlone.utils import _createObjectByType
 from Products.LinguaPlone import events
 from zExceptions import BadRequest
+from Products.statusmessages.interfaces import IStatusMessage
 from eea.reports.migration.zReports.parser import (
     get_reports,
     grab_file_from_url
@@ -22,6 +23,16 @@ class MigrateReports(object):
     def __init__(self, context, request=None):
         self.context = context
         self.request = request
+
+    def _redirect(self, msg):
+        """ Set status message and redirect to context absolute_url
+        """
+        context = getattr(self.context, 'publications', self.context)
+        context = getattr(context, 'en', context)
+        url = context.absolute_url()
+        IStatusMessage(self.request).addStatusMessage(msg, type='info')
+        self.request.response.redirect(url)
+        return ''
     #
     # Getters
     #
@@ -33,7 +44,8 @@ class MigrateReports(object):
         site = getattr(self.context, 'SITE', self.context)
         # Add publications folder
         if 'publications' not in site.objectIds():
-            site.invokeFactory('Folder', id='publications', title='Publications')
+            site.invokeFactory('Folder',
+                               id='publications', title='Publications')
         publications = getattr(site, 'publications')
 
         # Add default language folder: en
@@ -57,7 +69,10 @@ class MigrateReports(object):
                 continue
 
             ob.setExcludeFromNav(True)
-            wftool.doActionFor(ob, 'publish')
+            try:
+                wftool.doActionFor(ob, 'publish')
+            except Exception, err:
+                logger.warn('Could not publish %s: %s', ob.absolute_url(1), err)
 
             if ob.getCanonical() != canonical:
                 ob.addTranslationReference(canonical)
@@ -65,9 +80,15 @@ class MigrateReports(object):
 
         en.invalidateTranslationCache()
         # Publish folders
-        wftool.doActionFor(en, 'publish')
-        wftool.doActionFor(publications, 'publish')
-
+        try:
+            wftool.doActionFor(en, 'publish')
+        except Exception, err:
+            logger.warn('Could not publish %s: %s', en.absolute_url(1), err)
+        try:
+            wftool.doActionFor(publications, 'publish')
+        except Exception, err:
+            logger.warn('Could not publish %s: %s',
+                        publications.absolute_url(1), err)
         # Reindex objects
         ctool.reindexObject(en)
         ctool.reindexObject(publications)
@@ -77,9 +98,9 @@ class MigrateReports(object):
     # Handlers
     #
     def _get_file_url(self, datamodel):
+        """ Returns default file url for given datamodel.
         """
-        """
-        file_urls = datamodel.get('file', ())
+        file_urls = datamodel.get('file', {}).keys()
         # Handle empty list
         if not file_urls:
             logger.warn('Skip file property for %s, lang %s: files = %s',
@@ -108,7 +129,8 @@ class MigrateReports(object):
         # Handle datamodel file property
         file_url = self._get_file_url(datamodel)
         if file_url:
-            datamodel.set('file_file', grab_file_from_url(file_url, 'application/pdf'))
+            datamodel.set('file_file',
+                          grab_file_from_url(file_url, 'application/pdf'))
         return datamodel
     #
     # Update methods
@@ -130,11 +152,15 @@ class MigrateReports(object):
 
         # Add report if it doesn't exists
         context = getattr(context, lang)
-        context.invokeFactory('Folder', id=report_id)
+        if report_id not in context.objectIds():
+            logger.info('Adding report id: %s lang: %s', report_id, lang)
+            report_id = context.invokeFactory('Folder', id=report_id)
         report = getattr(context, report_id)
         report.setLanguage(lang)
         subtyper = getUtility(ISubtyper)
-        subtyper.change_type(report, 'eea.reports.FolderReport')
+        if not subtyper.existing_type(report) or \
+           subtyper.existing_type(report).name != 'eea.reports.FolderReport':
+            subtyper.change_type(report, 'eea.reports.FolderReport')
         self.update_properties(report, datamodel)
         return report_id
 
@@ -143,16 +169,21 @@ class MigrateReports(object):
         """
         lang = datamodel.get('lang')
         if not report.hasTranslation(lang):
+            logger.info('Adding report %s translation: %s',
+                        datamodel.getId(), lang)
             report.addTranslation(lang)
 
         translated = report.getTranslation(lang)
         subtyper = getUtility(ISubtyper)
-        subtyper.change_type(translated, 'eea.reports.FolderReport')
+        if not subtyper.existing_type(translated) or \
+        subtyper.existing_type(translated).name != 'eea.reports.FolderReport':
+            subtyper.change_type(translated, 'eea.reports.FolderReport')
         self.update_properties(translated, datamodel)
 
     def update_properties(self, report, datamodel):
         """ Update report properties
         """
+        logger.info('Update report %s properties', report.absolute_url(1))
         datamodel = self._process_datamodel(datamodel)
         form = datamodel()
         report.processForm(data=1, metadata=1, values=form)
@@ -166,16 +197,50 @@ class MigrateReports(object):
         except Exception, err:
             logger.warn('Could not publish report %s, lang %s: %s',
                         datamodel.getId(), datamodel.get('lang'), err)
+        self.update_additional_files_content(report, datamodel)
         ctool.reindexObject(report)
+
+    def update_additional_files_content(self, report, datamodel):
+        """ Add additional files
+        """
+        file_urls = datamodel.get('file', {})
+        default = self._get_file_url(datamodel)
+        ctool = getToolByName(self.context, 'portal_catalog')
+        wftool = getToolByName(self.context, 'portal_workflow')
+        for file_url, file_title in file_urls.items():
+            # Skip default file
+            if file_url == default:
+                continue
+            # Add/Edit
+            file_obj = grab_file_from_url(file_url, ctype='')
+            filename = file_obj.filename
+            doc_id = filename.replace('%20', '_')
+            if doc_id not in report.objectIds():
+                logger.info('Add report: %s additional file: %s',
+                            report.absolute_url(1), doc_id)
+                doc_id = report.invokeFactory('File', id=doc_id)
+            doc = getattr(report, doc_id)
+            logger.info('Update additional file %s properties',
+                        doc.absolute_url(1))
+            doc.processForm(data=1, metadata=1, values={'file_file': file_obj})
+            doc.setTitle(file_title)
+            # Publish
+            try:
+                wftool.doActionFor(doc, 'publish',
+                    comment='Auto published by migration script.')
+            except Exception, err:
+                logger.warn('Could not publish file %s: %s',
+                            doc.absolute_url(1), err)
+            # Reindex
+            ctool.reindexObject(doc)
     #
     # Browser interface
     #
     def __call__(self):
         container = self._get_container()
+        index = 0
         for index, report in enumerate(get_reports(REPORTS_XML)):
-            logger.info('Adding report id: %s lang: %s',
-                        report.getId(), report.get('lang'))
             self.add_report(container, report)
-        done = '%d language reports imported !' % index
-        logger.info(done)
-        return done
+        msg = '%d language reports imported !' % index
+        logger.info(msg)
+        return self._redirect(msg)

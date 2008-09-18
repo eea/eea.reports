@@ -66,11 +66,15 @@ Cover image:
 
 PDF File:
     >>> file_en = report_en.get('file')
-    >>> len(file_en)
-    13
+    >>> len(file_en.keys())
+    14
+    >>> file_en['http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter5.pdf']
+    u'chapter5.pdf'
     >>> file_ru = report_ru.get('file')
-    >>> len(file_ru)
+    >>> len(file_ru.keys())
     12
+    >>> file_ru['http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter9.pdf']
+    u'chapter5.pdf'
     >>> from eea.reports.migration.migrate import MigrateReports
     >>> migration = MigrateReports(self.portal)
     >>> migration._get_file_url(report_en)
@@ -110,8 +114,10 @@ Other properties:
     452
     >>> report_ru.get('order_id')
     u'TH-78-07-127-RU-C'
+    >>> report_en.get('for_sale')
+    True
     >>> report_ru.get('for_sale')
-    False
+    True
     >>> report_ru.get('copyrights')
     u'EEA, Copenhagen 2007'
     >>> report_en.get('trailer')

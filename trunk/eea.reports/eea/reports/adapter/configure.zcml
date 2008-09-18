@@ -4,7 +4,7 @@
     i18n_domain="eea.reports">
 
     <adapter factory=".report.ATCTReport" />
-    <!-- XXX Debug -->
+    <!-- XXX Debug
 
     <subscriber
         for="..interfaces.IPossibleReportContainer
@@ -12,7 +12,7 @@
         handler=".events.printEvent"
     />
 
-    <!-- Debug -->
+    Debug -->
     <subscriber
         for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
         handler=".events.subtype_added"

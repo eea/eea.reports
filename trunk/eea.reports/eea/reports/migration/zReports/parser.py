@@ -116,11 +116,10 @@ class zreports_handler(ContentHandler):
             self.__chapter_context = 1
 
         if name == 'report_file':
-            self.__report_files.append(attrs['url'])
+            self.__report_file_data.append(attrs['url'])
 
         if name == 'zope_file':
             self.__report_file_data.append(attrs['url'])
-            #XXX self.__report_files.append(attrs['url'])
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
@@ -132,7 +131,7 @@ class zreports_handler(ContentHandler):
             self.__report_context = 0
             self.__report_current = ''
 
-        if name == 'content_type':
+        if name == 'report_file_title':
             data = u''.join(self.__data).strip()
             self.__report_file_data.append(data)
 
@@ -140,8 +139,8 @@ class zreports_handler(ContentHandler):
             data = u''.join(self.__data).strip()
             self.__report_file_data.append(data)
 
-        if name == 'zope_file':
-            self.__report_files[self.__report_file_data[0]] = (self.__report_file_data[1], self.__report_file_data[2])
+        if name in ('zope_file', 'report_file'):
+            self.__report_files[self.__report_file_data[0]] = self.__report_file_data[1]
             self.__report_file_data = []
 
         if name == 'language_report':
@@ -194,7 +193,7 @@ class zreports_handler(ContentHandler):
             self.__language_report_context = ''
 
             self.__chapter_titles = []
-            self.__report_files = []
+            self.__report_files = {}
 
         if name == 'report_chapter':
             self.__chapter_context = 0
@@ -249,11 +248,8 @@ class zreports_parser:
         parser.setFeature(chandler.feature_external_ges, 0)
         inpsrc = InputSource()
         inpsrc.setByteStream(StringIO(xml_string))
-        try:
-            parser.parse(inpsrc)
-            return chandler
-        except:
-            return None
+        parser.parse(inpsrc)
+        return chandler
 
     def parseHeader(self, file):
         parser = make_parser()
@@ -263,16 +259,13 @@ class zreports_parser:
         except: pass
         inputsrc = InputSource()
 
-        try:
-            if type(file) is StringType:
-                inputsrc.setByteStream(StringIO(file))
-            else:
-                filecontent = file.read()
-                inputsrc.setByteStream(StringIO(filecontent))
-            parser.parse(inputsrc)
-            return chandler
-        except:
-            return None
+        if type(file) is StringType:
+            inputsrc.setByteStream(StringIO(file))
+        else:
+            filecontent = file.read()
+            inputsrc.setByteStream(StringIO(filecontent))
+        parser.parse(inputsrc)
+        return chandler
 
 def get_reports(url="http://10.0.0.24:8080/export_ZReports"):
     """ Returns a list of Report instances.
@@ -295,11 +288,13 @@ def grab_file_from_url(url, ctype='image/jpg', zope=True):
     size = len(data)
     if not zope:
         return data
+    # Zope
     fp = StringIO(data)
     env = {'REQUEST_METHOD':'PUT'}
-    headers = {'content-type' : ctype,
-               'content-length': size,
+    headers = {'content-length': size,
                'content-disposition':'attachment; filename=%s' % filename}
+    if ctype:
+        headers['content-type'] = ctype
     fs = FieldStorage(fp=fp, environ=env, headers=headers)
     return FileUpload(fs)
 

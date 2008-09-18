@@ -200,7 +200,7 @@ for report in root.objectValues(report_metatype):
                 res_add('\n<reporttitle>%s</reporttitle>' % lt_reporttitle)                      #string
             else:
                 res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                      #string
-                
+
             res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
             res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
@@ -256,7 +256,7 @@ for report in root.objectValues(report_metatype):
                 res_add('\n<report_file url="%s">' % rep_file.absolute_url())
                 #Basic Property Sheet
                 res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))       #string
-                res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+                res_add('\n<report_file_title>%s</report_file_title>' % formatExport(rep_file.title))   #string
                 res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
                 if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                     res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'latin1').encode('utf8'))  #text

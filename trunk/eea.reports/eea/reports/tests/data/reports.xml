@@ -121,47 +121,81 @@ The report has been prepared in close partnership with a range of international 
 <title>Europe's environment  &#8212; The fourth assessment</title>
 <publishdate>2007/10/10 10:00:00 GMT+2</publishdate>
 </search>
+<report_file url="http://reports.eea.europa.eu/technical_report_2007_2/en/eea_technical_report_2_2007.pdf">
+<id>eea_technical_report_2_2007.pdf</id>
+<report_file_title>Climate change and water adaptation issues</report_file_title>
+<tags/>
+<file_description>
+The report reviews the challenges facing Europe to adapt to the impacts of climate change on water resources. Water is a critical sector for people's lives and the economy. Even if emissions of greenhouse gases were stabilised today, increases in temperature and the associated impacts, including those on water availability and flooding, will continue for many decades to come. Using a policy analysis at European level, and a survey, the report  reviews practices in countries and concludes that countries are aware of these impacts and have started to adapt to them but there is still much to do. This material is also presented by country in an annex.
+</file_description>
+<pagenumber>108</pagenumber>
+</report_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter5.pdf">
 <id>chapter5.pdf</id>
-
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter1.pdf">
 <id>chapter1.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter2.pdf">
 <id>chapter2.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter3.pdf">
 <id>chapter3.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter4.pdf">
 <id>chapter4.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter6.pdf">
 <id>chapter6.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter7.pdf">
 <id>chapter7.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter8.pdf">
 <id>chapter8.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter9.pdf">
 <id>chapter9.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/cover.pdf">
 
 <id>cover.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter0.pdf">
 <id>chapter0.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter7.1.pdf">
 <id>chapter7.1.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/Belgrade_EN_all_chapters_incl_cover.pdf">
 <id>Belgrade_EN_all_chapters_incl_cover.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <report_chapter>
 <id>page010.html</id>
@@ -229,42 +263,65 @@ Group 1: Combustion in energy and transformation industries
 <langreleased>True</langreleased>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/cover.pdf">
 <id>cover.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/Chapter0.pdf">
 <id>Chapter0.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter1.pdf">
 <id>chapter1.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter2.pdf">
 <id>chapter2.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter3.pdf">
 <id>chapter3.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter5.pdf">
 <id>chapter5.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter4.pdf">
 <id>chapter4.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter6.pdf">
 
 <id>chapter6.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter7.pdf">
 <id>chapter7.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter7.1.pdf">
 <id>chapter7.1.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter8.pdf">
 <id>chapter8.pdf</id>
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 <zope_file url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter9.pdf">
 <id>chapter9.pdf</id>
-
+<file_title>chapter5.pdf</file_title>
+<content_type>application/pdf</content_type>
 </zope_file>
 </language_report>
 </report>

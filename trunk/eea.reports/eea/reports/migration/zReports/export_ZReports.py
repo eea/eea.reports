@@ -312,7 +312,26 @@ for report in root.objectValues(report_metatype):
             #########################
             for file in lang.objectValues('File'):
                 res_add('\n<zope_file url="%s">' % file.absolute_url())
-                res_add('\n<id>%s</id>' % formatExport(file.getId()))
+                res_add('\n<file_id>%s</file_id>' % formatExport(file.getId()))
+                res_add('\n<content_type>%s</content_type>' % file.content_type)
+
+                file_title = file.title
+                if file.getId() == 'PT-SCP-chapter-final-web.pdf':
+                    file_title = file_title.replace('&aacute;', 'á')
+
+                try:
+                    res_add('\n<file_title>%s</file_title>' % container.unescape(formatExport(file_title)).encode('utf-8'))
+                except:
+                    if file.getId() in ['TR-SCP-chapter-final-web.pdf', 'ET-SCP-chapter_final-web.pdf', 'FI-SCP-chapter_final-web.pdf']:
+                        try:
+                            res_add('\n<file_title>%s</file_title>' % file.getId())
+                        except:
+                            res_add('\nALEC1')
+                    elif file.getId() in ['ES-SCP-chapter-final-web.pdf', 'PT-SCP-chapter-final-web.pdf']:
+                        res_add('\n<file_title>%s</file_title>' % formatExport(file_title))
+                    else:
+                        res_add('\n<file_title>%s</file_title>' % formatExport(file_title).encode('utf-8'))
+
                 res_add('\n</zope_file>')
 
             ###Zope Image objects

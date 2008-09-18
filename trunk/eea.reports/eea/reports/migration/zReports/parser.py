@@ -94,7 +94,8 @@ class zreports_handler(ContentHandler):
         self.__language_report_current = ''
         self.__chapter_context = 0
         self.__chapter_titles = []
-        self.__report_files = []
+        self.__report_files = {}
+        self.__report_file_data = []
 
     def get_reports(self):
         return self.__reports
@@ -118,7 +119,8 @@ class zreports_handler(ContentHandler):
             self.__report_files.append(attrs['url'])
 
         if name == 'zope_file':
-            self.__report_files.append(attrs['url'])
+            self.__report_file_data.append(attrs['url'])
+            #XXX self.__report_files.append(attrs['url'])
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
@@ -129,6 +131,18 @@ class zreports_handler(ContentHandler):
         if name == 'report':
             self.__report_context = 0
             self.__report_current = ''
+
+        if name == 'content_type':
+            data = u''.join(self.__data).strip()
+            self.__report_file_data.append(data)
+
+        if name == 'file_title':
+            data = u''.join(self.__data).strip()
+            self.__report_file_data.append(data)
+
+        if name == 'zope_file':
+            self.__report_files[self.__report_file_data[0]] = (self.__report_file_data[1], self.__report_file_data[2])
+            self.__report_file_data = []
 
         if name == 'language_report':
             self.__language_report_context = 0

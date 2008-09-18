@@ -3,22 +3,25 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="eea.reports">
 
-    <adapter factory=".report.ATCTFileReport" />
-    <!-- XXX Debug
+    <adapter factory=".report.ATCTReport" />
+    <!-- XXX Debug -->
 
     <subscriber
-       for="..interfaces.IPossibleReportContainer
-            zope.app.event.interfaces.IObjectEvent"
-       handler=".events.printEvent"
+        for="..interfaces.IPossibleReportContainer
+             zope.app.event.interfaces.IObjectEvent"
+        handler=".events.printEvent"
+    />
+
+    <!-- Debug -->
+    <subscriber
+        for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
+        handler=".events.subtype_added"
     />
 
     <subscriber
-       for="..interfaces.IPossibleReportContainer
-            p4a.subtyper.interfaces.ISubtypeEvent"
-       handler=".events.printEvent"
+        for="p4a.subtyper.interfaces.ISubtypeRemovedEvent"
+        handler=".events.subtype_removed"
     />
-
-    Debug -->
 
     <adapter
         for="..interfaces.IPossibleReportContainer"

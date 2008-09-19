@@ -6,6 +6,8 @@ from Products.CMFCore.DirectoryView import registerDirectory
 from Products.Archetypes.atapi import process_types, listTypes
 from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
 
+import validator
+
 ppath = cmfutils.ProductsPath
 cmfutils.ProductsPath.append(dirname(package_home(globals())))
 registerDirectory('skins', globals())

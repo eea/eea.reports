@@ -35,3 +35,15 @@ def _restrict_subobjects(evt, rtype=-1):
     if subtype.type_interface is not interfaces.IReportContainerEnhanced:
         return
     interfaces.IReport(obj).restrictSubObjects(rtype)
+#
+# Generate cover image
+#
+def generate_image(obj, evt):
+    """ EVENT
+        called on objectmodified. Tries to generate the cover image.
+    """
+    # Make sure we execute this only on the canonical
+    if obj != obj.getCanonical():
+        return
+
+    interfaces.IReport(obj).generateImage(evt.data)

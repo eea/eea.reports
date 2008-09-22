@@ -66,12 +66,22 @@ Now we use subtyping to make this file a report.
 Now we load a demonstration pdf file from doc/test.pdf which has the following
 metadata set within the pdf file:
 
-    - Title: My test
-    - Description: My test file description ...
-    - Keywords: documentation, tutorial
-    - Language: en
+    - Title:          Annual European Community LRTAP Convention emission inventory report 1990-2006
+    - Subject:        The report presents an overview of air pollutant emission data reported by the EU-27 Member States between the years 1990 to 2006.
+    - Author:         Peder Gabrielsen/Martin Adams
+    - Creator:        Adobe InDesign CS2 (4.0.2)
+    - Producer:       Adobe PDF Library 7.0
+    - CreationDate:   Thu Jul 10 15:28:18 2008
+    - ModDate:        Thu Jul 10 15:29:25 2008
+    - Tagged:         yes
+    - Pages:          82
+    - Encrypted:      no
+    - Page size:      595.276 x 841.89 pts (A4)
+    - File size:      2365565 bytes
+    - Optimized:      yes
+    - PDF version:    1.4
 
-    >>> docpdf = self.loadfile('doc/test.pdf', ctype='application/pdf')
+    >>> docpdf = self.loadfile('tests/data/test.pdf', ctype='application/pdf')
     >>> from ZPublisher.HTTPRequest import FileUpload
     >>> isinstance(docpdf, FileUpload)
     True
@@ -101,7 +111,7 @@ Check file saved
 
     >>> report_file = myreport.getField('file').getAccessor(myreport)()
     >>> report_file.get_size()
-    7864L
+    2365565L
 
 Serial title and creators
 

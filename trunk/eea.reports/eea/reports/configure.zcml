@@ -5,6 +5,7 @@
 
     <five:registerPackage package="." initialize=".initialize" />
 
+    <include package=".pdf" />
     <include package=".browser" />
     <include package=".adapter" />
     <include package=".subtypes" />

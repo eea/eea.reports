@@ -19,6 +19,12 @@
        handler=".events.generate_image"
    />
 
+   <subscriber
+       for="eea.reports.interfaces.IReportContainerEnhanced
+            ..events.IFileUploadedEvent"
+       handler=".events.parse_metadata"
+   />
+
     <subscriber
         for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
         handler=".events.subtype_added"

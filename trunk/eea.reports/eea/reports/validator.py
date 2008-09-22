@@ -15,8 +15,15 @@ class NewFileUploadValidator:
         self.description = description
 
     def __call__(self, value, instance, *args, **kwargs):
-        if isinstance(value, FileUpload):
+        request = kwargs.get('REQUEST', None)
+        form = getattr(request, 'form', None)
+        if not form:
+            return 1
+
+        file_uploaded = form.get('_file_already_uploaded', False)
+        if isinstance(value, FileUpload) and not file_uploaded:
             notify(FileUploadedEvent(instance, value))
+            request.form['_file_already_uploaded'] = True
         return 1
 
 validation.register(NewFileUploadValidator('newFileUpload'))

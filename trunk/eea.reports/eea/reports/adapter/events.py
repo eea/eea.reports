@@ -1,4 +1,9 @@
+""" Events
+"""
 from eea.reports import interfaces
+from eea.reports.pdf.interfaces import IReportPDFParser
+from zope.component import getUtility
+
 #
 # Debug
 #
@@ -23,6 +28,8 @@ def subtype_removed(evt):
     _restrict_subobjects(evt, -1)
 
 def _restrict_subobjects(evt, rtype=-1):
+    """ Restrict report subobjects
+    """
     obj = evt.object
     subtype = evt.subtype
     # Nothing to do
@@ -47,3 +54,19 @@ def generate_image(obj, evt):
         return
 
     interfaces.IReport(obj).generateImage(evt.data)
+#
+# Parse pdf metadata
+#
+def parse_metadata(obj, evt):
+    """ EVENT
+        called on new file upload. Tries to import pdf metadata.
+    """
+    pdfparser = getUtility(IReportPDFParser)
+    metadata = pdfparser.parse(evt.data.read())
+    if not metadata:
+        return
+    for key, value in metadata.items():
+        field = obj.getField(key)
+        if not field:
+            continue
+        field.getMutator(obj)(value)

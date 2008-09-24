@@ -159,7 +159,7 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('serial_title_number', serial_number)
             try:
                 serial_year = int(self.__report_current.get('series_year'))
-            except ValueError, TypeError:
+            except (ValueError, TypeError):
                 serial_year = 1990
             self.__language_report_current.set('serial_title_year', serial_year)
             self.__language_report_current.set('serial_title_alt', self.__report_current.get('series_title'))
@@ -223,7 +223,7 @@ class zreports_handler(ContentHandler):
                 if name in ('pages', 'eeaid'):
                     try:
                         data = int(data)
-                    except (TypeError, ValueError):
+                    except (ValueError, TypeError):
                         data = 0
                     self.__language_report_current.set(name, data)
                 else:

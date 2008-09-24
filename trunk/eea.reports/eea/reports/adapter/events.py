@@ -3,7 +3,7 @@
 from eea.reports import interfaces
 from eea.reports.pdf.interfaces import IReportPDFParser
 from zope.component import getUtility
-
+from p4a.subtyper.interfaces import ISubtyper
 #
 # Debug
 #
@@ -70,3 +70,16 @@ def parse_metadata(obj, evt):
         if not field:
             continue
         field.getMutator(obj)(value)
+#
+# Report initialize
+#
+def report_initialized(obj, evt):
+    """ EVENT
+        called when a Report content-type were added. COnvert it to folder
+        and subtype as report.
+    """
+    if evt.portal_type != 'Report':
+        return
+    obj.portal_type = 'Folder'
+    subtyper = getUtility(ISubtyper)
+    subtyper.change_type(obj, 'eea.reports.FolderReport')

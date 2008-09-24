@@ -16,3 +16,14 @@ class FileUploadedEvent(object):
         self.object = context
         self.data = data
 
+class IObjectPortalTypeChanged(IObjectEvent):
+    """ Objects portal_type changed
+    """
+
+class ObjectPortalTypeChanged(object):
+    """ Sent if portal_type was changed """
+    implements(IObjectPortalTypeChanged)
+
+    def __init__(self, context, portal_type):
+        self.object = context
+        self.portal_type = portal_type

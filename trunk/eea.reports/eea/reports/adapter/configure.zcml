@@ -31,6 +31,12 @@
     />
 
     <subscriber
+       for="eea.reports.interfaces.IPossibleReportContainer
+            ..events.IObjectPortalTypeChanged"
+       handler=".events.report_initialized"
+   />
+
+    <subscriber
         for="p4a.subtyper.interfaces.ISubtypeRemovedEvent"
         handler=".events.subtype_removed"
     />

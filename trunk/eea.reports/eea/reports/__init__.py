@@ -6,6 +6,7 @@ from Products.CMFCore.DirectoryView import registerDirectory
 from Products.Archetypes.atapi import process_types, listTypes
 from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
 
+import patches
 import validator
 
 ppath = cmfutils.ProductsPath

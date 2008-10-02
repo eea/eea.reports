@@ -1,5 +1,4 @@
 import tempfile, logging, os, re
-#from types import *
 from DateTime import DateTime
 from interfaces import IReportPDFParser
 from zope.component import getUtility
@@ -14,7 +13,7 @@ class PDFParser(object):
     interface.implements(IReportPDFParser)
 
     def parse(self, pdf):
-        """ Safley parses the given pdf file and returns a mapping of attributes
+        """ Safely parses the given pdf file and returns a mapping of attributes
         """
         try:
             metadata = self._parse(pdf)

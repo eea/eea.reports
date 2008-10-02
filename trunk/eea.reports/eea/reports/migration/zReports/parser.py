@@ -276,8 +276,21 @@ def get_reports(url="http://10.0.0.24:8080/export_ZReports"):
     data = parser.parseHeader(s)
     return data.get_reports()
 
+def get_file_upload(data, filename, ctype):
+    """ Returns an instance of FileUpload from given data stream
+    """
+    fp = StringIO(data)
+    env = {'REQUEST_METHOD':'PUT'}
+    headers = {'content-length': len(data),
+               'content-disposition':'attachment; filename=%s' % filename}
+    if ctype:
+        headers['content-type'] = ctype
+    fs = FieldStorage(fp=fp, environ=env, headers=headers)
+    return FileUpload(fs)
+
 def grab_file_from_url(url, ctype='image/jpg', zope=True):
-    """ Returns a FileUpload instance with data from given url.
+    """ Returns a data stream if zope is False
+        or a FileUpload instance with data from given url.
     """
     try:
         url_file = urllib2.urlopen(url)
@@ -286,17 +299,9 @@ def grab_file_from_url(url, ctype='image/jpg', zope=True):
     filename = url.split('/')[-1]
     data = url_file.read()
     size = len(data)
-    if not zope:
-        return data
-    # Zope
-    fp = StringIO(data)
-    env = {'REQUEST_METHOD':'PUT'}
-    headers = {'content-length': size,
-               'content-disposition':'attachment; filename=%s' % filename}
-    if ctype:
-        headers['content-type'] = ctype
-    fs = FieldStorage(fp=fp, environ=env, headers=headers)
-    return FileUpload(fs)
+    if zope:
+        return get_file_upload(data, filename, ctype)
+    return data
 
 if __name__ == '__main__':
     print len(get_reports())

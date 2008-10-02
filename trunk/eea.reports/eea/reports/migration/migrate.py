@@ -9,9 +9,11 @@ from Products.CMFPlone.utils import _createObjectByType
 from Products.LinguaPlone import events
 from zExceptions import BadRequest
 from Products.statusmessages.interfaces import IStatusMessage
+from eea.reports.pdf.interfaces import IPDFMetadataUpdater
 from eea.reports.migration.zReports.parser import (
     get_reports,
-    grab_file_from_url
+    grab_file_from_url,
+    get_file_upload
 )
 from config import DEFAULT_FILE, REPORTS_XML
 import logging
@@ -128,9 +130,19 @@ class MigrateReports(object):
         """
         # Handle datamodel file property
         file_url = self._get_file_url(datamodel)
-        if file_url:
-            datamodel.set('file_file',
-                          grab_file_from_url(file_url, 'application/pdf'))
+        if not file_url:
+            return datamodel
+
+        ctype = 'application/pdf'
+        filename = file_url.split('/')[-1]
+        # Get pdf file
+        data = grab_file_from_url(file_url, ctype, zope=False)
+        # Update pdf metadata
+        mupdater = getUtility(IPDFMetadataUpdater)
+        data = mupdater.update(data, datamodel(all=True))
+        datamodel.set('file_file', get_file_upload(data, filename, ctype))
+
+        # Return
         return datamodel
     #
     # Update methods

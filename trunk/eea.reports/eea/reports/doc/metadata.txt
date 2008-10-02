@@ -121,6 +121,5 @@ not the same as original. If pdftk is not installed safely pass this test.
     ...     inp = self.loadfile('tests/data/meta-broken.pdf', ctype='application/pdf')
     ...     inp = inp.read()
     ...     out = updater.update(inp, metadata)
-    ...     open('/tmp/temp-output.pdf', 'wb').write(out)
     >>> inp != out
     True

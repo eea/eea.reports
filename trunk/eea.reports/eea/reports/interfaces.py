@@ -4,7 +4,6 @@
 from zope.interface import Interface, alsoProvides
 from zope.app.content import interfaces as contentifaces
 
-
 class IAnyReportCapable(Interface):
     """Any aspect of report/content capable.
     """
@@ -18,8 +17,3 @@ class IReportContainerEnhanced(Interface):
     """ Marker interface for reports
     """
 alsoProvides(IReportContainerEnhanced, contentifaces.IContentType)
-
-class IReport(Interface):
-    """ Objects which have report information.
-    """
-

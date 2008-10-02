@@ -6,5 +6,6 @@
     <include package="slc.publications.pdf" />
     <utility factory=".parser.PDFParser" />
     <utility factory=".updater.PDFMetadataUpdater" />
+    <utility factory=".cover.PDFCoverImage" />
 
 </configure>

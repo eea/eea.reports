@@ -1,9 +1,10 @@
 """ Events
 """
 from eea.reports import interfaces
-from eea.reports.pdf.interfaces import IReportPDFParser
+from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from zope.component import getUtility
 from p4a.subtyper.interfaces import ISubtyper
+from eea.reports.config import REPORT_SUBOBJECTS
 #
 # Debug
 #
@@ -41,7 +42,12 @@ def _restrict_subobjects(evt, rtype=-1):
     # Only report subtype
     if subtype.type_interface is not interfaces.IReportContainerEnhanced:
         return
-    interfaces.IReport(obj).restrictSubObjects(rtype)
+    # Restrict
+    obj.setConstrainTypesMode(rtype)
+    if rtype != 1:
+        return
+    obj.setImmediatelyAddableTypes(REPORT_SUBOBJECTS)
+    obj.setLocallyAllowedTypes(REPORT_SUBOBJECTS)
 #
 # Generate cover image
 #
@@ -53,7 +59,11 @@ def generate_image(obj, evt):
     if obj != obj.getCanonical():
         return
 
-    interfaces.IReport(obj).generateImage(evt.data)
+    generator = getUtility(IPDFCoverImage)
+    image = generator.generate(evt.data)
+    if not image:
+        return
+    obj.getField('cover_image').getMutator(obj)(image)
 #
 # Parse pdf metadata
 #

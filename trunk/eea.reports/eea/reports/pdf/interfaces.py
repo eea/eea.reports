@@ -21,3 +21,15 @@ class IPDFMetadataUpdater(Interface):
                 'description': 'This is a loong description ...'
             }
         """
+
+class IPDFCoverImage(Interface):
+    """ Utility to genrate pdf cover image
+    """
+
+    def generate(pdf, width, height):
+        """ Generate a cover image from given pdf data stream and return it.
+
+        @param pdf: pdf data stream
+        @param width: output image width
+        @param height: output image height
+        """

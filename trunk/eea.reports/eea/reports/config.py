@@ -11,4 +11,4 @@ COPYRIGHTS = u'(c) Copyrights - EEA (European Environment Agency)'
 
 STARTING_YEAR = 1990
 
-REPORT_SUBOBJECTS = ['File', 'Link']
+REPORT_SUBOBJECTS = ['File', 'Link', 'Folder']

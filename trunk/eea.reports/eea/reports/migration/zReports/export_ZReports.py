@@ -21,10 +21,10 @@ reports_year = [2006]
 #2000 -> 13
 #2001 -> 21
 #2002 -> 9
-#2003 -> 8
-#2004 -> 26
-#2005 -> 29
-#2006 -> 31
+#   2003 -> 8
+#   2004 -> 26
+#   2005 -> 29
+#   2006 -> 31
 #2007 -> 32
 #2008 -> 18
 
@@ -39,9 +39,63 @@ def formatExport(data):
     if data_type in ['int', 'date']:
         res = str(res)
     if len(res) > 5:
-        #if '%' in res or '&nbsp;' in res or '<p>' in res:
-        #    res = '<![CDATA[%s]]>' % res
-        res = '<![CDATA[%s]]>' % res
+        if '%' in res or '&nbsp;' in res or '</p>' in res:
+            res = '<![CDATA[%s]]>' % res
+        else:
+            #CDATA exceptions
+            if 'TSD-Environment & Process Department' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'The Head of Department of Environmental Science & Engineering' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Dilip Chandwani' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Bosch & Partner GmbH' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'One of the main objectives of the European Topic Centre on Land Cover has been to develop the CORINE Land Cover Database' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'SW& 2AZ' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Christian Fischer, EPA of Denmark and City of Copenhagen in co-operation with Matthew Crowe' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Serbia&Montenegro' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Dep. Environment, Technology  & Social Studies' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'School of Science & Technology' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Serbia & Montenegro' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'gua&Ambiente"' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Aaqius & Aaqius' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Ingenia Consultants & Engineers' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Traffic-related air pollution is still one of the most pressing problems in urban areas' in res:
+                res = '<![CDATA[%s]]>' % res
+            elif 'Coastal & Marine Resources Centre':
+                res = '<![CDATA[%s]]>' % res
+
+
+    #Other exceptions
+    excep1 = 'pollution monitoring (82/459/&quot;E'
+    excep2 = 'Values (WHO, 1987) for the listed compounds ('
+    excep3 = 'Figure 6.4: SO2 mean values in selected cities ('
+    excep4 = 'Figure 6.6: SO2 maximum 24h values in selected cities'
+    excep5 = 'Figure 6.7: SO2 trend in Norway 1977-1993 ('
+    excep6 = 'Figure 6.3: SO2 median 24h values in selected cities ('
+    excep7 = 'Figure 4: Frequency distribution of ozone concentrations in excess of the 180 '
+    if excep1 in res:
+        findex = res.find(excep1)
+        res = res[:findex+len(excep1)] + '&Oslash;' + res[findex+1+len(excep1):]
+    if excep2 in res:
+        findex = res.find(excep2)
+        res = res[:findex+len(excep2)] + '&micro;' + res[findex+1+len(excep2):]
+    for k in [excep3, excep4, excep5, excep6, excep7]:
+        if k in res: res = unicode(res, 'latin1').encode('utf8')
+
+
+
 
     res  = res.replace('&oslash;', 'ø')
     res  = res.replace('&egrave;', 'è')
@@ -191,9 +245,9 @@ res_add('\n<reports>')
 #    if report.series_year in reports_year:
 
 
-#for report in list(reports[2006][0]):
-if 1 == 1:
-    report = reports[int(rep_year)][int(rep_index)]
+for report in list(reports[int(rep_year)]):
+#if 1 == 1:
+#    report = reports[int(rep_year)][int(rep_index)]
 
     res_add('\n<report>')
 
@@ -242,7 +296,22 @@ if 1 == 1:
     res_add('\n<sort_title>%s</sort_title>' % formatExport(report.sort_title))                                    #string
     res_add('\n<serial_title>%s</serial_title>' % formatExport(report.serial_title))                              #string
     res_add('\n<series_title>%s</series_title>' % formatExport(report.series_title))                              #string
-    res_add('\n<catalogue_text>%s</catalogue_text>' % formatExport(report.catalogue_text))                        #text
+
+    if report.id in ['binaryttopic_14_1999pdf', 'topic_report_2001_7', 'topic_report_2001_15',
+                     'topic_report_2001_15_Part1', 'topic_report_2001_15_Part2', 'topic_report_2001_15_Part3',
+                     'topic_report_2001_16']:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'latin1').encode('utf8'))
+    elif ' Jol' in report.catalogue_text:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'latin1').encode('utf8'))
+    elif 'ETC/NC leader' in report.catalogue_text:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'latin1').encode('utf8'))
+    elif 'Brage Rygg, Norwegian Institute for Water Research, Anita K' in report.catalogue_text:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'latin1').encode('utf8'))
+    elif 'J. Feher, A. Lazar, M. Joanny, G. ' in report.catalogue_text:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'latin1').encode('utf8'))
+    else:
+        res_add('\n<catalogue_text>%s</catalogue_text>' % formatExport(report.catalogue_text))                        #text
+
     res_add('\n<main_entry>%s</main_entry>' % formatExport(report.main_entry))                                    #boolean
     res_add('\n<report_kind>%s</report_kind>' % formatExport(report.report_kind))                                 #selection
 
@@ -308,19 +377,20 @@ if 1 == 1:
         #Extra Property Sheet
         res_add('\n<Subjects_terms>%s</Subjects_terms>' % formatExport(tag.Subjects_terms))                         #lines
         res_add('\n<SpatialCoverage_terms>%s</SpatialCoverage_terms>' % formatExport(tag.SpatialCoverage_terms))    #lines
+
         res_add('\n</tag>')
 
     ###Language Report objects
     ##########################
     for lang in report.objectValues('Language Report'):
-        res_add('\n<language_report>')
+        res_add('\n<language_report url="%s">' % lang.absolute_url())
         #Basic Property Sheet
         res_add('\n<id>%s</id>' % formatExport(lang.id))                           #string
         res_add('\n<eeaid>%s</eeaid>' % formatExport(getattr(lang, 'eeaid', '0'))) #integer
         res_add('\n<language>%s</language>' % formatExport(lang.language))         #string
         res_add('\n<title>%s</title>' % formatExport(lang.title))                  #string
 
-       if lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
+        if lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
             res_add('\n<description>%s</description>' % unicode(formatExport(lang.description), 'latin1').encode('utf-8'))  #text
         else:
             res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
@@ -340,6 +410,8 @@ if 1 == 1:
             res_add('\n<reporttitle>%s</reporttitle>' % fi_reporttitle)                      #string
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
             res_add('\n<reporttitle>%s</reporttitle>' % lt_reporttitle)                      #string
+        elif lang.absolute_url() == 'http://reports.eea.europa.eu/topic_report_2001_10/fr':
+            res_add('\n<reporttitle>%s</reporttitle>' % unicode(formatExport(lang.reporttitle), 'latin1').encode('utf8'))
         else:
             res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                      #string
             
@@ -365,6 +437,8 @@ if 1 == 1:
             res_add('\n<sort_title>%s</sort_title>' % fi_reporttitle)                #string
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
             res_add('\n<sort_title>%s</sort_title>' % lt_reporttitle)                #string
+        elif lang.absolute_url() == 'http://reports.eea.europa.eu/topic_report_2001_10/fr':
+            res_add('\n<sort_title>%s</sort_title>' % unicode(formatExport(lang.sort_title), 'latin1').encode('utf8')) #string
         else:
             res_add('\n<sort_title>%s</sort_title>' % formatExport(lang.sort_title)) #string
 
@@ -378,7 +452,18 @@ if 1 == 1:
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(chp.id))                             #string
             res_add('\n<title>%s</title>' % formatExport(chp.title))                    #text
-            res_add('\n<content>%s</content>' % formatExport(chp.content))  #string
+
+            #for 1996 <content> need latin1->utf8
+            if 'southern part of the country are generally rather small. The greatest river is' in chp.content:
+                #TODO: fix 1996 on IE (invalid character)
+                pass
+            elif '8.6 per cent of the total area of Sweden consists' in chp.content:
+                #TODO: fix 1996 on IE (invalid character)
+                pass
+            else:
+                # Latin1 for 1996 reports
+                res_add('\n<content>%s</content>' % unicode(formatExport(chp.content), 'latin1').encode('utf8'))  #string
+
             res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(chp.pagenumber))     #int
             res_add('\n<categories>%s</categories>' % formatExport(chp.categories))     #lines
@@ -398,10 +483,17 @@ if 1 == 1:
             res_add('\n<report_file url="%s">' % rep_file.absolute_url())
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))       #string
-            res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+
+            if rep_file.absolute_url() == 'http://reports.eea.europa.eu/topic_report_2001_10/fr/topic-10-web.pdf':
+                res_add('\n<title>%s</title>' % unicode(formatExport(rep_file.title), 'latin1').encode('utf8'))   #string
+            else:
+                res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+
             res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
             if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                 res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'latin1').encode('utf8'))  #text
+            elif rep_file.absolute_url() in ['http://reports.eea.europa.eu/92-9167-029-4/en/TopicReportNo22-1996.pdf', 'http://reports.eea.europa.eu/92-9167-051-0/en/TopicReportNo16-1996.pdf']:
+                res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'latin1').encode('utf8'))
             else:
                 res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                        #int
@@ -410,21 +502,38 @@ if 1 == 1:
         ###ReportOrder objects
         #########################
         for ord in lang.objectValues('ReportOrder'):
-            res_add('\n<report_order>')
+            res_add('\n<report_order url="%s">' % ord.absolute_url())
             #Basic Property Sheet
             res_add('\n<title>%s</title>' % formatExport(ord.title))                                                    #string
             res_add('\n<order_id>%s</order_id>' % formatExport(ord.order_id))                                           #string
             res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord.customer_mail))                            #string
             res_add('\n<order_date>%s</order_date>' % formatExport(ord.order_date))                                     #date
             res_add('\n<order_confirm_date>%s</order_confirm_date>' % formatExport(ord.order_confirm_date))             #date
-            res_add('\n<customer_nameandadress>%s</customer_nameandadress>' % formatExport(ord.customer_nameandadress)) #text
+            res_add('\n<customer_nameandadress>%s</customer_nameandadress>' % unicode(formatExport(ord.customer_nameandadress), 'latin1').encode('utf8')) #text
             res_add('\n<order_shipping_date>%s</order_shipping_date>' % formatExport(ord.order_shipping_date))          #date
-            res_add('\n<name>%s</name>' % formatExport(ord.name))                                                       #string
-            res_add('\n<organisation>%s</organisation>' % formatExport(ord.organisation))                               #string
-            res_add('\n<address>%s</address>' % formatExport(ord.address))                                              #string
-            res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
-            res_add('\n<city>%s</city>' % formatExport(ord.city))                                                       #string
-            res_add('\n<country>%s</country>' % formatExport(ord.country))                                              #string
+            res_add('\n<name>%s</name>' % unicode(formatExport(ord.name), 'latin1').encode('utf8'))                                                       #string
+            res_add('\n<organisation>%s</organisation>' % unicode(formatExport(ord.organisation), 'latin1').encode('utf8'))                               #string
+            res_add('\n<address>%s</address>' % unicode(formatExport(ord.address), 'latin1').encode('utf8'))                                              #string
+
+            if ord.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2002_4/en/401514697',
+                                      'http://reports.eea.europa.eu/topic_report_2002_4/en/578070962']:
+                res_add('\n<postal_code>%s</postal_code>' % unicode(formatExport(ord.postal_code), 'latin1').encode('utf8'))                                  #string
+            else:
+                res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
+            res_add('\n<city>%s</city>' % unicode(formatExport(ord.city), 'latin1').encode('utf8'))                                                       #string
+            if ord.absolute_url() in ['http://reports.eea.europa.eu/Topic_report_No_111999/en/15710794',
+                                      'http://reports.eea.europa.eu/topic_report_2001_7/en/769877952']:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'latin1').encode('utf8'))
+            elif 'Espa' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'latin1').encode('utf8'))
+            elif 'ESPA' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'latin1').encode('utf8'))
+            elif 'espa' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'latin1').encode('utf8'))
+            elif 'XICO' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'latin1').encode('utf8'))
+            else:
+                res_add('\n<country>%s</country>' % formatExport(ord.country))                                              #string
             res_add('\n</report_order>')
 
         ###ReportOrder2 objects

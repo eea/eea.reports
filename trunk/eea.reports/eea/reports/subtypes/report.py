@@ -177,6 +177,9 @@ class SchemaExtender(object):
             ReportTextField('order_override_text',
                 schemata='report',
                 languageIndependent=False,
+                allowable_content_types=('text/html',),
+                default_content_type='text/html',
+                default_output_type='text/html',
                 widget=atapi.RichWidget(
                     label=_(u'label_order_override_text', default=u'Override the order text with your own text'),
                     description=_(u'description_order_override_text', default=u'Fill in to override the order text'),
@@ -186,6 +189,9 @@ class SchemaExtender(object):
             ReportTextField('order_extra_text',
                 schemata='report',
                 languageIndependent=False,
+                allowable_content_types=('text/html',),
+                default_content_type='text/html',
+                default_output_type='text/html',
                 widget=atapi.RichWidget(
                     label=_(u'label_order_extra_text', default=u'OR add some text to the order screen'),
                     description=_(u'description_order_extra_text', default=u'Fill in to add this text to the order text'),
@@ -215,6 +221,9 @@ class SchemaExtender(object):
             ReportTextField('trailer',
                 schemata='report',
                 languageIndependent=False,
+                allowable_content_types=('text/html',),
+                default_content_type='text/html',
+                default_output_type='text/html',
                 widget=atapi.RichWidget(
                     label = _(u'label_trailer', default=u'Trailer'),
                     description=_(u'description_trailer', default=u'Fill in the trailer.'),

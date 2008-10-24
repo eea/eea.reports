@@ -1,16 +1,24 @@
-﻿# -*- coding: utf8 -*-
+﻿##parameters=report_year='',report_from='',report_to=''
+##title=Export ZReports
+# -*- coding: utf8 -*-
 
 # Get the HTML request and response objects
 request = container.REQUEST
 RESPONSE =  request.RESPONSE
+
+# REQUEST parameters
+if report_year != '':
+    report_year = int(report_year)
+    if report_from == '':   report_from = 0
+    else:                   report_from = int(report_from)
+    if report_to == '': report_to = 0
+    else:               report_to = int(report_to)
 
 # Set content type
 RESPONSE.setHeader('content-type', 'text/xml')
 
 root = container.restrictedTraverse('/')
 report_metatype = ['Multilingual Report']
-#reports_year = [2007, 2008]
-reports_year = [2006]
 
 #Reports count
 #1995 -> 2
@@ -21,12 +29,10 @@ reports_year = [2006]
 #2000 -> 13
 #2001 -> 21
 #2002 -> 9
-
 #2003 -> 8
 #2004 -> 26
 #2005 -> 29
 #2006 -> 31
-
 #2007 -> 32
 #2008 -> 18
 
@@ -79,7 +85,6 @@ def formatExport(data, skip=0):
                 elif 'Coastal & Marine Resources Centre':
                     res = '<![CDATA[%s]]>' % res
 
-
     #Other exceptions
     excep1 = 'pollution monitoring (82/459/&quot;E'
     excep2 = 'Values (WHO, 1987) for the listed compounds ('
@@ -88,7 +93,6 @@ def formatExport(data, skip=0):
     excep5 = 'Figure 6.7: SO2 trend in Norway 1977-1993 ('
     excep6 = 'Figure 6.3: SO2 median 24h values in selected cities ('
     excep7 = 'Figure 4: Frequency distribution of ozone concentrations in excess of the 180 '
-#    excep8 = "mes prioritaires pour l'environnement m"
     if excep1 in res:
         findex = res.find(excep1)
         res = res[:findex+len(excep1)] + '&Oslash;' + res[findex+1+len(excep1):]
@@ -97,11 +101,8 @@ def formatExport(data, skip=0):
         res = res[:findex+len(excep2)] + '&micro;' + res[findex+1+len(excep2):]
     for k in [excep3, excep4, excep5, excep6, excep7]:
         if k in res: res = unicode(res, 'ISO-8859-15').encode('utf8')
-#    if excep8 in res and len(res) < 70:
-#        res = "Problèmes prioritaires pour l’environnement méditerranéen"
 
-
-
+    # HTML entities
     res  = res.replace('&oslash;', 'ø')
     res  = res.replace('&egrave;', 'è')
     res  = res.replace('&eacute;', 'é')
@@ -241,24 +242,28 @@ for report in root.objectValues(report_metatype):
     val.append(report)
     reports[report.series_year] = val
 
+exported_reports = []
+if report_year != '':
+    data = list(reports[int(report_year)])
+    if report_to == 0: report_to = len(data)
+    exported_reports.extend(data[report_from:report_to])
+else:
+    for report in reports.keys():
+        exported_reports.extend(reports[report])
 
 # Export content
 res_add("""<?xml version="1.0" encoding="utf-8"?>""")
 res_add('\n<reports>')
 
-#for report in root.objectValues(report_metatype):
-#    if report.series_year in reports_year:
-
-
-for report in list(reports[int(rep_year)]):
-#if 1 == 1:
-#    report = reports[int(rep_year)][int(rep_index)]
-
+for report in exported_reports:
     res_add('\n<report>')
 
     #Basic Property Sheet
     res_add('\n<id>%s</id>' % formatExport(report.id))                                                     #string
-    res_add('\n<title>%s</title>' % formatExport(report.title))                                            #string
+    try:
+        res_add('\n<title>%s</title>' % container.unescape(formatExport(report.title)).encode('utf8'))     #string
+    except:
+        res_add('\n<title>%s</title>' % formatExport(report.title))                                        #string
     res_add('\n<categories>%s</categories>' % formatExport(report.categories))                             #lines
     res_add('\n<weighting>%s</weighting>' % formatExport(report.weighting))                                #int
     res_add('\n<author>%s</author>' % formatExport(report.author))                                         #string
@@ -298,7 +303,10 @@ for report in list(reports[int(rep_year)]):
     res_add('\n<SpatialCoverage_terms>%s</SpatialCoverage_terms>' % formatExport(report.SpatialCoverage_terms))   #lines
     res_add('\n<series_year>%s</series_year>' % formatExport(report.series_year))                                 #selection
     res_add('\n<version_date>%s</version_date>' % formatExport(report.version_date))                              #date
-    res_add('\n<sort_title>%s</sort_title>' % formatExport(report.sort_title))                                    #string
+    try:
+        res_add('\n<sort_title>%s</sort_title>' % container.unescape(formatExport(report.sort_title)).encode('utf8')) #string
+    except:
+        res_add('\n<sort_title>%s</sort_title>' % formatExport(report.sort_title))                                    #string
     res_add('\n<serial_title>%s</serial_title>' % formatExport(report.serial_title))                              #string
     res_add('\n<series_title>%s</series_title>' % formatExport(report.series_title))                              #string
 
@@ -315,13 +323,16 @@ for report in list(reports[int(rep_year)]):
     elif 'J. Feher, A. Lazar, M. Joanny, G. ' in report.catalogue_text:
         res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'ISO-8859-15').encode('utf8'))
     else:
-        res_add('\n<catalogue_text>%s</catalogue_text>' % formatExport(report.catalogue_text))                        #text
+        try:
+            res_add('\n<catalogue_text>%s</catalogue_text>' % container.unescape(formatExport(report.catalogue_text)).encode('utf8')) #text
+        except:
+            res_add('\n<catalogue_text>%s</catalogue_text>' % formatExport(report.catalogue_text))                #text
 
     res_add('\n<main_entry>%s</main_entry>' % formatExport(report.main_entry))                                    #boolean
     res_add('\n<report_kind>%s</report_kind>' % formatExport(report.report_kind))                                 #selection
 
     #Product Property Sheet
-    res_add('\n<product_version>%s</product_version>' % formatExport(report.product_version))     #string
+    res_add('\n<product_version>%s</product_version>' % formatExport(report.product_version)) #string
 
     #Relations Property Sheet
     res_add('\n<IsRequiredBy>%s</IsRequiredBy>' % formatExport(report.IsRequiredBy))          #lines
@@ -339,7 +350,7 @@ for report in list(reports[int(rep_year)]):
     for img in report.objectValues('CoverImage'):
         res_add('\n<cover_image url="%s">' % img.absolute_url())
         #Zope file properties
-        res_add('\n<id>%s</id>' % formatExport(img.getId()))                                 #string
+        res_add('\n<id>%s</id>' % formatExport(img.getId()))                                     #string
         res_add('\n<title>%s</title>' % formatExport(img.title))                                 #string
 
         #Atlas Property Sheet
@@ -365,7 +376,7 @@ for report in list(reports[int(rep_year)]):
     ###Redirect objects
     ###################
     for rdr in report.objectValues('Redirect'):
-        res_add('\n<redirect redirect_to="%s" />' % formatExport(rdr.redirect_to, 1))  #string
+        res_add('\n<redirect redirect_to="%s" />' % formatExport(rdr.redirect_to, 1))           #string
 
 
     ###Tag objects
@@ -396,11 +407,14 @@ for report in list(reports[int(rep_year)]):
         res_add('\n<title>%s</title>' % formatExport(lang.title))                  #string
 
         if lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
-            res_add('\n<description>%s</description>' % unicode(formatExport(lang.description), 'ISO-8859-15').encode('utf-8'))  #text
+            res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf-8'))  #text
         else:
             res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
 
-        res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
+        try:
+            res_add('\n<trailer>%s</trailer>' % container.unescape(formatExport(lang.trailer)).encode('utf8'))   #text
+        except:
+            res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
         res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
         res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
@@ -466,13 +480,14 @@ for report in list(reports[int(rep_year)]):
                 'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is',
                 'http://reports.eea.europa.eu/briefing_2006_4/sv', 'http://reports.eea.europa.eu/briefing_2006_1/et',
                 'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_4/pt']:
-            res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'ISO-8859-15').encode('utf8')))
+            res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'ISO-8859-15')).encode('utf8'))
         elif lang.absolute_url() in ['http://reports.eea.europa.eu/eea_report_2006_4/fr']:
-            res_add('\n<reporttitle>%s</reporttitle>' % formatExport("Problèmes prioritaires pour l'environnement méditerranéen"))                      #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/briefing_2008_1/fr']:
-            pass
+            res_add('\n<reporttitle>%s</reporttitle>' % formatExport("Problèmes prioritaires pour l'environnement méditerranéen")) #string
         else:
-            res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                      #string
+            try:
+                res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(formatExport(lang.reporttitle)).encode('utf8'))     #string
+            except:
+                res_add('\n<reporttitle>%s</reporttitle>' % formatExport(lang.reporttitle))                      #string
 
         #Extra Property Sheet
         res_add('\n<pages>%s</pages>' % formatExport(lang.pages))                    #int
@@ -553,7 +568,11 @@ for report in list(reports[int(rep_year)]):
                 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/el', 'http://reports.eea.europa.eu/briefing_2006_4/el']:
             res_add('\n<sort_title>%s</sort_title>' % unicode(formatExport(lang.sort_title), 'iso-8859-7').encode('utf8')) #string
         else:
-            res_add('\n<sort_title>%s</sort_title>' % formatExport(lang.sort_title)) #string
+            try:
+                res_add('\n<sort_title>%s</sort_title>' % container.unescape(formatExport(lang.sort_title)).encode('utf8')) #string
+            except:
+                #TODO: as we dont need this property anymore some exceptions were left behind
+                res_add('\n<sort_title>%s</sort_title>' % lang.id)
 
         #Manager Property Sheet
         res_add('\n<langreleased>%s</langreleased>' % formatExport(lang.langreleased))   #boolean
@@ -564,7 +583,10 @@ for report in list(reports[int(rep_year)]):
             res_add('\n<report_chapter>')
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(chp.id))                             #string
-            res_add('\n<title>%s</title>' % formatExport(chp.title))                    #text
+            try:
+                res_add('\n<title>%s</title>' % container.unescape(formatExport(chp.title)).encode('utf8')) #text
+            except:
+                res_add('\n<title>%s</title>' % formatExport(chp.title))                #text
 
             #for 1996 <content> need ISO-8859-15->utf8
             if 'southern part of the country are generally rather small. The greatest river is' in chp.content:
@@ -575,9 +597,13 @@ for report in list(reports[int(rep_year)]):
                 pass
             else:
                 # ISO-8859-15 for 1996 reports
-                res_add('\n<content>%s</content>' % unicode(formatExport(chp.content), 'ISO-8859-15').encode('utf8'))  #string
+                res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'ISO-8859-15')).encode('utf8'))  #string
 
-            res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
+            try:
+                res_add('\n<description>%s</description>' % container.unescape(formatExport(chp.description)).encode('utf8'))  #string
+            except:
+                res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
+
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(chp.pagenumber))     #int
             res_add('\n<categories>%s</categories>' % formatExport(chp.categories))     #lines
             res_add('\n<section>%s</section>' % formatExport(chp.section))              #string
@@ -597,7 +623,7 @@ for report in list(reports[int(rep_year)]):
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))       #string
             res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
-            res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber))                        #int
+            res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber)) #int
 
             if rep_file.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr/topic-10-web.pdf',
 'http://reports.eea.europa.eu/briefing_2003_1/da/EEA_Briefing_WIR_DA.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
@@ -647,9 +673,12 @@ for report in list(reports[int(rep_year)]):
 'http://reports.eea.europa.eu/briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/pt', 'http://reports.eea.europa.eu/briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf']:
-                res_add('\n<title>%s</title>' % unicode(formatExport(rep_file.title), 'ISO-8859-15').encode('utf8'))   #string
+                res_add('\n<title>%s</title>' % container.unescape(unicode(formatExport(rep_file.title), 'ISO-8859-15')).encode('utf8'))   #string
             else:
-                res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+                try:
+                    res_add('\n<title>%s</title>' % container.unescape(formatExport(rep_file.title)).encode('utf8'))   #string
+                except:
+                    res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
 
             if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                 res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'ISO-8859-15').encode('utf8'))  #text
@@ -703,9 +732,12 @@ for report in list(reports[int(rep_year)]):
 'http://reports.eea.europa.eu/briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/pl/eea_briefing_4_2006-PL.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/fi/eea_briefing_4_2006-FI.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/lv/eea_briefing_4_2006-LV.pdf']:
-                res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'ISO-8859-15').encode('utf8'))
+                res_add('\n<file_description>%s</file_description>' % container.unescape(unicode(formatExport(rep_file.file_description), 'ISO-8859-15')).encode('utf8'))
             else:
-                res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
+                try:
+                    res_add('\n<file_description>%s</file_description>' % container.unescape(formatExport(rep_file.file_description)).encode('utf8'))  #text
+                except:
+                    res_add('\n<file_description>%s</file_description>' % formatExport(rep_file.file_description))  #text
 
             res_add('\n</report_file>')
 
@@ -728,7 +760,7 @@ for report in list(reports[int(rep_year)]):
             if ord.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2002_4/en/401514697',
                                       'http://reports.eea.europa.eu/topic_report_2002_4/en/578070962',
                                       'http://reports.eea.europa.eu/topic_report_2003_1/en/604315246']:
-                res_add('\n<postal_code>%s</postal_code>' % unicode(formatExport(ord.postal_code), 'ISO-8859-15').encode('utf8'))                                  #string
+                res_add('\n<postal_code>%s</postal_code>' % unicode(formatExport(ord.postal_code), 'ISO-8859-15').encode('utf8'))                              #string
             else:
                 res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
             res_add('\n<city>%s</city>' % unicode(formatExport(ord.city), 'ISO-8859-15').encode('utf8'))                                                       #string
@@ -766,7 +798,10 @@ for report in list(reports[int(rep_year)]):
         for search in lang.objectValues('Search'):
             res_add('\n<search>')
             #Basic Property Sheet
-            res_add('\n<title>%s</title>' % formatExport(search.title))                   #string
+            try:
+                res_add('\n<title>%s</title>' % container.unescape(formatExport(search.title)).encode('utf8'))               #string
+            except:
+                res_add('\n<title>%s</title>' % formatExport(search.title))               #string
             res_add('\n<publishdate>%s</publishdate>' % formatExport(search.publishdate)) #date
             res_add('\n</search>')
 

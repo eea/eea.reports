@@ -51,6 +51,19 @@ def _restrict_subobjects(evt, rtype=-1):
 #
 # Generate cover image
 #
+def add_image_file(obj, image):
+    """ Util method used to add an image to given object.
+
+    @param obj: a portal object
+    @param image: image data
+    """
+    if not image:
+        return
+    if 'cover' not in obj.objectIds():
+        obj.invokeFactory('Image', id='cover', title='Cover Image')
+    cover = obj._getOb('cover')
+    cover.getField('image').getMutator(cover)(image)
+
 def generate_image(obj, evt):
     """ EVENT
         called on objectmodified. Tries to generate the cover image.
@@ -63,7 +76,7 @@ def generate_image(obj, evt):
     image = generator.generate(evt.data)
     if not image:
         return
-    obj.getField('cover_image').getMutator(obj)(image)
+    add_image_file(obj, image)
 #
 # Parse pdf metadata
 #

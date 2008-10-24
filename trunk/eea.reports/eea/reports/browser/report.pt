@@ -53,9 +53,12 @@
         </tal:serial_title>
     </div>
 
-    <div class="figure-left" tal:condition="here/cover_image|nothing">
-         <div class="figure">
-            <img tal:replace="structure here/cover_image" />
+    <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
+        tal:condition="cover">
+         <div class="figure"><img tal:attributes="
+            src cover/absolute_url;
+            alt cover/title_or_id;
+            title cover/title_or_id" />
         </div>
     </div>
 
@@ -112,7 +115,7 @@
         <tal:foldercontents define="
             folderContents python:here.getFolderContents({'portal_type': 'File'});"
             condition="folderContents">
-        <h2>Contents - Free download</h2>
+        <h2>Additional content - Free download</h2>
         <ul>
             <li tal:repeat="item folderContents">
             <tal:file define="

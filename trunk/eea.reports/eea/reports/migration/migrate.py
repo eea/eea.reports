@@ -10,6 +10,7 @@ from Products.LinguaPlone import events
 from zExceptions import BadRequest
 from Products.statusmessages.interfaces import IStatusMessage
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
+from eea.reports.adapter.events import add_image_file
 from eea.reports.migration.zReports.parser import (
     get_reports,
     grab_file_from_url,
@@ -173,6 +174,8 @@ class MigrateReports(object):
         if not subtyper.existing_type(report) or \
            subtyper.existing_type(report).name != 'eea.reports.FolderReport':
             subtyper.change_type(report, 'eea.reports.FolderReport')
+        # Add cover image only in canonical report
+        add_image_file(report, datamodel.get('cover_image_file'))
         self.update_properties(report, datamodel)
         return report_id
 

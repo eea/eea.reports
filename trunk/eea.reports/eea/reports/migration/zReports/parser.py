@@ -168,7 +168,7 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text'))
             self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
             cover_image_url = self.__report_current.get('rep_cover_image')
-            cover_image_file = grab_file_from_url(cover_image_url)
+            cover_image_file = grab_file_from_url(cover_image_url, zope=False)
             self.__language_report_current.set('cover_image_file', cover_image_file)
             self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
             creators = self.__report_current.get('creators').replace('\n', '').split('###')

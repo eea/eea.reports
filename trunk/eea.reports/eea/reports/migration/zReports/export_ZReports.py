@@ -823,7 +823,7 @@ for report in exported_reports:
                     try:
                         res_add('\n<file_title>%s</file_title>' % file.getId())
                     except:
-                        res_add('\nALEC1')
+                        res_add('\n<file_title></file_title>'
                 elif file.getId() in ['ES-SCP-chapter-final-web.pdf', 'PT-SCP-chapter-final-web.pdf']:
                     res_add('\n<file_title>%s</file_title>' % formatExport(file_title))
                 elif file.getId() == 'toprep02_2001.pdf':

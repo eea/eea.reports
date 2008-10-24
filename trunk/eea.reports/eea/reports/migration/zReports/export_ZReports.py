@@ -285,7 +285,14 @@ for report in exported_reports:
     res_add('\n<version_number>%s</version_number>' % formatExport(report.version_number))              #string
     res_add('\n<price_euro>%s</price_euro>' % formatExport(report.price_euro))                          #string
     res_add('\n<creators_orgs>%s</creators_orgs>' % formatExport(report.creators_orgs))                 #multiple selection
-    res_add('\n<creators>%s</creators>' % formatExport(report.creators))                                #lines
+
+    if report.id in ['groundwater07012000', 'ENVIASESSREP03', 'TEC06']:
+        res_add('\n<creators>%s</creators>' % unicode(formatExport(report.creators), 'ISO-8859-15').encode('utf8'))
+    elif report.id in ['92-9167-125-8']:
+        res_add('\n<creators>%s</creators>' % container.unescape(unicode(formatExport(report.creators), 'ISO-8859-15')).encode('utf8'))
+    else:
+        res_add('\n<creators>%s</creators>' % formatExport(report.creators))                            #lines
+
     res_add('\n<publishers_orgs>%s</publishers_orgs>' % formatExport(report.publishers_orgs))           #multiple selection
     res_add('\n<publishers>%s</publishers>' % formatExport(report.publishers))                          #lines
     res_add('\n<coverage_time_from>%s</coverage_time_from>' % formatExport(report.coverage_time_from))  #date
@@ -303,17 +310,33 @@ for report in exported_reports:
     res_add('\n<SpatialCoverage_terms>%s</SpatialCoverage_terms>' % formatExport(report.SpatialCoverage_terms))   #lines
     res_add('\n<series_year>%s</series_year>' % formatExport(report.series_year))                                 #selection
     res_add('\n<version_date>%s</version_date>' % formatExport(report.version_date))                              #date
-    try:
-        res_add('\n<sort_title>%s</sort_title>' % container.unescape(formatExport(report.sort_title)).encode('utf8')) #string
-    except:
-        res_add('\n<sort_title>%s</sort_title>' % formatExport(report.sort_title))                                    #string
+
+    if report.series_year == -1:
+        res_add('\n<sort_title>%s</sort_title>' % container.unescape(unicode(formatExport(report.sort_title), 'iso-8859-15')).encode('utf8')) #text
+    else:
+        try:
+            res_add('\n<sort_title>%s</sort_title>' % container.unescape(formatExport(report.sort_title)).encode('utf8')) #string
+        except:
+            res_add('\n<sort_title>%s</sort_title>' % formatExport(report.sort_title))                                    #string
+
     res_add('\n<serial_title>%s</serial_title>' % formatExport(report.serial_title))                              #string
     res_add('\n<series_title>%s</series_title>' % formatExport(report.series_title))                              #string
 
     if report.id in ['binaryttopic_14_1999pdf', 'topic_report_2001_7', 'topic_report_2001_15',
                      'topic_report_2001_15_Part1', 'topic_report_2001_15_Part2', 'topic_report_2001_15_Part3',
-                     'topic_report_2001_16']:
+                     'topic_report_2001_16', 'technical_report_2003_87', 'technical_report_2002_83',
+                     'technical_report_2002_89', 'technical_report_2002_84', 'technical_report_2003_90',
+                     'technical_report_2002_79', 'technical_report_2002_72', 'technical_report_2002_71',
+                     'environmental_issue_report_2002_30', 'technical_report_2002_80', 'technical_report_2002_82',
+                     'technical_report_2002_81', 'technical_report_2001_70', 'technical_report_2001_67',
+                     'technical_report_2001_68', 'Technical_report_No_55_and_56', 'Technical_report_no_65',
+                     'environmental_issue_report_1998_14', 'Technical_report_No_61', 'Environmental_Issues_No_21',
+                     'TEC27', 'TECH07', 'TECH39', 'Technical_report_No_43', 'Technical_report_No_49',
+                     'binaryttech31pdf', 'binaryttech32pdf', 'binaryttech33pdf', 'environmental_taxes_in_EU',
+                     'groundwater07012000', 'tech35pdf']:
         res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'ISO-8859-15').encode('utf8'))
+    elif report.series_year == -1:
+            res_add('\n<catalogue_text>%s</catalogue_text>' % container.unescape(unicode(formatExport(report.catalogue_text), 'iso-8859-15')).encode('utf8')) #text
     elif ' Jol' in report.catalogue_text:
         res_add('\n<catalogue_text>%s</catalogue_text>' % unicode(formatExport(report.catalogue_text), 'ISO-8859-15').encode('utf8'))
     elif 'ETC/NC leader' in report.catalogue_text:
@@ -387,7 +410,10 @@ for report in exported_reports:
         #Basic Property Sheet
         res_add('\n<title>%s</title>' % formatExport(tag.title))                                #string
         res_add('\n<categories>%s</categories>' % formatExport(tag.categories))                 #string
-        res_add('\n<tag_description>%s</tag_description>' % formatExport(tag.tag_description))  #string
+        if report.series_year == -1:
+            res_add('\n<tag_description>%s</tag_description>' % unicode(tag.tag_description, 'ISO-8859-15').encode('utf8'))
+        else:
+            res_add('\n<tag_description>%s</tag_description>' % formatExport(tag.tag_description))  #string
         res_add('\n<chapter>%s</chapter>' % formatExport(tag.chapter))                          #string
 
         #Extra Property Sheet
@@ -406,19 +432,38 @@ for report in exported_reports:
         res_add('\n<language>%s</language>' % formatExport(lang.language))         #string
         res_add('\n<title>%s</title>' % formatExport(lang.title))                  #string
 
-        if lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
+        if report.series_year == -1 and not lang.language in ['bg', 'el']:
+            data = container.unescape(unicode(formatExport(lang.description), 'iso-8859-15')).encode('utf8')
+            if lang.absolute_url() == 'http://reports.eea.europa.eu/environmental_issue_report_2002_31-sum/cs':
+                data = data.replace('prost&#345edí', 'prostředí')
+            res_add('\n<description>%s</description>' % data) #text
+        elif lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
             res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf-8'))  #text
+        elif lang.absolute_url() in ['http://reports.eea.europa.eu/92-827-5263-1-sum/da',
+            'http://reports.eea.europa.eu/92-827-5263-1-sum/fi', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fr']:
+            res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf8'))
+        elif lang.absolute_url() == 'http://reports.eea.europa.eu/signals-2004/el':
+            ddata = lang.description
+            ddata = unicode(ddata, 'ISO-8859-15').encode('utf8')
+            res_add('\n<description>%s</description>' % ddata) #text
         else:
-            res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
+            try:
+                res_add('\n<description>%s</description>' % container.unescape(formatExport(lang.description)).encode('utf-8')) #text
+            except:
+                res_add('\n<description>%s</description>' % formatExport(lang.description)) #text
 
         try:
             res_add('\n<trailer>%s</trailer>' % container.unescape(formatExport(lang.trailer)).encode('utf8'))   #text
         except:
-            res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                      #text
+            res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                  #text
         res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
         res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
-        if report.id == 'state_of_environment_report_2007_1' and lang.id == 'tr':
+        if lang.absolute_url() == 'http://reports.eea.europa.eu/environmental_assessment_report_2002_9-sum/el':
+            res_add('\n<reporttitle>%s</reporttitle>' % unicode(lang.reporttitle, 'ISO-8859-15').encode('utf8'))
+        elif report.series_year == -1 and not lang.language in ['bg', 'el']:
+            res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'iso-8859-15')).encode('utf8')) #text
+        elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'tr':
             res_add('\n<reporttitle>%s</reporttitle>' % tr_reporttitle)                      #string
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'it':
             res_add('\n<reporttitle>%s</reporttitle>' % it_reporttitle)                      #string
@@ -468,7 +513,7 @@ for report in exported_reports:
                 'http://reports.eea.europa.eu/briefing_2005_3/sv', 'http://reports.eea.europa.eu/briefing_2005_3/pt',
                 'http://reports.eea.europa.eu/briefing_2005_3/no', 'http://reports.eea.europa.eu/briefing_2005_3/is',
                 'http://reports.eea.europa.eu/briefing_2005_3/it', 'http://reports.eea.europa.eu/briefing_2005_3/sk',
-                'http://reports.eea.europa.eu/eea_report_2006_2/fr',
+                'http://reports.eea.europa.eu/eea_report_2006_2/fr', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fi'
                 'http://reports.eea.europa.eu/briefing_2006_1/fr', 'http://reports.eea.europa.eu/briefing_2006_1/no',
                 'http://reports.eea.europa.eu/briefing_2006_1/sv', 'http://reports.eea.europa.eu/briefing_2006_1/tr',
                 'http://reports.eea.europa.eu/briefing_2006_1/da', 'http://reports.eea.europa.eu/briefing_2006_1/da/briefing_01_2006-DA.pdf',
@@ -479,10 +524,13 @@ for report in exported_reports:
                 'http://reports.eea.europa.eu/briefing_2006_2/fr', 'http://reports.eea.europa.eu/briefing_2006_4/es',
                 'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is',
                 'http://reports.eea.europa.eu/briefing_2006_4/sv', 'http://reports.eea.europa.eu/briefing_2006_1/et',
-                'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_4/pt']:
+                'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_4/pt',
+                'http://reports.eea.europa.eu/92-827-5263-1-sum/da', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fr']:
             res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'ISO-8859-15')).encode('utf8'))
         elif lang.absolute_url() in ['http://reports.eea.europa.eu/eea_report_2006_4/fr']:
             res_add('\n<reporttitle>%s</reporttitle>' % formatExport("Problèmes prioritaires pour l'environnement méditerranéen")) #string
+        elif lang.absolute_url() in ['http://reports.eea.europa.eu/92-9167-205-X/el']:
+            res_add('\n<reporttitle>%s</reporttitle>' % unicode(formatExport(lang.reporttitle), 'iso-8859-7').encode('utf8')) #string
         else:
             try:
                 res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(formatExport(lang.reporttitle)).encode('utf8'))     #string
@@ -580,13 +628,22 @@ for report in exported_reports:
         ###Report Chapter objects
         #########################
         for chp in lang.objectValues('Report Chapter'):
-            res_add('\n<report_chapter>')
+            res_add('\n<report_chapter url="%s">' % chp.absolute_url())
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(chp.id))                             #string
-            try:
-                res_add('\n<title>%s</title>' % container.unescape(formatExport(chp.title)).encode('utf8')) #text
-            except:
-                res_add('\n<title>%s</title>' % formatExport(chp.title))                #text
+
+            if report.series_year == -1 and not lang.language in ['bg', 'el']:
+                res_add('\n<title>%s</title>' % container.unescape(unicode(formatExport(chp.title), 'iso-8859-15')).encode('utf8')) #text
+            elif report.series_year == -1 and lang.language == 'el':
+                try:
+                    res_add('\n<title>%s</title>' % container.unescape(unicode(formatExport(chp.title), 'iso-8859-7')).encode('utf8')) #text
+                except:
+                    res_add('\n<title>%s</title>' % container.unescape(unicode(formatExport(chp.title), 'iso-8859-15')).encode('utf8')) #text
+            else:
+                try:
+                    res_add('\n<title>%s</title>' % container.unescape(formatExport(chp.title)).encode('utf8')) #text
+                except:
+                    res_add('\n<title>%s</title>' % formatExport(chp.title))                #text
 
             #for 1996 <content> need ISO-8859-15->utf8
             if 'southern part of the country are generally rather small. The greatest river is' in chp.content:
@@ -595,14 +652,22 @@ for report in exported_reports:
             elif '8.6 per cent of the total area of Sweden consists' in chp.content:
                 #TODO: fix 1996 on IE (invalid character)
                 pass
+            elif chp.absolute_url() == 'http://reports.eea.europa.eu/92-827-5263-1-sum/fi/page005.html':
+                #TODO: for report_year=-1&report_to=252&report_from=240
+                pass
+            elif report.series_year == -1 and lang.language == 'el':
+                res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'iso-8859-7')).encode('utf8')) #text
             else:
                 # ISO-8859-15 for 1996 reports
                 res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'ISO-8859-15')).encode('utf8'))  #string
 
-            try:
-                res_add('\n<description>%s</description>' % container.unescape(formatExport(chp.description)).encode('utf8'))  #string
-            except:
-                res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
+            if report.series_year == -1 and not lang.language in ['bg', 'el']:
+                res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(chp.description), 'iso-8859-15')).encode('utf8')) #text
+            else:
+                try:
+                    res_add('\n<description>%s</description>' % container.unescape(formatExport(chp.description)).encode('utf8'))  #string
+                except:
+                    res_add('\n<description>%s</description>' % formatExport(chp.description))  #string
 
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(chp.pagenumber))     #int
             res_add('\n<categories>%s</categories>' % formatExport(chp.categories))     #lines
@@ -625,7 +690,11 @@ for report in exported_reports:
             res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber)) #int
 
-            if rep_file.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr/topic-10-web.pdf',
+            if rep_file.absolute_url() == 'http://reports.eea.europa.eu/environmental_assessment_report_2002_9-sum/el/GR_summary_web.pdf':
+                res_add('\n<report_file_title>%s</report_file_title>' % unicode(rep_file.reporttitle, 'ISO-8859-15').encode('utf8'))
+            elif report.series_year == -1 and not lang.language in ['bg', 'el']:
+                res_add('\n<report_file_title>%s</report_file_title>' % container.unescape(unicode(formatExport(rep_file.title), 'iso-8859-15')).encode('utf8')) #text
+            elif rep_file.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr/topic-10-web.pdf',
 'http://reports.eea.europa.eu/briefing_2003_1/da/EEA_Briefing_WIR_DA.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
 'http://reports.eea.europa.eu/briefing_2003_1/hu/EEA_Briefing_WIR_HU.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/is/EEA_Briefing_WIR_IS.pdf',
 'http://reports.eea.europa.eu/briefing_2003_1/lt/EEA_Briefing_WIR_LT.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/pl/EEA_Briefing_WIR_PL.pdf',
@@ -673,14 +742,16 @@ for report in exported_reports:
 'http://reports.eea.europa.eu/briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/pt', 'http://reports.eea.europa.eu/briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf',
 'http://reports.eea.europa.eu/briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf']:
-                res_add('\n<title>%s</title>' % container.unescape(unicode(formatExport(rep_file.title), 'ISO-8859-15')).encode('utf8'))   #string
+                res_add('\n<report_file_title>%s</report_file_title>' % container.unescape(unicode(formatExport(rep_file.title), 'ISO-8859-15')).encode('utf8'))   #string
             else:
                 try:
-                    res_add('\n<title>%s</title>' % container.unescape(formatExport(rep_file.title)).encode('utf8'))   #string
+                    res_add('\n<report_file_title>%s</report_file_title>' % container.unescape(formatExport(rep_file.title)).encode('utf8'))   #string
                 except:
-                    res_add('\n<title>%s</title>' % formatExport(rep_file.title))   #string
+                    res_add('\n<report_file_title>%s</report_file_title>' % formatExport(rep_file.title))   #string
 
-            if rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
+            if report.series_year == -1 and not lang.language in ['bg', 'el']:
+                res_add('\n<file_description>%s</file_description>' % container.unescape(unicode(formatExport(rep_file.file_description), 'iso-8859-15')).encode('utf8')) #text
+            elif rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                 res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'ISO-8859-15').encode('utf8'))  #text
             elif rep_file.absolute_url() in ['http://reports.eea.europa.eu/92-9167-029-4/en/TopicReportNo22-1996.pdf',
 'http://reports.eea.europa.eu/92-9167-051-0/en/TopicReportNo16-1996.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
@@ -748,7 +819,10 @@ for report in exported_reports:
             #Basic Property Sheet
             res_add('\n<title>%s</title>' % formatExport(ord.title))                                                    #string
             res_add('\n<order_id>%s</order_id>' % formatExport(ord.order_id))                                           #string
-            res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord.customer_mail))                            #string
+            if ord.absolute_url() in ['http://reports.eea.europa.eu/environmental_issue_report_2002_31-sum/de/423218120']:
+                res_add('\n<customer_mail>%s</customer_mail>' % unicode(formatExport(ord.customer_mail), 'ISO-8859-15').encode('utf8'))                            #string
+            else:
+                res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord.customer_mail))                            #string
             res_add('\n<order_date>%s</order_date>' % formatExport(ord.order_date))                                     #date
             res_add('\n<order_confirm_date>%s</order_confirm_date>' % formatExport(ord.order_confirm_date))             #date
             res_add('\n<customer_nameandadress>%s</customer_nameandadress>' % unicode(formatExport(ord.customer_nameandadress), 'ISO-8859-15').encode('utf8')) #text
@@ -758,8 +832,8 @@ for report in exported_reports:
             res_add('\n<address>%s</address>' % unicode(formatExport(ord.address), 'ISO-8859-15').encode('utf8'))                                              #string
 
             if ord.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2002_4/en/401514697',
-                                      'http://reports.eea.europa.eu/topic_report_2002_4/en/578070962',
-                                      'http://reports.eea.europa.eu/topic_report_2003_1/en/604315246']:
+           'http://reports.eea.europa.eu/topic_report_2002_4/en/578070962', 'http://reports.eea.europa.eu/topic_report_2003_1/en/604315246',
+           'http://reports.eea.europa.eu/report_2003_0617_150910/it/688472941', 'http://reports.eea.europa.eu/environmental_issue_report_2001_22/en/693319874']:
                 res_add('\n<postal_code>%s</postal_code>' % unicode(formatExport(ord.postal_code), 'ISO-8859-15').encode('utf8'))                              #string
             else:
                 res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
@@ -774,6 +848,10 @@ for report in exported_reports:
             elif 'espa' in ord.country:
                 res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
             elif 'XICO' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
+            elif 'Belgi' in ord.country:
+                res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
+            elif 'xico' in ord.country:
                 res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
             else:
                 res_add('\n<country>%s</country>' % formatExport(ord.country))                                              #string
@@ -816,28 +894,36 @@ for report in exported_reports:
             if file.getId() == 'PT-SCP-chapter-final-web.pdf':
                 file_title = file_title.replace('&aacute;', 'á')
 
-            try:
-                res_add('\n<file_title>%s</file_title>' % container.unescape(formatExport(file_title)).encode('utf-8'))
-            except:
-                if file.getId() in ['TR-SCP-chapter-final-web.pdf', 'ET-SCP-chapter_final-web.pdf', 'FI-SCP-chapter_final-web.pdf']:
-                    try:
-                        res_add('\n<file_title>%s</file_title>' % file.getId())
-                    except:
-                        res_add('\n<file_title></file_title>'
-                elif file.getId() in ['ES-SCP-chapter-final-web.pdf', 'PT-SCP-chapter-final-web.pdf']:
-                    res_add('\n<file_title>%s</file_title>' % formatExport(file_title))
-                elif file.getId() == 'toprep02_2001.pdf':
-                    res_add('\n<file_title>European Topic Centre on Inland Waters. Annual topic update 2000. Topic report No 2/2001</file_title>')
-                elif file.getId() == 'Topic_5_2002.pdf':
-                    res_add('\n<file_title>Emissions of atmospheric pollutants in Europe, 1990-99</file_title>')
-                elif file.getId() == 'Topic_7.pdf':
-                    res_add('\n<file_title>Greenhouse gas emission trends in Europe, 1990-2000</file_title>')
-                elif file.getId() == 'topic_4.pdf':
-                    res_add('\n<file_title>Air quality in Europe. State and trends 1990-99</file_title>')
-                elif file.absolute_url() in file_exceptions:
-                    res_add('\n<file_title>%s</file_title>' % unicode(formatExport(file_title), 'ISO-8859-15').encode('utf-8'))
-                else:
-                    res_add('\n<file_title>%s</file_title>' % formatExport(file_title).encode('utf-8'))
+            if report.series_year == -1 and not lang.language in ['bg', 'el']:
+                res_add('\n<file_title>%s</file_title>' % container.unescape(unicode(formatExport(file_title), 'iso-8859-15')).encode('utf8')) #text
+            elif report.series_year == -1 and lang.language == 'el':
+                res_add('\n<file_title>%s</file_title>' % container.unescape(unicode(formatExport(file_title), 'iso-8859-7')).encode('utf8')) #text
+            else:
+                try:
+                    res_add('\n<file_title>%s</file_title>' % container.unescape(formatExport(file_title)).encode('utf-8'))
+                except:
+                    if file.getId() in ['TR-SCP-chapter-final-web.pdf', 'ET-SCP-chapter_final-web.pdf', 'FI-SCP-chapter_final-web.pdf']:
+                        try:
+                            res_add('\n<file_title>%s</file_title>' % file.getId())
+                        except:
+                            res_add('\n<file_title></file_title>')
+                    elif file.getId() in ['ES-SCP-chapter-final-web.pdf', 'PT-SCP-chapter-final-web.pdf']:
+                        res_add('\n<file_title>%s</file_title>' % formatExport(file_title))
+                    elif file.getId() == 'toprep02_2001.pdf':
+                        res_add('\n<file_title>European Topic Centre on Inland Waters. Annual topic update 2000. Topic report No 2/2001</file_title>')
+                    elif file.getId() == 'Topic_5_2002.pdf':
+                        res_add('\n<file_title>Emissions of atmospheric pollutants in Europe, 1990-99</file_title>')
+                    elif file.getId() == 'Topic_7.pdf':
+                        res_add('\n<file_title>Greenhouse gas emission trends in Europe, 1990-2000</file_title>')
+                    elif file.getId() == 'topic_4.pdf':
+                        res_add('\n<file_title>Air quality in Europe. State and trends 1990-99</file_title>')
+                    elif file.absolute_url() in file_exceptions:
+                        res_add('\n<file_title>%s</file_title>' % unicode(formatExport(file_title), 'ISO-8859-15').encode('utf-8'))
+                    else:
+                        try:
+                            res_add('\n<file_title>%s</file_title>' % formatExport(file_title).encode('utf-8'))
+                        except:
+                            res_add('\n<file_title>%s</file_title>' % formatExport(file_title))
 
             res_add('\n</zope_file>')
 
@@ -854,3 +940,12 @@ for report in exported_reports:
 res_add('\n</reports>')
 print ''.join(res)
 return printed
+
+#TODO: check this for unclosed &# entities
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/ru -> reporttile, sort_title
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/ru/kiev_sum_ru.pdf -> file_title
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/cs/kiev_cs.pdf -> report_file_title
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/sk -> reporttile
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/sk/kiev_sk.pdf -> report_file_title
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/pl -> reporttitle
+#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/pl/kiev_pl.pdf -> file_title

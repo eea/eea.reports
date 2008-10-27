@@ -113,11 +113,13 @@
 
         <!-- Additional files content -->
         <tal:foldercontents define="
-            folderContents python:here.getFolderContents({'portal_type': 'File'});"
-            condition="folderContents">
+            fileItems python:here.getFolderContents({'portal_type': 'File'});
+            folderItems python:here.getFolderContents({'portal_type':'Folder'});
+            objectItems python:fileItems or folderItems;"
+            condition="objectItems">
         <h2>Additional content - Free download</h2>
-        <ul>
-            <li tal:repeat="item folderContents">
+        <ul metal:define-macro="folderish">
+            <li tal:repeat="item fileItems">
             <tal:file define="
                 item_type item/portal_type;
                 item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
@@ -135,6 +137,23 @@
                 </a>
                 <span tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
+            </li>
+            <li tal:repeat="folder folderItems">
+                <tal:folder define="
+                    folder folder/getObject|folder;
+                    folder_title folder/pretty_title_or_id;
+                    folder_type folder/portal_type;">
+                    <a tal:attributes="href folder/absolute_url; title folder_title">
+                        <img tal:define="icon python:folder.getIcon(1)"
+                            tal:attributes="src string:${portal_url}/${icon}" alt="folder_title" />
+                        <span tal:content="folder_title" />
+                    </a>
+                    <tal:block define="
+                        fileItems python:folder.getFolderContents({'portal_type': 'File'});
+                        folderItems python:folder.getFolderContents({'portal_type': 'Folder'});">
+                       <ul metal:use-macro="here/report_view/macros/folderish" />
+                    </tal:block>
+                </tal:folder>
             </li>
         </ul>
         </tal:foldercontents>

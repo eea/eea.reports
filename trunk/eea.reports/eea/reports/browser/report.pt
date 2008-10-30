@@ -255,6 +255,8 @@
             <div tal:content="structure oe_value">Order extra text</div>
         </tal:order_extra>
         </tal:order>
+
+        <!-- Trailer -->
         <tal:trailer define="
             tr_field python:here.getField('trailer');
             tr_value python:tr_field.getAccessor(here)();">

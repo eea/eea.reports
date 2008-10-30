@@ -81,14 +81,14 @@ class SchemaExtender(object):
                 schemata='report',
                 languageIndependent=False,
                 widget=atapi.StringWidget(
-                    label = _(u'label_order_id', default=u'Order ID'),
+                    label = _(u'label_order_id', default=u'ORDER ID (Catalogue Number)'),
                     description=_(u'description_order_id', default=u'Fill in the Order ID of this publication.'),
                     i18n_domain='eea.reports',
                 ),
             ),
             ReportBooleanField('for_sale',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 default=False,
                 widget=atapi.BooleanWidget(
                     label = _(u'label_for_sale', default=u'For sale?'),
@@ -149,6 +149,7 @@ class SchemaExtender(object):
             ReportLinesField('publication_groups',
                 schemata='report',
                 vocabulary=NamedVocabulary("publications_groups"),
+                languageIndependent=True,
                 widget=atapi.InAndOutWidget(
                     label=_(u'label_publication_groups', default=u'Publication groups'),
                     description=_(u'description_publication_groups', default=u'Fill in publication groups'),
@@ -157,7 +158,7 @@ class SchemaExtender(object):
             ),
             ReportFloatField('price',
                 schemata='report',
-                languageIndependent=True,
+                languageIndependent=False,
                 default=0,
                 widget=atapi.DecimalWidget(
                     label=_(u'label_price', default=u'Price'),

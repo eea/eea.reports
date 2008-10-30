@@ -68,10 +68,6 @@ def generate_image(obj, evt):
     """ EVENT
         called on objectmodified. Tries to generate the cover image.
     """
-    # Make sure we execute this only on the canonical
-    if obj != obj.getCanonical():
-        return
-
     generator = getUtility(IPDFCoverImage)
     image = generator.generate(evt.data)
     if not image:
@@ -101,8 +97,15 @@ def report_initialized(obj, evt):
         called when a Report content-type were added. COnvert it to folder
         and subtype as report.
     """
-    if evt.portal_type != 'Report':
-        return
-    obj.portal_type = 'Folder'
     subtyper = getUtility(ISubtyper)
-    subtyper.change_type(obj, 'eea.reports.FolderReport')
+    canonical = obj.getCanonical()
+
+    # Object added
+    if obj == canonical and evt.portal_type == 'Report':
+        obj.portal_type = 'Folder'
+        return subtyper.change_type(obj, 'eea.reports.FolderReport')
+
+    # Object translated
+    if subtyper.existing_type(canonical).name == 'eea.reports.FolderReport':
+        obj.portal_type = 'Folder'
+        return subtyper.change_type(obj, 'eea.reports.FolderReport')

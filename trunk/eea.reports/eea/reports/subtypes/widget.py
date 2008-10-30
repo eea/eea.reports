@@ -17,10 +17,10 @@ class SerialTitleWidget(TypesWidget):
                      emptyReturnsMarker=False, validating=True):
         """ process form """
         name = field.getName()
-        report_type = form.get('%s_type' % name, empty_marker)
-        report_number = form.get('%s_number' % name, empty_marker)
-        report_year = form.get('%s_year' % name, empty_marker)
-        report_alt = form.get('%s_alt' % name, empty_marker)
+        report_type = form.get('%s_type' % name, '')
+        report_number = form.get('%s_number' % name, 0)
+        report_year = form.get('%s_year' % name, -1)
+        report_alt = form.get('%s_alt' % name, '')
         if report_alt:
             return (u'N/A', 0, -1, report_alt), {}
         return (report_type, report_number, report_year, u''), {}

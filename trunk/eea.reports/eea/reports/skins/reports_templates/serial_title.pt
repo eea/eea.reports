@@ -17,7 +17,7 @@
 ">
   <div tal:condition="report_alt" tal:content="report_alt" />
   <div tal:condition="not:report_alt">
-    <span tal:content="python:here.translate(
+    <span tal:content="python:report_type and here.translate(
       types.getMsgId(report_type), default=types.getValue(report_type))" />
     <span tal:content="string:No ${report_num}" tal:condition="report_num"/>
     <span tal:content="string:/${report_year}" tal:condition="report_year"/>

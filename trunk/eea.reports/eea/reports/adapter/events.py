@@ -106,6 +106,7 @@ def report_initialized(obj, evt):
         return subtyper.change_type(obj, 'eea.reports.FolderReport')
 
     # Object translated
-    if subtyper.existing_type(canonical).name == 'eea.reports.FolderReport':
+    subtype = subtyper.existing_type(canonical)
+    if getattr(subtype, 'name', None) == 'eea.reports.FolderReport':
         obj.portal_type = 'Folder'
         return subtyper.change_type(obj, 'eea.reports.FolderReport')

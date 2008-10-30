@@ -44,7 +44,7 @@ class SerialTitleField(ObjectField):
         value = ObjectField.get(self, instance, **kwargs) or ()
         data = [encode(v, instance, **kwargs) for v in value]
         return tuple(data)
-    
+
     security.declarePrivate('getRaw')
     def getRaw(self, instance, **kwargs):
         return self.get(instance, **kwargs)

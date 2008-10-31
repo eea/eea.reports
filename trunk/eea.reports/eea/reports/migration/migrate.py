@@ -175,7 +175,9 @@ class MigrateReports(object):
            subtyper.existing_type(report).name != 'eea.reports.FolderReport':
             subtyper.change_type(report, 'eea.reports.FolderReport')
         # Add cover image only in canonical report
-        add_image_file(report, datamodel.get('cover_image_file'))
+        cover_image_file = grab_file_from_url(
+            datamodel.get('cover_image_file'), zope=False)
+        add_image_file(report, cover_image_file)
         self.update_properties(report, datamodel)
         return report_id
 
@@ -213,6 +215,8 @@ class MigrateReports(object):
             logger.warn('Could not publish report %s, lang %s: %s',
                         datamodel.getId(), datamodel.get('lang'), err)
         self.update_additional_files_content(report, datamodel)
+        self.update_chapters(report, datamodel)
+        self.update_images(report, datamodel)
         ctool.reindexObject(report)
 
     def update_additional_files_content(self, report, datamodel):
@@ -248,6 +252,51 @@ class MigrateReports(object):
                             doc.absolute_url(1), err)
             # Reindex
             ctool.reindexObject(doc)
+
+    def update_chapters(self, report, datamodel):
+        """ Add additional chapters
+        """
+        chapters = datamodel.get('chapters', {})
+        ctool = getToolByName(self.context, 'portal_catalog')
+        wftool = getToolByName(self.context, 'portal_workflow')
+        chapter_keys = chapters.keys()
+        chapter_keys.sort()
+        for doc_id in chapter_keys:
+            value = chapters[doc_id]
+            doc_id = doc_id.replace('%20', '_')
+            if doc_id not in report.objectIds():
+                logger.debug('Add report: %s chapter: %s',
+                             report.absolute_url(1), doc_id)
+                doc_id = report.invokeFactory('Document', id=doc_id)
+            doc = getattr(report, doc_id)
+            logger.debug('Update chapter %s properties', doc.absolute_url(1))
+            # Update content
+            content = len(value) > 1 and value[1] or ''
+            if content:
+                doc.processForm(data=1, metadata=1, values={'text': content})
+            # Update title
+            title = len(value) > 0 and value[0] or doc_id
+            if title:
+                doc.setTitle(title)
+            # Publish
+            try:
+                wftool.doActionFor(doc, 'publish',
+                    comment='Auto published by migration script.')
+            except Exception, err:
+                logger.warn('Could not publish chapter %s: %s',
+                            doc.absolute_url(1), err)
+            # Reindex
+            ctool.reindexObject(doc)
+
+    def update_images(self, report, datamodel):
+        """ Add additional chapters
+        """
+        images = datamodel.get('images', {})
+        for img_id, img_url in images.items():
+            logger.debug('Add report: %s image: %s',
+                         report.absolute_url(1), img_id)
+            img = grab_file_from_url(img_url, zope=False)
+            add_image_file(report, img, img_id, '')
     #
     # Browser interface
     #
@@ -256,6 +305,6 @@ class MigrateReports(object):
         index = 0
         for index, report in enumerate(get_reports(REPORTS_XML)):
             self.add_report(container, report)
-        msg = '%d language reports imported !' % index
+        msg = '%d language reports imported !' % (index + 1)
         logger.info(msg)
         return self._redirect(msg)

@@ -113,13 +113,36 @@
 
         <!-- Additional files content -->
         <tal:foldercontents define="
-            fileItems python:here.getFolderContents({'portal_type': 'File'});
-            folderItems python:here.getFolderContents({'portal_type':'Folder'});
-            objectItems python:fileItems or folderItems;"
+            fileItems python:here.getFolderContents({'portal_type': ['File', 'Folder']});
+            pageItems python:here.getFolderContents({'portal_type':'Document'});
+            objectItems python:fileItems or pageItems;"
             condition="objectItems">
-        <h2>Additional content - Free download</h2>
+        <h2>Additional content</h2>
+        <ul tal:condition="pageItems">
+            <li tal:repeat="item pageItems">
+                <tal:file define="
+                    item_type item/portal_type;
+                    item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+                    item_wf_state_class  python:'state-' + normalizeString(item_wf_state);
+                    item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+                    item_object item/getObject|item;
+                    item_title_or_id item/pretty_title_or_id;">
+                    <a tal:attributes="
+                        class item_wf_state_class;
+                        href item_object/absolute_url;
+                        title item_title_or_id">
+                        <img tal:define="icon python:item_object.getIcon(1)"
+                            tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
+                        <span tal:content="item_title_or_id" />
+                    </a>
+                </tal:file>
+            </li>
+        </ul>
+
+        <tal:default condition="not:pageItems">
         <ul metal:define-macro="folderish">
-            <li tal:repeat="item fileItems">
+        <tal:fileitems repeat="item fileItems">
+            <li tal:condition="python:item.portal_type=='File'">
             <tal:file define="
                 item_type item/portal_type;
                 item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
@@ -138,8 +161,9 @@
                 <span tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
             </li>
-            <li tal:repeat="folder folderItems">
+            <li tal:condition="python:item.portal_type=='Folder'">
                 <tal:folder define="
+                    folder item;
                     folder folder/getObject|folder;
                     folder_title folder/pretty_title_or_id;
                     folder_type folder/portal_type;">
@@ -149,13 +173,14 @@
                         <span tal:content="folder_title" />
                     </a>
                     <tal:block define="
-                        fileItems python:folder.getFolderContents({'portal_type': 'File'});
-                        folderItems python:folder.getFolderContents({'portal_type': 'Folder'});">
+                        fileItems python:folder.getFolderContents({'portal_type': ['File', 'Folder']});">
                        <ul metal:use-macro="here/report_view/macros/folderish" />
                     </tal:block>
                 </tal:folder>
             </li>
+        </tal:fileitems>
         </ul>
+        </tal:default>
         </tal:foldercontents>
 
         <!-- Additional links content -->

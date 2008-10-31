@@ -51,7 +51,7 @@ def _restrict_subobjects(evt, rtype=-1):
 #
 # Generate cover image
 #
-def add_image_file(obj, image):
+def add_image_file(obj, image, image_id='cover', image_title='Cover Image'):
     """ Util method used to add an image to given object.
 
     @param obj: a portal object
@@ -59,10 +59,10 @@ def add_image_file(obj, image):
     """
     if not image:
         return
-    if 'cover' not in obj.objectIds():
-        obj.invokeFactory('Image', id='cover', title='Cover Image')
-    cover = obj._getOb('cover')
-    cover.getField('image').getMutator(cover)(image)
+    if image_id not in obj.objectIds():
+        image_id = obj.invokeFactory('Image', id=image_id, title=image_title)
+    img_obj = obj._getOb(image_id)
+    img_obj.getField('image').getMutator(img_obj)(image)
 
 def generate_image(obj, evt):
     """ EVENT

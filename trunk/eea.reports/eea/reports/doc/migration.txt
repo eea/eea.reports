@@ -56,13 +56,8 @@ Cover image:
 
     >>> cover_en = report_en.get('cover_image_file')
     >>> cover_ru = report_ru.get('cover_image_file')
-    >>> isinstance(cover_en, str)
-    True
-    >>> isinstance(cover_ru, str)
-    True
-    >>> data = cover_ru
-    >>> data[:10]
-    '\xff\xd8\xff\xe0\x00\x10JFIF'
+    >>> cover_ru
+    u'http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover'
 
 PDF File:
     >>> file_en = report_en.get('file')
@@ -103,8 +98,21 @@ Themes:
 
 Chapers:
 
-    >>> report_en.get('chapters')
-    [u'Group 1: Combustion in energy and transformation industries', u'Group 2: Non-industrial combustion plants']
+    >>> chapters = report_en.get('chapters')
+    >>> chapters.keys()
+    [u'page010.html', u'page011.html']
+    >>> chapters['page010.html'][0]
+    u'Group 1: Combustion in energy and transformation industries'
+    >>> chapters['page011.html'][0]
+    u'Group 2: Non-industrial combustion plants'
+
+Images:
+
+    >>> images = report_ru.get('images', {})
+    >>> images.keys()
+    [u'ieeplogo.gif', u'fig110.gif']
+    >>> images['ieeplogo.gif']
+    u'http://reports.eea.europa.eu/92-827-4083-8/en/ieeplogo.gif'
 
 Other properties:
 

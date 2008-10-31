@@ -16,17 +16,14 @@ class Report(object):
             @param lang:                              String;
             @param title:                             String;
             @param description:                       String;
-            @param file                               Tuple;
+            @param file                               Dict;
             @param relatedItems:                      Tuple;
-            @param cover_image_file:                  ImageFile;
+            @param cover_image_file:                  URL;
             @param author:                            String;
             @param isbn:                              String;
             @param order_id:                          String;
             @param for_sale:                          Boolean;
-            @param chapters:                          Tuple;
-            @param metadata_upload:                   File;
-            @param owner_password:                    String;
-            @param user_password:                     String;
+            @param chapters:                          Dict;
             @param serial_title_type:                 String;
             @param serial_title_number:               Integer;
             @param serial_title_year:                 String;
@@ -44,6 +41,7 @@ class Report(object):
             @param trailer:                           String;
             @param effectiveDate                      String
             @param expirationDate                     String;
+            @param images                             Dict;
         """
         pass
 
@@ -93,6 +91,10 @@ class zreports_handler(ContentHandler):
         self.__language_report_context = 0
         self.__language_report_current = ''
         self.__chapter_context = 0
+        self.__image_context = 0
+        self.__images = {}
+        self.__image_data = []
+        self.__chapters = {}
         self.__chapter_titles = []
         self.__report_files = {}
         self.__report_file_data = []
@@ -120,6 +122,10 @@ class zreports_handler(ContentHandler):
 
         if name == 'zope_file':
             self.__report_file_data.append(attrs['url'])
+
+        if name == 'zope_image':
+            self.__image_context = 1
+            self.__image_data.append(attrs['url'])
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 0
@@ -168,8 +174,7 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text'))
             self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
             cover_image_url = self.__report_current.get('rep_cover_image')
-            cover_image_file = grab_file_from_url(cover_image_url, zope=False)
-            self.__language_report_current.set('cover_image_file', cover_image_file)
+            self.__language_report_current.set('cover_image_file', cover_image_url)
             self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
             creators = self.__report_current.get('creators').replace('\n', '').split('###')
             creators = [x.strip() for x in creators if x.strip()]
@@ -188,19 +193,47 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('file', self.__report_files)
 
             #add language report to results
-            self.__language_report_current.set('chapters', self.__chapter_titles)
+            self.__language_report_current.set('chapters', self.__chapters)
+
+            #add images
+            self.__language_report_current.set('images', self.__images)
+
             self.__reports.append(self.__language_report_current)
             self.__language_report_context = ''
 
-            self.__chapter_titles = []
             self.__report_files = {}
-
+        #
+        # Report chapter
+        #
         if name == 'report_chapter':
+            self.__chapters[self.__chapter_titles[0]] = (self.__chapter_titles[1], self.__chapter_titles[2])
+            self.__chapter_titles = []
             self.__chapter_context = 0
+
+        if name == 'id' and self.__chapter_context:
+            data = u''.join(self.__data).strip()
+            self.__chapter_titles.append(data)
 
         if name == 'title' and self.__chapter_context:
             data = u''.join(self.__data).strip()
             self.__chapter_titles.append(data)
+
+        if name == 'content' and self.__chapter_context:
+            data = u''.join(self.__data).strip()
+            self.__chapter_titles.append(data)
+        #
+        # Zope image
+        #
+        if name == 'zope_image':
+            zid = self.__image_data[1]
+            zurl =  self.__image_data[0]
+            self.__images[zid] = zurl
+            self.__image_data = []
+            self.__image_context = 0
+
+        if name == 'id' and self.__image_context:
+            data = u''.join(self.__data).strip()
+            self.__image_data.append(data)
 
         if name in REPORT_SUB_OBJECTS:
             self.__report_context = 1

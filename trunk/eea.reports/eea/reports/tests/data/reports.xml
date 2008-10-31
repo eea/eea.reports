@@ -323,6 +323,12 @@ Group 1: Combustion in energy and transformation industries
 <file_title>chapter5.pdf</file_title>
 <content_type>application/pdf</content_type>
 </zope_file>
+<zope_image url="http://reports.eea.europa.eu/92-827-4083-8/en/fig110.gif">
+<id><![CDATA[fig110.gif]]></id>
+</zope_image>
+<zope_image url="http://reports.eea.europa.eu/92-827-4083-8/en/ieeplogo.gif">
+<id><![CDATA[ieeplogo.gif]]></id>
+</zope_image>
 </language_report>
 </report>
 </reports>

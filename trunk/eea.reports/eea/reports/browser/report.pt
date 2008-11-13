@@ -117,7 +117,7 @@
             pageItems python:here.getFolderContents({'portal_type':'Document'});
             objectItems python:fileItems or pageItems;"
             condition="objectItems">
-        <h2>Additional content</h2>
+        <h2>Content</h2>
         <ul tal:condition="pageItems">
             <li tal:repeat="item pageItems">
                 <tal:file define="
@@ -258,9 +258,12 @@
 
             <div style="float:left" class="publicationOrderButton">
                <a href=""
+                      tal:define="eubookshop_link python:oid_value and 
+                          'http://bookshop.europa.eu/eGetRecords?Template=Test_EUB/en_publication_details&CATNBR=%s' % oid_value.replace('-', '') or
+                          'http://bookshop.europa.eu/eGetRecords?Template=en_search_identifiers'"
                       target="_blank"
                       alt="Order a printed copy at EU-Bookshop"
-                      tal:attributes="href string:http://bookshop.europa.eu/eGetRecords?Template=en_search_identifiers" >
+                      tal:attributes="href eubookshop_link" >
                           <img src="eu_bookshop.gif"
                                alt="EU Bookshop: You can order a printed copy of this document"
                                title="EU Bookshop: You can order a printed copy of this document">
@@ -270,7 +273,8 @@
         </div>
         <div>
             <strong i18n:translate="nearst_locations_label">You can also obtain a copy from</strong>
-            <a href="/sales_agent_redirect" i18n:translate="nearst_locations_link">your nearest sales agent</a>
+            <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
+              i18n:translate="nearst_locations_link">your nearest sales agent</a>
         </div>
         </tal:order_default>
         <tal:order_override tal:condition="oo_value">

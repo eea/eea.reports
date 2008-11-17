@@ -28,9 +28,7 @@
         mode string:view;
 ">
 
-    <h1>
-        <span tal:replace="here/Title">Title of the Publication</span>
-    </h1>
+    <h1 tal:content="here/pretty_title_or_id">Title of the Publication</h1>
     <div class="documentActions languages">
         <tal:lang tal:condition="exists: here/global_languageselector">
             <metal:lang use-macro="here/global_languageselector/macros/language" />
@@ -85,7 +83,7 @@
             <tal:publishdate metal:use-macro="here/document_byline/macros/publishdate" />
         </div>
 
-        <p class="documentByLine"> Published by: </p>
+        <p class="documentByLine" i18n:translate="published_by_label"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
             publishers python:field.getAccessor(here)();
@@ -111,7 +109,7 @@
             objectItems python:rsize or fileItems"
             condition="objectItems">
 
-        <h2>Content</h2>
+        <h2 i18n:translate="publication_content">Content</h2>
         <ul tal:condition="rsize">
             <li>
                 <a tal:attributes="href string:${here/absolute_url}/at_download/file">
@@ -168,7 +166,7 @@
         <tal:foldercontents define="
             folderContents python:here.getFolderContents({'portal_type': 'Link'});"
             condition="folderContents">
-        <h2>Links</h2>
+        <h2 i18n:translate="publication_links">Links</h2>
         <ul>
             <li tal:repeat="item folderContents">
             <tal:link define="

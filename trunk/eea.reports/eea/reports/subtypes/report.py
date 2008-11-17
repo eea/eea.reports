@@ -49,7 +49,6 @@ class SchemaExtender(object):
     _fields = [
             ReportFileField('file',
                 schemata='default',
-                required=True,
                 validators=('newFileUpload',),
                 languageIndependent=False,
                 widget=atapi.FileWidget(

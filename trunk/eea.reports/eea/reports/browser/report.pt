@@ -85,19 +85,6 @@
             <tal:publishdate metal:use-macro="here/document_byline/macros/publishdate" />
         </div>
 
-        <div class="publicationFile" tal:define="
-            field python:here.getField('file');
-            value python:field.getAccessor(here)()"
-            tal:condition="python:value and value.get_size()">
-
-            <a href="" tal:attributes="href string:${here/absolute_url}/at_download/file">
-                <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
-                <strong i18n:domain="eea.reports"
-                       i18n:translate="label_download_full_publication">Download the full publication as PDF</strong>
-            </a>
-            <span tal:content="python:'[%s]' % value.getObjSize(value)" />
-        </div>
-
         <p class="documentByLine"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
@@ -113,11 +100,24 @@
 
         <!-- Additional files content -->
         <tal:foldercontents define="
+            rfile python:here.getField('file');
+            rfilename python:rfile.getFilename(here) or here.pretty_title_or_id();
+            rvalue python:rfile.getAccessor(here)();
+            rsize python:rvalue and rvalue.get_size();
             fileItems python:here.getFolderContents({'portal_type': ['File', 'Folder']});
             pageItems python:here.getFolderContents({'portal_type':'Document'});
-            objectItems python:fileItems or pageItems;"
+            objectItems python:rsize or fileItems or pageItems;"
             condition="objectItems">
         <h2>Content</h2>
+        <ul tal:condition="rsize">
+        <li>
+            <a tal:attributes="href string:${here/absolute_url}/at_download/file">
+                <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+                <span tal:content="rfilename" />
+            </a>
+            <span tal:content="python:'[%s]' % rvalue.getObjSize(rvalue)" />
+        </li>
+        </ul>
         <ul tal:condition="pageItems">
             <li tal:repeat="item pageItems">
                 <tal:file define="
@@ -258,7 +258,7 @@
 
             <div style="float:left" class="publicationOrderButton">
                <a href=""
-                      tal:define="eubookshop_link python:oid_value and 
+                      tal:define="eubookshop_link python:oid_value and
                           'http://bookshop.europa.eu/eGetRecords?Template=Test_EUB/en_publication_details&CATNBR=%s' % oid_value.replace('-', '') or
                           'http://bookshop.europa.eu/eGetRecords?Template=en_search_identifiers'"
                       target="_blank"

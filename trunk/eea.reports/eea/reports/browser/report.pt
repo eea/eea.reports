@@ -104,45 +104,27 @@
             rfilename python:rfile.getFilename(here) or here.pretty_title_or_id();
             rvalue python:rfile.getAccessor(here)();
             rsize python:rvalue and rvalue.get_size();
-            fileItems python:here.getFolderContents({'portal_type': ['File', 'Folder']});
             pageItems python:here.getFolderContents({'portal_type':'Document'});
-            objectItems python:rsize or fileItems or pageItems;"
+            fileItems python:pageItems and
+                here.getFolderContents({'portal_type': ['Document', 'Folder']}) or
+                here.getFolderContents({'portal_type': ['File', 'Folder']});
+            objectItems python:rsize or fileItems"
             condition="objectItems">
+
         <h2>Content</h2>
         <ul tal:condition="rsize">
-        <li>
-            <a tal:attributes="href string:${here/absolute_url}/at_download/file">
-                <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
-                <span tal:content="rfilename" />
-            </a>
-            <span tal:content="python:'[%s]' % rvalue.getObjSize(rvalue)" />
-        </li>
-        </ul>
-        <ul tal:condition="pageItems">
-            <li tal:repeat="item pageItems">
-                <tal:file define="
-                    item_type item/portal_type;
-                    item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
-                    item_wf_state_class  python:'state-' + normalizeString(item_wf_state);
-                    item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
-                    item_object item/getObject|item;
-                    item_title_or_id item/pretty_title_or_id;">
-                    <a tal:attributes="
-                        class item_wf_state_class;
-                        href item_object/absolute_url;
-                        title item_title_or_id">
-                        <img tal:define="icon python:item_object.getIcon(1)"
-                            tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
-                        <span tal:content="item_title_or_id" />
-                    </a>
-                </tal:file>
+            <li>
+                <a tal:attributes="href string:${here/absolute_url}/at_download/file">
+                    <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+                    <span tal:content="rfilename" />
+                </a>
+                <span tal:content="python:'[%s]' % rvalue.getObjSize(rvalue)" />
             </li>
         </ul>
 
-        <tal:default condition="not:pageItems">
         <ul metal:define-macro="folderish">
         <tal:fileitems repeat="item fileItems">
-            <li tal:condition="python:item.portal_type=='File'">
+            <li tal:condition="python:item.portal_type in ['File', 'Document']">
             <tal:file define="
                 item_type item/portal_type;
                 item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
@@ -158,7 +140,8 @@
                         tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
                     <span tal:content="item_title_or_id" />
                 </a>
-                <span tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
+                <span tal:condition="python:item_type == 'File'"
+                    tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
             </li>
             <li tal:condition="python:item.portal_type=='Folder'">
@@ -172,15 +155,13 @@
                             tal:attributes="src string:${portal_url}/${icon}" alt="folder_title" />
                         <span tal:content="folder_title" />
                     </a>
-                    <tal:block define="
-                        fileItems python:folder.getFolderContents({'portal_type': ['File', 'Folder']});">
+                    <tal:block define="fileItems folder/getFolderContents;">
                        <ul metal:use-macro="here/report_view/macros/folderish" />
                     </tal:block>
                 </tal:folder>
             </li>
         </tal:fileitems>
         </ul>
-        </tal:default>
         </tal:foldercontents>
 
         <!-- Additional links content -->

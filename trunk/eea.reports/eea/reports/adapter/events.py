@@ -5,6 +5,7 @@ from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from zope.component import getUtility
 from p4a.subtyper.interfaces import ISubtyper
 from eea.reports.config import REPORT_SUBOBJECTS
+from eea.reports.vocabulary import ReportThemesVocabulary
 #
 # Debug
 #
@@ -76,6 +77,17 @@ def generate_image(obj, evt):
 #
 # Parse pdf metadata
 #
+def _get_themes_from_keywords(instance, keywords):
+    """ Match keywords with themes vocabulary
+    """
+    if not keywords:
+        return []
+    vocab = ReportThemesVocabulary()
+    all_themes = vocab.getDisplayList(instance)
+    keywords = set([x.lower() for x in keywords])
+    res = set([key for key, value in all_themes if value.lower() in keywords])
+    return tuple(res)
+
 def parse_metadata(obj, evt):
     """ EVENT
         called on new file upload. Tries to import pdf metadata.
@@ -84,6 +96,13 @@ def parse_metadata(obj, evt):
     metadata = pdfparser.parse(evt.data.read())
     if not metadata:
         return
+
+    # Get themes from keywords
+    keywords = metadata.get('subject', ())
+    themes = _get_themes_from_keywords(obj, keywords)
+    if themes:
+        metadata['themes'] = themes
+
     for key, value in metadata.items():
         field = obj.getField(key)
         if not field:

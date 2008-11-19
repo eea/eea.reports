@@ -52,7 +52,17 @@ class PDFParser(object):
             metadata['description'] = description
 
         # Fix subject
-        metadata.pop('subject', '')
+        keywords = metadata.pop('keywords', ())
+        if keywords:
+            if isinstance(keywords, str) or isinstance(keywords, unicode):
+                if keywords.find(';') != -1:
+                    keywords = keywords.split(';')
+                elif keywords.find(',') != -1:
+                    keywords = keywords.split(',')
+            keywords = [x.strip() for x in keywords if x.strip()]
+            metadata['subject'] = keywords
+        else:
+            metadata.pop('subject', '')
 
         return metadata
 

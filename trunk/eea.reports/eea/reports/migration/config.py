@@ -17,4 +17,5 @@ DEFAULT_FILE = {
     'en/technical_report_2008_7': 'technical_report_2008_7/en/LRTAP-Convention-final_for_www.pdf',
 }
 
-REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
+#REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
+REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports?report_year=2008&report_from=1&report_to=2'

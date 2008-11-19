@@ -35,7 +35,9 @@ class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
 class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
     """ """
     def set(self, instance, value, **kwargs):
-        if value and value != "DELETE_FILE":
+        is_value = value and value != "DELETE_FILE"
+        migration = kwargs.pop('_migration_', False)
+        if is_value and not migration:
             notify(FileUploadedEvent(instance, value))
         atapi.FileField.set(self, instance, value, **kwargs)
 

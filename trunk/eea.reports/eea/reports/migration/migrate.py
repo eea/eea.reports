@@ -16,6 +16,7 @@ from eea.reports.migration.zReports.parser import (
     grab_file_from_url,
     get_file_upload
 )
+from eea.reports.config import PUBLICATIONS_SUBOBJECTS
 from config import DEFAULT_FILE, REPORTS_XML
 import logging
 logger = logging.getLogger('eea.reports.migration')
@@ -50,6 +51,9 @@ class MigrateReports(object):
             site.invokeFactory('Folder',
                                id='publications', title='Publications')
         publications = getattr(site, 'publications')
+        publications.setConstrainTypesMode(1)
+        publications.setImmediatelyAddableTypes(PUBLICATIONS_SUBOBJECTS)
+        publications.setLocallyAllowedTypes(PUBLICATIONS_SUBOBJECTS)
 
         # Add default language folder: en
         if 'en' not in publications.objectIds():
@@ -141,7 +145,7 @@ class MigrateReports(object):
         # Update pdf metadata
         mupdater = getUtility(IPDFMetadataUpdater)
         data = mupdater.update(data, datamodel(all=True))
-        datamodel.set('file_file', get_file_upload(data, filename, ctype))
+        datamodel.set('report_file', get_file_upload(data, filename, ctype))
 
         # Return
         return datamodel
@@ -205,6 +209,15 @@ class MigrateReports(object):
         form = datamodel()
         report.processForm(data=1, metadata=1, values=form)
         report.setTitle(datamodel.get('title', ''))
+        report_file = datamodel.get('report_file', None)
+        if report_file:
+            file_field = report.getField('file')
+            kwargs = {
+                'field': file_field.__name__,
+                '_migration_': True
+            }
+            file_field.getMutator(report)(report_file, **kwargs)
+
         # Publish
         wftool = getToolByName(self.context, 'portal_workflow')
         ctool = getToolByName(self.context, 'portal_catalog')

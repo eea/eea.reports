@@ -48,11 +48,14 @@ Installation
     yum install xpdf (fedora)
     apt-get install xpdf (debian)
 
-  * Optional: pdftk and imagemagicks convert to generate a
-    cover image from a pdf file
+  * Optional: pdftk and ImageMagick (6.3.7+) convert to generate a
+    cover image from a pdf file.
 
     yum install pdftk (fedora)
     apt-get install pdftk (debian)
+
+    yum install ImageMagick
+    apt-get install imagemagick
 
 Documentation
 

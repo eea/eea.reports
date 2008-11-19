@@ -2,7 +2,7 @@
 <object name="Report"
    meta_type="Factory-based Type Information with dynamic views"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Report</property>
+ <property name="title">Publication</property>
  <property
     name="description">A report publication.</property>
  <property name="content_icon">report_icon.gif</property>

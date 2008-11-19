@@ -34,11 +34,14 @@
             <metal:lang use-macro="here/global_languageselector/macros/language" />
         </tal:lang>
     </div>
+    <div class="visualClear">&nbsp;</div>
     <div class="documentDescription" tal:define="
         field python:here.getField('serial_title');
+        empty python:field.is_empty(here);
         serial_title python:field.getAccessor(here)();
         serial_alt python:len(serial_title) > 3 and serial_title[3];
-        vocab python:field.Vocabulary(here);">
+        vocab python:field.Vocabulary(here);"
+        tal:condition="not:empty">
         <tal:serial_alt condition="serial_alt" replace="serial_alt" />
         <tal:serial_title condition="not:serial_alt" tal:define="
             report_type python:len(serial_title) and serial_title[0];
@@ -231,7 +234,10 @@
                                for python:price_field.widget.Label(here);
                                title python:price_field.widget.Label(here)"
                            tal:content="python:price_field.widget.Label(here)"></label>:
-                    <span tal:content="python:'EUR %.02f' % (price_value or 0)" />
+                    <span tal:condition="price_value"
+                        tal:content="python:'EUR %.02f' % price_value" />
+                    <span tal:condition="not:price_value"
+                        tal:content="string:FREE" />
                 </div>
             </div>
 

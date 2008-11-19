@@ -49,6 +49,23 @@ class SerialTitleField(ObjectField):
     def getRaw(self, instance, **kwargs):
         return self.get(instance, **kwargs)
 
+    security.declarePublic('is_empty')
+    def is_empty(self, instance, **kwargs):
+        """ Check if serial title is set or not.
+        """
+        value = self.get(instance, **kwargs)
+        if not value:
+            return True
+        if len(value) < 4:
+            return True
+
+        # Alt title is not empty
+        if value[3]:
+            return False
+        elif value[0] and value[0] != 'N/A':
+            return False
+        return True
+
     security.declarePublic('get_size')
     def get_size(self, instance):
         """Get size of the stored data used for get_size in BaseObject

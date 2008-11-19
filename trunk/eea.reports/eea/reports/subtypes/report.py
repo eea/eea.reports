@@ -1,5 +1,6 @@
 """ Subtyping
 """
+from zope.event import notify
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
@@ -10,6 +11,7 @@ from eea.reports.config import COPYRIGHTS
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 from eea.reports.subtypes.field import SerialTitleField
 from eea.reports.subtypes.widget import SerialTitleWidget
+from eea.reports.events import FileUploadedEvent
 
 class ExtensionFieldMixin:
     def translationMutator(self, instance):
@@ -32,6 +34,10 @@ class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
     """ """
+    def set(self, instance, value, **kwargs):
+        if value and value != "DELETE_FILE":
+            notify(FileUploadedEvent(instance, value))
+        atapi.FileField.set(self, instance, value, **kwargs)
 
 class ReportImageField(ExtensionField, ExtensionFieldMixin, atapi.ImageField):
     """ """
@@ -49,7 +55,6 @@ class SchemaExtender(object):
     _fields = [
             ReportFileField('file',
                 schemata='default',
-                validators=('newFileUpload',),
                 languageIndependent=False,
                 widget=atapi.FileWidget(
                     label = _(u'label_report_file', default=u'Report File'),
@@ -160,7 +165,7 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 default=0,
                 widget=atapi.DecimalWidget(
-                    label=_(u'label_price', default=u'Price'),
+                    label=_(u'label_price', default=u'Price (Euro)'),
                     description=_(u'description_price', default=u'Fill in publication price'),
                     i18n_domain='eea.reports',
                 ),

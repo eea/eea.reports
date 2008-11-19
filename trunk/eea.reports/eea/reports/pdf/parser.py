@@ -43,8 +43,17 @@ class PDFParser(object):
         elif metadata.has_key('creationdate'):
             metadata['effectiveDate'] = metadata.pop('creationdate')
 
+        # Fix description
+
+        description = metadata.pop('description', metadata.get('subject', ''))
+        if isinstance(description, tuple) or isinstance(description, list):
+            description = ' '.join([x.strip() for x in description])
+        if description:
+            metadata['description'] = description
+
         # Fix subject
         metadata.pop('subject', '')
+
         return metadata
 
     def _parse(self, pdf):

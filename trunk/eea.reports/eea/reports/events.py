@@ -12,9 +12,10 @@ class FileUploadedEvent(object):
     """Sent if a new file was uploaded."""
     implements(IFileUploadedEvent)
 
-    def __init__(self, context, data):
+    def __init__(self, context, data, update_main=False):
         self.object = context
         self.data = data
+        self.update_main = update_main
 
 class IObjectPortalTypeChanged(IObjectEvent):
     """ Objects portal_type changed

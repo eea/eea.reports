@@ -48,8 +48,9 @@ class PDFParser(object):
         description = metadata.pop('description', metadata.get('subject', ''))
         if isinstance(description, tuple) or isinstance(description, list):
             description = ' '.join([x.strip() for x in description])
-        if description:
-            metadata['description'] = description
+        if not description:
+            description = ' '
+        metadata['description'] = description
 
         # Fix subject
         keywords = metadata.pop('keywords', ())

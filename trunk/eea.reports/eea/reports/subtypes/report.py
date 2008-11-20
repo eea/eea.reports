@@ -32,15 +32,6 @@ class ReportLinesField(ExtensionField, ExtensionFieldMixin, atapi.LinesField):
 class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
     """ """
 
-class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
-    """ """
-    def set(self, instance, value, **kwargs):
-        is_value = value and value != "DELETE_FILE"
-        migration = kwargs.pop('_migration_', False)
-        if is_value and not migration:
-            notify(FileUploadedEvent(instance, value))
-        atapi.FileField.set(self, instance, value, **kwargs)
-
 class ReportImageField(ExtensionField, ExtensionFieldMixin, atapi.ImageField):
     """ """
 
@@ -50,6 +41,35 @@ class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
 class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleField):
     """ """
 
+class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
+    """ """
+    def set(self, instance, value, **kwargs):
+        is_value = value and value != "DELETE_FILE"
+
+        # Handle update title and description checkbox
+        update_main = kwargs.pop('_update_main_', False)
+
+        # Handle migration
+        migration = kwargs.pop('_migration_', False)
+        if is_value and not migration:
+            notify(FileUploadedEvent(instance, value, update_main))
+
+        atapi.FileField.set(self, instance, value, **kwargs)
+
+class ReportFileWidget(atapi.FileWidget):
+    """ """
+    def process_form(self, instance, field, form, **kwargs):
+        """ """
+        res = atapi.FileWidget.process_form(self, instance, field, form, **kwargs)
+        if not res:
+            return res
+        value, res = res
+
+        meta = form.get('%s_update_meta_input' % field.getName(), None)
+        if meta:
+            res['_update_main_'] = True
+        return value, res
+
 class SchemaExtender(object):
     """ Schema extender
     """
@@ -58,9 +78,11 @@ class SchemaExtender(object):
             ReportFileField('file',
                 schemata='default',
                 languageIndependent=False,
-                widget=atapi.FileWidget(
-                    label = _(u'label_report_file', default=u'Report File'),
+                widget=ReportFileWidget(
+                    label = _(u'label_report_file', default=u'Publication file'),
                     description=_(u'description_report_file', default=u'Fill in the publication file'),
+                    helper_js = ('widgets/update_metadata.js',),
+                    macro='widgets/report_file',
                     i18n_domain='eea.reports',
                 ),
             ),

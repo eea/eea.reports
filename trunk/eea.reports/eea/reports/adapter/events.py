@@ -103,6 +103,11 @@ def parse_metadata(obj, evt):
     if themes:
         metadata['themes'] = themes
 
+    update_main = evt.update_main
+    if not update_main:
+        metadata.pop('title', None)
+        metadata.pop('description', None)
+
     for key, value in metadata.items():
         field = obj.getField(key)
         if not field:

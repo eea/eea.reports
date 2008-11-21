@@ -1,13 +1,8 @@
 """ Migrate old zope reports to plone.
 """
-from zope.event import notify
 from p4a.subtyper.interfaces import ISubtyper
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
-from Products.LinguaPlone import config
-from Products.CMFPlone.utils import _createObjectByType
-from Products.LinguaPlone import events
-from zExceptions import BadRequest
 from Products.statusmessages.interfaces import IStatusMessage
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
 from eea.reports.adapter.events import add_image_file
@@ -32,7 +27,6 @@ class MigrateReports(object):
         """ Set status message and redirect to context absolute_url
         """
         context = getattr(self.context, 'publications', self.context)
-        context = getattr(context, 'en', context)
         url = context.absolute_url()
         IStatusMessage(self.request).addStatusMessage(msg, type='info')
         self.request.response.redirect(url)
@@ -55,50 +49,28 @@ class MigrateReports(object):
         publications.setImmediatelyAddableTypes(PUBLICATIONS_SUBOBJECTS)
         publications.setLocallyAllowedTypes(PUBLICATIONS_SUBOBJECTS)
 
-        # Add default language folder: en
-        if 'en' not in publications.objectIds():
-            publications.invokeFactory('Folder', id='en', title='Publications')
-        en = getattr(publications, 'en')
-        canonical = en.getCanonical()
-
-        # Add translation folders for en
+        # Add translation folders for publications
         langs = publications.portal_languages.getSupportedLanguages()
         for lang in langs:
-            beforeevent = events.ObjectWillBeTranslatedEvent(en, lang)
-            notify(beforeevent)
-            kwargs[config.KWARGS_TRANSLATION_KEY] = canonical
-            kwargs['language'] = lang
-            kwargs['title'] = en.Title()
-            try:
-                ob = _createObjectByType(en.portal_type, publications,
-                                         lang, *args, **kwargs)
-            except BadRequest:
+            if lang == 'en':
                 continue
-
-            ob.setExcludeFromNav(True)
+            if not publications.getTranslation(lang):
+                publications.addTranslation(lang)
+            translated = publications.getTranslation(lang)
             try:
-                wftool.doActionFor(ob, 'publish')
+                wftool.doActionFor(translated, 'publish')
             except Exception, err:
-                logger.warn('Could not publish %s: %s', ob.absolute_url(1), err)
+                logger.warn('Could not publish %s: %s',
+                            translated.absolute_url(1), err)
+        publications.invalidateTranslationCache()
 
-            if ob.getCanonical() != canonical:
-                ob.addTranslationReference(canonical)
-            ctool.reindexObject(ob)
-
-        en.invalidateTranslationCache()
         # Publish folders
-        try:
-            wftool.doActionFor(en, 'publish')
-        except Exception, err:
-            logger.warn('Could not publish %s: %s', en.absolute_url(1), err)
         try:
             wftool.doActionFor(publications, 'publish')
         except Exception, err:
             logger.warn('Could not publish %s: %s',
                         publications.absolute_url(1), err)
-        # Reindex objects
-        ctool.reindexObject(en)
-        ctool.reindexObject(publications)
+
         # Returns
         return publications
     #
@@ -159,16 +131,18 @@ class MigrateReports(object):
         lang = datamodel.get('lang')
 
         # Add translation for existing reports
+        langs = context.portal_languages.getSupportedLanguages()
         canonical = None
-        for lang_folder in context.objectValues():
-            if report_id in lang_folder.objectIds():
-                canonical = getattr(lang_folder, report_id).getCanonical()
+        for portal_lang in langs:
+            pub_tr = context.getTranslation(portal_lang)
+            if report_id in pub_tr.objectIds():
+                canonical = getattr(pub_tr, report_id).getCanonical()
                 break
         if canonical:
             return self.add_translation(canonical, datamodel)
 
         # Add report if it doesn't exists
-        context = getattr(context, lang)
+        context = context.getTranslation(lang)
         if report_id not in context.objectIds():
             logger.info('Adding report id: %s lang: %s', report_id, lang)
             report_id = context.invokeFactory('Folder', id=report_id)

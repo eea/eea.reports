@@ -4,53 +4,64 @@ Update old reports attached pdf files metadata from zope objects properties
 
 Data to test
 ============
+    >>> metadata = {'allowDiscussion': False,
+    ... 'authors_str': 'EEA',
+    ... 'constrainTypesMode': 1,
+    ... 'contributors': (),
+    ... 'copyrights': '(c) Copyrights - EEA (European Environment Agency)',
+    ... 'creators_keywords': ('EEA',),
+    ... 'description': '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f',
+    ... 'eeaid': 0,
+    ... 'excludeFromNav': False,
+    ... 'expirationDate': None,
+    ... 'for_sale': False,
+    ... 'id': '627644646638627645',
+    ... 'immediatelyAddableTypes': ('File', 'Link', 'Folder', 'Image', 'Document'),
+    ... 'isbn': 'SDFHSDJKFSDGHJ344354353',
+    ... 'keywords': (
+    ...        '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f',
+    ...        '\xd0\x92\xd1\x81\xd0\xb5\xd0\xb1\xd0\xb0\xd0\xbb\xd1\x82\xd0\xb8\xd0\xb9\xd1\x81\xd0\xba\xd0\xb8\xd0\xb9',
+    ...        'M\xc3\xa5lungdom',
+    ...        's\xc3\xad\xc3\xb0unni',
+    ...        'v\xc3\xbdpo\xc4\x8dtovou',
+    ...        'poi\xc5\xa1\xc4\x8di',
+    ...        'm\xc3\xa5lr\xc3\xb8rsla',
+    ...        '\xd8\xa7\xd9\x84\xd9\x86\xd8\xb8\xd8\xa7\xd9\x85',
+    ...        '\xc3\xa1skrifendu',
+    ...        'S\xc3\xa1rv\xc3\xa1r',
+    ...        'Edici\xc3\xb3n',
+    ...        'l\xc3\xb6yt\xc3\xa4m\xc3\xa4\xc3\xa4n',
+    ...        'Le\xc3\xb3n',
+    ...        '\xd1\x85\xd1\x83\xd0\xb4\xd0\xbe\xd0\xb6\xd0\xb5\xd1\x81\xd1\x82\xd0\xb2\xd0\xb5\xd0\xbd\xd0\xbd\xd0\xb0\xd1\x8f',
+    ...        'Confedera\xc3\xa7\xc3\xa3o',
+    ...        'oportunit\xc4\x83\xc5\xa3i',
+    ...        'Na\xc5\x82\xc4\x99cz\xc3\xb3w',
+    ...       '\xc3\x87ocuk Poliklini\xc4\x9fi',
+    ...        'K\xc3\xb6ln',
+    ...        '\xe1\x8b\xa8\xe1\x8a\xa2\xe1\x8d\x8c\xe1\x8b\xb2\xe1\x88\xaa'),
+    ... 'keywords_str': '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f; \xd0\x92\xd1\x81\xd0\xb5\xd0\xb1\xd0\xb0\xd0\xbb\xd1\x82\xd0\xb8\xd0\xb9\xd1\x81\xd0\xba\xd0\xb8\xd0\xb9; M\xc3\xa5lungdom; s\xc3\xad\xc3\xb0unni; v\xc3\xbdpo\xc4\x8dtovou; poi\xc5\xa1\xc4\x8di; m\xc3\xa5lr\xc3\xb8rsla; \xd8\xa7\xd9\x84\xd9\x86\xd8\xb8\xd8\xa7\xd9\x85; \xc3\xa1skrifendu; S\xc3\xa1rv\xc3\xa1r; Edici\xc3\xb3n; l\xc3\xb6yt\xc3\xa4m\xc3\xa4\xc3\xa4n; Le\xc3\xb3n; \xd1\x85\xd1\x83\xd0\xb4\xd0\xbe\xd0\xb6\xd0\xb5\xd1\x81\xd1\x82\xd0\xb2\xd0\xb5\xd0\xbd\xd0\xbd\xd0\xb0\xd1\x8f; Confedera\xc3\xa7\xc3\xa3o; oportunit\xc4\x83\xc5\xa3i; Na\xc5\x82\xc4\x99cz\xc3\xb3w; \xc3\x87ocuk Poliklini\xc4\x9fi; K\xc3\xb6ln; \xe1\x8b\xa8\xe1\x8a\xa2\xe1\x8d\x8c\xe1\x8b\xb2\xe1\x88\xaa; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas',
+    ... 'lang': 'en',
+    ... 'locallyAllowedTypes': ('File', 'Link', 'Folder', 'Image', 'Document'),
+    ... 'order_extra_text': '',
+    ... 'order_id': 'SDFDRTWEYTUIOTYRWEUTIRE',
+    ... 'order_override_text': '',
+    ... 'pages': 4,
+    ... 'price': 0.0,
+    ... 'publication_groups': (),
+    ... 'publishers_keywords': ('EEA (European Environment Agency)',),
+    ... 'publishers_str': 'EEA (European Environment Agency)',
+    ... 'relatedItems': [],
+    ... 'rights': '',
+    ... 'serial_title': ('N/A', 0, -1, ''),
+    ... 'serial_title_str': ' 0/1970',
+    ... 'themes': ['Air pollution',
+    ...            'Biodiversity',
+    ...            'Chemicals',
+    ...            'Climate change',
+    ...            'Coasts and seas'],
+    ... 'title': '\xd9\x85\xd8\xac\xd8\xa7\xd9\x84 \xd8\xa7\xd9\x84\xd9\x85\xd9\x8a\xd8\xa7\xd9\x87',
+    ... 'trailer': ''}
 
-    >>> metadata = {'author': u'',
-    ...  'catalogue': u'TH-78-07-127-RU-C',
-    ...  'chapters': [],
-    ...  'copyrights': u'EEA, Copenhagen 2007',
-    ...  'cover_image_file': '',
-    ...  'creators_existing_keywords': [u'EEA (European Environment Agency)'],
-    ...  'creators_keywords': [u'Additional Sample Creator'],
-    ...  'description': u'\u0417\u0430\u0449\u0438\u0442\u0430',
-    ...  'eeaid': 1605,
-    ...  'effectiveDate': u'2007/10/10 10:00:00 GMT+2',
-    ...  'expirationDate': u'2099/12/31',
-    ...  'file': {},
-    ...  'for_sale': True,
-    ...  'id': u'state_of_environment_report_2007_1',
-    ...  'isbn': u'978-92-9167-933-1',
-    ...  'lang': u'ru',
-    ...  'language': u'ru',
-    ...  'order_extra_text': u'',
-    ...  'order_id': u'TH-78-07-127-RU-C',
-    ...  'order_override_text': u'',
-    ...  'pages': 452,
-    ...  'price': u'50',
-    ...  'publishers_existing_keywords': [u'EEA (European Environment Agency)',
-    ...                                   u'OPOCE (Office for Official Publications of the European Communities)'],
-    ...  'publishers_keywords': ['Sample Publisher'],
-    ...  'reporttitle': u'\u0417\u0430\u0449\u0438\u0442\u0430',
-    ...  'serial_title_alt': u'',
-    ...  'serial_title_number': 1,
-    ...  'serial_title_type': u'Conseil g\xe9n\xe9ral des Bouches-du-Rh\xf4ne',
-    ...  'serial_title_year': 2007,
-    ...  'themes': [u'agriculture',
-    ...             u'air',
-    ...             u'air_quality',
-    ...             u'biodiversity',
-    ...             u'chemicals',
-    ...             u'climate',
-    ...             u'coast_sea',
-    ...             u'energy',
-    ...             u'human',
-    ...             u'soil',
-    ...             u'tourism',
-    ...             u'transport',
-    ...             u'waste',
-    ...             u'water'],
-    ...  'title': u'\u0627\u0644\u0646\u0634\u0631\u0629 \u0627\u0644\u0634\u0647\u0631\u064a\u0629 58 - \u0641\u0644\u0627\u0634',
-    ...  'trailer': u''}
     >>> from eea.reports.pdf.interfaces import IPDFMetadataUpdater
     >>> from zope.component import getUtility
     >>> updater = getUtility(IPDFMetadataUpdater)
@@ -78,33 +89,33 @@ update pdfs properties.
     >>> print updater._process_metadata(metadata)
     <BLANKLINE>
     InfoKey: Title
-    InfoValue: &#1575;&#1604;&#1606;&#1588;&#1585;&#1577; &#1575;&#1604;&#1588;&#1607;&#1585;&#1610;&#1577; 58 - &#1601;&#1604;&#1575;&#1588;
+    InfoValue: &#1605;&#1580;&#1575;&#1604; &#1575;&#1604;&#1605;&#1610;&#1575;&#1607;
     InfoKey: Subject
-    InfoValue: &#1047;&#1072;&#1097;&#1080;&#1090;&#1072;
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;
     InfoKey: Keywords
-    InfoValue: agriculture; air; air_quality; biodiversity; chemicals; climate; coast_sea; energy; human; soil; tourism; transport; waste; water
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;; &#1042;&#1089;&#1077;&#1073;&#1072;&#1083;&#1090;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;; M&#229;lungdom; s&#237;&#240;unni; v&#253;po&#269;tovou; poi&#353;&#269;i; m&#229;lr&#248;rsla; &#1575;&#1604;&#1606;&#1592;&#1575;&#1605;; &#225;skrifendu; S&#225;rv&#225;r; Edici&#243;n; l&#246;yt&#228;m&#228;&#228;n; Le&#243;n; &#1093;&#1091;&#1076;&#1086;&#1078;&#1077;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103;; Confedera&#231;&#227;o; oportunit&#259;&#355;i; Na&#322;&#281;cz&#243;w; &#199;ocuk Poliklini&#287;i; K&#246;ln; &#4840;&#4770;&#4940;&#4850;&#4650;; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas
     InfoKey: Creator
-    InfoValue: EEA (European Environment Agency); Additional Sample Creator
+    InfoValue: EEA
     InfoKey: Producer
     InfoValue: reports.eea.europa.eu
     InfoKey: Authors
-    InfoValue: EEA (European Environment Agency); Additional Sample Creator
+    InfoValue: EEA
     InfoKey: Publishers
-    InfoValue: EEA (European Environment Agency); OPOCE (Office for Official Publications of the European Communities); Sample Publisher
+    InfoValue: EEA (European Environment Agency)
     InfoKey: ISBN
-    InfoValue: 978-92-9167-933-1
+    InfoValue: SDFHSDJKFSDGHJ344354353
     InfoKey: OrderId
-    InfoValue: TH-78-07-127-RU-C
+    InfoValue: SDFDRTWEYTUIOTYRWEUTIRE
     InfoKey: Copyrights
-    InfoValue: EEA, Copenhagen 2007
+    InfoValue: (c) Copyrights - EEA (European Environment Agency)
     InfoKey: Language
-    InfoValue: ru
+    InfoValue: en
     InfoKey: Price
-    InfoValue: 50
+    InfoValue: 0.0
     InfoKey: SerialTitle
-    InfoValue: Conseil g&#233;n&#233;ral des Bouches-du-Rh&#244;ne 1/2007
+    InfoValue:  0/1970
     InfoKey: Themes
-    InfoValue: agriculture; air; air_quality; biodiversity; chemicals; climate; coast_sea; energy; human; soil; tourism; transport; waste; water
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;; &#1042;&#1089;&#1077;&#1073;&#1072;&#1083;&#1090;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;; M&#229;lungdom; s&#237;&#240;unni; v&#253;po&#269;tovou; poi&#353;&#269;i; m&#229;lr&#248;rsla; &#1575;&#1604;&#1606;&#1592;&#1575;&#1605;; &#225;skrifendu; S&#225;rv&#225;r; Edici&#243;n; l&#246;yt&#228;m&#228;&#228;n; Le&#243;n; &#1093;&#1091;&#1076;&#1086;&#1078;&#1077;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103;; Confedera&#231;&#227;o; oportunit&#259;&#355;i; Na&#322;&#281;cz&#243;w; &#199;ocuk Poliklini&#287;i; K&#246;ln; &#4840;&#4770;&#4940;&#4850;&#4650;; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas
     <BLANKLINE>
 
 Update pdf metadata

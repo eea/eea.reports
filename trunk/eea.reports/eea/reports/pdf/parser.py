@@ -23,14 +23,21 @@ class PDFParser(object):
         else:
             return metadata
 
+    def _split(self, text):
+        if not (isinstance(text, str) or isinstance(text, unicode)):
+            return text
+        if text.find(';') != -1:
+            return [x.strip() for x in text.split(';') if x.strip()]
+        return [x.strip() for x in text.split(',') if x.strip()]
+
     def _fix_metadata(self, metadata):
         """ Update metadata dict
         """
         # Fix authors
         if metadata.has_key('author'):
-            metadata['creators'] = metadata.pop('author', '').split(',')
+            metadata['creators'] = self._split(metadata.pop('author', ''))
         if metadata.has_key('creator'):
-            creator = metadata.pop('creator', '').split(',')
+            creator = self._split(metadata.pop('creator', ''))
             metadata.setdefault('creators', [])
             metadata['creators'].extend([
                 x for x in creator if x not in metadata['creators']])
@@ -44,8 +51,7 @@ class PDFParser(object):
             metadata['effectiveDate'] = metadata.pop('creationdate')
 
         # Fix description
-
-        description = metadata.pop('description', metadata.get('subject', ''))
+        description = metadata.pop('subject', metadata.get('description', ''))
         if isinstance(description, tuple) or isinstance(description, list):
             description = ' '.join([x.strip() for x in description])
         if not description:
@@ -55,12 +61,7 @@ class PDFParser(object):
         # Fix subject
         keywords = metadata.pop('keywords', ())
         if keywords:
-            if isinstance(keywords, str) or isinstance(keywords, unicode):
-                if keywords.find(';') != -1:
-                    keywords = keywords.split(';')
-                elif keywords.find(',') != -1:
-                    keywords = keywords.split(',')
-            keywords = [x.strip() for x in keywords if x.strip()]
+            keywords = self._split(keywords)
             metadata['subject'] = keywords
         else:
             metadata.pop('subject', '')
@@ -110,14 +111,15 @@ class PDFParser(object):
             logger.error(error)
             return metadata
 
+        result = result.replace('  ', ' ').replace('\r\n', '\n')
         res_list = result.splitlines()
         new_metadata = [[r.strip() for r in x.split(':', 1)]
                         for x in res_list]
         new_metadata = dict((x[0].lower(), x[1]) for x in new_metadata
                             if len(x) == 2)
-        new_metadata.update(metadata)
+        metadata.update(new_metadata)
         #
         # Fix some metadata
         #
-        metadata = self._fix_metadata(new_metadata)
+        metadata = self._fix_metadata(metadata)
         return metadata

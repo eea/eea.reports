@@ -111,7 +111,10 @@ class PDFMetadataUpdater(object):
         [...]
         """
         # Process list/tuple metadata
-        metadata['keywords_str'] = '; '.join(metadata.get('themes', []))
+        keywords = list(metadata.get('keywords', []))
+        themes = list(metadata.get('themes', []))
+        keywords.extend([x for x in themes if x not in keywords])
+        metadata['keywords_str'] = '; '.join(keywords)
 
         authors = metadata.get('creators_existing_keywords', [])
         authors.extend(metadata.get('creators_keywords', []))
@@ -132,14 +135,21 @@ class PDFMetadataUpdater(object):
         # Convert non-ascii chart to html entities
         res = {}
         for key, value in metadata.items():
-            try:
-                value = value.decode()
-            except UnicodeEncodeError, err:
-                value = self._utf2entity(value)
-            except:
-                # Not string or unicode
-                pass
-            res[key] = value
+            if value is None:
+                res[key] = ''
+            elif isinstance(value, int) or isinstance(value, float):
+                res[key] = value
+            elif isinstance(value, str) or isinstance(value, unicode):
+                try:
+                    value = value.decode('utf-8')
+                except UnicodeDecodeError, err:
+                    value = self._utf2entity(value)
+                except Exception, err:
+                    # Not string or unicode
+                    pass
+                else:
+                    value = self._utf2entity(value)
+                res[key] = value
 
         # Return
         return META_TEMPLATE % res

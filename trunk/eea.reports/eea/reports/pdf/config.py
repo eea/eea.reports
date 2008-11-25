@@ -1,7 +1,7 @@
 """ Config variables
 """
 
-META_TEMPLATE = """
+META_TEMPLATE = u"""
 InfoKey: Title
 InfoValue: %(title)s
 InfoKey: Subject

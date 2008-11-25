@@ -56,4 +56,4 @@ class DisplayUploadView(FlashView):
         return can_upload
 
     def __call__(self):
-        return self.os_can_upload
+        return getattr(self, 'os_can_upload', False)

@@ -127,10 +127,16 @@ def report_initialized(obj, evt):
     # Object added
     if obj == canonical and evt.portal_type == 'Report':
         obj.portal_type = 'Folder'
+        obj.setExcludeFromNav(True)
+        # Fix language
+        parent_lang = obj.getParentNode().getLanguage()
+        if obj.getLanguage() != parent_lang:
+            obj.setLanguage(parent_lang)
         return subtyper.change_type(obj, 'eea.reports.FolderReport')
 
     # Object translated
     subtype = subtyper.existing_type(canonical)
     if getattr(subtype, 'name', None) == 'eea.reports.FolderReport':
         obj.portal_type = 'Folder'
+        obj.setExcludeFromNav(True)
         return subtyper.change_type(obj, 'eea.reports.FolderReport')

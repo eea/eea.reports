@@ -179,6 +179,7 @@ class MigrateReports(object):
         """ Update report properties
         """
         logger.info('Update report %s properties', report.absolute_url(1))
+        report.setExcludeFromNav(True)
         datamodel = self._process_datamodel(datamodel)
         form = datamodel()
         report.processForm(data=1, metadata=1, values=form)
@@ -205,6 +206,7 @@ class MigrateReports(object):
         self.update_chapters(report, datamodel)
         self.update_images(report, datamodel)
         ctool.reindexObject(report)
+        ctool.reindexObject(report.getParentNode())
 
     def update_additional_files_content(self, report, datamodel):
         """ Add additional files

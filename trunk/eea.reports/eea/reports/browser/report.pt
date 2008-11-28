@@ -207,12 +207,12 @@
             oe_value        python:oe_field.getAccessor(here)();"
             tal:condition="fs_value">
 
-        <h2 i18n:translate="help_order_id">Order a printed copy of this document</h2>
+        <h2 i18n:translate="help_order_info">Order information</h2>
 
         <tal:order_default condition="not:oo_value">
         <div class="publicationOrder">
             <div class="publicationField" style="float:left">
-                <div>
+                <div tal:condition="isbn_value">
                     <label for="isbn_filed.name" title="The widget's hint"
                            tal:attributes="
                                for python:isbn_filed.widget.Label(here);
@@ -220,7 +220,7 @@
                            tal:content="python:isbn_filed.widget.Label(here)"></label>:
                     <span tal:content="isbn_value" />
                 </div>
-                <div>
+                <div tal:condition="oid_value">
                     <label for="oid_field.name" title="The widget's hint"
                            tal:attributes="
                                for python:oid_field.widget.Label(here);

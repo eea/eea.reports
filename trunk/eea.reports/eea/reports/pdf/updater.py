@@ -52,6 +52,8 @@ class PDFMetadataUpdater(object):
             raise ValueError('Empty pdf file')
 
         metadata = self._process_metadata(metadata)
+        metadata = metadata.encode('utf-8')
+
         if not metadata:
             raise ValueError('Empty metadata provided')
 

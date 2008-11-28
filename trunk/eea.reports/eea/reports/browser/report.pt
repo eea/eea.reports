@@ -67,24 +67,12 @@
         <div class="publicationDescription">
             <strong tal:content="here/Description" />
         </div>
-        <ul class="visualNoMarker relatedLinks publicationThemes"  tal:define="
-            field python:here.getField('themes');
-            themes python:field.getAccessor(here)();
-            vocab python:field.Vocabulary(here);"
-            tal:condition="themes">
-            <li tal:content="python:field.widget.Label(here)" />
-            <li tal:repeat="theme themes">
-                <a tal:define="
-                    have_key python:theme in vocab.keys();
-                    value python:have_key and here.translate(vocab.getMsgId(theme), default=vocab.getValue(theme)) or theme"
-                    tal:attributes="href string:http://www.eea.europa.eu/themes/${theme}; title value"
-                    tal:omit-tag="not:have_key" tal:content="value" />
-                <span tal:condition="not:repeat/theme/end" tal:content="string:|" />
-            </li>
-        </ul>
+
         <div class="discreet">
             <tal:publishdate metal:use-macro="here/document_byline/macros/publishdate" />
         </div>
+
+        <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
 
         <p class="documentByLine" i18n:translate="published_by_label"> Published by: </p>
         <ul tal:define="

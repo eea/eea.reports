@@ -1,10 +1,13 @@
 import logging
 logger = logging.getLogger('eea.reports.subtypes.field')
 
+from persistent.list import PersistentList
 from types import ListType, TupleType, StringType, UnicodeType
 from AccessControl import ClassSecurityInfo
+from zope.app.annotation.interfaces import IAnnotations
+from eea.themecentre.themetaggable import KEY, checkTheme
 from Products.Archetypes.interfaces.vocabulary import IVocabulary
-from Products.Archetypes.atapi import ObjectField
+from Products.Archetypes.atapi import ObjectField, StringField
 from Products.Archetypes.Field import decode, encode
 from Products.Archetypes.utils import DisplayList, mapply, Vocabulary
 from Products.Archetypes.Registry import registerField
@@ -12,6 +15,28 @@ from Products.Archetypes.Registry import registerPropertyType
 from eea.reports.subtypes.widget import SerialTitleWidget
 
 STRING_TYPES = [StringType, UnicodeType]
+
+class ThemesField(StringField):
+    """ Save themes as annotation """
+    def set(self, instance, value, **kwargs):
+        """ Save as annotation
+        """
+        anno = IAnnotations(instance)
+        mapping = anno.get(KEY)
+        themes = list(value)
+        checkTheme(instance, themes)
+        themes = [theme for theme in themes if theme]
+        mapping['themes'] = PersistentList(themes)
+
+    def get(self, instance, **kwargs):
+        """ Get from annotation
+        """
+        anno = IAnnotations(instance)
+        mapping = anno.get(KEY)
+
+        tags = list(mapping[self.getName()])
+        return tags
+
 
 class SerialTitleField(ObjectField):
     """For creating lines objects"""

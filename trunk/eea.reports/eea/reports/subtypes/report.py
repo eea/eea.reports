@@ -9,7 +9,7 @@ from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.field import ExtensionField
 from eea.reports.config import COPYRIGHTS
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
-from eea.reports.subtypes.field import SerialTitleField
+from eea.reports.subtypes.field import SerialTitleField, ThemesField
 from eea.reports.subtypes.widget import SerialTitleWidget
 from eea.reports.events import FileUploadedEvent
 
@@ -39,6 +39,9 @@ class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
     """ """
 
 class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleField):
+    """ """
+
+class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
     """ """
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
@@ -162,10 +165,12 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                 ),
             ),
-            ReportLinesField('themes',
+            ReportThemesField('themes',
                 schemata='report',
+                validators=('maxValues',),
                 vocabulary=ReportThemesVocabulary(),
                 widget=atapi.InAndOutWidget(
+                    maxValues=3,
                     label=_(u'EEAContentTypes_label_themes', default=u'Themes'),
                     description=_(u'EEAContentTypes_help_themes', default=u'Choose publication themes'),
                     i18n_domain='EEAContentTypes',

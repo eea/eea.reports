@@ -9,6 +9,7 @@
     <include package=".browser" />
     <include package=".adapter" />
     <include package=".subtypes" />
+    <include package=".relations" />
     <include file="profiles.zcml" />
 
 </configure>

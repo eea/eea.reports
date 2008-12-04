@@ -44,7 +44,15 @@ font-weight: normal;
 }
 
 .publicationOrderButton {
-margin-left: 20px;
+  margin-left: 20px;
+}
+
+.publicationPortlet {
+  clear:right;
+  float:right;
+  margin-right:0;
+  padding:10px ! important;
+  width:17em;
 }
 
 .publicationBlock { margin-bottom:10px;}

@@ -183,6 +183,7 @@ class SchemaExtender(object):
                 schemata='report',
                 vocabulary=NamedVocabulary("publications_groups"),
                 languageIndependent=True,
+                index="KeywordIndex:brains",
                 widget=atapi.InAndOutWidget(
                     label=_(u'label_publication_groups', default=u'Publication groups'),
                     description=_(u'description_publication_groups', default=u'Fill in publication groups'),

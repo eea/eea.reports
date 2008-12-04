@@ -35,6 +35,19 @@
         </tal:lang>
     </div>
     <div class="visualClear">&nbsp;</div>
+
+    <div class="portalMessage" tal:define="is_replaced view/is_replaced_by"
+        tal:condition="is_replaced">
+        <strong i18n:translate="new_version_available">
+            Note: new versions are available!
+        </strong>
+        <ul>
+            <li tal:repeat="brain is_replaced">
+                <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+            </li>
+        </ul>
+    </div>
+
     <div class="documentDescription" tal:define="
         field python:here.getField('serial_title');
         empty python:field.is_empty(here);
@@ -73,6 +86,14 @@
         </div>
 
         <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
+
+        <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"
+            tal:condition="brains">
+            <dt class="portletHeader" i18n:translate="report_older_versions">Older versions</dt>
+            <dt class="portletItem" tal:repeat="brain brains">
+                <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+            </dt>
+        </dl>
 
         <p class="documentByLine" i18n:translate="published_by_label"> Published by: </p>
         <ul tal:define="

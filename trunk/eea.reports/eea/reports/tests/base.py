@@ -11,10 +11,12 @@ from eea.reports.config import product_globals
 
 # Let Zope know about the two products we require above-and-beyond a basic
 # Plone install (PloneTestCase takes care of these).
+
 ztc.installProduct('PloneLanguageTool')
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('Five')
 ztc.installProduct('FiveSite')
+ztc.installProduct('ATVocabularyManager')
 
 # Import PloneTestCase - this registers more products with Zope as a side effect
 from Products.PloneTestCase.PloneTestCase import PloneTestCase
@@ -64,10 +66,9 @@ def setup_eea_reports():
 
 setup_eea_reports()
 EXTRA_PRODUCTS = [
+    'ATVocabularyManager',
     'PloneLanguageTool',
     'LinguaPlone',
-    'slc.publications',
-    'eea.reports'
 ]
 try:
     import plone.app.blob
@@ -76,7 +77,9 @@ except ImportError, error:
     pass
 else:
     EXTRA_PRODUCTS.append('plone.app.blob')
-setupPloneSite(products=EXTRA_PRODUCTS)
+
+setupPloneSite(products=EXTRA_PRODUCTS,
+               extension_profiles=('eea.reports:default',))
 
 class ReportTestCase(PloneTestCase):
     """Base class for integration tests for the 'Report' product.

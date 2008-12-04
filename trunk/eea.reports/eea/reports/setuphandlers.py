@@ -11,7 +11,12 @@ def installVocabularies(context):
 
     site = context.getSite()
     # Create vocabularies in vocabulary lib
-    atvm = getToolByName(site, ATVOCABULARYTOOL)
+    try:
+        atvm = getToolByName(site, ATVOCABULARYTOOL)
+    except AttributeError:
+        qinstaller = getToolByName(site, 'portal_quickinstaller')
+        qinstaller.installProduct('ATVocabularyManager')
+        atvm = getToolByName(site, ATVOCABULARYTOOL)
     vocabmap = {
         'report_types': ('VdexVocabulary', 'VdexTerm'),
         'report_creators': ('VdexVocabulary', 'VdexTerm'),

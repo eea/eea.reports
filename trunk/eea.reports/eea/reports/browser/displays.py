@@ -1,6 +1,7 @@
 from zope import interface
 from zope import component
 from eea.reports import interfaces
+from eea.reports.relations.interfaces import IGroupRelations
 
 import p4a.z2utils #Patch CMFDynamicViewFTI
 from Products.CMFDynamicViewFTI import interfaces as cmfdynifaces
@@ -12,6 +13,19 @@ except ImportError:
         @property
         def can_upload(self):
             return False
+
+class ReportContainerView(object):
+    """ Default report view
+    """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def is_replaced_by(self):
+        return IGroupRelations(self.context).forward()
+
+    def does_replace(self):
+        return IGroupRelations(self.context).backward()
 
 class ReportContainerDynamicViews(object):
 

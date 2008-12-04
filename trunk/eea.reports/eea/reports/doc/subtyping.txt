@@ -139,7 +139,7 @@ Other properties
     >>> myreport.getField('isbn').getAccessor(myreport)()
     'WETROET-3543-GFSFGDF'
     >>> myreport.getField('themes').getAccessor(myreport)()
-    ('biodiversity', 'agriculture', 'chemicals')
+    ['biodiversity', 'agriculture', 'chemicals']
     >>> myreport.getField('pages').getAccessor(myreport)()
     34
     >>> myreport.getField('trailer').getAccessor(myreport)()

@@ -13,6 +13,7 @@ from Products.Archetypes.utils import DisplayList, mapply, Vocabulary
 from Products.Archetypes.Registry import registerField
 from Products.Archetypes.Registry import registerPropertyType
 from eea.reports.subtypes.widget import SerialTitleWidget
+from eea.themecentre.interfaces import IThemeTagging
 
 STRING_TYPES = [StringType, UnicodeType]
 
@@ -21,22 +22,12 @@ class ThemesField(StringField):
     def set(self, instance, value, **kwargs):
         """ Save as annotation
         """
-        anno = IAnnotations(instance)
-        mapping = anno.get(KEY)
-        themes = list(value)
-        checkTheme(instance, themes)
-        themes = [theme for theme in themes if theme]
-        mapping['themes'] = PersistentList(themes)
+        IThemeTagging(instance).tags = value
 
     def get(self, instance, **kwargs):
         """ Get from annotation
         """
-        anno = IAnnotations(instance)
-        mapping = anno.get(KEY)
-
-        tags = list(mapping[self.getName()])
-        return tags
-
+        return IThemeTagging(instance).tags
 
 class SerialTitleField(ObjectField):
     """For creating lines objects"""

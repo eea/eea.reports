@@ -39,7 +39,8 @@ Installation
    ``/path/to/instance/etc/package-includes`` directory.  The file
    should only contain this::
 
-       <include package="eea.reports" />
+       <include package="eea.reports" file="configure.zcml" />
+       <include package="eea.reports" file="overrides.zcml" />
 
   * use the QuickInstaller to add this product to your Plone site
 

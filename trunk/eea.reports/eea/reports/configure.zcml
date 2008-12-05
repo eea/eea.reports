@@ -10,6 +10,7 @@
     <include package=".adapter" />
     <include package=".subtypes" />
     <include package=".relations" />
+    <include package=".migration" />
     <include file="profiles.zcml" />
 
 </configure>

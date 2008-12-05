@@ -4,6 +4,8 @@ from p4a.subtyper.interfaces import ISubtyper
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
+from zope.app.annotation.interfaces import IAnnotations
+from ZODB.PersistentList import PersistentList
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
 from eea.reports.adapter.events import add_image_file
 from eea.reports.migration.zReports.parser import (
@@ -12,7 +14,11 @@ from eea.reports.migration.zReports.parser import (
     get_file_upload
 )
 from eea.reports.config import PUBLICATIONS_SUBOBJECTS
-from config import DEFAULT_FILE, REPORTS_XML
+from config import (
+    DEFAULT_FILE, REPORTS_XML,
+    ANNOTATION_ISREPLACED, ANNOTATION_REPLACES,
+    REPORTS_CONTAINER
+)
 import logging
 logger = logging.getLogger('eea.reports.migration')
 
@@ -26,7 +32,7 @@ class MigrateReports(object):
     def _redirect(self, msg):
         """ Set status message and redirect to context absolute_url
         """
-        context = getattr(self.context, 'publications', self.context)
+        context = getattr(self.context, REPORTS_CONTAINER, self.context)
         url = context.absolute_url()
         IStatusMessage(self.request).addStatusMessage(msg, type='info')
         self.request.response.redirect(url)
@@ -41,10 +47,10 @@ class MigrateReports(object):
         ctool = getToolByName(self.context, 'portal_catalog')
         site = getattr(self.context, 'SITE', self.context)
         # Add publications folder
-        if 'publications' not in site.objectIds():
+        if REPORTS_CONTAINER not in site.objectIds():
             site.invokeFactory('Folder',
-                               id='publications', title='Publications')
-        publications = getattr(site, 'publications')
+                               id=REPORTS_CONTAINER, title=REPORTS_CONTAINER.title())
+        publications = getattr(site, REPORTS_CONTAINER)
         publications.setConstrainTypesMode(1)
         publications.setImmediatelyAddableTypes(PUBLICATIONS_SUBOBJECTS)
         publications.setLocallyAllowedTypes(PUBLICATIONS_SUBOBJECTS)
@@ -157,6 +163,7 @@ class MigrateReports(object):
             datamodel.get('cover_image_file'), zope=False)
         add_image_file(report, cover_image_file)
         self.update_properties(report, datamodel)
+        self.update_group_relations(report, datamodel)
         return report_id
 
     def add_translation(self, report, datamodel):
@@ -286,6 +293,19 @@ class MigrateReports(object):
                          report.absolute_url(1), img_id)
             img = grab_file_from_url(img_url, zope=False)
             add_image_file(report, img, img_id, '')
+
+    def update_group_relations(self, report, datamodel):
+        """ Update publication groups property
+        """
+        annotations = IAnnotations(report)
+
+        replaces = tuple(datamodel.get('replaces', ()))
+        if replaces:
+            annotations[ANNOTATION_REPLACES] = PersistentList(replaces)
+
+        is_replaced_by = tuple(datamodel.get('is_replaced_by', ()))
+        if is_replaced_by:
+            annotations[ANNOTATION_ISREPLACED] = PersistentList(is_replaced_by)
     #
     # Browser interface
     #

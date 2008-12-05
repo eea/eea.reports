@@ -19,3 +19,8 @@ DEFAULT_FILE = {
 
 #REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
 REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports?report_year=2008&report_from=1&report_to=2'
+
+ANNOTATION_REPLACES = '_replaces_'
+ANNOTATION_ISREPLACED = '_is_replaced_by_'
+
+REPORTS_CONTAINER = 'publications'

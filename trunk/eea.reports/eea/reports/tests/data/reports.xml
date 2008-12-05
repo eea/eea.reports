@@ -62,8 +62,12 @@ The report has been prepared in close partnership with a range of international 
 <IsReferencedBy></IsReferencedBy>
 
 <References></References>
-<IsReplacedBy></IsReplacedBy>
-<Replaces></Replaces>
+<IsReplacedBy>
+http://reports.eea.europa.eu/technical_report_2008_7
+</IsReplacedBy>
+<Replaces>
+http://reports.eea.eu.int/EMEPCORINAIR4###http://reports.eea.eu.int/EMEPCORINAIR3###http://reports.eea.eu.int/technical_report_2001_3
+</Replaces>
 <cover_image url="http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover">
 <id>Cover</id>
 <title></title>

@@ -17,7 +17,7 @@ class Report(object):
             @param title:                             String;
             @param description:                       String;
             @param file                               Dict;
-            @param relatedItems:                      Tuple;
+            @param relatedItems:                      Iterator;
             @param cover_image_file:                  URL;
             @param author:                            String;
             @param isbn:                              String;
@@ -28,11 +28,11 @@ class Report(object):
             @param serial_title_number:               Integer;
             @param serial_title_year:                 String;
             @param serial_title_alt:                  String;
-            @param creators_existing_keywords:        Tuple;
-            @param creators_keywords                  Tuple;
-            @param publishers_existing_keywords:      Tuple;
-            @param publishers_keywords:               Tuple;
-            @param themes:                            Tuple;
+            @param creators_existing_keywords:        Iterator;
+            @param creators_keywords                  Iterator;
+            @param publishers_existing_keywords:      Iterator;
+            @param publishers_keywords:               Iterator;
+            @param themes:                            Iterator;
             @param price:                             Float;
             @param order_override_text:               String;
             @param order_extra_text:                  String;
@@ -42,6 +42,8 @@ class Report(object):
             @param effectiveDate                      String
             @param expirationDate                     String;
             @param images                             Dict;
+            @param replaces                           Iterator;
+            @param is_replaced_by                     Iterator;
         """
         pass
 
@@ -74,9 +76,15 @@ class Report(object):
         return self.id
 
 REPORT_SUB_OBJECTS = ['cover_image', 'redirect', 'tag', 'language_report']
-LANGUAGE_REPORT_SUB_OBJECTS = ['report_chapter', 'report_file', 'report_order', 'report_order2', 'search', 'zope_file', 'zope_image']
+LANGUAGE_REPORT_SUB_OBJECTS = [
+    'report_chapter', 'report_file', 'report_order', 'report_order2',
+    'search', 'zope_file', 'zope_image'
+]
 
-LANGUAGE_REPORT_PROPS = ['reporttitle', 'language', 'description', 'isbn', 'catalogue', 'pages', 'trailer', 'eeaid']
+LANGUAGE_REPORT_PROPS = [
+    'reporttitle', 'language', 'description',
+    'isbn', 'catalogue', 'pages', 'trailer', 'eeaid'
+]
 
 class zreports_handler(ContentHandler):
     """ """
@@ -183,6 +191,17 @@ class zreports_handler(ContentHandler):
             publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
+
+            # Relations
+            replaces = self.__report_current.get('Replaces').replace('\n', '').split('###')
+            replaces = [x.strip() for x in replaces if x.strip()]
+            replaces = set([x.split('/')[-1] for x in replaces])
+            self.__language_report_current.set('replaces', replaces)
+
+            is_replaced_by = self.__report_current.get('IsReplacedBy').replace('\n', '').split('###')
+            is_replaced_by = [x.strip() for x in is_replaced_by if x.strip()]
+            is_replaced_by = set([x.split('/')[-1] for x in is_replaced_by])
+            self.__language_report_current.set('is_replaced_by', is_replaced_by)
 
             # Effective date
             self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate'))

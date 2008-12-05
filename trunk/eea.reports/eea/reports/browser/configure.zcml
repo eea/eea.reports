@@ -16,13 +16,6 @@
   <zope:adapter factory=".displays.ReportContainerDynamicViews" />
 
   <browser:page
-      for="*"
-      name="migrate_reports"
-      class="eea.reports.migration.migrate.MigrateReports"
-      permission="cmf.ModifyPortalContent"
-      />
-
-  <browser:page
       for="eea.reports.interfaces.IReportContainerEnhanced"
       name="can_syncronize"
       class="eea.reports.pdf.syncronize.SyncronizerSupport"

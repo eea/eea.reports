@@ -140,3 +140,10 @@ Other properties:
     0
     >>> report_ru.get('eeaid')
     1605
+
+Relations:
+
+    >>> report_ru.get('replaces')
+    set([u'EMEPCORINAIR4', u'EMEPCORINAIR3', u'technical_report_2001_3'])
+    >>> report_en.get('is_replaced_by')
+    set([u'technical_report_2008_7'])

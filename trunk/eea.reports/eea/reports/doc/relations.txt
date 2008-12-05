@@ -17,12 +17,6 @@ will appear saying "Please note, a new version is available see Report A."
 Group relations
 ===============
 
-Imports
-
-    >>> from p4a.subtyper.interfaces import ISubtyper
-    >>> from zope.component import getUtility
-    >>> subtyper = getUtility(ISubtyper)
-
 Add some reports
 
     >>> self.loginAsPortalOwner()

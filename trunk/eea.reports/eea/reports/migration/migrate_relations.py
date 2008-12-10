@@ -8,7 +8,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 import logging
 logger = logging.getLogger('eea.reports.migration')
 
-class MigrateGroupRelations(object):
+class MigrateRelations(object):
     """ Class used to migrate reports.
     """
     def __init__(self, context, request=None):
@@ -25,7 +25,9 @@ class MigrateGroupRelations(object):
             IStatusMessage(self.request).addStatusMessage(msg, type='info')
             return self.request.response.redirect(url)
         return msg
-
+    #
+    # Group relations
+    #
     def _update_relations(self, container):
         """ Update documents relations
         """
@@ -80,6 +82,39 @@ class MigrateGroupRelations(object):
             logger.info('Update %s publications_groups with %s', doc.getId(), term)
             doc.getField('publication_groups').getMutator(doc)(term)
     #
+    # Inclusion relations
+    #
+    def _update_inclusion_relations(self, container):
+        """ Update inclusion relations
+        """
+        for doc in container.objectValues():
+            self._handle_is_part_of_relation(doc, container)
+            self._handle_has_part_relation(doc, container)
+
+    def _handle_is_part_of_relation(self, doc, parent):
+        """ Handle is part of relation
+        """
+        anno = IAnnotations(doc)
+        is_part = set(anno.pop(config.ANNOTATION_ISPARTOF, []))
+        terms = [getattr(parent, x, None) for x in is_part if x]
+        if not terms:
+            return
+        logger.info('Update %s relatedItems with %s', doc.getId(), terms)
+        doc.getField('relatedItems').getMutator(doc)(terms)
+
+    def _handle_has_part_relation(self, doc, parent):
+        """ Handle has part relation
+        """
+        anno = IAnnotations(doc)
+        has_part = set(anno.pop(config.ANNOTATION_HASPART, []))
+        terms = [getattr(parent, x, None) for x in has_part if x]
+        for term in terms:
+            rels = set(term.getField('relatedItems').getAccessor(term)())
+            rels.add(doc)
+            rels = list(rels)
+            logger.info('Update %s relatedItems with %s', term.getId(), rels)
+            term.getField('relatedItems').getMutator(term)(rels)
+    #
     # Browser interface
     #
     def __call__(self):
@@ -89,6 +124,7 @@ class MigrateGroupRelations(object):
             logger.info(msg)
             return self._redirect(msg)
         self._update_relations(container)
+        self._update_inclusion_relations(container)
 
         msg = 'Publications relations updated !'
         logger.info(msg)

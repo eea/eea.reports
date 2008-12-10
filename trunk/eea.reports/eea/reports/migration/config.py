@@ -22,5 +22,7 @@ REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports?report_year=2008&rep
 
 ANNOTATION_REPLACES = '_replaces_'
 ANNOTATION_ISREPLACED = '_is_replaced_by_'
+ANNOTATION_HASPART = '_haspart_'
+ANNOTATION_ISPARTOF = '_is_part_of_'
 
 REPORTS_CONTAINER = 'publications'

@@ -38,4 +38,8 @@ def test_suite():
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
                   test_class=ReportFunctionalTestCase) ,
+            Suite('doc/migrate_inclusion_relations.txt',
+                  optionflags=OPTIONFLAGS,
+                  package='eea.reports',
+                  test_class=ReportFunctionalTestCase) ,
               ))

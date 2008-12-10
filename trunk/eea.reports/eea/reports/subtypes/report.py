@@ -3,6 +3,8 @@
 from zope.event import notify
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+from Products.OrderableReferenceField._field import OrderableReferenceField
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.Archetypes import atapi
 from zope.interface import implements
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
@@ -13,9 +15,13 @@ from eea.reports.subtypes.field import SerialTitleField, ThemesField
 from eea.reports.subtypes.widget import SerialTitleWidget
 from eea.reports.events import FileUploadedEvent
 
+
 class ExtensionFieldMixin:
     def translationMutator(self, instance):
         return self.getMutator(instance)
+
+class ReportOrderableReferenceField(ExtensionField, ExtensionFieldMixin, OrderableReferenceField):
+    """ """
 
 class ReportStringField(ExtensionField, ExtensionFieldMixin, atapi.StringField):
     """ """
@@ -180,7 +186,7 @@ class SchemaExtender(object):
                 enforceVocabulary=1
             ),
             ReportLinesField('publication_groups',
-                schemata='report',
+                schemata='relations',
                 vocabulary=NamedVocabulary("publications_groups"),
                 languageIndependent=True,
                 index="KeywordIndex:brains",
@@ -188,6 +194,24 @@ class SchemaExtender(object):
                     label=_(u'label_publication_groups', default=u'Publication groups'),
                     description=_(u'description_publication_groups', default=u'Fill in publication groups'),
                     i18n_domain='eea.reports',
+                ),
+            ),
+            ReportOrderableReferenceField('relatedItems',
+                schemata='relations',
+                languageIndependent=True,
+                index = 'KeywordIndex',
+                relationship = 'relatesTo',
+                multiValued = True,
+                isMetadata = True,
+                widget = ReferenceBrowserWidget(
+                    allow_search = True,
+                    allow_browse = True,
+                    allow_sorting = True,
+                    show_indexes = False,
+                    force_close_on_insert = True,
+                    label = _(u'label_related_items', default=u'Related Item(s)'),
+                    description = _(u'help_related_items', default=u''),
+                    i18n_domain = "plone",
                 ),
             ),
             ReportFloatField('price',

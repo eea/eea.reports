@@ -147,3 +147,7 @@ Relations:
     set([u'EMEPCORINAIR4', u'EMEPCORINAIR3', u'technical_report_2001_3'])
     >>> report_en.get('is_replaced_by')
     set([u'technical_report_2008_7'])
+    >>> report_en.get('has_part')
+    set([u'state_of_environment_report_2007_2'])
+    >>> report_ru.get('is_part_of')
+    set([u'EMEPCORINAIR4', u'EMEPCORINAIR3', u'technical_report_2001_3'])

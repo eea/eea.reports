@@ -57,7 +57,7 @@ The report has been prepared in close partnership with a range of international 
 <product_version>2.2</product_version>
 <IsRequiredBy></IsRequiredBy>
 <Requires></Requires>
-<IsPartOf></IsPartOf>
+<IsPartOf>http://reports.eea.eu.int/EMEPCORINAIR4###http://reports.eea.eu.int/EMEPCORINAIR3###http://reports.eea.eu.int/technical_report_2001_3</IsPartOf>
 <HasPart>http://reports.eea.europa.eu/state_of_environment_report_2007_2</HasPart>
 <IsReferencedBy></IsReferencedBy>
 

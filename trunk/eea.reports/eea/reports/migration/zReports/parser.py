@@ -44,6 +44,8 @@ class Report(object):
             @param images                             Dict;
             @param replaces                           Iterator;
             @param is_replaced_by                     Iterator;
+            @param has_part                           Iterator;
+            @param is_part_of                         Iterator;
         """
         pass
 
@@ -202,6 +204,16 @@ class zreports_handler(ContentHandler):
             is_replaced_by = [x.strip() for x in is_replaced_by if x.strip()]
             is_replaced_by = set([x.split('/')[-1] for x in is_replaced_by])
             self.__language_report_current.set('is_replaced_by', is_replaced_by)
+
+            has_part = self.__report_current.get('HasPart').replace('\n', '').split('###')
+            has_part = [x.strip() for x in has_part if x.strip()]
+            has_part = set([x.split('/')[-1] for x in has_part])
+            self.__language_report_current.set('has_part', has_part)
+
+            is_part_of = self.__report_current.get('IsPartOf').replace('\n', '').split('###')
+            is_part_of = [x.strip() for x in is_part_of if x.strip()]
+            is_part_of = set([x.split('/')[-1] for x in is_part_of])
+            self.__language_report_current.set('is_part_of', is_part_of)
 
             # Effective date
             self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate'))

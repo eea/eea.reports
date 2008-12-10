@@ -58,3 +58,26 @@ creation date.
     >>> back = relations_3.backward()
     >>> back[1].getId
     'myreport_2'
+
+Inclusion relations
+===================
+
+    >>> _ = self.folder.invokeFactory('Report', 'report_has_parts')
+    >>> _ = self.folder.invokeFactory('Report', 'report_is_part_of')
+    >>> rep_hp = self.folder.report_has_parts
+    >>> rep_ip = self.folder.report_is_part_of
+    >>> rep_ip.getField('relatedItems').getMutator(rep_ip)(rep_hp)
+
+Let's get in relation
+
+    >>> from Products.EEAContentTypes.interfaces import IRelations
+    >>> res = IRelations(rep_ip).forwardReferences()
+    >>> [x.getId() for x in res]
+    ['report_has_parts']
+    >>> IRelations(rep_hp).forwardReferences()
+    []
+    >>> IRelations(rep_ip).backReferences()
+    []
+    >>> res = IRelations(rep_hp).backReferences()
+    >>> [x.getId() for x in res]
+    ['report_is_part_of']

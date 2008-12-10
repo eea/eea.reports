@@ -17,6 +17,7 @@ from eea.reports.config import PUBLICATIONS_SUBOBJECTS
 from config import (
     DEFAULT_FILE, REPORTS_XML,
     ANNOTATION_ISREPLACED, ANNOTATION_REPLACES,
+    ANNOTATION_HASPART, ANNOTATION_ISPARTOF,
     REPORTS_CONTAINER
 )
 import logging
@@ -164,6 +165,7 @@ class MigrateReports(object):
         add_image_file(report, cover_image_file)
         self.update_properties(report, datamodel)
         self.update_group_relations(report, datamodel)
+        self.update_inclusion_relations(report, datamodel)
         return report_id
 
     def add_translation(self, report, datamodel):
@@ -306,6 +308,19 @@ class MigrateReports(object):
         is_replaced_by = tuple(datamodel.get('is_replaced_by', ()))
         if is_replaced_by:
             annotations[ANNOTATION_ISREPLACED] = PersistentList(is_replaced_by)
+
+    def update_inclusion_relations(self, report, datamodel):
+        """ Update publication related items property
+        """
+        annotations = IAnnotations(report)
+
+        has_part = tuple(datamodel.get('has_part', ()))
+        if has_part:
+            annotations[ANNOTATION_HASPART] = PersistentList(has_part)
+
+        is_part_of = tuple(datamodel.get('is_part_of', ()))
+        if is_part_of:
+            annotations[ANNOTATION_ISPARTOF] = PersistentList(is_part_of)
     #
     # Browser interface
     #

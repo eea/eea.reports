@@ -28,6 +28,7 @@
         mode string:view;
 ">
 
+    <!-- Title -->
     <h1 tal:content="here/pretty_title_or_id">Title of the Publication</h1>
     <div class="documentActions languages">
         <tal:lang tal:condition="exists: here/global_languageselector">
@@ -36,6 +37,7 @@
     </div>
     <div class="visualClear">&nbsp;</div>
 
+    <!-- Information about new versions -->
     <div class="portalMessage" tal:define="is_replaced view/is_replaced_by"
         tal:condition="is_replaced">
         <strong i18n:translate="new_version_available">
@@ -48,6 +50,7 @@
         </ul>
     </div>
 
+    <!-- Serial title -->
     <div class="documentDescription" tal:define="
         field python:here.getField('serial_title');
         empty python:field.is_empty(here);
@@ -67,6 +70,7 @@
         </tal:serial_title>
     </div>
 
+    <!-- Cover image -->
     <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
         tal:condition="cover">
          <div class="figure"><img tal:attributes="
@@ -77,24 +81,58 @@
     </div>
 
     <div class="publicationText">
+        <!-- Description -->
         <div class="publicationDescription">
             <strong tal:content="here/Description" />
         </div>
 
+        <!-- Publication effective date -->
         <div class="discreet">
             <tal:publishdate metal:use-macro="here/document_byline/macros/publishdate" />
         </div>
 
+        <!-- Tags (themes) -->
         <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
 
+        <!-- Older versions -->
         <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"
             tal:condition="brains">
             <dt class="portletHeader" i18n:translate="report_older_versions">Older versions</dt>
             <dt class="portletItem" tal:repeat="brain brains">
-                <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+                <img tal:define="
+                    ptype here/portal_types;
+                    item_type brain/portal_type;
+                    itype python:ptype[item_type];
+                    icon itype/getIcon;"
+                    tal:attributes="src string:${portal_url}/${icon}" />
+                <a tal:attributes="href brain/getPath"
+                   tal:content="brain/Title" />
             </dt>
         </dl>
 
+        <!-- Related items -->
+        <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"
+            tal:define="related context/@@document_related/other"
+            tal:condition="related">
+            <dt class="portletHeader" i18n:translate="label_related_items">Related content</dt>
+            <dt class="portletItem" tal:repeat="item related">
+                <img tal:define="
+                    ptype here/portal_types;
+                    item_type item/item_type;
+                    itype python:ptype[item_type];
+                    icon itype/getIcon;"
+                    tal:attributes="src string:${portal_url}/${icon}" />
+                <a tal:attributes="
+                    href item/url;
+                    title item/description;
+                    class string: ${item/item_wf_state_class}"
+                   tal:content="item/title">
+                    Related Item
+                </a>
+            </dt>
+        </dl>
+
+        <!-- Publishers -->
         <p class="documentByLine" i18n:translate="published_by_label"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
@@ -201,6 +239,7 @@
         </ul>
         </tal:foldercontents>
 
+        <!-- Order information -->
         <tal:order define="
             oid_field       python:here.getField('order_id');
             oid_value       python:oid_field.getAccessor(here)();

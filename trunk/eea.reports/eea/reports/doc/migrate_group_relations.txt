@@ -3,21 +3,20 @@ Overview
 
 Migrate old reports group relations
 
-Prepare some reports
-====================
+Group relations
+===============
 
 Imports and login
 
     >>> from eea.reports.migration.config import REPORTS_CONTAINER, ANNOTATION_REPLACES, ANNOTATION_ISREPLACED
-    >>> from eea.reports.migration.migrate_groups import MigrateGroupRelations
+    >>> from eea.reports.migration.migrate_relations import MigrateRelations
     >>> from zope.app.annotation.interfaces import IAnnotations
     >>> from ZODB.PersistentList import PersistentList
     >>> self.loginAsPortalOwner()
 
-
 Let's see what happends if you run this script before reports migration script
 
-    >>> run = MigrateGroupRelations(self.folder)
+    >>> run = MigrateRelations(self.folder)
     >>> run()
     'You should run @@migrate_reports script first !!!'
 
@@ -70,7 +69,7 @@ Now let's make some virtual relations as migration script does
 
 Now let's run the migration script.
 
-    >>> run = MigrateGroupRelations(self.folder)
+    >>> run = MigrateRelations(self.folder)
     >>> run()
     create vdex term term.a
     create vdex term term.d

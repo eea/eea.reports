@@ -30,11 +30,11 @@ Migrate old reports
 
       http://<portal_url>:<port>/www/SITE/publications
 
-5. After all reports are imported, run @@migrate_group_relations script.
+5. After all reports are imported, run @@migrate_relations script.
 
    For example:
 
-      http://<portal_url>:<port>/www/SITE/@@migrate_group_relations
+      http://<portal_url>:<port>/www/SITE/@@migrate_relations
 
 6. Go to administration section > vocabularies and update publications_groups
    items as these were generated automatically at migration time.

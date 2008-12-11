@@ -1,5 +1,6 @@
 """ Migrate old zope reports to plone.
 """
+from urllib import urlencode
 from p4a.subtyper.interfaces import ISubtyper
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
@@ -11,7 +12,8 @@ from eea.reports.adapter.events import add_image_file
 from eea.reports.migration.zReports.parser import (
     get_reports,
     grab_file_from_url,
-    get_file_upload
+    get_file_upload,
+    cleanup_id
 )
 from eea.reports.config import PUBLICATIONS_SUBOBJECTS
 from config import (
@@ -29,6 +31,20 @@ class MigrateReports(object):
     def __init__(self, context, request=None):
         self.context = context
         self.request = request
+        self.xmlfile = REPORTS_XML
+        if request:
+            query = {}
+            year = self.request.get('year', None)
+            if year:
+                query['report_year'] = year
+            start = self.request.get('start', None)
+            if start:
+                query['report_from'] = start
+            stop = self.request.get('stop', None)
+            if stop:
+                query['report_to'] = stop
+            if query:
+                self.xmlfile = '?'.join((self.xmlfile, urlencode(query)))
 
     def _redirect(self, msg):
         """ Set status message and redirect to context absolute_url
@@ -135,6 +151,7 @@ class MigrateReports(object):
         """ Add new report
         """
         report_id = datamodel.getId()
+        report_id = cleanup_id(report_id)
         lang = datamodel.get('lang')
 
         # Add translation for existing reports
@@ -150,6 +167,7 @@ class MigrateReports(object):
 
         # Add report if it doesn't exists
         context = context.getTranslation(lang)
+
         if report_id not in context.objectIds():
             logger.info('Adding report id: %s lang: %s', report_id, lang)
             report_id = context.invokeFactory('Folder', id=report_id)
@@ -231,7 +249,8 @@ class MigrateReports(object):
             # Add/Edit
             file_obj = grab_file_from_url(file_url, ctype='')
             filename = file_obj.filename
-            doc_id = filename.replace('%20', '_')
+
+            doc_id = cleanup_id(filename)
             if doc_id not in report.objectIds():
                 logger.info('Add report: %s additional file: %s',
                             report.absolute_url(1), doc_id)
@@ -261,7 +280,8 @@ class MigrateReports(object):
         chapter_keys.sort()
         for doc_id in chapter_keys:
             value = chapters[doc_id]
-            doc_id = doc_id.replace('%20', '_')
+
+            doc_id = cleanup_id(doc_id)
             if doc_id not in report.objectIds():
                 logger.debug('Add report: %s chapter: %s',
                              report.absolute_url(1), doc_id)
@@ -327,7 +347,8 @@ class MigrateReports(object):
     def __call__(self):
         container = self._get_container()
         index = 0
-        for index, report in enumerate(get_reports(REPORTS_XML)):
+        logger.info('Import reports using xml file: %s', self.xmlfile)
+        for index, report in enumerate(get_reports(self.xmlfile)):
             self.add_report(container, report)
         msg = '%d language reports imported !' % (index + 1)
         logger.info(msg)

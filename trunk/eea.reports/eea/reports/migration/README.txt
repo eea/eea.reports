@@ -30,6 +30,29 @@ Migrate old reports
 
       http://<portal_url>:<port>/www/SITE/publications
 
+   Note: As there are to many reports to import is indicated to import them in
+   more than one step, for that you can specify year like:
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_reports?year=2008
+
+   For reports that doesn't have year specified you can use 'year=-1'. Also
+   as there are a lot of reports without year specified you can split results
+   adding 'start'index and 'stop' index of reports list. For example:
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_reports?year=-1&start=0&stop=10
+
+   These parameters works only if year is specified. You also can omit one of
+   them, and the results will be everithing from that point, or everithing
+   to that point. For example:
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_reports?year=2008&start=20
+
+   Returns all reports from year 2008 without first 20.
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_reports?year=2008&stop=15
+
+   Returns first 15 reports from year 2008.
+
 5. After all reports are imported, run @@migrate_relations script.
 
    For example:

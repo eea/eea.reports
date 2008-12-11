@@ -335,4 +335,144 @@ Group 1: Combustion in energy and transformation industries
 </zope_image>
 </language_report>
 </report>
+<report>
+<id><![CDATA[briefing_2008_1]]></id>
+<title><![CDATA[Better management of municipal waste will reduce greenhouse gas emissions]]></title>
+<categories><![CDATA[climate###waste]]></categories>
+<weighting>1</weighting>
+<author></author>
+<publisher></publisher>
+<source></source>
+<publishdate><![CDATA[2008/01/31 10:00:00 GMT+1]]></publishdate>
+<updatedate><![CDATA[2008/01/31]]></updatedate>
+<createdate><![CDATA[2008/01/16]]></createdate>
+<released>True</released>
+<reporttype><![CDATA[Briefing]]></reporttype>
+
+<reportnum>1</reportnum>
+<external_url></external_url>
+<order_override>True</order_override>
+<order_override_text></order_override_text>
+<order_extra_text></order_extra_text>
+<expiry_date><![CDATA[2088/12/31]]></expiry_date>
+<version_number></version_number>
+<price_euro>0</price_euro>
+<creators_orgs><![CDATA[EEA (European Environment Agency)   ### ]]></creators_orgs>
+<creators><![CDATA[                                                   ###                                                                               ###                                                   ###                       ]]></creators>
+<publishers_orgs><![CDATA[  ###OPOCE (Office for Official Publications of the European Communities)]]></publishers_orgs>
+<publishers></publishers>
+<coverage_time_from><![CDATA[1900/01/01]]></coverage_time_from>
+<coverage_time_to><![CDATA[2099/12/31]]></coverage_time_to>
+
+<copyright><![CDATA[EEA, Copenhagen 2001]]></copyright>
+<description><![CDATA[The amount of municipal waste is expected to grow by 25 % from 2005 to 2020.
+Increased recovery of waste, and diverting waste away from landfill play a key role in tackling the environmental impacts of increasing waste volumes.
+As recycling and incineration with energy recovery are increasingly used, net greenhouse gas emissions from municipal waste management are expected to drop considerably by 2020.
+Limiting or avoiding growth in waste volumes would further reduce greenhouse gas emissions from the waste sector and deliver other benefits to society and the environment.]]></description>
+<Subjects_terms></Subjects_terms>
+<SpatialCoverage_terms><![CDATA[10.20.160]]></SpatialCoverage_terms>
+<series_year>2008</series_year>
+<version_date><![CDATA[2099/12/31]]></version_date>
+<sort_title><![CDATA[better management of municipal waste will reduce greenhouse gas emissions]]></sort_title>
+<serial_title><![CDATA[Briefing No 1/2008]]></serial_title>
+<series_title></series_title>
+<catalogue_text><![CDATA[Prepared by:
+
+
+]]></catalogue_text>
+<main_entry>True</main_entry>
+<report_kind><![CDATA[Full Report]]></report_kind>
+<product_version>2.2</product_version>
+<IsRequiredBy></IsRequiredBy>
+
+<Requires></Requires>
+<IsPartOf></IsPartOf>
+<HasPart></HasPart>
+<IsReferencedBy></IsReferencedBy>
+<References></References>
+<IsReplacedBy></IsReplacedBy>
+<Replaces></Replaces>
+<cover_image url="http://reports.eea.europa.eu/briefing_2008_1/cover.jpg">
+<id><![CDATA[cover.jpg]]></id>
+<title></title>
+<result1><![CDATA[Created new atlas entry]]></result1>
+<result2><![CDATA[Assigned referenceId (not if it was already done)]]></result2>
+<result3><![CDATA[http://reports.eea.europa.eu/briefing_2008_1/cover.jpg uploaded]]></result3>
+<result4></result4>
+<result5></result5>
+<result6></result6>
+<result7></result7>
+
+<result8></result8>
+<result9></result9>
+<result10></result10>
+<hardreference><![CDATA[1E8C2167-ECFE-41EA-833E-3E5048115606]]></hardreference>
+<softreference><![CDATA[http://reports.eea.europa.eu/briefing_2008_1/cover.jpg]]></softreference>
+<totalresult>3</totalresult>
+<totalmembers>9</totalmembers>
+<status>ok</status>
+<synch_timestamp><![CDATA[2008/01/16 15:13:44.189 GMT+1]]></synch_timestamp>
+</cover_image>
+<language_report url="http://reports.eea.europa.eu/briefing_2008_1/en">
+<id>en</id>
+<eeaid>1555</eeaid>
+
+<language>en</language>
+<title><![CDATA[English]]></title>
+<description><![CDATA[The amount of municipal waste is expected to grow by 25 % from 2005 to 2020.
+Increased recovery of waste, and diverting waste away from landfill play a key role in tackling the environmental impacts of increasing waste volumes.
+As recycling and incineration with energy recovery are increasingly used, net greenhouse gas emissions from municipal waste management are expected to drop considerably by 2020.
+Limiting or avoiding growth in waste volumes would further reduce greenhouse gas emissions from the waste sector and deliver other benefits to society and the environment.]]></description>
+<trailer><![CDATA[<h2>Links</h2>
+<a href="http://waste.eionet.europa.eu/publications/wp2008_1">Working paper 'Munical Municipal waste management and greenhouse gases', European Topic Centre on resources and waste management, 1/2008 </a>
+<br /><br />]]></trailer>
+<sections></sections>
+<order_override_lang>False</order_override_lang>
+<reporttitle><![CDATA[Better management of municipal waste will reduce greenhouse gas emissions]]></reporttitle>
+<pages>4</pages>
+<isbn><![CDATA[978-92-9167-333-9]]></isbn>
+<catalogue><![CDATA[TH-AM-08-001-EN-N]]></catalogue>
+<sort_title><![CDATA[better management of municipal waste will reduce greenhouse gas emissions]]></sort_title>
+<langreleased>True</langreleased>
+<zope_file url="http://reports.eea.europa.eu/briefing_2008_1/en/EN_Briefing_01-2008.pdf">
+
+<file_id><![CDATA[EN_Briefing_01-2008.pdf]]></file_id>
+<content_type>application/pdf</content_type>
+<file_title><![CDATA[Better management of municipal waste will reduce greenhouse gas emissions]]></file_title>
+</zope_file>
+<zope_file url="http://reports.eea.europa.eu/briefing_2008_1/en/Supporting_document_to_EEA_Briefing_2008-01.pdf">
+<file_id><![CDATA[Supporting_document_to_EEA_Briefing_2008-01.pdf]]></file_id>
+<content_type>application/pdf</content_type>
+<file_title><![CDATA[Supporting document to Briefing 1/2008]]></file_title>
+</zope_file>
+</language_report>
+<language_report url="http://reports.eea.europa.eu/briefing_2008_1/fr">
+<id>fr</id>
+<eeaid>0</eeaid>
+
+<language>fr</language>
+<title><![CDATA[French]]></title>
+<description><![CDATA[La quantité de déchets municipaux produits chaque année devrait augmenter de 25 % entre 2005 et 2020.
+La valorisation croissante des déchets et le recours à des solutions autres que la mise en décharge jouent un rôle clé pour faire face aux impacts environnementaux de la croissance du volume des déchets.
+Le recyclage et l’incinération avec valorisation énergétique étant de plus en plus utilisés, les émissions nettes de gaz à effet de serre provenant de la gestion des déchets municipaux devraient diminuer considérablement d’ici à 2020.
+Le fait de limiter ou d’éviter l’augmentation du volume des déchets permettrait de réduire les émissions de gaz à effet de serre du secteur des déchets tout en présentant d’autres avantages pour la société et l’environnement.]]></description>
+<trailer><![CDATA[<h2>Links</h2>
+<a href="http://waste.eionet.europa.eu/publications/Working_paper_2008_1">Working paper 'Municipal waste management and greenhouse gas  emissions', European Topic Centre on resources and waste management, 1/2008 </a>
+<br /><br />]]></trailer>
+<sections></sections>
+<order_override_lang>False</order_override_lang>
+<reporttitle><![CDATA[Une meilleure gestion des déchets municipaux réduira les émissions de gaz à effet de serre]]></reporttitle>
+<pages>4</pages>
+<isbn><![CDATA[978-92-9167-337-7]]></isbn>
+<catalogue><![CDATA[TH-AM-08-001-FR-N]]></catalogue>
+<sort_title>fr</sort_title>
+<langreleased>True</langreleased>
+
+<zope_file url="http://reports.eea.europa.eu/briefing_2008_1/fr/FR_Briefing_01-2008.pdf">
+<file_id><![CDATA[FR_Briefing_01-2008.pdf]]></file_id>
+<content_type>application/pdf</content_type>
+<file_title><![CDATA[Une meilleure gestion des déchets municipaux réduira les émissions de gaz à effet de serre]]></file_title>
+</zope_file>
+</language_report>
+</report>
 </reports>

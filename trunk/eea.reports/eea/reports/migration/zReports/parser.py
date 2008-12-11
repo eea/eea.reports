@@ -1,5 +1,6 @@
 import urllib2
 import sys
+import re
 from xml.sax.handler import ContentHandler
 from xml.sax import *
 from cStringIO import StringIO
@@ -185,11 +186,15 @@ class zreports_handler(ContentHandler):
             self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
             cover_image_url = self.__report_current.get('rep_cover_image')
             self.__language_report_current.set('cover_image_file', cover_image_url)
-            self.__language_report_current.set('creators_existing_keywords', self.__report_current.get('creators_orgs').split('###'))
+            creators_ex = self.__report_current.get('creators_orgs').split('###')
+            creators_ex = [x.strip() for x in creators_ex if x.strip()]
+            self.__language_report_current.set('creators_existing_keywords', creators_ex)
             creators = self.__report_current.get('creators').replace('\n', '').split('###')
             creators = [x.strip() for x in creators if x.strip()]
             self.__language_report_current.set('creators_keywords', creators)
-            self.__language_report_current.set('publishers_existing_keywords', self.__report_current.get('publishers_orgs').split('###'))
+            publishers_ex = self.__report_current.get('publishers_orgs').split('###')
+            publishers_ex = [x.strip() for x in publishers_ex if x.strip()]
+            self.__language_report_current.set('publishers_existing_keywords', publishers_ex)
             publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
@@ -222,22 +227,27 @@ class zreports_handler(ContentHandler):
 
             #set files
             self.__language_report_current.set('file', self.__report_files)
+            self.__report_files = {}
 
             #add language report to results
             self.__language_report_current.set('chapters', self.__chapters)
+            self.__chapters = {}
 
             #add images
             self.__language_report_current.set('images', self.__images)
+            self.__images = {}
 
             self.__reports.append(self.__language_report_current)
             self.__language_report_context = ''
-
-            self.__report_files = {}
         #
         # Report chapter
         #
         if name == 'report_chapter':
-            self.__chapters[self.__chapter_titles[0]] = (self.__chapter_titles[1], self.__chapter_titles[2])
+            if self.__chapter_titles:
+                chapter_id = self.__chapter_titles[0]
+                chapter_title = len(self.__chapter_titles) > 1 and self.__chapter_titles[1] or ''
+                chapter_body = len(self.__chapter_titles) > 2 and self.__chapter_titles[2] or ''
+                self.__chapters[chapter_id] = (chapter_title, chapter_body)
             self.__chapter_titles = []
             self.__chapter_context = 0
 
@@ -366,6 +376,13 @@ def grab_file_from_url(url, ctype='image/jpg', zope=True):
     if zope:
         return get_file_upload(data, filename, ctype)
     return data
+
+def cleanup_id(uid):
+    """ Cleanup url
+    """
+    safe = re.compile(r'[^_A-Za-z0-9\.\-]')
+    uid = urllib2.unquote(uid)
+    return safe.sub('-', uid)
 
 if __name__ == '__main__':
     print len(get_reports())

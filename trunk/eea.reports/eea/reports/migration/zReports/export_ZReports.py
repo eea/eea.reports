@@ -124,6 +124,24 @@ hu_reporttitle = "Európa környezete Negyedik értékelés: 6 Fenntartható fog
 fi_reporttitle = "Euroopan ympäristö - Neljäs arviointi: 6 Kestävä kulutus ja tuotanto"
 lt_reporttitle = "Europos aplinka - Ketvirtasis ávertinimas: 6 Tausojantis vartojimas ir gamyba"
 
+TRAILER1 = """
+<p><strong>Underpinning Energy and Environment indicators:</strong></p>
+<p>The 'Energy and Environment indicators' underpinning the Energy and Environment report refer to data covering the period 
+1990-2005, with few exceptions. The main data sources were: The European Community LRTAP Convention emission inventory report 
+1990-2005, the 2007 EC Greenhouse Gas Emission inventory report; and the energy balances from Eurostat (for European countries)
+ and from the IEA (for countries not covered by Eurostat). More updated greenhouse gas and air pollutant emissions data can 
+be obtained from <a href="http://www.eea.europa.eu/themes/climate">http://www.eea.europa.eu/themes/climate</a>
+ and <a href="http://www.eea.europa.eu/themes/air"> http://www.eea.europa.eu/themes/air</a></p> 
+<p>The energy and environment 
+indicators with 2006 data should be available in February 2009. The set will also include three new indicators which have 
+been partially included in the Energy and Environment Report (i.e. renewable final energy consumption, energy efficiency 
+and CO2 savings, and security of energy supply).</p>
+"""
+
+TRAILER2 = """
+<p><strong>Underpinning Energy and Environment indicator fact-sheets (Updated versions of the indicators can be found on the <a href="http://themes.eea.europa.eu/Sectors_and_activities/energy/indicators">energy indicators page</a>).</strong></p>
+"""
+
 lang_exceptions = ['briefing_2004_2/et', 'topic_report_2001_10/fr',
         'briefing_2005_3/et', 'state_of_environment_report_2005_1/et',
         'briefing_2005_1/et', 'briefing_2004_4/et',
@@ -452,10 +470,16 @@ for report in exported_reports:
             except:
                 res_add('\n<description>%s</description>' % formatExport(lang.description)) #text
 
-        try:
-            res_add('\n<trailer>%s</trailer>' % container.unescape(formatExport(lang.trailer)).encode('utf8'))   #text
-        except:
-            res_add('\n<trailer>%s</trailer>' % formatExport(lang.trailer))                                  #text
+        if lang.absolute_url(1) == 'eea_report_2006_8/en':
+            res_add('\n<trailer>%s</trailer>' % container.unescape(formatExport(TRAILER2)))
+        elif lang.absolute_url(1) == 'eea_report_2008_6/en':
+            res_add('\n<trailer>%s</trailer>' % container.unescape(formatExport(TRAILER1)))
+        else:
+            try:
+                res_add('\n<trailer url="%s">%s</trailer>' % (lang.absolute_url(1), container.unescape(formatExport(lang.trailer)).encode('utf8')))   #text
+            except:
+                res_add('\n<trailer url="%s">%s</trailer>' % (lang.absolute_url(1). formatExport(lang.trailer)))                                  #text
+
         res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
         res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
@@ -893,7 +917,12 @@ for report in exported_reports:
 
         ###Zope File objects
         #########################
-        for file in lang.objectValues('File'):
+        files = lang.objectValues('File')
+        
+        if lang.absolute_url(1) in ['eea_report_2006_8/en', 'eea_report_2008_6/en']:
+            files.extend(lang.factsheets.objectValues('File'))
+
+        for file in files:
             res_add('\n<zope_file url="%s">' % file.absolute_url())
             res_add('\n<file_id>%s</file_id>' % formatExport(file.getId()))
             res_add('\n<content_type>%s</content_type>' % file.content_type)
@@ -941,7 +970,7 @@ for report in exported_reports:
             res_add('\n<zope_image url="%s">' % img.absolute_url())
             res_add('\n<id>%s</id>' % formatExport(img.getId()))
             res_add('\n</zope_image>')
-
+            
         res_add('\n</language_report>')
     res_add('\n</report>')
 

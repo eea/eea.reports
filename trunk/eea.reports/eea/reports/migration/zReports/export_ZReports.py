@@ -437,7 +437,7 @@ for report in exported_reports:
             if lang.absolute_url() == 'http://reports.eea.europa.eu/environmental_issue_report_2002_31-sum/cs':
                 data = data.replace('prost&#345edí', 'prostředí')
             res_add('\n<description>%s</description>' % data) #text
-        elif lang.isbn == '978-92-9167-919-5' or lang.absolute_url() in lang_exceptions:
+        elif lang.isbn in ['978-92-9167-919-5', '92-9167-819-8'] or lang.absolute_url() in lang_exceptions:
             res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf-8'))  #text
         elif lang.absolute_url() in ['http://reports.eea.europa.eu/92-827-5263-1-sum/da',
             'http://reports.eea.europa.eu/92-827-5263-1-sum/fi', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fr']:
@@ -477,6 +477,10 @@ for report in exported_reports:
             res_add('\n<reporttitle>%s</reporttitle>' % fi_reporttitle)                      #string
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
             res_add('\n<reporttitle>%s</reporttitle>' % lt_reporttitle)                      #string
+        elif report.id =='briefing_2006_1' and lang.id == 'fr':
+            res_add('\n<reporttitle>%s</reporttitle>' % "EEA Briefing 1/2006 - Évaluer l'intégration environnementale dans la politique agricole communautaire")
+        elif report.id =='briefing_2006_2' and lang.id == 'fr':
+            res_add('\n<reporttitle>%s</reporttitle>' % "Qualité de l'air et bénéfices indirects des politiques en matière de changements climatiques")
         elif lang.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr',
                 'http://reports.eea.europa.eu/briefing_2003_1/cs', 'http://reports.eea.europa.eu/briefing_2003_1/fr',
                 'http://reports.eea.europa.eu/briefing_2003_1/sv', 'http://reports.eea.europa.eu/briefing_2004_2/es',
@@ -521,7 +525,7 @@ for report in exported_reports:
                 'http://reports.eea.europa.eu/briefing_2006_1/pt', 'http://reports.eea.europa.eu/briefing_2006_1/et'
                 'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_1/ro',
                 'http://reports.eea.europa.eu/briefing_2006_1/fi', 'http://reports.eea.europa.eu/briefing_2006_1/lv',
-                'http://reports.eea.europa.eu/briefing_2006_2/fr', 'http://reports.eea.europa.eu/briefing_2006_4/es',
+                'http://reports.eea.europa.eu/briefing_2006_4/es',
                 'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is',
                 'http://reports.eea.europa.eu/briefing_2006_4/sv', 'http://reports.eea.europa.eu/briefing_2006_1/et',
                 'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_4/pt',

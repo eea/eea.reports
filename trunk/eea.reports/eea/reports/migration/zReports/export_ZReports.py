@@ -124,115 +124,115 @@ hu_reporttitle = "Európa környezete Negyedik értékelés: 6 Fenntartható fog
 fi_reporttitle = "Euroopan ympäristö - Neljäs arviointi: 6 Kestävä kulutus ja tuotanto"
 lt_reporttitle = "Europos aplinka - Ketvirtasis ávertinimas: 6 Tausojantis vartojimas ir gamyba"
 
-lang_exceptions = ['http://reports.eea.europa.eu/briefing_2004_2/et', 'http://reports.eea.europa.eu/topic_report_2001_10/fr',
-        'http://reports.eea.europa.eu/briefing_2005_3/et', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et',
-        'http://reports.eea.europa.eu/briefing_2005_1/et', 'http://reports.eea.europa.eu/briefing_2004_4/et',
-        'http://reports.eea.europa.eu/briefing_2004_3/et', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/da',
-        'http://reports.eea.europa.eu/briefing_2004_3/da', 'http://reports.eea.europa.eu/briefing_2004_4/da',
-        'http://reports.eea.europa.eu/briefing_2005_1/da', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da',
-        'http://reports.eea.europa.eu/briefing_2005_3/da', 'http://reports.eea.europa.eu/briefing_2004_2/da',
-        'http://reports.eea.europa.eu/briefing_2004_2/nl', 'http://reports.eea.europa.eu/briefing_2005_3/nl',
-        'http://reports.eea.europa.eu/brochure_2006_0306_112210/fi', 'http://reports.eea.europa.eu/briefing_2004_3/fi',
-        'http://reports.eea.europa.eu/briefing_2004_4/fi', 'http://reports.eea.europa.eu/briefing_2005_1/fi',
-        'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fi', 'http://reports.eea.europa.eu/briefing_2004_2/fi',
-        'http://reports.eea.europa.eu/briefing_2005_3/fi', 'http://reports.eea.europa.eu/briefing_2003_1/fr',
-        'http://reports.eea.europa.eu/briefing_2004_3/fr', 'http://reports.eea.europa.eu/briefing_2004_4/fr',
-        'http://reports.eea.europa.eu/briefing_2005_1/fr', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr',
-        'http://reports.eea.europa.eu/briefing_2004_2/fr', 'http://reports.eea.europa.eu/briefing_2005_3/fr',
-        'http://reports.eea.europa.eu/briefing_2004_3/de', 'http://reports.eea.europa.eu/briefing_2004_4/de',
-        'http://reports.eea.europa.eu/briefing_2005_1/de', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/de',
-        'http://reports.eea.europa.eu/briefing_2004_2/de', 'http://reports.eea.europa.eu/briefing_2005_3/de',
-        'http://reports.eea.europa.eu/briefing_2004_2/el', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/hu',
-        'http://reports.eea.europa.eu/briefing_2004_3/hu', 'http://reports.eea.europa.eu/briefing_2004_4/hu',
-        'http://reports.eea.europa.eu/briefing_2005_1/hu', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu',
-        'http://reports.eea.europa.eu/briefing_2005_3/hu', 'http://reports.eea.europa.eu/briefing_2004_2/hu',
-        'http://reports.eea.europa.eu/brochure_2006_0306_112210/is', 'http://reports.eea.europa.eu/briefing_2004_3/is',
-        'http://reports.eea.europa.eu/briefing_2005_3/is', 'http://reports.eea.europa.eu/briefing_2004_2/is',
-        'http://reports.eea.europa.eu/briefing_2003_1/it', 'http://reports.eea.europa.eu/briefing_2004_4/it',
-        'http://reports.eea.europa.eu/briefing_2005_1/it', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/it',
-        'http://reports.eea.europa.eu/briefing_2004_3/it', 'http://reports.eea.europa.eu/briefing_2004_2/it',
-        'http://reports.eea.europa.eu/state_of_environment_report_2005_1/lt', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/no',
-        'http://reports.eea.europa.eu/briefing_2005_3/no', 'http://reports.eea.europa.eu/briefing_2004_4/no',
-        'http://reports.eea.europa.eu/briefing_2005_1/no', 'http://reports.eea.europa.eu/briefing_2004_3/no',
-        'http://reports.eea.europa.eu/briefing_2004_2/no', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/no',
-        'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pt', 'http://reports.eea.europa.eu/briefing_2004_2/pt',
-        'http://reports.eea.europa.eu/briefing_2004_3/pt', 'http://reports.eea.europa.eu/briefing_2005_1/pt',
-        'http://reports.eea.europa.eu/briefing_2004_4/pt', 'http://reports.eea.europa.eu/briefing_2005_3/pt',
-        'http://reports.eea.europa.eu/brochure_2006_0306_112210/sk', 'http://reports.eea.europa.eu/briefing_2004_2/sk',
-        'http://reports.eea.europa.eu/briefing_2005_3/es', 'http://reports.eea.europa.eu/briefing_2004_4/es',
-        'http://reports.eea.europa.eu/briefing_2005_1/es', 'http://reports.eea.europa.eu/briefing_2004_3/es',
-        'http://reports.eea.europa.eu/state_of_environment_report_2005_1/es', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/es',
-        'http://reports.eea.europa.eu/briefing_2004_2/es', 'http://reports.eea.europa.eu/briefing_2003_1/sv',
-        'http://reports.eea.europa.eu/briefing_2005_3/sv', 'http://reports.eea.europa.eu/briefing_2004_4/sv',
-        'http://reports.eea.europa.eu/briefing_2005_1/sv', 'http://reports.eea.europa.eu/briefing_2004_3/sv',
-        'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sv', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/sv',
-        'http://reports.eea.europa.eu/briefing_2004_2/sv', 'http://reports.eea.europa.eu/briefing_2004_3/tr',
-        'http://reports.eea.europa.eu/briefing_2005_3/tr', 'http://reports.eea.europa.eu/briefing_2004_2/tr',
-        'http://reports.eea.europa.eu/briefing_2004_3/mt',
-        
-        
-        'http://reports.eea.europa.eu/eea_report_2006_2/fr', 'http://reports.eea.europa.eu/eea_report_2006_4/fr',
-        'http://reports.eea.europa.eu/briefing_2006_1/de', 'http://reports.eea.europa.eu/briefing_2006_1/fr',
-        'http://reports.eea.europa.eu/briefing_2006_1/it', 'http://reports.eea.europa.eu/briefing_2006_1/no',
-        'http://reports.eea.europa.eu/briefing_2006_1/sv', 'http://reports.eea.europa.eu/briefing_2006_1/tr',
-        'http://reports.eea.europa.eu/briefing_2006_1/da', 'http://reports.eea.europa.eu/briefing_2006_1/es',
-        'http://reports.eea.europa.eu/briefing_2006_1/nl', 'http://reports.eea.europa.eu/briefing_2006_1/is',
-        'http://reports.eea.europa.eu/briefing_2006_1/pt', 'http://reports.eea.europa.eu/briefing_2006_1/et',
-        'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_1/ro',
-        'http://reports.eea.europa.eu/briefing_2006_1/fi', 'http://reports.eea.europa.eu/briefing_2006_2/fr',
-        'http://reports.eea.europa.eu/briefing_2006_3/mt', 'http://reports.eea.europa.eu/briefing_2006_4/da',
-        'http://reports.eea.europa.eu/briefing_2006_4/de', 'http://reports.eea.europa.eu/briefing_2006_4/es',
-        'http://reports.eea.europa.eu/briefing_2006_4/et', 'http://reports.eea.europa.eu/briefing_2006_4/fr',
-        'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is',
-        'http://reports.eea.europa.eu/briefing_2006_4/it', 'http://reports.eea.europa.eu/briefing_2006_4/no',
-        'http://reports.eea.europa.eu/briefing_2006_4/pt', 'http://reports.eea.europa.eu/briefing_2006_4/sv',
-        'http://reports.eea.europa.eu/briefing_2006_4/pl', 'http://reports.eea.europa.eu/briefing_2006_4/fi',
-        'http://reports.eea.europa.eu/briefing_2006_4/lv']
+lang_exceptions = ['briefing_2004_2/et', 'topic_report_2001_10/fr',
+        'briefing_2005_3/et', 'state_of_environment_report_2005_1/et',
+        'briefing_2005_1/et', 'briefing_2004_4/et',
+        'briefing_2004_3/et', 'brochure_2006_0306_112210/da',
+        'briefing_2004_3/da', 'briefing_2004_4/da',
+        'briefing_2005_1/da', 'state_of_environment_report_2005_1/da',
+        'briefing_2005_3/da', 'briefing_2004_2/da',
+        'briefing_2004_2/nl', 'briefing_2005_3/nl',
+        'brochure_2006_0306_112210/fi', 'briefing_2004_3/fi',
+        'briefing_2004_4/fi', 'briefing_2005_1/fi',
+        'state_of_environment_report_2005_1/fi', 'briefing_2004_2/fi',
+        'briefing_2005_3/fi', 'briefing_2003_1/fr',
+        'briefing_2004_3/fr', 'briefing_2004_4/fr',
+        'briefing_2005_1/fr', 'state_of_environment_report_2005_1/fr',
+        'briefing_2004_2/fr', 'briefing_2005_3/fr',
+        'briefing_2004_3/de', 'briefing_2004_4/de',
+        'briefing_2005_1/de', 'state_of_environment_report_2005_1/de',
+        'briefing_2004_2/de', 'briefing_2005_3/de',
+        'briefing_2004_2/el', 'brochure_2006_0306_112210/hu',
+        'briefing_2004_3/hu', 'briefing_2004_4/hu',
+        'briefing_2005_1/hu', 'state_of_environment_report_2005_1/hu',
+        'briefing_2005_3/hu', 'briefing_2004_2/hu',
+        'brochure_2006_0306_112210/is', 'briefing_2004_3/is',
+        'briefing_2005_3/is', 'briefing_2004_2/is',
+        'briefing_2003_1/it', 'briefing_2004_4/it',
+        'briefing_2005_1/it', 'state_of_environment_report_2005_1/it',
+        'briefing_2004_3/it', 'briefing_2004_2/it',
+        'state_of_environment_report_2005_1/lt', 'brochure_2006_0306_112210/no',
+        'briefing_2005_3/no', 'briefing_2004_4/no',
+        'briefing_2005_1/no', 'briefing_2004_3/no',
+        'briefing_2004_2/no', 'state_of_environment_report_2005_1/no',
+        'state_of_environment_report_2005_1/pt', 'briefing_2004_2/pt',
+        'briefing_2004_3/pt', 'briefing_2005_1/pt',
+        'briefing_2004_4/pt', 'briefing_2005_3/pt',
+        'brochure_2006_0306_112210/sk', 'briefing_2004_2/sk',
+        'briefing_2005_3/es', 'briefing_2004_4/es',
+        'briefing_2005_1/es', 'briefing_2004_3/es',
+        'state_of_environment_report_2005_1/es', 'brochure_2006_0306_112210/es',
+        'briefing_2004_2/es', 'briefing_2003_1/sv',
+        'briefing_2005_3/sv', 'briefing_2004_4/sv',
+        'briefing_2005_1/sv', 'briefing_2004_3/sv',
+        'state_of_environment_report_2005_1/sv', 'brochure_2006_0306_112210/sv',
+        'briefing_2004_2/sv', 'briefing_2004_3/tr',
+        'briefing_2005_3/tr', 'briefing_2004_2/tr',
+        'briefing_2004_3/mt',
+
+
+        'eea_report_2006_2/fr', 'eea_report_2006_4/fr',
+        'briefing_2006_1/de', 'briefing_2006_1/fr',
+        'briefing_2006_1/it', 'briefing_2006_1/no',
+        'briefing_2006_1/sv', 'briefing_2006_1/tr',
+        'briefing_2006_1/da', 'briefing_2006_1/es',
+        'briefing_2006_1/nl', 'briefing_2006_1/is',
+        'briefing_2006_1/pt', 'briefing_2006_1/et',
+        'briefing_2006_1/hu', 'briefing_2006_1/ro',
+        'briefing_2006_1/fi', 'briefing_2006_2/fr',
+        'briefing_2006_3/mt', 'briefing_2006_4/da',
+        'briefing_2006_4/de', 'briefing_2006_4/es',
+        'briefing_2006_4/et', 'briefing_2006_4/fr',
+        'briefing_2006_4/hu', 'briefing_2006_4/is',
+        'briefing_2006_4/it', 'briefing_2006_4/no',
+        'briefing_2006_4/pt', 'briefing_2006_4/sv',
+        'briefing_2006_4/pl', 'briefing_2006_4/fi',
+        'briefing_2006_4/lv']
 
 file_exceptions = [
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da/DA-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da/DA_DA-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/cs/CS_CS-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/de/AT_DE-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/de/AT_DE-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/es/ES-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/es/part-b_ES.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et/ET-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et/ET-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et/ET_ET-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fi/FI-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fi/FI_FI-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr/FR-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr/BE_FR-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr/FR_FR-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr/LU_FR-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr/CH_FR-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu/HU-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu/part-b_HU.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu/HU-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu/HU_HU-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/is/IS-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/is/IS-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/is/part-b_IS.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/nl/BE_NL-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/no/NO-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pl/PL_PL-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pt/PT-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sk/SK-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sk/part-a_SK.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sv/SV-summary.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sv/part-b_SV.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/tr/TR-countryprofile.pdf'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/tr/TR_TR-ppt.ppt'
-,'http://reports.eea.europa.eu/state_of_environment_report_2005_1/tr/part-b_TR.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/es/ES_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/fr/FR_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/tr/TR_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/sk/SK_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/is/IS_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/cs/CS_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/sv/SV_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_2/pt/PT_Briefing-Energy_web.pdf'
+'state_of_environment_report_2005_1/da/DA-summary.pdf'
+,'state_of_environment_report_2005_1/da/DA_DA-ppt.ppt'
+,'state_of_environment_report_2005_1/cs/CS_CS-ppt.ppt'
+,'state_of_environment_report_2005_1/de/AT_DE-ppt.ppt'
+,'state_of_environment_report_2005_1/de/AT_DE-countryprofile.pdf'
+,'state_of_environment_report_2005_1/es/ES-countryprofile.pdf'
+,'state_of_environment_report_2005_1/es/part-b_ES.pdf'
+,'state_of_environment_report_2005_1/et/ET-summary.pdf'
+,'state_of_environment_report_2005_1/et/ET-countryprofile.pdf'
+,'state_of_environment_report_2005_1/et/ET_ET-ppt.ppt'
+,'state_of_environment_report_2005_1/fi/FI-summary.pdf'
+,'state_of_environment_report_2005_1/fi/FI_FI-ppt.ppt'
+,'state_of_environment_report_2005_1/fr/FR-summary.pdf'
+,'state_of_environment_report_2005_1/fr/BE_FR-ppt.ppt'
+,'state_of_environment_report_2005_1/fr/FR_FR-ppt.ppt'
+,'state_of_environment_report_2005_1/fr/LU_FR-ppt.ppt'
+,'state_of_environment_report_2005_1/fr/CH_FR-ppt.ppt'
+,'state_of_environment_report_2005_1/hu/HU-summary.pdf'
+,'state_of_environment_report_2005_1/hu/part-b_HU.pdf'
+,'state_of_environment_report_2005_1/hu/HU-countryprofile.pdf'
+,'state_of_environment_report_2005_1/hu/HU_HU-ppt.ppt'
+,'state_of_environment_report_2005_1/is/IS-summary.pdf'
+,'state_of_environment_report_2005_1/is/IS-countryprofile.pdf'
+,'state_of_environment_report_2005_1/is/part-b_IS.pdf'
+,'state_of_environment_report_2005_1/nl/BE_NL-countryprofile.pdf'
+,'state_of_environment_report_2005_1/no/NO-summary.pdf'
+,'state_of_environment_report_2005_1/pl/PL_PL-ppt.ppt'
+,'state_of_environment_report_2005_1/pt/PT-summary.pdf'
+,'state_of_environment_report_2005_1/sk/SK-countryprofile.pdf'
+,'state_of_environment_report_2005_1/sk/part-a_SK.pdf'
+,'state_of_environment_report_2005_1/sv/SV-summary.pdf'
+,'state_of_environment_report_2005_1/sv/part-b_SV.pdf'
+,'state_of_environment_report_2005_1/tr/TR-countryprofile.pdf'
+,'state_of_environment_report_2005_1/tr/TR_TR-ppt.ppt'
+,'state_of_environment_report_2005_1/tr/part-b_TR.pdf',
+'briefing_2004_2/es/ES_Briefing-Energy_web.pdf',
+'briefing_2004_2/fr/FR_Briefing-Energy_web.pdf',
+'briefing_2004_2/tr/TR_Briefing-Energy_web.pdf',
+'briefing_2004_2/sk/SK_Briefing-Energy_web.pdf',
+'briefing_2004_2/is/IS_Briefing-Energy_web.pdf',
+'briefing_2004_2/cs/CS_Briefing-Energy_web.pdf',
+'briefing_2004_2/sv/SV_Briefing-Energy_web.pdf',
+'briefing_2004_2/pt/PT_Briefing-Energy_web.pdf'
 ]
 
 #Sort reports by year
@@ -434,15 +434,15 @@ for report in exported_reports:
 
         if report.series_year == -1 and not lang.language in ['bg', 'el']:
             data = container.unescape(unicode(formatExport(lang.description), 'iso-8859-15')).encode('utf8')
-            if lang.absolute_url() == 'http://reports.eea.europa.eu/environmental_issue_report_2002_31-sum/cs':
+            if lang.absolute_url(1) == 'environmental_issue_report_2002_31-sum/cs':
                 data = data.replace('prost&#345edí', 'prostředí')
             res_add('\n<description>%s</description>' % data) #text
-        elif lang.isbn in ['978-92-9167-919-5', '92-9167-819-8'] or lang.absolute_url() in lang_exceptions:
+        elif lang.isbn in ['978-92-9167-919-5', '92-9167-819-8'] or lang.absolute_url(1) in lang_exceptions:
             res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf-8'))  #text
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/92-827-5263-1-sum/da',
-            'http://reports.eea.europa.eu/92-827-5263-1-sum/fi', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fr']:
+        elif lang.absolute_url(1) in ['92-827-5263-1-sum/da',
+            '92-827-5263-1-sum/fi', '92-827-5263-1-sum/fr']:
             res_add('\n<description>%s</description>' % container.unescape(unicode(formatExport(lang.description), 'ISO-8859-15')).encode('utf8'))
-        elif lang.absolute_url() == 'http://reports.eea.europa.eu/signals-2004/el':
+        elif lang.absolute_url(1) == 'signals-2004/el':
             ddata = lang.description
             ddata = unicode(ddata, 'ISO-8859-15').encode('utf8')
             res_add('\n<description>%s</description>' % ddata) #text
@@ -459,7 +459,7 @@ for report in exported_reports:
         res_add('\n<sections>%s</sections>' % formatExport(lang.sections))                                   #lines
         res_add('\n<order_override_lang>%s</order_override_lang>' % formatExport(lang.order_override_lang))  #boolean
 
-        if lang.absolute_url() == 'http://reports.eea.europa.eu/environmental_assessment_report_2002_9-sum/el':
+        if lang.absolute_url(1) == 'environmental_assessment_report_2002_9-sum/el':
             res_add('\n<reporttitle>%s</reporttitle>' % unicode(lang.reporttitle, 'ISO-8859-15').encode('utf8'))
         elif report.series_year == -1 and not lang.language in ['bg', 'el']:
             res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'iso-8859-15')).encode('utf8')) #text
@@ -478,62 +478,66 @@ for report in exported_reports:
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
             res_add('\n<reporttitle>%s</reporttitle>' % lt_reporttitle)                      #string
         elif report.id =='briefing_2006_1' and lang.id == 'fr':
-            res_add('\n<reporttitle>%s</reporttitle>' % "EEA Briefing 1/2006 - Évaluer l'intégration environnementale dans la politique agricole communautaire")
+            tdata = "EEA Briefing 1/2006 - Évaluer l'intégration environnementale dans la politique agricole communautaire"
+            tdata = tdata.decode('utf8').encode('utf8')
+            res_add('\n<reporttitle>%s</reporttitle>' % tdata)
         elif report.id =='briefing_2006_2' and lang.id == 'fr':
-            res_add('\n<reporttitle>%s</reporttitle>' % "Qualité de l'air et bénéfices indirects des politiques en matière de changements climatiques")
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr',
-                'http://reports.eea.europa.eu/briefing_2003_1/cs', 'http://reports.eea.europa.eu/briefing_2003_1/fr',
-                'http://reports.eea.europa.eu/briefing_2003_1/sv', 'http://reports.eea.europa.eu/briefing_2004_2/es',
-                'http://reports.eea.europa.eu/briefing_2004_2/fr', 'http://reports.eea.europa.eu/briefing_2004_2/tr',
-                'http://reports.eea.europa.eu/briefing_2004_2/sk', 'http://reports.eea.europa.eu/briefing_2004_2/is',
-                'http://reports.eea.europa.eu/briefing_2004_2/cs', 'http://reports.eea.europa.eu/briefing_2004_2/sv',
-                'http://reports.eea.europa.eu/briefing_2004_2/pt', 'http://reports.eea.europa.eu/briefing_2004_2/hu',
-                'http://reports.eea.europa.eu/briefing_2004_3/da', 'http://reports.eea.europa.eu/briefing_2004_3/fi',
-                'http://reports.eea.europa.eu/briefing_2004_3/sv', 'http://reports.eea.europa.eu/briefing_2004_3/no',
-                'http://reports.eea.europa.eu/briefing_2004_3/hu', 'http://reports.eea.europa.eu/briefing_2004_3/tr',
-                'http://reports.eea.europa.eu/briefing_2004_3/sk', 'http://reports.eea.europa.eu/briefing_2004_3/ro',
-                'http://reports.eea.europa.eu/TERM2004/tr', 'http://reports.eea.europa.eu/briefing_2004_4/de',
-                'http://reports.eea.europa.eu/briefing_2004_4/et', 'http://reports.eea.europa.eu/briefing_2004_4/fr',
-                'http://reports.eea.europa.eu/briefing_2004_4/hu', 'http://reports.eea.europa.eu/briefing_2004_4/no',
-                'http://reports.eea.europa.eu/briefing_2004_4/pt', 'http://reports.eea.europa.eu/briefing_2004_4/da',
-                'http://reports.eea.europa.eu/briefing_2004_4/es', 'http://reports.eea.europa.eu/briefing_2004_4/sv',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/da', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/de',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/fr', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/hu',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/no', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/pt',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/sk', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/fi',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/sv', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/tr',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/is', 'http://reports.eea.europa.eu/briefing_2004_3/is',
-                'http://reports.eea.europa.eu/briefing_2005_1/es', 'http://reports.eea.europa.eu/briefing_2005_1/pt',
-                'http://reports.eea.europa.eu/briefing_2005_1/sk', 'http://reports.eea.europa.eu/briefing_2005_1/sv',
-                'http://reports.eea.europa.eu/briefing_2005_1/et', 'http://reports.eea.europa.eu/briefing_2005_1/hu',
-                'http://reports.eea.europa.eu/briefing_2005_1/da', 'http://reports.eea.europa.eu/briefing_2005_1/ro',
-                'http://reports.eea.europa.eu/briefing_2005_1/fr', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da',
-                'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fi',
-                'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu',
-                'http://reports.eea.europa.eu/state_of_environment_report_2005_1/no', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pt',
-                'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sv', 'http://reports.eea.europa.eu/briefing_2005_3/da',
-                'http://reports.eea.europa.eu/briefing_2005_3/es', 'http://reports.eea.europa.eu/briefing_2005_3/hu',
-                'http://reports.eea.europa.eu/briefing_2005_3/de', 'http://reports.eea.europa.eu/briefing_2005_3/fr',
-                'http://reports.eea.europa.eu/briefing_2005_3/sv', 'http://reports.eea.europa.eu/briefing_2005_3/pt',
-                'http://reports.eea.europa.eu/briefing_2005_3/no', 'http://reports.eea.europa.eu/briefing_2005_3/is',
-                'http://reports.eea.europa.eu/briefing_2005_3/it', 'http://reports.eea.europa.eu/briefing_2005_3/sk',
-                'http://reports.eea.europa.eu/eea_report_2006_2/fr', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fi'
-                'http://reports.eea.europa.eu/briefing_2006_1/fr', 'http://reports.eea.europa.eu/briefing_2006_1/no',
-                'http://reports.eea.europa.eu/briefing_2006_1/sv', 'http://reports.eea.europa.eu/briefing_2006_1/tr',
-                'http://reports.eea.europa.eu/briefing_2006_1/da', 'http://reports.eea.europa.eu/briefing_2006_1/da/briefing_01_2006-DA.pdf',
-                'http://reports.eea.europa.eu/briefing_2006_1/es', 'http://reports.eea.europa.eu/briefing_2006_1/is',
-                'http://reports.eea.europa.eu/briefing_2006_1/pt', 'http://reports.eea.europa.eu/briefing_2006_1/et'
-                'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_1/ro',
-                'http://reports.eea.europa.eu/briefing_2006_1/fi', 'http://reports.eea.europa.eu/briefing_2006_1/lv',
-                'http://reports.eea.europa.eu/briefing_2006_4/es',
-                'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is',
-                'http://reports.eea.europa.eu/briefing_2006_4/sv', 'http://reports.eea.europa.eu/briefing_2006_1/et',
-                'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_4/pt',
-                'http://reports.eea.europa.eu/92-827-5263-1-sum/da', 'http://reports.eea.europa.eu/92-827-5263-1-sum/fr']:
+            tdata = "Qualité de l'air et bénéfices indirects des politiques en matière de changements climatiques"
+            tdata = tdata.decode('utf8').encode('utf8')
+            res_add('\n<reporttitle>%s</reporttitle>' % tdata)
+        elif lang.absolute_url(1) in ['topic_report_2001_10/fr',
+                'briefing_2003_1/cs', 'briefing_2003_1/fr',
+                'briefing_2003_1/sv', 'briefing_2004_2/es',
+                'briefing_2004_2/fr', 'briefing_2004_2/tr',
+                'briefing_2004_2/sk', 'briefing_2004_2/is',
+                'briefing_2004_2/cs', 'briefing_2004_2/sv',
+                'briefing_2004_2/pt', 'briefing_2004_2/hu',
+                'briefing_2004_3/da', 'briefing_2004_3/fi',
+                'briefing_2004_3/sv', 'briefing_2004_3/no',
+                'briefing_2004_3/hu', 'briefing_2004_3/tr',
+                'briefing_2004_3/sk', 'briefing_2004_3/ro',
+                'TERM2004/tr', 'briefing_2004_4/de',
+                'briefing_2004_4/et', 'briefing_2004_4/fr',
+                'briefing_2004_4/hu', 'briefing_2004_4/no',
+                'briefing_2004_4/pt', 'briefing_2004_4/da',
+                'briefing_2004_4/es', 'briefing_2004_4/sv',
+                'brochure_2006_0306_112210/da', 'brochure_2006_0306_112210/de',
+                'brochure_2006_0306_112210/fr', 'brochure_2006_0306_112210/hu',
+                'brochure_2006_0306_112210/no', 'brochure_2006_0306_112210/pt',
+                'brochure_2006_0306_112210/sk', 'brochure_2006_0306_112210/fi',
+                'brochure_2006_0306_112210/sv', 'brochure_2006_0306_112210/tr',
+                'brochure_2006_0306_112210/is', 'briefing_2004_3/is',
+                'briefing_2005_1/es', 'briefing_2005_1/pt',
+                'briefing_2005_1/sk', 'briefing_2005_1/sv',
+                'briefing_2005_1/et', 'briefing_2005_1/hu',
+                'briefing_2005_1/da', 'briefing_2005_1/ro',
+                'briefing_2005_1/fr', 'state_of_environment_report_2005_1/da',
+                'state_of_environment_report_2005_1/et', 'state_of_environment_report_2005_1/fi',
+                'state_of_environment_report_2005_1/fr', 'state_of_environment_report_2005_1/hu',
+                'state_of_environment_report_2005_1/no', 'state_of_environment_report_2005_1/pt',
+                'state_of_environment_report_2005_1/sv', 'briefing_2005_3/da',
+                'briefing_2005_3/es', 'briefing_2005_3/hu',
+                'briefing_2005_3/de', 'briefing_2005_3/fr',
+                'briefing_2005_3/sv', 'briefing_2005_3/pt',
+                'briefing_2005_3/no', 'briefing_2005_3/is',
+                'briefing_2005_3/it', 'briefing_2005_3/sk',
+                '92-827-5263-1-sum/fi', 'eea_report_2006_2/fr',
+                'briefing_2006_1/fr', 'briefing_2006_1/no',
+                'briefing_2006_1/sv', 'briefing_2006_1/tr',
+                'briefing_2006_1/da', 'briefing_2006_1/da/briefing_01_2006-DA.pdf',
+                'briefing_2006_1/es', 'briefing_2006_1/is',
+                'briefing_2006_1/pt', 'briefing_2006_1/et'
+                'briefing_2006_1/hu', 'briefing_2006_1/ro',
+                'briefing_2006_1/fi', 'briefing_2006_1/lv',
+                'briefing_2006_4/es',
+                'briefing_2006_4/hu', 'briefing_2006_4/is',
+                'briefing_2006_4/sv', 'briefing_2006_1/et',
+                'briefing_2006_1/hu', 'briefing_2006_4/pt',
+                '92-827-5263-1-sum/da', '92-827-5263-1-sum/fr']:
             res_add('\n<reporttitle>%s</reporttitle>' % container.unescape(unicode(formatExport(lang.reporttitle), 'ISO-8859-15')).encode('utf8'))
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/eea_report_2006_4/fr']:
+        elif lang.absolute_url(1) in ['eea_report_2006_4/fr']:
             res_add('\n<reporttitle>%s</reporttitle>' % formatExport("Problèmes prioritaires pour l'environnement méditerranéen")) #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/92-9167-205-X/el']:
+        elif lang.absolute_url(1) in ['92-9167-205-X/el']:
             res_add('\n<reporttitle>%s</reporttitle>' % unicode(formatExport(lang.reporttitle), 'iso-8859-7').encode('utf8')) #string
         else:
             try:
@@ -560,64 +564,64 @@ for report in exported_reports:
             res_add('\n<sort_title>%s</sort_title>' % fi_reporttitle)                #string
         elif report.id == 'state_of_environment_report_2007_1' and lang.id == 'lt':
             res_add('\n<sort_title>%s</sort_title>' % lt_reporttitle)                #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr',
-'http://reports.eea.europa.eu/briefing_2003_1/cs', 'http://reports.eea.europa.eu/briefing_2003_1/fr', 'http://reports.eea.europa.eu/briefing_2003_1/sv',
-'http://reports.eea.europa.eu/briefing_2004_1/es', 'http://reports.eea.europa.eu/briefing_2004_1/et', 'http://reports.eea.europa.eu/briefing_2004_1/fi',
-'http://reports.eea.europa.eu/briefing_2004_1/fr', 'http://reports.eea.europa.eu/briefing_2004_1/is', 'http://reports.eea.europa.eu/briefing_2004_1/pl',
-'http://reports.eea.europa.eu/briefing_2004_1/sl', 'http://reports.eea.europa.eu/briefing_2004_1/sv', 'http://reports.eea.europa.eu/briefing_2004_1/tr',
-'http://reports.eea.europa.eu/briefing_2004_2/tr', 'http://reports.eea.europa.eu/briefing_2004_2/lv','http://reports.eea.europa.eu/briefing_2004_2/sk',
-'http://reports.eea.europa.eu/briefing_2004_2/cs', 'http://reports.eea.europa.eu/briefing_2004_2/pt', 'http://reports.eea.europa.eu/briefing_2004_2/ro',
-'http://reports.eea.europa.eu/briefing_2004_2/lt', 'http://reports.eea.europa.eu/briefing_2004_2/hu',
-'http://reports.eea.europa.eu/briefing_2004_3/da', 'http://reports.eea.europa.eu/briefing_2004_3/fi', 'http://reports.eea.europa.eu/briefing_2004_3/sv',
-'http://reports.eea.europa.eu/briefing_2004_3/no', 'http://reports.eea.europa.eu/briefing_2004_3/sk', 'http://reports.eea.europa.eu/briefing_2004_3/lv',
-'http://reports.eea.europa.eu/briefing_2004_3/is', 'http://reports.eea.europa.eu/briefing_2004_3/ro', 'http://reports.eea.europa.eu/TERM2004/tr',
-'http://reports.eea.europa.eu/briefing_2004_4/de', 'http://reports.eea.europa.eu/briefing_2004_4/cs',
-'http://reports.eea.europa.eu/briefing_2004_4/et', 'http://reports.eea.europa.eu/briefing_2004_4/fr', 'http://reports.eea.europa.eu/briefing_2004_4/hu',
-'http://reports.eea.europa.eu/briefing_2004_4/no', 'http://reports.eea.europa.eu/briefing_2004_4/pt', 'http://reports.eea.europa.eu/briefing_2004_4/sk',
-'http://reports.eea.europa.eu/briefing_2004_4/tr', 'http://reports.eea.europa.eu/briefing_2004_4/da', 'http://reports.eea.europa.eu/briefing_2004_4/es',
-'http://reports.eea.europa.eu/briefing_2004_4/lt', 'http://reports.eea.europa.eu/briefing_2004_4/ro', 'http://reports.eea.europa.eu/briefing_2004_4/lv',
-'http://reports.eea.europa.eu/briefing_2004_4/is', 'http://reports.eea.europa.eu/briefing_2004_4/sv', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/da',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/de', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/fr', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/lv',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/hu', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/no', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/pt',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/sk', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/fi', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/sv',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/tr', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/is', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/cs',
-'http://reports.eea.europa.eu/briefing_2005_1/es', 'http://reports.eea.europa.eu/briefing_2005_1/lt', 'http://reports.eea.europa.eu/briefing_2005_1/lv',
-'http://reports.eea.europa.eu/briefing_2005_1/mt', 'http://reports.eea.europa.eu/briefing_2005_1/pt', 'http://reports.eea.europa.eu/briefing_2005_1/sk',
-'http://reports.eea.europa.eu/briefing_2005_1/sv', 'http://reports.eea.europa.eu/briefing_2005_1/tr', 'http://reports.eea.europa.eu/briefing_2005_1/et',
-'http://reports.eea.europa.eu/briefing_2005_1/hu', 'http://reports.eea.europa.eu/briefing_2005_1/da', 'http://reports.eea.europa.eu/briefing_2005_1/ro',
-'http://reports.eea.europa.eu/briefing_2005_1/fr', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/cs',
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/et', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fi', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/fr',
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/hu', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/lt', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/lv',
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/no', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pl', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/pt',
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/ro', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sk', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sl',
-'http://reports.eea.europa.eu/state_of_environment_report_2005_1/sv', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/tr', 'http://reports.eea.europa.eu/briefing_2005_3/da',
-'http://reports.eea.europa.eu/briefing_2005_3/es', 'http://reports.eea.europa.eu/briefing_2005_3/hu', 'http://reports.eea.europa.eu/briefing_2005_3/de',
-'http://reports.eea.europa.eu/briefing_2005_3/fr', 'http://reports.eea.europa.eu/briefing_2005_3/sv', 'http://reports.eea.europa.eu/briefing_2005_3/pt',
-'http://reports.eea.europa.eu/briefing_2005_3/no', 'http://reports.eea.europa.eu/briefing_2005_3/is', 'http://reports.eea.europa.eu/briefing_2005_3/it',
-'http://reports.eea.europa.eu/briefing_2005_3/tr', 'http://reports.eea.europa.eu/briefing_2005_3/lt', 'http://reports.eea.europa.eu/briefing_2005_3/lv',
-'http://reports.eea.europa.eu/briefing_2005_3/sk', 'http://reports.eea.europa.eu/briefing_2005_3/ro', 'http://reports.eea.europa.eu/briefing_2005_3/pl',
-'http://reports.eea.europa.eu/eea_report_2006_2/fr', 'http://reports.eea.europa.eu/briefing_2006_1/fr',
-'http://reports.eea.europa.eu/briefing_2006_1/no', 'http://reports.eea.europa.eu/briefing_2006_1/sk', 'http://reports.eea.europa.eu/briefing_2006_1/sv',
-'http://reports.eea.europa.eu/briefing_2006_1/tr', 'http://reports.eea.europa.eu/briefing_2006_1/da', 'http://reports.eea.europa.eu/briefing_2006_1/da/briefing_01_2006-DA.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/es', 'http://reports.eea.europa.eu/briefing_2006_1/is', 'http://reports.eea.europa.eu/briefing_2006_1/pt',
-'http://reports.eea.europa.eu/briefing_2006_1/et', 'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_1/ro',
-'http://reports.eea.europa.eu/briefing_2006_1/fi', 'http://reports.eea.europa.eu/briefing_2006_1/lv', 'http://reports.eea.europa.eu/briefing_2006_1/lt',
-'http://reports.eea.europa.eu/briefing_2006_2/fr', 'http://reports.eea.europa.eu/briefing_2006_4/cs', 'http://reports.eea.europa.eu/briefing_2006_4/es',
-'http://reports.eea.europa.eu/briefing_2006_4/hu', 'http://reports.eea.europa.eu/briefing_2006_4/is', 'http://reports.eea.europa.eu/briefing_2006_4/lt',
-'http://reports.eea.europa.eu/briefing_2006_4/pt', 'http://reports.eea.europa.eu/briefing_2006_4/ro', 'http://reports.eea.europa.eu/briefing_2006_4/sk',
-'http://reports.eea.europa.eu/briefing_2006_4/sl', 'http://reports.eea.europa.eu/briefing_2006_4/sv', 'http://reports.eea.europa.eu/briefing_2006_4/tr',
-'http://reports.eea.europa.eu/briefing_2006_4/lv']:
+        elif lang.absolute_url(1) in ['topic_report_2001_10/fr',
+'briefing_2003_1/cs', 'briefing_2003_1/fr', 'briefing_2003_1/sv',
+'briefing_2004_1/es', 'briefing_2004_1/et', 'briefing_2004_1/fi',
+'briefing_2004_1/fr', 'briefing_2004_1/is', 'briefing_2004_1/pl',
+'briefing_2004_1/sl', 'briefing_2004_1/sv', 'briefing_2004_1/tr',
+'briefing_2004_2/tr', 'briefing_2004_2/lv','briefing_2004_2/sk',
+'briefing_2004_2/cs', 'briefing_2004_2/pt', 'briefing_2004_2/ro',
+'briefing_2004_2/lt', 'briefing_2004_2/hu',
+'briefing_2004_3/da', 'briefing_2004_3/fi', 'briefing_2004_3/sv',
+'briefing_2004_3/no', 'briefing_2004_3/sk', 'briefing_2004_3/lv',
+'briefing_2004_3/is', 'briefing_2004_3/ro', 'TERM2004/tr',
+'briefing_2004_4/de', 'briefing_2004_4/cs',
+'briefing_2004_4/et', 'briefing_2004_4/fr', 'briefing_2004_4/hu',
+'briefing_2004_4/no', 'briefing_2004_4/pt', 'briefing_2004_4/sk',
+'briefing_2004_4/tr', 'briefing_2004_4/da', 'briefing_2004_4/es',
+'briefing_2004_4/lt', 'briefing_2004_4/ro', 'briefing_2004_4/lv',
+'briefing_2004_4/is', 'briefing_2004_4/sv', 'brochure_2006_0306_112210/da',
+'brochure_2006_0306_112210/de', 'brochure_2006_0306_112210/fr', 'brochure_2006_0306_112210/lv',
+'brochure_2006_0306_112210/hu', 'brochure_2006_0306_112210/no', 'brochure_2006_0306_112210/pt',
+'brochure_2006_0306_112210/sk', 'brochure_2006_0306_112210/fi', 'brochure_2006_0306_112210/sv',
+'brochure_2006_0306_112210/tr', 'brochure_2006_0306_112210/is', 'brochure_2006_0306_112210/cs',
+'briefing_2005_1/es', 'briefing_2005_1/lt', 'briefing_2005_1/lv',
+'briefing_2005_1/mt', 'briefing_2005_1/pt', 'briefing_2005_1/sk',
+'briefing_2005_1/sv', 'briefing_2005_1/tr', 'briefing_2005_1/et',
+'briefing_2005_1/hu', 'briefing_2005_1/da', 'briefing_2005_1/ro',
+'briefing_2005_1/fr', 'state_of_environment_report_2005_1/da', 'state_of_environment_report_2005_1/cs',
+'state_of_environment_report_2005_1/et', 'state_of_environment_report_2005_1/fi', 'state_of_environment_report_2005_1/fr',
+'state_of_environment_report_2005_1/hu', 'state_of_environment_report_2005_1/lt', 'state_of_environment_report_2005_1/lv',
+'state_of_environment_report_2005_1/no', 'state_of_environment_report_2005_1/pl', 'state_of_environment_report_2005_1/pt',
+'state_of_environment_report_2005_1/ro', 'state_of_environment_report_2005_1/sk', 'state_of_environment_report_2005_1/sl',
+'state_of_environment_report_2005_1/sv', 'state_of_environment_report_2005_1/tr', 'briefing_2005_3/da',
+'briefing_2005_3/es', 'briefing_2005_3/hu', 'briefing_2005_3/de',
+'briefing_2005_3/fr', 'briefing_2005_3/sv', 'briefing_2005_3/pt',
+'briefing_2005_3/no', 'briefing_2005_3/is', 'briefing_2005_3/it',
+'briefing_2005_3/tr', 'briefing_2005_3/lt', 'briefing_2005_3/lv',
+'briefing_2005_3/sk', 'briefing_2005_3/ro', 'briefing_2005_3/pl',
+'eea_report_2006_2/fr', 'briefing_2006_1/fr',
+'briefing_2006_1/no', 'briefing_2006_1/sk', 'briefing_2006_1/sv',
+'briefing_2006_1/tr', 'briefing_2006_1/da', 'briefing_2006_1/da/briefing_01_2006-DA.pdf',
+'briefing_2006_1/es', 'briefing_2006_1/is', 'briefing_2006_1/pt',
+'briefing_2006_1/et', 'briefing_2006_1/hu', 'briefing_2006_1/ro',
+'briefing_2006_1/fi', 'briefing_2006_1/lv', 'briefing_2006_1/lt',
+'briefing_2006_2/fr', 'briefing_2006_4/cs', 'briefing_2006_4/es',
+'briefing_2006_4/hu', 'briefing_2006_4/is', 'briefing_2006_4/lt',
+'briefing_2006_4/pt', 'briefing_2006_4/ro', 'briefing_2006_4/sk',
+'briefing_2006_4/sl', 'briefing_2006_4/sv', 'briefing_2006_4/tr',
+'briefing_2006_4/lv']:
             res_add('\n<sort_title>%s</sort_title>' % unicode(formatExport(lang.sort_title), 'ISO-8859-15').encode('utf8')) #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/eea_report_2006_4/fr']:
+        elif lang.absolute_url(1) in ['eea_report_2006_4/fr']:
             res_add('\n<sort_title>%s</sort_title>' % formatExport("Problèmes prioritaires pour l'environnement méditerranéen")) #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/brochure_2006_0306_112210/bg',
-                'http://reports.eea.europa.eu/briefing_2005_1/bg', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/bg',
-                'http://reports.eea.europa.eu/briefing_2004_3/bg', 'http://reports.eea.europa.eu/briefing_2004_4/bg']:
+        elif lang.absolute_url(1) in ['brochure_2006_0306_112210/bg',
+                'briefing_2005_1/bg', 'state_of_environment_report_2005_1/bg',
+                'briefing_2004_3/bg', 'briefing_2004_4/bg']:
             res_add('\n<sort_title>%s</sort_title>' % unicode(formatExport(lang.sort_title), 'ISO-8859-5').encode('utf8')) #string
-        elif lang.absolute_url() in ['http://reports.eea.europa.eu/briefing_2004_1/el',
-                'http://reports.eea.europa.eu/briefing_2004_3/el', 'http://reports.eea.europa.eu/briefing_2004_4/el',
-                'http://reports.eea.europa.eu/brochure_2006_0306_112210/el', 'http://reports.eea.europa.eu/briefing_2005_1/el',
-                'http://reports.eea.europa.eu/state_of_environment_report_2005_1/el', 'http://reports.eea.europa.eu/briefing_2006_4/el']:
+        elif lang.absolute_url(1) in ['briefing_2004_1/el',
+                'briefing_2004_3/el', 'briefing_2004_4/el',
+                'brochure_2006_0306_112210/el', 'briefing_2005_1/el',
+                'state_of_environment_report_2005_1/el', 'briefing_2006_4/el']:
             res_add('\n<sort_title>%s</sort_title>' % unicode(formatExport(lang.sort_title), 'iso-8859-7').encode('utf8')) #string
         else:
             try:
@@ -656,7 +660,7 @@ for report in exported_reports:
             elif '8.6 per cent of the total area of Sweden consists' in chp.content:
                 #TODO: fix 1996 on IE (invalid character)
                 pass
-            elif chp.absolute_url() == 'http://reports.eea.europa.eu/92-827-5263-1-sum/fi/page005.html':
+            elif chp.absolute_url(1) == '92-827-5263-1-sum/fi/page005.html':
                 #TODO: for report_year=-1&report_to=252&report_from=240
                 pass
             elif report.series_year == -1 and lang.language == 'el':
@@ -694,58 +698,58 @@ for report in exported_reports:
             res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
             res_add('\n<pagenumber>%s</pagenumber>' % formatExport(rep_file.pagenumber)) #int
 
-            if rep_file.absolute_url() == 'http://reports.eea.europa.eu/environmental_assessment_report_2002_9-sum/el/GR_summary_web.pdf':
+            if rep_file.absolute_url(1) == 'environmental_assessment_report_2002_9-sum/el/GR_summary_web.pdf':
                 res_add('\n<report_file_title>%s</report_file_title>' % unicode(rep_file.reporttitle, 'ISO-8859-15').encode('utf8'))
             elif report.series_year == -1 and not lang.language in ['bg', 'el']:
                 res_add('\n<report_file_title>%s</report_file_title>' % container.unescape(unicode(formatExport(rep_file.title), 'iso-8859-15')).encode('utf8')) #text
-            elif rep_file.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2001_10/fr/topic-10-web.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/da/EEA_Briefing_WIR_DA.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/hu/EEA_Briefing_WIR_HU.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/is/EEA_Briefing_WIR_IS.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/lt/EEA_Briefing_WIR_LT.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/pl/EEA_Briefing_WIR_PL.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/pt/EEA_Briefing_WIR_PT.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/sk/EEA_Briefing_WIR_SK.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/sv/EEA_Briefing_WIR_SV.pdf', 'http://reports.eea.europa.eu/briefing_2004_1/fi/Briefing-bio_FI_FINAL.pdf',
-'http://reports.eea.europa.eu/briefing_2004_1/no/Briefing-bio_NO_FINAL.pdf', 'http://reports.eea.europa.eu/briefing_2004_2/hu/HU_Briefing-Energy_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/da/DA_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/fi/FI_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/sv/SV_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/no/NO_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/hu/HU_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/tr/TR_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/sk/SK_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/is/IS_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/ro/RO_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/TERM2004/tr/TERM2004_TR_final.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/de/DE_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/et/ET_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/fr/FR_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/hu/HU_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/no/NO_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/pt/PT_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/da/DA_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/es/ES_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/sv/SV_Briefing_4.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/da/general_brochure_web-DA.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/de/general_brochure_web-DE.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/lv/general_brochure_web-LV.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/lt/general_brochure_web-LT.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/hu/general_brochure_web-HU.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/no/general_brochure_web-NO.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/pt/general_brochure_web-PT.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/sk/general_brochure_web-SK.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/fi/general_brochure_web-FI.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/sv/general_brochure_web-SV.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/tr/general_brochure_web-TR.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/is/general_brochure_web-IS.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/es/briefing_2005_1-es.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/it/briefing_2005_1-it.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/pt/briefing_2005_1-pt.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/sk/briefing_2005_1-sk.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/sv/briefing_2005_1-sv.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/et/briefing_2005_1-et.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/hu/briefing_2005_1-hu.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/da/briefing_2005_1-da.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/ro/briefing_2005_1-ro.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/fr/briefing_2005_1-fr.pdf', 'http://reports.eea.europa.eu/state_of_environment_report_2005_1/da/part-b_DA.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/da/Briefing_3_2005_DA.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/es/Briefing_3_2005_ES.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/hu/Briefing_3_2005_HU.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/cs/Briefing_3_2005_CS.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/de/Briefing_3_2005_DE.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/fr/Briefing_3_2005_FR.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/sv/Briefing_3_2005_SV.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/pt/Briefing_3_2005_PT.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/no/Briefing_3_2005_NO.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/mt/Briefing_3_2005_MT.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/is/Briefing_3_2005_IS.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/it/Briefing_3_2005_IT.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/tr/Briefing_3_2005_TR.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/lv/Briefing_3_2005_LV.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/sk/Briefing_3_2005_SK.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/ro/Briefing_3_2005_RO.pdf',
-'http://reports.eea.europa.eu/eea_report_2006_2/fr/irena2006-FR.pdf', 'http://reports.eea.europa.eu/eea_report_2006_4/fr/eea_report_4_2006_FR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/fr/briefing_01_2006-FR.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/no/briefing_01_2006-NO.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/sv/briefing_01_2006-SV.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/tr/briefing_01_2006-TR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/da/briefing_01_2006-DA.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/es/briefing_01_2006-ES.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/is/briefing_01_2006-IS.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/pt/briefing_01_2006-PT.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/et', 'http://reports.eea.europa.eu/briefing_2006_1/et/briefing_01_2006-ET.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/hu', 'http://reports.eea.europa.eu/briefing_2006_1/hu/briefing_01_2006-HU.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/ro/briefing_01_2006-RO.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/fi/briefing_01_2006-FI.pdf',
-'http://reports.eea.europa.eu/briefing_2006_2/fr/eea_briefing_02_2006_fr.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/es/eea_briefing_4_2006-ES.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/pt', 'http://reports.eea.europa.eu/briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf']:
+            elif rep_file.absolute_url(1) in ['topic_report_2001_10/fr/topic-10-web.pdf',
+'briefing_2003_1/da/EEA_Briefing_WIR_DA.pdf', 'briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
+'briefing_2003_1/hu/EEA_Briefing_WIR_HU.pdf', 'briefing_2003_1/is/EEA_Briefing_WIR_IS.pdf',
+'briefing_2003_1/lt/EEA_Briefing_WIR_LT.pdf', 'briefing_2003_1/pl/EEA_Briefing_WIR_PL.pdf',
+'briefing_2003_1/pt/EEA_Briefing_WIR_PT.pdf', 'briefing_2003_1/sk/EEA_Briefing_WIR_SK.pdf',
+'briefing_2003_1/sv/EEA_Briefing_WIR_SV.pdf', 'briefing_2004_1/fi/Briefing-bio_FI_FINAL.pdf',
+'briefing_2004_1/no/Briefing-bio_NO_FINAL.pdf', 'briefing_2004_2/hu/HU_Briefing-Energy_web.pdf',
+'briefing_2004_3/da/DA_Briefing_No_03_web.pdf', 'briefing_2004_3/fi/FI_Briefing_No_03_web.pdf',
+'briefing_2004_3/sv/SV_Briefing_No_03_web.pdf', 'briefing_2004_3/no/NO_Briefing_No_03_web.pdf',
+'briefing_2004_3/hu/HU_Briefing_No_03_web.pdf', 'briefing_2004_3/tr/TR_Briefing_No_03_web.pdf',
+'briefing_2004_3/sk/SK_Briefing_No_03_web.pdf', 'briefing_2004_3/is/IS_Briefing_No_03_web.pdf',
+'briefing_2004_3/ro/RO_Briefing_No_03_web.pdf', 'TERM2004/tr/TERM2004_TR_final.pdf',
+'briefing_2004_4/de/DE_Briefing_4.pdf', 'briefing_2004_4/et/ET_Briefing_4.pdf',
+'briefing_2004_4/fr/FR_Briefing_4.pdf', 'briefing_2004_4/hu/HU_Briefing_4.pdf',
+'briefing_2004_4/no/NO_Briefing_4.pdf', 'briefing_2004_4/pt/PT_Briefing_4.pdf',
+'briefing_2004_4/da/DA_Briefing_4.pdf', 'briefing_2004_4/es/ES_Briefing_4.pdf',
+'briefing_2004_4/sv/SV_Briefing_4.pdf', 'brochure_2006_0306_112210/da/general_brochure_web-DA.pdf',
+'brochure_2006_0306_112210/de/general_brochure_web-DE.pdf', 'brochure_2006_0306_112210/lv/general_brochure_web-LV.pdf',
+'brochure_2006_0306_112210/lt/general_brochure_web-LT.pdf', 'brochure_2006_0306_112210/hu/general_brochure_web-HU.pdf',
+'brochure_2006_0306_112210/no/general_brochure_web-NO.pdf', 'brochure_2006_0306_112210/pt/general_brochure_web-PT.pdf',
+'brochure_2006_0306_112210/sk/general_brochure_web-SK.pdf', 'brochure_2006_0306_112210/fi/general_brochure_web-FI.pdf',
+'brochure_2006_0306_112210/sv/general_brochure_web-SV.pdf', 'brochure_2006_0306_112210/tr/general_brochure_web-TR.pdf',
+'brochure_2006_0306_112210/is/general_brochure_web-IS.pdf', 'briefing_2005_1/es/briefing_2005_1-es.pdf',
+'briefing_2005_1/it/briefing_2005_1-it.pdf', 'briefing_2005_1/pt/briefing_2005_1-pt.pdf',
+'briefing_2005_1/sk/briefing_2005_1-sk.pdf', 'briefing_2005_1/sv/briefing_2005_1-sv.pdf',
+'briefing_2005_1/et/briefing_2005_1-et.pdf', 'briefing_2005_1/hu/briefing_2005_1-hu.pdf',
+'briefing_2005_1/da/briefing_2005_1-da.pdf', 'briefing_2005_1/ro/briefing_2005_1-ro.pdf',
+'briefing_2005_1/fr/briefing_2005_1-fr.pdf', 'state_of_environment_report_2005_1/da/part-b_DA.pdf',
+'briefing_2005_3/da/Briefing_3_2005_DA.pdf', 'briefing_2005_3/es/Briefing_3_2005_ES.pdf',
+'briefing_2005_3/hu/Briefing_3_2005_HU.pdf', 'briefing_2005_3/cs/Briefing_3_2005_CS.pdf',
+'briefing_2005_3/de/Briefing_3_2005_DE.pdf', 'briefing_2005_3/fr/Briefing_3_2005_FR.pdf',
+'briefing_2005_3/sv/Briefing_3_2005_SV.pdf', 'briefing_2005_3/pt/Briefing_3_2005_PT.pdf',
+'briefing_2005_3/no/Briefing_3_2005_NO.pdf', 'briefing_2005_3/mt/Briefing_3_2005_MT.pdf',
+'briefing_2005_3/is/Briefing_3_2005_IS.pdf', 'briefing_2005_3/it/Briefing_3_2005_IT.pdf',
+'briefing_2005_3/tr/Briefing_3_2005_TR.pdf', 'briefing_2005_3/lv/Briefing_3_2005_LV.pdf',
+'briefing_2005_3/sk/Briefing_3_2005_SK.pdf', 'briefing_2005_3/ro/Briefing_3_2005_RO.pdf',
+'eea_report_2006_2/fr/irena2006-FR.pdf', 'eea_report_2006_4/fr/eea_report_4_2006_FR.pdf',
+'briefing_2006_1/fr/briefing_01_2006-FR.pdf', 'briefing_2006_1/no/briefing_01_2006-NO.pdf',
+'briefing_2006_1/sv/briefing_01_2006-SV.pdf', 'briefing_2006_1/tr/briefing_01_2006-TR.pdf',
+'briefing_2006_1/da/briefing_01_2006-DA.pdf', 'briefing_2006_1/es/briefing_01_2006-ES.pdf',
+'briefing_2006_1/is/briefing_01_2006-IS.pdf', 'briefing_2006_1/pt/briefing_01_2006-PT.pdf',
+'briefing_2006_1/et', 'briefing_2006_1/et/briefing_01_2006-ET.pdf',
+'briefing_2006_1/hu', 'briefing_2006_1/hu/briefing_01_2006-HU.pdf',
+'briefing_2006_1/ro/briefing_01_2006-RO.pdf', 'briefing_2006_1/fi/briefing_01_2006-FI.pdf',
+'briefing_2006_2/fr/eea_briefing_02_2006_fr.pdf', 'briefing_2006_4/es/eea_briefing_4_2006-ES.pdf',
+'briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
+'briefing_2006_4/pt', 'briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf',
+'briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf']:
                 res_add('\n<report_file_title>%s</report_file_title>' % container.unescape(unicode(formatExport(rep_file.title), 'ISO-8859-15')).encode('utf8'))   #string
             else:
                 try:
@@ -757,56 +761,56 @@ for report in exported_reports:
                 res_add('\n<file_description>%s</file_description>' % container.unescape(unicode(formatExport(rep_file.file_description), 'iso-8859-15')).encode('utf8')) #text
             elif rep_file.getId() == 'eea_briefing_1_2007-de.pdf':
                 res_add('\n<file_description>%s</file_description>' % unicode(formatExport(rep_file.file_description), 'ISO-8859-15').encode('utf8'))  #text
-            elif rep_file.absolute_url() in ['http://reports.eea.europa.eu/92-9167-029-4/en/TopicReportNo22-1996.pdf',
-'http://reports.eea.europa.eu/92-9167-051-0/en/TopicReportNo16-1996.pdf', 'http://reports.eea.europa.eu/briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
-'http://reports.eea.europa.eu/briefing_2003_1/sv/EEA_Briefing_WIR_SV.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/da/DA_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/de/DE_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/es/ES_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/et/ET_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/fi/FI_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/fr/FR_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/sv/SV_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/it/IT_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/mt/MT_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/no/NO_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/pt/PT_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/hu/HU_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_3/tr/TR_Briefing_No_03_web.pdf',
-'http://reports.eea.europa.eu/briefing_2004_3/is/IS_Briefing_No_03_web.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/de/DE_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/et/ET_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/fi/FI_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/fr/FR_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/hu/HU_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/no/NO_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/pt/PT_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/da/DA_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/es/ES_Briefing_4.pdf',
-'http://reports.eea.europa.eu/briefing_2004_4/sv/SV_Briefing_4.pdf', 'http://reports.eea.europa.eu/briefing_2004_4/it/IT_Briefing_4.pdf',
-'http://reports.eea.europa.eu/technical_report_2004_6/en/tech_6_2004_web.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/da/general_brochure_web-DA.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/es/general_brochure_web-ES.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/hu/general_brochure_web-HU.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/no/general_brochure_web-NO.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/sk/general_brochure_web-SK.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/fi/general_brochure_web-FI.pdf', 'http://reports.eea.europa.eu/brochure_2006_0306_112210/sv/general_brochure_web-SV.pdf',
-'http://reports.eea.europa.eu/brochure_2006_0306_112210/is/general_brochure_web-IS.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/de/briefing_2005_1-de.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/es/briefing_2005_1-es.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/it/briefing_2005_1-it.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/no/briefing_2005_1-no.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/pt/briefing_2005_1-pt.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/sv/briefing_2005_1-sv.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/fi/briefing_2005_1-fi.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/et/briefing_2005_1-et.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/hu/briefing_2005_1-hu.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/da/briefing_2005_1-da.pdf', 'http://reports.eea.europa.eu/briefing_2005_1/fr/briefing_2005_1-fr.pdf'
-'http://reports.eea.europa.eu/report_2004_0622_154840/en/Annual-report-FINAL_web.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/da/Briefing_3_2005_DA.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/es/Briefing_3_2005_ES.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/fi/Briefing_3_2005_FI.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/hu/Briefing_3_2005_HU.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/de/Briefing_3_2005_DE.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/fr/Briefing_3_2005_FR.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/sv/Briefing_3_2005_SV.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/nl/Briefing_3_2005_NL.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/pt/Briefing_3_2005_PT.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/no/Briefing_3_2005_NO.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/et/Briefing_3_2005_ET.pdf',
-'http://reports.eea.europa.eu/briefing_2005_3/is/Briefing_3_2005_IS.pdf', 'http://reports.eea.europa.eu/briefing_2005_3/tr/Briefing_3_2005_TR.pdf',
-'http://reports.eea.europa.eu/briefing_2005_1/fr/briefing_2005_1-fr.pdf', 'http://reports.eea.europa.eu/report_2004_0622_154840/en/Annual-report-FINAL_web.pdf',
-'http://reports.eea.europa.eu/eea_report_2006_2/fr/irena2006-FR.pdf', 'http://reports.eea.europa.eu/eea_report_2006_4/fr/eea_report_4_2006_FR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/de/briefing_01_2006-DE.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/fr/briefing_01_2006-FR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/it/briefing_01_2006-IT.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/no/briefing_01_2006-NO.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/sv/briefing_01_2006-SV.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/tr/briefing_01_2006-TR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/da/briefing_01_2006-DA.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/es/briefing_01_2006-ES.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/nl/briefing_01_2006-NL.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/is/briefing_01_2006-IS.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/pt/briefing_01_2006-PT.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/et/briefing_01_2006-ET.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/hu/briefing_01_2006-HU.pdf', 'http://reports.eea.europa.eu/briefing_2006_1/ro/briefing_01_2006-RO.pdf',
-'http://reports.eea.europa.eu/briefing_2006_1/fi/briefing_01_2006-FI.pdf', 'http://reports.eea.europa.eu/briefing_2006_2/fr/eea_briefing_02_2006_fr.pdf',
-'http://reports.eea.europa.eu/briefing_2006_3/mt/eea_briefing_3_2006-mt.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/da/eea_briefing_4_2006-DA.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/de/eea_briefing_4_2006-DE.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/es/eea_briefing_4_2006-ES.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/et/eea_briefing_4_2006-ET.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/fr/eea_briefing_4_2006-FR.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/it/eea_briefing_4_2006-IT.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/no/eea_briefing_4_2006-NO.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/pl/eea_briefing_4_2006-PL.pdf', 'http://reports.eea.europa.eu/briefing_2006_4/fi/eea_briefing_4_2006-FI.pdf',
-'http://reports.eea.europa.eu/briefing_2006_4/lv/eea_briefing_4_2006-LV.pdf']:
+            elif rep_file.absolute_url(1) in ['92-9167-029-4/en/TopicReportNo22-1996.pdf',
+'92-9167-051-0/en/TopicReportNo16-1996.pdf', 'briefing_2003_1/fr/EEA_Briefing_WIR_FR.pdf',
+'briefing_2003_1/sv/EEA_Briefing_WIR_SV.pdf', 'briefing_2004_3/da/DA_Briefing_No_03_web.pdf',
+'briefing_2004_3/de/DE_Briefing_No_03_web.pdf', 'briefing_2004_3/es/ES_Briefing_No_03_web.pdf',
+'briefing_2004_3/et/ET_Briefing_No_03_web.pdf', 'briefing_2004_3/fi/FI_Briefing_No_03_web.pdf',
+'briefing_2004_3/fr/FR_Briefing_No_03_web.pdf', 'briefing_2004_3/sv/SV_Briefing_No_03_web.pdf',
+'briefing_2004_3/it/IT_Briefing_No_03_web.pdf', 'briefing_2004_3/mt/MT_Briefing_No_03_web.pdf',
+'briefing_2004_3/no/NO_Briefing_No_03_web.pdf', 'briefing_2004_3/pt/PT_Briefing_No_03_web.pdf',
+'briefing_2004_3/hu/HU_Briefing_No_03_web.pdf', 'briefing_2004_3/tr/TR_Briefing_No_03_web.pdf',
+'briefing_2004_3/is/IS_Briefing_No_03_web.pdf', 'briefing_2004_4/de/DE_Briefing_4.pdf',
+'briefing_2004_4/et/ET_Briefing_4.pdf', 'briefing_2004_4/fi/FI_Briefing_4.pdf',
+'briefing_2004_4/fr/FR_Briefing_4.pdf', 'briefing_2004_4/hu/HU_Briefing_4.pdf',
+'briefing_2004_4/no/NO_Briefing_4.pdf', 'briefing_2004_4/pt/PT_Briefing_4.pdf',
+'briefing_2004_4/da/DA_Briefing_4.pdf', 'briefing_2004_4/es/ES_Briefing_4.pdf',
+'briefing_2004_4/sv/SV_Briefing_4.pdf', 'briefing_2004_4/it/IT_Briefing_4.pdf',
+'technical_report_2004_6/en/tech_6_2004_web.pdf', 'brochure_2006_0306_112210/da/general_brochure_web-DA.pdf',
+'brochure_2006_0306_112210/es/general_brochure_web-ES.pdf', 'brochure_2006_0306_112210/hu/general_brochure_web-HU.pdf',
+'brochure_2006_0306_112210/no/general_brochure_web-NO.pdf', 'brochure_2006_0306_112210/sk/general_brochure_web-SK.pdf',
+'brochure_2006_0306_112210/fi/general_brochure_web-FI.pdf', 'brochure_2006_0306_112210/sv/general_brochure_web-SV.pdf',
+'brochure_2006_0306_112210/is/general_brochure_web-IS.pdf', 'briefing_2005_1/de/briefing_2005_1-de.pdf',
+'briefing_2005_1/es/briefing_2005_1-es.pdf', 'briefing_2005_1/it/briefing_2005_1-it.pdf',
+'briefing_2005_1/no/briefing_2005_1-no.pdf', 'briefing_2005_1/pt/briefing_2005_1-pt.pdf',
+'briefing_2005_1/sv/briefing_2005_1-sv.pdf', 'briefing_2005_1/fi/briefing_2005_1-fi.pdf',
+'briefing_2005_1/et/briefing_2005_1-et.pdf', 'briefing_2005_1/hu/briefing_2005_1-hu.pdf',
+'briefing_2005_1/da/briefing_2005_1-da.pdf', 'briefing_2005_1/fr/briefing_2005_1-fr.pdf'
+'report_2004_0622_154840/en/Annual-report-FINAL_web.pdf', 'briefing_2005_3/da/Briefing_3_2005_DA.pdf',
+'briefing_2005_3/es/Briefing_3_2005_ES.pdf', 'briefing_2005_3/fi/Briefing_3_2005_FI.pdf',
+'briefing_2005_3/hu/Briefing_3_2005_HU.pdf', 'briefing_2005_3/de/Briefing_3_2005_DE.pdf',
+'briefing_2005_3/fr/Briefing_3_2005_FR.pdf', 'briefing_2005_3/sv/Briefing_3_2005_SV.pdf',
+'briefing_2005_3/nl/Briefing_3_2005_NL.pdf', 'briefing_2005_3/pt/Briefing_3_2005_PT.pdf',
+'briefing_2005_3/no/Briefing_3_2005_NO.pdf', 'briefing_2005_3/et/Briefing_3_2005_ET.pdf',
+'briefing_2005_3/is/Briefing_3_2005_IS.pdf', 'briefing_2005_3/tr/Briefing_3_2005_TR.pdf',
+'briefing_2005_1/fr/briefing_2005_1-fr.pdf', 'report_2004_0622_154840/en/Annual-report-FINAL_web.pdf',
+'eea_report_2006_2/fr/irena2006-FR.pdf', 'eea_report_2006_4/fr/eea_report_4_2006_FR.pdf',
+'briefing_2006_1/de/briefing_01_2006-DE.pdf', 'briefing_2006_1/fr/briefing_01_2006-FR.pdf',
+'briefing_2006_1/it/briefing_01_2006-IT.pdf', 'briefing_2006_1/no/briefing_01_2006-NO.pdf',
+'briefing_2006_1/sv/briefing_01_2006-SV.pdf', 'briefing_2006_1/tr/briefing_01_2006-TR.pdf',
+'briefing_2006_1/da/briefing_01_2006-DA.pdf', 'briefing_2006_1/es/briefing_01_2006-ES.pdf',
+'briefing_2006_1/nl/briefing_01_2006-NL.pdf', 'briefing_2006_1/is/briefing_01_2006-IS.pdf',
+'briefing_2006_1/pt/briefing_01_2006-PT.pdf', 'briefing_2006_1/et/briefing_01_2006-ET.pdf',
+'briefing_2006_1/hu/briefing_01_2006-HU.pdf', 'briefing_2006_1/ro/briefing_01_2006-RO.pdf',
+'briefing_2006_1/fi/briefing_01_2006-FI.pdf', 'briefing_2006_2/fr/eea_briefing_02_2006_fr.pdf',
+'briefing_2006_3/mt/eea_briefing_3_2006-mt.pdf', 'briefing_2006_4/da/eea_briefing_4_2006-DA.pdf',
+'briefing_2006_4/de/eea_briefing_4_2006-DE.pdf', 'briefing_2006_4/es/eea_briefing_4_2006-ES.pdf',
+'briefing_2006_4/et/eea_briefing_4_2006-ET.pdf', 'briefing_2006_4/fr/eea_briefing_4_2006-FR.pdf',
+'briefing_2006_4/hu/eea_briefing_4_2006-HU.pdf', 'briefing_2006_4/is/eea_briefing_4_2006-IS.pdf',
+'briefing_2006_4/it/eea_briefing_4_2006-IT.pdf', 'briefing_2006_4/no/eea_briefing_4_2006-NO.pdf',
+'briefing_2006_4/pt/eea_briefing_4_2006-PT.pdf', 'briefing_2006_4/sv/eea_briefing_4_2006-SV.pdf',
+'briefing_2006_4/pl/eea_briefing_4_2006-PL.pdf', 'briefing_2006_4/fi/eea_briefing_4_2006-FI.pdf',
+'briefing_2006_4/lv/eea_briefing_4_2006-LV.pdf']:
                 res_add('\n<file_description>%s</file_description>' % container.unescape(unicode(formatExport(rep_file.file_description), 'ISO-8859-15')).encode('utf8'))
             else:
                 try:
@@ -823,7 +827,7 @@ for report in exported_reports:
             #Basic Property Sheet
             res_add('\n<title>%s</title>' % formatExport(ord.title))                                                    #string
             res_add('\n<order_id>%s</order_id>' % formatExport(ord.order_id))                                           #string
-            if ord.absolute_url() in ['http://reports.eea.europa.eu/environmental_issue_report_2002_31-sum/de/423218120']:
+            if ord.absolute_url(1) in ['environmental_issue_report_2002_31-sum/de/423218120']:
                 res_add('\n<customer_mail>%s</customer_mail>' % unicode(formatExport(ord.customer_mail), 'ISO-8859-15').encode('utf8'))                            #string
             else:
                 res_add('\n<customer_mail>%s</customer_mail>' % formatExport(ord.customer_mail))                            #string
@@ -835,15 +839,15 @@ for report in exported_reports:
             res_add('\n<organisation>%s</organisation>' % unicode(formatExport(ord.organisation), 'ISO-8859-15').encode('utf8'))                               #string
             res_add('\n<address>%s</address>' % unicode(formatExport(ord.address), 'ISO-8859-15').encode('utf8'))                                              #string
 
-            if ord.absolute_url() in ['http://reports.eea.europa.eu/topic_report_2002_4/en/401514697',
-           'http://reports.eea.europa.eu/topic_report_2002_4/en/578070962', 'http://reports.eea.europa.eu/topic_report_2003_1/en/604315246',
-           'http://reports.eea.europa.eu/report_2003_0617_150910/it/688472941', 'http://reports.eea.europa.eu/environmental_issue_report_2001_22/en/693319874']:
+            if ord.absolute_url(1) in ['topic_report_2002_4/en/401514697',
+           'topic_report_2002_4/en/578070962', 'topic_report_2003_1/en/604315246',
+           'report_2003_0617_150910/it/688472941', 'environmental_issue_report_2001_22/en/693319874']:
                 res_add('\n<postal_code>%s</postal_code>' % unicode(formatExport(ord.postal_code), 'ISO-8859-15').encode('utf8'))                              #string
             else:
                 res_add('\n<postal_code>%s</postal_code>' % formatExport(ord.postal_code))                                  #string
             res_add('\n<city>%s</city>' % unicode(formatExport(ord.city), 'ISO-8859-15').encode('utf8'))                                                       #string
-            if ord.absolute_url() in ['http://reports.eea.europa.eu/Topic_report_No_111999/en/15710794',
-                                      'http://reports.eea.europa.eu/topic_report_2001_7/en/769877952']:
+            if ord.absolute_url(1) in ['Topic_report_No_111999/en/15710794',
+                                      'topic_report_2001_7/en/769877952']:
                 res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
             elif 'Espa' in ord.country:
                 res_add('\n<country>%s</country>' % unicode(formatExport(ord.country), 'ISO-8859-15').encode('utf8'))
@@ -921,7 +925,7 @@ for report in exported_reports:
                         res_add('\n<file_title>Greenhouse gas emission trends in Europe, 1990-2000</file_title>')
                     elif file.getId() == 'topic_4.pdf':
                         res_add('\n<file_title>Air quality in Europe. State and trends 1990-99</file_title>')
-                    elif file.absolute_url() in file_exceptions:
+                    elif file.absolute_url(1) in file_exceptions:
                         res_add('\n<file_title>%s</file_title>' % unicode(formatExport(file_title), 'ISO-8859-15').encode('utf-8'))
                     else:
                         try:
@@ -946,10 +950,10 @@ print ''.join(res)
 return printed
 
 #TODO: check this for unclosed &# entities
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/ru -> reporttile, sort_title
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/ru/kiev_sum_ru.pdf -> file_title
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/cs/kiev_cs.pdf -> report_file_title
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/sk -> reporttile
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/sk/kiev_sk.pdf -> report_file_title
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/pl -> reporttitle
-#http://reports.eea.europa.eu/environmental_assessment_report_2003_10-sum/pl/kiev_pl.pdf -> file_title
+#environmental_assessment_report_2003_10-sum/ru -> reporttile, sort_title
+#environmental_assessment_report_2003_10-sum/ru/kiev_sum_ru.pdf -> file_title
+#environmental_assessment_report_2003_10-sum/cs/kiev_cs.pdf -> report_file_title
+#environmental_assessment_report_2003_10-sum/sk -> reporttile
+#environmental_assessment_report_2003_10-sum/sk/kiev_sk.pdf -> report_file_title
+#environmental_assessment_report_2003_10-sum/pl -> reporttitle
+#environmental_assessment_report_2003_10-sum/pl/kiev_pl.pdf -> file_title

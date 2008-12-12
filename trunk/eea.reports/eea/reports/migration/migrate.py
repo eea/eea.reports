@@ -1,6 +1,6 @@
 """ Migrate old zope reports to plone.
 """
-from urllib import urlencode
+from urllib import urlencode, unquote
 from p4a.subtyper.interfaces import ISubtyper
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
@@ -105,7 +105,7 @@ class MigrateReports(object):
         file_urls = datamodel.get('file', {}).keys()
         # Handle empty list
         if not file_urls:
-            logger.warn('Skip file property for %s, lang %s: files = %s',
+            logger.warn('No file property for %s, lang %s: files = %s',
                         datamodel.getId(), datamodel.get('lang'), file_urls)
             return None
         # Handle one file
@@ -116,7 +116,7 @@ class MigrateReports(object):
         default_url = DEFAULT_FILE.get('%s/%s' % (
             datamodel.get('lang'), datamodel.getId()), None)
         if not default_url:
-            logger.warn('Skip file property for %s, lang %s: file = %s',
+            logger.warn('No default file defined for %s, lang %s: file = %s',
                         datamodel.getId(), datamodel.get('lang'), file_urls)
             return None
 
@@ -135,6 +135,7 @@ class MigrateReports(object):
 
         ctype = 'application/pdf'
         filename = file_url.split('/')[-1]
+        filename = unquote(filename)
         # Get pdf file
         data = grab_file_from_url(file_url, ctype, zope=False)
         # Update pdf metadata

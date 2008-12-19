@@ -442,7 +442,15 @@ for report in exported_reports:
 
     ###Language Report objects
     ##########################
-    for lang in report.objectValues('Language Report'):
+    language_reports = report.objectValues('Language Report')
+    for lang_rep in language_reports:
+    		if lang_rep.language.lower() == 'en':
+    		    en_lang_rep = lang_rep
+    		    break
+    language_reports.remove(lang_rep)
+    language_reports.insert(0, lang_rep)
+    
+    for lang in language_reports:
         res_add('\n<language_report url="%s">' % lang.absolute_url())
         #Basic Property Sheet
         res_add('\n<id>%s</id>' % formatExport(lang.id))                           #string

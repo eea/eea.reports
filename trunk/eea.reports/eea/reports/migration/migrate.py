@@ -1,5 +1,6 @@
 """ Migrate old zope reports to plone.
 """
+from pprint import pformat
 from urllib import urlencode, unquote
 from p4a.subtyper.interfaces import ISubtyper
 from zope.component import getUtility
@@ -24,6 +25,7 @@ from config import (
 )
 import logging
 logger = logging.getLogger('eea.reports.migration')
+info = logger.info
 
 class MigrateReports(object):
     """ Class used to migrate reports.
@@ -49,24 +51,24 @@ class MigrateReports(object):
     def _redirect(self, msg):
         """ Set status message and redirect to context absolute_url
         """
+        if not self.request:
+            return msg
         context = getattr(self.context, REPORTS_CONTAINER, self.context)
         url = context.absolute_url()
         IStatusMessage(self.request).addStatusMessage(msg, type='info')
         self.request.response.redirect(url)
-        return ''
     #
     # Getters
     #
     def _get_container(self, *args, **kwargs):
         """ Creates folder structure to import old reports
         """
-        wftool = getToolByName(self.context, 'portal_workflow')
-        ctool = getToolByName(self.context, 'portal_catalog')
         site = getattr(self.context, 'SITE', self.context)
         # Add publications folder
         if REPORTS_CONTAINER not in site.objectIds():
+            info('Create folder %s/%s', site.absolute_url(1), REPORTS_CONTAINER)
             site.invokeFactory('Folder',
-                               id=REPORTS_CONTAINER, title=REPORTS_CONTAINER.title())
+                id=REPORTS_CONTAINER, title=REPORTS_CONTAINER.title())
         publications = getattr(site, REPORTS_CONTAINER)
         publications.setConstrainTypesMode(1)
         publications.setImmediatelyAddableTypes(PUBLICATIONS_SUBOBJECTS)
@@ -78,35 +80,29 @@ class MigrateReports(object):
             if lang == 'en':
                 continue
             if not publications.getTranslation(lang):
+                info('Add %s translation for %s', lang,
+                     publications.absolute_url(1))
                 publications.addTranslation(lang)
             translated = publications.getTranslation(lang)
-            try:
-                wftool.doActionFor(translated, 'publish')
-            except Exception, err:
-                logger.warn('Could not publish %s: %s',
-                            translated.absolute_url(1), err)
+            self._publish(translated)
+
         publications.invalidateTranslationCache()
 
         # Publish folders
-        try:
-            wftool.doActionFor(publications, 'publish')
-        except Exception, err:
-            logger.warn('Could not publish %s: %s',
-                        publications.absolute_url(1), err)
+        self._publish(publications)
 
         # Returns
         return publications
-    #
-    # Handlers
-    #
+
     def _get_file_url(self, datamodel):
         """ Returns default file url for given datamodel.
         """
         file_urls = datamodel.get('file', {}).keys()
         # Handle empty list
         if not file_urls:
+            text = pformat(file_urls)
             logger.warn('No file property for %s, lang %s: files = %s',
-                        datamodel.getId(), datamodel.get('lang'), file_urls)
+                        datamodel.getId(), datamodel.get('lang'), text)
             return None
         # Handle one file
         if len(file_urls) == 1:
@@ -116,14 +112,37 @@ class MigrateReports(object):
         default_url = DEFAULT_FILE.get('%s/%s' % (
             datamodel.get('lang'), datamodel.getId()), None)
         if not default_url:
+            text = pformat(file_urls)
             logger.warn('No default file defined for %s, lang %s: file = %s',
-                        datamodel.getId(), datamodel.get('lang'), file_urls)
+                        datamodel.getId(), datamodel.get('lang'), text)
             return None
 
         file_urls = [url for url in file_urls if url.endswith(default_url)]
         if not file_urls:
             return None
         return file_urls[0]
+    #
+    # Handlers
+    #
+    def _reindex(self, doc):
+        """ Reindex document
+        """
+        ctool = getToolByName(self.context, 'portal_catalog')
+        ctool.reindexObject(doc)
+
+    def _publish(self, doc):
+        """ Try to publish given document
+        """
+        wftool = getToolByName(self.context, 'portal_workflow')
+        state = wftool.getInfoFor(doc, 'review_state', '(Unknown)')
+        if state == 'published':
+            return
+        try:
+            wftool.doActionFor(doc, 'publish',
+                               comment='Auto published by migration script.')
+        except Exception, err:
+            logger.warn('Could not publish %s, state: %s, error: %s',
+                        doc.absolute_url(1), state, err)
 
     def _process_datamodel(self, datamodel):
         """ Process datamodel properties before adding new file
@@ -170,7 +189,7 @@ class MigrateReports(object):
         context = context.getTranslation(lang)
 
         if report_id not in context.objectIds():
-            logger.info('Adding report id: %s lang: %s', report_id, lang)
+            info('Adding report id: %s lang: %s', report_id, lang)
             report_id = context.invokeFactory('Folder', id=report_id)
         report = getattr(context, report_id)
         report.setLanguage(lang)
@@ -192,8 +211,7 @@ class MigrateReports(object):
         """
         lang = datamodel.get('lang')
         if not report.hasTranslation(lang):
-            logger.info('Adding report %s translation: %s',
-                        datamodel.getId(), lang)
+            info('Adding report %s translation: %s', datamodel.getId(), lang)
             report.addTranslation(lang)
 
         translated = report.getTranslation(lang)
@@ -206,7 +224,7 @@ class MigrateReports(object):
     def update_properties(self, report, datamodel):
         """ Update report properties
         """
-        logger.info('Update report %s properties', report.absolute_url(1))
+        info('Update report %s properties', report.absolute_url(1))
         report.setExcludeFromNav(True)
         datamodel = self._process_datamodel(datamodel)
         form = datamodel()
@@ -222,27 +240,22 @@ class MigrateReports(object):
             file_field.getMutator(report)(report_file, **kwargs)
 
         # Publish
-        wftool = getToolByName(self.context, 'portal_workflow')
-        ctool = getToolByName(self.context, 'portal_catalog')
-        try:
-            wftool.doActionFor(report, 'publish',
-                               comment='Auto published by migration script.')
-        except Exception, err:
-            logger.warn('Could not publish report %s, lang %s: %s',
-                        datamodel.getId(), datamodel.get('lang'), err)
+        self._publish(report)
+
+        # Update additional content
         self.update_additional_files_content(report, datamodel)
         self.update_chapters(report, datamodel)
         self.update_images(report, datamodel)
-        ctool.reindexObject(report)
-        ctool.reindexObject(report.getParentNode())
+
+        # Reindex
+        self._reindex(report)
+        self._reindex(report.getParentNode())
 
     def update_additional_files_content(self, report, datamodel):
         """ Add additional files
         """
         file_urls = datamodel.get('file', {})
         default = self._get_file_url(datamodel)
-        ctool = getToolByName(self.context, 'portal_catalog')
-        wftool = getToolByName(self.context, 'portal_workflow')
         for file_url, file_title in file_urls.items():
             # Skip default file
             if file_url == default:
@@ -253,30 +266,24 @@ class MigrateReports(object):
 
             doc_id = cleanup_id(filename)
             if doc_id not in report.objectIds():
-                logger.info('Add report: %s additional file: %s',
+                info('Add report: %s additional file: %s',
                             report.absolute_url(1), doc_id)
                 doc_id = report.invokeFactory('File', id=doc_id)
             doc = getattr(report, doc_id)
-            logger.info('Update additional file %s properties',
-                        doc.absolute_url(1))
+            info('Update additional file %s properties', doc.absolute_url(1))
             doc.processForm(data=1, metadata=1, values={'file_file': file_obj})
             doc.setTitle(file_title)
+
             # Publish
-            try:
-                wftool.doActionFor(doc, 'publish',
-                    comment='Auto published by migration script.')
-            except Exception, err:
-                logger.warn('Could not publish file %s: %s',
-                            doc.absolute_url(1), err)
+            self._publish(doc)
+
             # Reindex
-            ctool.reindexObject(doc)
+            self._reindex(doc)
 
     def update_chapters(self, report, datamodel):
         """ Add additional chapters
         """
         chapters = datamodel.get('chapters', {})
-        ctool = getToolByName(self.context, 'portal_catalog')
-        wftool = getToolByName(self.context, 'portal_workflow')
         chapter_keys = chapters.keys()
         chapter_keys.sort()
         for doc_id in chapter_keys:
@@ -297,15 +304,12 @@ class MigrateReports(object):
             title = len(value) > 0 and value[0] or doc_id
             if title:
                 doc.setTitle(title)
+
             # Publish
-            try:
-                wftool.doActionFor(doc, 'publish',
-                    comment='Auto published by migration script.')
-            except Exception, err:
-                logger.warn('Could not publish chapter %s: %s',
-                            doc.absolute_url(1), err)
+            self._publish(doc)
+
             # Reindex
-            ctool.reindexObject(doc)
+            self._reindex(doc)
 
     def update_images(self, report, datamodel):
         """ Add additional chapters
@@ -348,9 +352,9 @@ class MigrateReports(object):
     def __call__(self):
         container = self._get_container()
         index = 0
-        logger.info('Import reports using xml file: %s', self.xmlfile)
+        info('Import reports using xml file: %s', self.xmlfile)
         for index, report in enumerate(get_reports(self.xmlfile)):
             self.add_report(container, report)
         msg = '%d language reports imported !' % (index + 1)
-        logger.info(msg)
+        info(msg)
         return self._redirect(msg)

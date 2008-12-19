@@ -7,6 +7,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 
 import logging
 logger = logging.getLogger('eea.reports.migration')
+info = logger.info
 
 class MigrateRelations(object):
     """ Class used to migrate reports.
@@ -75,11 +76,11 @@ class MigrateRelations(object):
         except Exception, err:
             logger.error('COULD NOT add %s to publications_groups vocabulary: %s', term, err)
         else:
-            logger.info('Added %s to publications_groups vocabulary', term)
+            info('Added %s to publications_groups vocabulary', term)
 
         term = (term,)
         for doc in docs:
-            logger.info('Update %s publications_groups with %s', doc.getId(), term)
+            info('Update %s publications_groups with %s', doc.getId(), term)
             doc.getField('publication_groups').getMutator(doc)(term)
     #
     # Inclusion relations
@@ -99,7 +100,7 @@ class MigrateRelations(object):
         terms = [getattr(parent, x, None) for x in is_part if x]
         if not terms:
             return
-        logger.info('Update %s relatedItems with %s', doc.getId(), terms)
+        info('Update %s relatedItems with %s', doc.getId(), terms)
         doc.getField('relatedItems').getMutator(doc)(terms)
 
     def _handle_has_part_relation(self, doc, parent):
@@ -112,7 +113,7 @@ class MigrateRelations(object):
             rels = set(term.getField('relatedItems').getAccessor(term)())
             rels.add(doc)
             rels = list(rels)
-            logger.info('Update %s relatedItems with %s', term.getId(), rels)
+            info('Update %s relatedItems with %s', term.getId(), rels)
             term.getField('relatedItems').getMutator(term)(rels)
     #
     # Browser interface
@@ -121,11 +122,11 @@ class MigrateRelations(object):
         container = getattr(self.context, config.REPORTS_CONTAINER, None)
         if not container:
             msg = 'You should run @@migrate_reports script first !!!'
-            logger.info(msg)
+            info(msg)
             return self._redirect(msg)
         self._update_relations(container)
         self._update_inclusion_relations(container)
 
         msg = 'Publications relations updated !'
-        logger.info(msg)
+        info(msg)
         return self._redirect(msg)

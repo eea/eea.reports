@@ -26,6 +26,12 @@ class MigrateRelations(object):
             IStatusMessage(self.request).addStatusMessage(msg, type='info')
             return self.request.response.redirect(url)
         return msg
+
+    def _reindex(self, doc):
+        """ Reindex document
+        """
+        ctool = getToolByName(self.context, 'portal_catalog')
+        ctool.reindexObject(doc)
     #
     # Group relations
     #
@@ -82,6 +88,7 @@ class MigrateRelations(object):
         for doc in docs:
             info('Update %s publications_groups with %s', doc.getId(), term)
             doc.getField('publication_groups').getMutator(doc)(term)
+            self._reindex(doc)
     #
     # Inclusion relations
     #
@@ -97,24 +104,29 @@ class MigrateRelations(object):
         """
         anno = IAnnotations(doc)
         is_part = set(anno.pop(config.ANNOTATION_ISPARTOF, []))
-        terms = [getattr(parent, x, None) for x in is_part if x]
+        terms = [getattr(parent, x, None) for x in is_part
+                 if x and getattr(parent, x, None)]
+
         if not terms:
             return
         info('Update %s relatedItems with %s', doc.getId(), terms)
         doc.getField('relatedItems').getMutator(doc)(terms)
+        self._reindex(doc)
 
     def _handle_has_part_relation(self, doc, parent):
         """ Handle has part relation
         """
         anno = IAnnotations(doc)
         has_part = set(anno.pop(config.ANNOTATION_HASPART, []))
-        terms = [getattr(parent, x, None) for x in has_part if x]
+        terms = [getattr(parent, x, None) for x in has_part
+                 if x and getattr(parent, x, None)]
         for term in terms:
             rels = set(term.getField('relatedItems').getAccessor(term)())
             rels.add(doc)
             rels = list(rels)
             info('Update %s relatedItems with %s', term.getId(), rels)
             term.getField('relatedItems').getMutator(term)(rels)
+            self._reindex(term)
     #
     # Browser interface
     #

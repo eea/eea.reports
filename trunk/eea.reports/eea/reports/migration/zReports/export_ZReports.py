@@ -127,15 +127,15 @@ lt_reporttitle = "Europos aplinka - Ketvirtasis ávertinimas: 6 Tausojantis vart
 
 TRAILER1 = """
 <p><strong>Underpinning Energy and Environment indicators:</strong></p>
-<p>The 'Energy and Environment indicators' underpinning the Energy and Environment report refer to data covering the period 
-1990-2005, with few exceptions. The main data sources were: The European Community LRTAP Convention emission inventory report 
+<p>The 'Energy and Environment indicators' underpinning the Energy and Environment report refer to data covering the period
+1990-2005, with few exceptions. The main data sources were: The European Community LRTAP Convention emission inventory report
 1990-2005, the 2007 EC Greenhouse Gas Emission inventory report; and the energy balances from Eurostat (for European countries)
- and from the IEA (for countries not covered by Eurostat). More updated greenhouse gas and air pollutant emissions data can 
+ and from the IEA (for countries not covered by Eurostat). More updated greenhouse gas and air pollutant emissions data can
 be obtained from <a href="http://www.eea.europa.eu/themes/climate">http://www.eea.europa.eu/themes/climate</a>
- and <a href="http://www.eea.europa.eu/themes/air"> http://www.eea.europa.eu/themes/air</a></p> 
-<p>The energy and environment 
-indicators with 2006 data should be available in February 2009. The set will also include three new indicators which have 
-been partially included in the Energy and Environment Report (i.e. renewable final energy consumption, energy efficiency 
+ and <a href="http://www.eea.europa.eu/themes/air"> http://www.eea.europa.eu/themes/air</a></p>
+<p>The energy and environment
+indicators with 2006 data should be available in February 2009. The set will also include three new indicators which have
+been partially included in the Energy and Environment Report (i.e. renewable final energy consumption, energy efficiency
 and CO2 savings, and security of energy supply).</p>
 """
 
@@ -445,12 +445,12 @@ for report in exported_reports:
     ##########################
     language_reports = report.objectValues('Language Report')
     for lang_rep in language_reports:
-    		if lang_rep.language.lower() == 'en':
-    		    en_lang_rep = lang_rep
-    		    break
+        if lang_rep.language.lower() == 'en':
+            en_lang_rep = lang_rep
+            break
     language_reports.remove(lang_rep)
     language_reports.insert(0, lang_rep)
-    
+
     for lang in language_reports:
         res_add('\n<language_report url="%s">' % lang.absolute_url())
         #Basic Property Sheet
@@ -927,7 +927,7 @@ for report in exported_reports:
         ###Zope File objects
         #########################
         files = lang.objectValues('File')
-        
+
         if lang.absolute_url(1) in ['eea_report_2006_8/en', 'eea_report_2008_6/en']:
             files.extend(lang.factsheets.objectValues('File'))
 
@@ -979,7 +979,7 @@ for report in exported_reports:
             res_add('\n<zope_image url="%s">' % img.absolute_url())
             res_add('\n<id>%s</id>' % formatExport(img.getId()))
             res_add('\n</zope_image>')
-            
+
         res_add('\n</language_report>')
     res_add('\n</report>')
 

@@ -48,6 +48,7 @@ def formatExport(data, skip=0):
         if data_type in ['int', 'date']:
             res = str(res)
         if len(res) > 5:
+            res = res.replace('<! Table 3 end -->', '<!-- Table 3 end -->')
             if '%' in res or '&nbsp;' in res or '</p>' in res:
                 res = '<![CDATA[%s]]>' % res
             else:

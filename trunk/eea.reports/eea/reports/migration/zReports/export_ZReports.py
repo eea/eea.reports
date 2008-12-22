@@ -687,16 +687,7 @@ for report in exported_reports:
                     res_add('\n<title>%s</title>' % formatExport(chp.title))                #text
 
             #for 1996 <content> need ISO-8859-15->utf8
-            if 'southern part of the country are generally rather small. The greatest river is' in chp.content:
-                #TODO: fix 1996 on IE (invalid character)
-                pass
-            elif '8.6 per cent of the total area of Sweden consists' in chp.content:
-                #TODO: fix 1996 on IE (invalid character)
-                pass
-            elif chp.absolute_url(1) == '92-827-5263-1-sum/fi/page005.html':
-                #TODO: for report_year=-1&report_to=252&report_from=240
-                pass
-            elif report.series_year == -1 and lang.language == 'el':
+            if report.series_year == -1 and lang.language == 'el':
                 res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'iso-8859-7')).encode('utf8')) #text
             else:
                 # ISO-8859-15 for 1996 reports

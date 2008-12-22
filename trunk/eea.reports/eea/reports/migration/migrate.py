@@ -176,6 +176,12 @@ class MigrateReports(object):
 
         # Add translation for existing reports
         langs = context.portal_languages.getSupportedLanguages()
+
+        if lang not in langs:
+            logger.warn('Skip report id: %s, lang: %s. Language not available.',
+                        report_id, lang)
+            return
+
         canonical = None
         for portal_lang in langs:
             pub_tr = context.getTranslation(portal_lang)

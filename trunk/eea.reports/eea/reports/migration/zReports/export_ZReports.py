@@ -1,6 +1,4 @@
-﻿##parameters=report_year='',report_from='',report_to=''
-##title=Export ZReports
-# -*- coding: utf8 -*-
+﻿# -*- coding: utf8 -*-
 
 # Get the HTML request and response objects
 request = container.REQUEST
@@ -689,6 +687,12 @@ for report in exported_reports:
             #for 1996 <content> need ISO-8859-15->utf8
             if report.series_year == -1 and lang.language == 'el':
                 res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'iso-8859-7')).encode('utf8')) #text
+            elif lang.language == 'fi' and chp.id == 'page005.html':
+                ex_list = ['','']
+                res_fi = container.unescape(unicode(chp.content, 'ISO-8859-15')).encode('utf8')
+                for ex in ex_list:
+                    res_fi = res_fi.replace(ex, '')
+                res_add('\n<content><![CDATA[%s]]></content>' % res_fi)
             else:
                 # ISO-8859-15 for 1996 reports
                 res_add('\n<content>%s</content>' % container.unescape(unicode(formatExport(chp.content), 'ISO-8859-15')).encode('utf8'))  #string

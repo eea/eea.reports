@@ -1,4 +1,6 @@
-﻿# -*- coding: utf8 -*-
+﻿#parameters=report_year='',report_from='',report_to=''
+#title=Export ZReports
+# -*- coding: utf8 -*-
 
 # Get the HTML request and response objects
 request = container.REQUEST

@@ -125,7 +125,7 @@ class SchemaExtender(object):
             ),
             ReportBooleanField('for_sale',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 default=False,
                 widget=atapi.BooleanWidget(
                     label = _(u'label_for_sale', default=u'For sale?'),
@@ -147,7 +147,7 @@ class SchemaExtender(object):
             ),
             ReportLinesField('creators',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 multiValued=1,
                 default=(u'EEA (European Environment Agency)',),
                 vocabulary=NamedVocabulary("report_creators"),
@@ -216,7 +216,7 @@ class SchemaExtender(object):
             ),
             ReportFloatField('price',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 default=0,
                 widget=atapi.DecimalWidget(
                     label=_(u'label_price', default=u'Price (Euro)'),
@@ -254,13 +254,13 @@ class SchemaExtender(object):
                 default=0,
                 widget=atapi.IntegerWidget(
                     label=_(u'label_pages', default=u'Pages'),
-                    description=_(u'description_pages', default=u'Fill in pages'),
+                    description=_(u'description_pages', default=u'Fill in total number of pages'),
                     i18n_domain='eea.reports',
                 ),
             ),
             ReportStringField('copyrights',
                 schemata='report',
-                languageIndependent=False,
+                languageIndependent=True,
                 default=COPYRIGHTS,
                 widget=atapi.StringWidget(
                     label=_(u'label_copyrights', default=u'Copyrights'),

@@ -64,8 +64,11 @@
             report_type python:report_type and here.translate(vocab.getMsgId(report_type),
                         default=vocab.getValue(report_type)) or report_type;
             report_num python:len(serial_title)>1 and serial_title[1];
-            report_year python:len(serial_title)>2 and serial_title[2];"
-            tal:replace="string:${report_type} No ${report_num}/${report_year}">
+            report_year python:len(serial_title)>2 and serial_title[2];
+            report_title python:report_type;
+            report_title python:report_num and '%s No %s' % (report_title, report_num) or report_title;
+            report_title python:report_year != -1 and '%s/%s' % (report_title, report_year) or report_title;"
+            tal:replace="report_title">
             Report No 7/2000
         </tal:serial_title>
     </div>

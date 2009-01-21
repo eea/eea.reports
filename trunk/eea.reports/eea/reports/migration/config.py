@@ -39,7 +39,7 @@ DEFAULT_FILE = {
 #
 # Link to XML file that exports reports to migrate
 #
-REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
+REPORTS_XML = 'http://10.0.0.22:8181/export_ZReports'
 #
 # Relations
 #

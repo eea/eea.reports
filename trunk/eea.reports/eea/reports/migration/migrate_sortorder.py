@@ -60,6 +60,8 @@ class MigrateSortOrder(object):
 
         # Log missing files
         diff = set(file_order).difference(ordered_files)
+        main_file = cleanup_id(report.getField('file').getFilename(report))
+        diff = [x for x in diff if x != main_file]
         if diff:
             logger.warn('Missing file ids %s in report %s', ', '.join(diff),
                         report.absolute_url(1))
@@ -76,9 +78,11 @@ class MigrateSortOrder(object):
             info(msg)
             return self._redirect(msg)
 
-        for report in self.reports:
+        info('Update reports files order using xml file: %s', self.order_xml)
+        index = 0
+        for index, report in enumerate(self.reports):
             self._update_sortorder(report, container)
 
-        msg = 'Publications sortorder updated !'
+        msg = '%d publications sortorder updated !' % index
         info(msg)
         return self._redirect(msg)

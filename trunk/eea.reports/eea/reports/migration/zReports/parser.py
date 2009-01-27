@@ -108,6 +108,7 @@ class zreports_handler(ContentHandler):
         self.__chapters = {}
         self.__chapter_titles = []
         self.__report_files = {}
+        self.__report_files_order = {'zope':[], 'report':[]}
         self.__report_file_data = []
 
     def get_reports(self):
@@ -130,9 +131,13 @@ class zreports_handler(ContentHandler):
 
         if name == 'report_file':
             self.__report_file_data.append(attrs['url'])
+            self.__report_file_data.append(attrs['id'])
+            self.__report_file_data.append(attrs['pagenumber'])
 
         if name == 'zope_file':
             self.__report_file_data.append(attrs['url'])
+            self.__report_file_data.append(attrs['id'])
+            self.__report_file_data.append(None)
 
         if name == 'zope_image':
             self.__image_context = 1
@@ -157,7 +162,11 @@ class zreports_handler(ContentHandler):
             self.__report_file_data.append(data)
 
         if name in ('zope_file', 'report_file'):
-            self.__report_files[self.__report_file_data[0]] = self.__report_file_data[1]
+            self.__report_files[self.__report_file_data[0]] = self.__report_file_data[3]
+            if name == 'zope_file':
+                self.__report_files_order['zope'].append(self.__report_file_data[1])
+            else:
+                self.__report_files_order['report'].append((self.__report_file_data[2], name, self.__report_file_data[1]))
             self.__report_file_data = []
 
         if name == 'language_report':
@@ -227,7 +236,16 @@ class zreports_handler(ContentHandler):
 
             #set files
             self.__language_report_current.set('file', self.__report_files)
+            self.__language_report_current.set('file_order', [])
+
+            self.__report_files_order['zope'].sort()
+            self.__report_files_order['report'].sort()
+            for k in sself.__report_files_order['report']:
+                self.__language_report_current.file_order.append(k)
+            self.__language_report_current.file_order.extend(self.__report_files_order['zope'])
+
             self.__report_files = {}
+            self.__report_files_order = {'zope':[], 'report':[]}
 
             #add language report to results
             self.__language_report_current.set('chapters', self.__chapters)

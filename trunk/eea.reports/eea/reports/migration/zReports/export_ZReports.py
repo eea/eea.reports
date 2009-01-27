@@ -722,7 +722,7 @@ for report in exported_reports:
         ###Report File objects
         #########################
         for rep_file in lang.objectValues('Report File'):
-            res_add('\n<report_file url="%s">' % rep_file.absolute_url())
+            res_add('\n<report_file url="%s" id="" pagenumber="">' % rep_file.absolute_url())
             #Basic Property Sheet
             res_add('\n<id>%s</id>' % formatExport(rep_file.getId()))       #string
             res_add('\n<tags>%s</tags>' % formatExport(rep_file.tags))      #lines
@@ -929,7 +929,7 @@ for report in exported_reports:
             files.extend(lang.factsheets.objectValues('File'))
 
         for file in files:
-            res_add('\n<zope_file url="%s">' % file.absolute_url())
+            res_add('\n<zope_file url="%s" id="">' % file.absolute_url())
             res_add('\n<file_id>%s</file_id>' % formatExport(file.getId()))
             res_add('\n<content_type>%s</content_type>' % file.content_type)
 

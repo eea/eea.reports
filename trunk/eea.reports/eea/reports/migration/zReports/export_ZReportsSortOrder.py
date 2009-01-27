@@ -81,6 +81,7 @@ for report in exported_reports:
         for rep_file in lang.objectValues('Report File'):
             res_add('\n<report_file url="%s" id="%s" pagenumber="%s">' %
                     (rep_file.absolute_url(), formatExport(rep_file.getId()), formatExport(rep_file.pagenumber)))
+            res_add('\n<report_file_title></report_file_title>')
             res_add('\n</report_file>')
 
         ###Zope File objects
@@ -92,6 +93,7 @@ for report in exported_reports:
 
         for file in files:
             res_add('\n<zope_file url="%s" id="%s">' % (file.absolute_url(), formatExport(file.getId())))
+            res_add('\n<file_title></file_title>')
             res_add('\n</zope_file>')
 
         res_add('\n</language_report>')

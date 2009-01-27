@@ -240,8 +240,8 @@ class zreports_handler(ContentHandler):
 
             self.__report_files_order['zope'].sort()
             self.__report_files_order['report'].sort()
-            for k in sself.__report_files_order['report']:
-                self.__language_report_current.file_order.append(k)
+            for k in self.__report_files_order['report']:
+                self.__language_report_current.file_order.append(k[1])
             self.__language_report_current.file_order.extend(self.__report_files_order['zope'])
 
             self.__report_files = {}

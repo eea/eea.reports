@@ -42,4 +42,8 @@ def test_suite():
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
                   test_class=ReportFunctionalTestCase) ,
+            Suite('doc/migrate_sortorder.txt',
+                  optionflags=OPTIONFLAGS,
+                  package='eea.reports',
+                  test_class=ReportFunctionalTestCase) ,
               ))

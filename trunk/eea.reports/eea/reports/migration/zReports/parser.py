@@ -131,12 +131,12 @@ class zreports_handler(ContentHandler):
 
         if name == 'report_file':
             self.__report_file_data.append(attrs['url'])
-            self.__report_file_data.append(attrs['id'])
-            self.__report_file_data.append(attrs['pagenumber'])
+            self.__report_file_data.append(attrs.get('id', ''))
+            self.__report_file_data.append(attrs.get('pagenumber', ''))
 
         if name == 'zope_file':
-            self.__report_file_data.append(attrs['url'])
-            self.__report_file_data.append(attrs['id'])
+            self.__report_file_data.append(attrs.get('url', ''))
+            self.__report_file_data.append(attrs.get('id', ''))
             self.__report_file_data.append(None)
 
         if name == 'zope_image':
@@ -166,73 +166,73 @@ class zreports_handler(ContentHandler):
             if name == 'zope_file':
                 self.__report_files_order['zope'].append(self.__report_file_data[1])
             else:
-                self.__report_files_order['report'].append((self.__report_file_data[2], name, self.__report_file_data[1]))
+                self.__report_files_order['report'].append((self.__report_file_data[2], self.__report_file_data[1]))
             self.__report_file_data = []
 
         if name == 'language_report':
             self.__language_report_context = 0
             #set properties from Report object
-            self.__language_report_current.set('id', self.__report_current.get('id'))
-            self.__language_report_current.set('themes', self.__report_current.get('categories').split('###'))
-            self.__language_report_current.set('author', self.__report_current.get('author'))
+            self.__language_report_current.set('id', self.__report_current.get('id', ''))
+            self.__language_report_current.set('themes', self.__report_current.get('categories', '').split('###'))
+            self.__language_report_current.set('author', self.__report_current.get('author', ''))
             for_sale = self.__report_current.get('order_override', True)
             self.__language_report_current.set('for_sale', for_sale in (u'False', 'False', False, 0))
-            self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype'))
+            self.__language_report_current.set('serial_title_type', self.__report_current.get('reporttype', ''))
             try:
-                serial_number = int(self.__report_current.get('reportnum'))
+                serial_number = int(self.__report_current.get('reportnum', ''))
             except (ValueError, TypeError):
                 serial_number = 0
             self.__language_report_current.set('serial_title_number', serial_number)
             try:
-                serial_year = int(self.__report_current.get('series_year'))
+                serial_year = int(self.__report_current.get('series_year', ''))
             except (ValueError, TypeError):
                 serial_year = 1990
             self.__language_report_current.set('serial_title_year', serial_year)
-            self.__language_report_current.set('serial_title_alt', self.__report_current.get('series_title'))
-            self.__language_report_current.set('price', self.__report_current.get('price_euro'))
-            self.__language_report_current.set('order_override_text', self.__report_current.get('order_override_text'))
-            self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text'))
-            self.__language_report_current.set('copyrights', self.__report_current.get('copyright'))
-            cover_image_url = self.__report_current.get('rep_cover_image')
+            self.__language_report_current.set('serial_title_alt', self.__report_current.get('series_title', ''))
+            self.__language_report_current.set('price', self.__report_current.get('price_euro', ''))
+            self.__language_report_current.set('order_override_text', self.__report_current.get('order_override_text', ''))
+            self.__language_report_current.set('order_extra_text', self.__report_current.get('order_extra_text', ''))
+            self.__language_report_current.set('copyrights', self.__report_current.get('copyright', ''))
+            cover_image_url = self.__report_current.get('rep_cover_image', '')
             self.__language_report_current.set('cover_image_file', cover_image_url)
-            creators_ex = self.__report_current.get('creators_orgs').split('###')
+            creators_ex = self.__report_current.get('creators_orgs', '').split('###')
             creators_ex = [x.strip() for x in creators_ex if x.strip()]
             self.__language_report_current.set('creators_existing_keywords', creators_ex)
-            creators = self.__report_current.get('creators').replace('\n', '').split('###')
+            creators = self.__report_current.get('creators', '').replace('\n', '').split('###')
             creators = [x.strip() for x in creators if x.strip()]
             self.__language_report_current.set('creators_keywords', creators)
-            publishers_ex = self.__report_current.get('publishers_orgs').split('###')
+            publishers_ex = self.__report_current.get('publishers_orgs', '').split('###')
             publishers_ex = [x.strip() for x in publishers_ex if x.strip()]
             self.__language_report_current.set('publishers_existing_keywords', publishers_ex)
-            publishers = self.__report_current.get('publishers').replace('\n', '').split('###')
+            publishers = self.__report_current.get('publishers', '').replace('\n', '').split('###')
             publishers = [x.strip() for x in publishers if x.strip()]
             self.__language_report_current.set('publishers_keywords', publishers)
 
             # Relations
-            replaces = self.__report_current.get('Replaces').replace('\n', '').split('###')
+            replaces = self.__report_current.get('Replaces', '').replace('\n', '').split('###')
             replaces = [x.strip() for x in replaces if x.strip()]
             replaces = set([x.split('/')[-1] for x in replaces])
             self.__language_report_current.set('replaces', replaces)
 
-            is_replaced_by = self.__report_current.get('IsReplacedBy').replace('\n', '').split('###')
+            is_replaced_by = self.__report_current.get('IsReplacedBy', '').replace('\n', '').split('###')
             is_replaced_by = [x.strip() for x in is_replaced_by if x.strip()]
             is_replaced_by = set([x.split('/')[-1] for x in is_replaced_by])
             self.__language_report_current.set('is_replaced_by', is_replaced_by)
 
-            has_part = self.__report_current.get('HasPart').replace('\n', '').split('###')
+            has_part = self.__report_current.get('HasPart', '').replace('\n', '').split('###')
             has_part = [x.strip() for x in has_part if x.strip()]
             has_part = set([x.split('/')[-1] for x in has_part])
             self.__language_report_current.set('has_part', has_part)
 
-            is_part_of = self.__report_current.get('IsPartOf').replace('\n', '').split('###')
+            is_part_of = self.__report_current.get('IsPartOf', '').replace('\n', '').split('###')
             is_part_of = [x.strip() for x in is_part_of if x.strip()]
             is_part_of = set([x.split('/')[-1] for x in is_part_of])
             self.__language_report_current.set('is_part_of', is_part_of)
 
             # Effective date
-            self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate'))
+            self.__language_report_current.set('effectiveDate', self.__report_current.get('publishdate', ''))
             # Expiration date
-            self.__language_report_current.set('expirationDate', self.__report_current.get('expiry_date'))
+            self.__language_report_current.set('expirationDate', self.__report_current.get('expiry_date', ''))
 
             #set files
             self.__language_report_current.set('file', self.__report_files)
@@ -240,8 +240,10 @@ class zreports_handler(ContentHandler):
 
             self.__report_files_order['zope'].sort()
             self.__report_files_order['report'].sort()
+
             for k in self.__report_files_order['report']:
                 self.__language_report_current.file_order.append(k[1])
+
             self.__language_report_current.file_order.extend(self.__report_files_order['zope'])
 
             self.__report_files = {}

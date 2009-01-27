@@ -19,4 +19,11 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="*"
+      name="migrate_sortorder"
+      class=".migrate_sortorder.MigrateSortOrder"
+      permission="cmf.ModifyPortalContent"
+      />
+
 </configure>

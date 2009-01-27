@@ -61,3 +61,9 @@ Migrate old reports
 
 6. Go to administration section > vocabularies and update publications_groups
    items as these were generated automatically at migration time.
+
+7. Run @@migrate_sortorder in order to fix additional files order.
+
+   For example:
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_sortorder

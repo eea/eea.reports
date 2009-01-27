@@ -41,6 +41,10 @@ DEFAULT_FILE = {
 #
 REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
 #
+# Link to XML file that exports reports files order
+#
+REPORTS_ORDER_XML = 'http://reports.eea.europa.eu/export_ZReportsSortOrder'
+#
 # Relations
 #
 ANNOTATION_REPLACES = '_replaces_'

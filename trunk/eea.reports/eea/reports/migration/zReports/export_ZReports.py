@@ -262,6 +262,7 @@ for report in root.objectValues(report_metatype):
     reports[report.series_year] = val
 
 exported_reports = []
+
 if report_year != '':
     data = list(reports[int(report_year)])
     if report_to == 0: report_to = len(data)
@@ -323,7 +324,10 @@ for report in exported_reports:
     else:
         res_add('\n<copyright>%s</copyright>' % formatExport(report.copyright[tmp_find:]))  #text
 
-    res_add('\n<description>%s</description>' % container.unescape(formatExport(report.description)).encode('utf-8'))   #text
+    if report.id == 'technical_report_2008_12':
+        res_add('\n<description>%s</description>' % container.unescape(formatExport(report.description)))   #text
+    else:
+        res_add('\n<description>%s</description>' % container.unescape(formatExport(report.description)).encode('utf-8'))   #text
 
     res_add('\n<Subjects_terms>%s</Subjects_terms>' % formatExport(report.Subjects_terms))                        #lines
     res_add('\n<SpatialCoverage_terms>%s</SpatialCoverage_terms>' % formatExport(report.SpatialCoverage_terms))   #lines

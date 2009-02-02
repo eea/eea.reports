@@ -42,7 +42,7 @@ class GroupRelations(object):
         return refs
 
     def references(self):
-        """" Gets both forward and backward references. """
+        """ Gets both forward and backward references. """
         gfield = self.context.getField(self.group)
         if not gfield:
             return []
@@ -57,6 +57,7 @@ class GroupRelations(object):
 
         catalog = getToolByName(self.context, 'portal_catalog')
         query = {
+            'portal_type' : self.context.portal_type,
             self.group: groups,
             'sort_on': 'effective',
             'sort_order': 'reverse',

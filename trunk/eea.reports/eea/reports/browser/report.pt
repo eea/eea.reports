@@ -3,13 +3,6 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="plone">
 
-
-<metal:cssslot fill-slot="css_slot">
-  <style type="text/css" media="all" tal:condition="exists: portal/reports_styles.css"
-         tal:content="string:@import url($portal_url/reports_styles.css);">
-  </style>
-</metal:cssslot>
-
 <body>
 
 <div metal:fill-slot="main"

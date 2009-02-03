@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
       lang="en-US"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="eea.translations">
 
 <body>
 
@@ -95,12 +95,6 @@
             tal:condition="brains">
             <dt class="portletHeader" i18n:translate="report_older_versions">Older versions</dt>
             <dt class="portletItem" tal:repeat="brain brains">
-                <img tal:define="
-                    ptype here/portal_types;
-                    item_type brain/portal_type;
-                    itype python:ptype[item_type];
-                    icon itype/getIcon;"
-                    tal:attributes="src string:${portal_url}/${icon}" />
                 <a tal:attributes="href brain/getPath"
                    tal:content="brain/Title" />
             </dt>
@@ -110,14 +104,8 @@
         <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"
             tal:define="related context/@@document_related/other"
             tal:condition="related">
-            <dt class="portletHeader" i18n:translate="label_related_items">Related content</dt>
+            <dt class="portletHeader" i18n:domain="plone" i18n:translate="box_related">Related content</dt>
             <dt class="portletItem" tal:repeat="item related">
-                <img tal:define="
-                    ptype here/portal_types;
-                    item_type item/item_type;
-                    itype python:ptype[item_type];
-                    icon itype/getIcon;"
-                    tal:attributes="src string:${portal_url}/${icon}" />
                 <a tal:attributes="
                     href item/url;
                     title item/description;
@@ -129,7 +117,7 @@
         </dl>
 
         <!-- Publishers -->
-        <p class="documentByLine" i18n:translate="published_by_label"> Published by: </p>
+        <p class="documentByLine" i18n:translate="Published by"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
             publishers python:field.getAccessor(here)();
@@ -155,7 +143,7 @@
             objectItems python:rsize or fileItems"
             condition="objectItems">
 
-        <h2 i18n:translate="publication_content">Content</h2>
+        <h2 i18n:translate="Contents">Content</h2>
         <ul tal:condition="rsize">
             <li>
                 <a tal:attributes="href string:${here/absolute_url}/at_download/file">
@@ -180,8 +168,6 @@
                     class item_wf_state_class;
                     href item_object/absolute_url;
                     title item_title_or_id">
-                    <img tal:define="icon python:item_object.getIcon(1)"
-                        tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
                     <span tal:content="item_title_or_id" />
                 </a>
                 <span tal:condition="python:item_type == 'File'"
@@ -195,8 +181,6 @@
                     folder_title folder/pretty_title_or_id;
                     folder_type folder/portal_type;">
                     <a tal:attributes="href folder/absolute_url; title folder_title">
-                        <img tal:define="icon python:folder.getIcon(1)"
-                            tal:attributes="src string:${portal_url}/${icon}" alt="folder_title" />
                         <span tal:content="folder_title" />
                     </a>
                     <tal:block define="fileItems folder/getFolderContents;">
@@ -226,8 +210,6 @@
                     class item_wf_state_class;
                     href item_object/remote_url;
                     title item_title_or_id">
-                    <img tal:define="icon python:item_object.getIcon(1)"
-                        tal:attributes="src string:${portal_url}/${icon}" alt="item_title_or_id" />
                     <span tal:content="item_title_or_id" />
                 </a>
             </tal:link>
@@ -251,7 +233,7 @@
             oe_value        python:oe_field.getAccessor(here)();"
             tal:condition="fs_value">
 
-        <h2 i18n:translate="help_order_info">Order information</h2>
+        <h2 i18n:translate="title_order_info">Order information</h2>
 
         <tal:order_default condition="not:oo_value">
         <div class="publicationOrder">
@@ -281,7 +263,8 @@
                     <span tal:condition="price_value"
                         tal:content="python:'EUR %.02f' % price_value" />
                     <span tal:condition="not:price_value"
-                        tal:content="string:FREE" />
+                        tal:content="string:FREE"
+			i18n:translate="FREE" />
                 </div>
             </div>
 

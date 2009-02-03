@@ -288,8 +288,8 @@
             <div style="float:left" class="publicationOrderButton">
                <a href=""
                       tal:define="eubookshop_link python:oid_value and
-                          'http://bookshop.europa.eu/eGetRecords?Template=Test_EUB/en_publication_details&CATNBR=%s' % oid_value.replace('-', '') or
-                          'http://bookshop.europa.eu/eGetRecords?Template=en_search_identifiers'"
+                          'http://bookshop.europa.eu/eubookshop/index.action?request_locale=EN&CATNBR=%s' % oid_value.replace('-', '') or
+                          'http://bookshop.europa.eu/eubookshop/searchById.action'"
                       target="_blank"
                       alt="Order a printed copy at EU-Bookshop"
                       tal:attributes="href eubookshop_link" >

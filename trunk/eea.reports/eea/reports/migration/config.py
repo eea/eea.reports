@@ -39,11 +39,13 @@ DEFAULT_FILE = {
 #
 # Link to XML file that exports reports to migrate
 #
-REPORTS_XML = 'http://reports.eea.europa.eu/export_ZReports'
+REPORTS_XML = 'http://reports-old.eea.europa.eu/export_ZReports'
 #
 # Link to XML file that exports reports files order
+REPORTS_ORDER_XML = 'http://reports-old.eea.europa.eu/export_ZReportsSortOrder'
 #
-REPORTS_ORDER_XML = 'http://reports.eea.europa.eu/export_ZReportsSortOrder'
+# Link to XML file that exports reports report type, report number and report year
+REPORTS_SERIALTITLE_XML = 'http://reports-old.eea.europa.eu/export_ZReportsSortOrder'
 #
 # Relations
 #

@@ -59,10 +59,16 @@ Migrate old reports
 
       http://<portal_url>:<port>/www/SITE/@@migrate_relations
 
-6. Go to administration section > vocabularies and update publications_groups
+6. After you run @@migrate_relations script, run @@migrate_serialtitle script.
+
+   For example:
+
+      http://<portal_url>:<port>/www/SITE/@@migrate_serialtitle
+
+7. Go to administration section > vocabularies and update publications_groups
    items as these were generated automatically at migration time.
 
-7. Run @@migrate_sortorder in order to fix additional files order.
+8. Run @@migrate_sortorder in order to fix additional files order.
 
    For example:
 

@@ -60,6 +60,10 @@ res_add('\n<reports>')
 for report in exported_reports:
     res_add('\n<report>')
     res_add('\n<id>%s</id>' % formatExport(report.id))
+    res_add('\n<reporttype>%s</reporttype>' % formatExport(report.reporttype))
+    res_add('\n<reportnum>%s</reportnum>' % formatExport(report.reportnum))
+    res_add('\n<series_year>%s</series_year>' % formatExport(report.series_year))
+    res_add('\n<series_title>%s</series_title>' % formatExport(report.series_title))
 
     ###Language Report objects
     ##########################

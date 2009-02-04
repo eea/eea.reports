@@ -21,11 +21,18 @@ class SerialTitleWidget(TypesWidget):
         report_number = form.get('%s_number' % name, None)
         report_year = form.get('%s_year' % name, None)
         report_alt = form.get('%s_alt' % name, None)
-        if report_alt:
-            return (u'N/A', 0, -1, report_alt), {}
-        elif not (report_type or report_number or report_year):
+
+#TODO: old alternative serial title behaviour, delete if absolete
+#        if report_alt:
+#            return (u'N/A', 0, -1, report_alt), {}
+#        elif not (report_type or report_number or report_year):
+#            return empty_marker
+#return (report_type, report_number, report_year, u''), {}
+
+        if not (report_type or report_number or report_year or report_alt):
             return empty_marker
-        return (report_type, report_number, report_year, u''), {}
+
+        return (report_type, report_number, report_year, report_alt), {}
 
 registerWidget(
     SerialTitleWidget,

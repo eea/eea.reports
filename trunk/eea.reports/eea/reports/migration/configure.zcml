@@ -21,6 +21,13 @@
 
   <browser:page
       for="*"
+      name="migrate_serialtitle"
+      class=".migrate_serialtitle.MigrateSerialTitle"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="*"
       name="migrate_sortorder"
       class=".migrate_sortorder.MigrateSortOrder"
       permission="cmf.ModifyPortalContent"

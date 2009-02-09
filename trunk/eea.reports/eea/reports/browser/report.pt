@@ -264,15 +264,14 @@
                         tal:content="python:'EUR %.02f' % price_value" />
                     <span tal:condition="not:price_value"
                         tal:content="string:FREE"
-			i18n:translate="FREE" />
+                        i18n:translate="FREE" />
                 </div>
             </div>
 
             <div style="float:left" class="publicationOrderButton">
-               <a href=""
-                      tal:define="eubookshop_link python:oid_value and
-                          'http://bookshop.europa.eu/eubookshop/index.action?request_locale=EN&CATNBR=%s' % oid_value.replace('-', '') or
-                          'http://bookshop.europa.eu/eubookshop/searchById.action'"
+               <a href="" tal:define="eubookshop_link python:oid_value and
+                    'http://bookshop.europa.eu/eubookshop/index.action?request_locale=%s&CATNBR=%s' % (language, oid_value.replace('-', '')) or
+                    'http://bookshop.europa.eu/eubookshop/searchById.action'"
                       target="_blank"
                       alt="Order a printed copy at EU-Bookshop"
                       tal:attributes="href eubookshop_link" >

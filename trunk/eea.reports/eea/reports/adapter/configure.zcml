@@ -40,6 +40,13 @@
         handler=".events.subtype_removed"
     />
 
+    <!-- Fix for #2168 -->
+    <subscriber
+        for="eea.reports.interfaces.IReportContainerEnhanced
+             zope.app.event.interfaces.IObjectModifiedEvent"
+        handler=".events.setLanguageIndependent"
+    />
+
     <adapter
         for="..interfaces.IPossibleReportContainer"
         provides="zope.app.annotation.interfaces.IAnnotations"

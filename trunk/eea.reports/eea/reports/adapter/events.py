@@ -3,6 +3,7 @@
 from eea.reports import interfaces
 from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from zope.component import getUtility
+from Products.CMFCore.utils import getToolByName
 from p4a.subtyper.interfaces import ISubtyper
 from eea.reports.config import REPORT_SUBOBJECTS
 from eea.reports.vocabulary import ReportThemesVocabulary
@@ -140,3 +141,34 @@ def report_initialized(obj, evt):
         obj.portal_type = 'Folder'
         obj.setExcludeFromNav(True)
         return subtyper.change_type(obj, 'eea.reports.FolderReport')
+#
+# Set the language independent
+#
+def setLanguageIndependent(obj, evt):
+    """ Set the language independent values on translations.
+    """
+    subtyper = getUtility(ISubtyper)
+    canonical = obj.getCanonical()
+    if obj == canonical:
+        # Default
+        independent_fields = {}
+        obj_schemata = canonical.Schemata()
+        ctool = getToolByName(canonical, 'portal_catalog')
+
+        # Get language independent fields
+        for schema_id in obj_schemata.keys():
+            [independent_fields.setdefault(field.getName(), None) for field in obj_schemata[schema_id].filterFields(languageIndependent=True)]
+        for field_id in independent_fields.keys():
+            independent_fields[field_id] = canonical.getField(field_id).get(canonical)
+
+        # Set (if case) values for langauge independent fields
+        for trans in canonical.getTranslations():
+            detect_diff = False
+            ob_trans = canonical.getTranslation(trans)
+            for field_id in independent_fields.keys():
+                new_value = independent_fields[field_id]
+                old_value = ob_trans.getField(field_id).get(ob_trans)
+                if new_value != old_value:
+                    detect_diff = True
+                    ob_trans.getField(field_id).getMutator(ob_trans)(new_value)
+            if detect_diff: ctool.reindexObject(ob_trans)

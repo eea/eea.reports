@@ -6,6 +6,7 @@ import logging
 from zope import interface
 from interfaces import IPDFMetadataUpdater
 from config import META_TEMPLATE
+from eea.reports.pdf import CAN_UPDATE_PDF_METADATA
 
 logger = logging.getLogger('eea.reports.pdf.updater')
 
@@ -88,11 +89,7 @@ class PDFMetadataUpdater(object):
     def _can_convert(self):
         """ Check if pdftk is installed
         """
-        f_in, f_out = os.popen4('pdftk --version')
-        res = f_out.read()
-        if 'handy tool' in res.lower():
-            return True
-        return False
+        return CAN_UPDATE_PDF_METADATA
 
     def _utf2entity(self, data=''):
         """ Convert utf stream to html entities

@@ -5,7 +5,7 @@ import tempfile
 import logging
 from zope import interface
 from interfaces import IPDFCoverImage
-
+from eea.reports.pdf import CAN_GENERATE_COVER_IMAGE
 logger = logging.getLogger('eea.reports.pdf.cover')
 
 class PDFCoverImage(object):
@@ -72,18 +72,7 @@ class PDFCoverImage(object):
     def _can_convert(self):
         """ Check if pdftk is installed
         """
-        # Test for pdftk
-        f_in, f_out = os.popen4('pdftk --version')
-        res = f_out.read()
-        if 'handy tool' not in res.lower():
-            return False
-
-        # Test for ImageMagik
-        f_in, f_out = os.popen4('convert --version')
-        res = f_out.read()
-        if 'imagemagick' not in res.lower():
-            return False
-        return True
+        return CAN_GENERATE_COVER_IMAGE
 
     def _finish(self, *paths):
         """ remove temporary files

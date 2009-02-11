@@ -130,7 +130,7 @@ Test alternative serial title:
     ... }
     >>> myreport.processForm(values=form)
     >>> myreport.getField('serial_title').getAccessor(myreport)()
-    ('N/A', 0, -1, 'Save me, only !')
+    ('Briefing', 20, 1999, 'Save me, only !')
 
 Other properties
 

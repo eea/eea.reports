@@ -164,7 +164,7 @@ class zreports_handler(ContentHandler):
         if name in ('zope_file', 'report_file'):
             self.__report_files[self.__report_file_data[0]] = self.__report_file_data[3]
             if name == 'zope_file':
-                self.__report_files_order['zope'].append(self.__report_file_data[1])
+                self.__report_files_order['zope'].append((self.__report_file_data[3], self.__report_file_data[1]))
             else:
                 self.__report_files_order['report'].append((self.__report_file_data[2], self.__report_file_data[1]))
             self.__report_file_data = []
@@ -244,7 +244,8 @@ class zreports_handler(ContentHandler):
             for k in self.__report_files_order['report']:
                 self.__language_report_current.file_order.append(k[1])
 
-            self.__language_report_current.file_order.extend(self.__report_files_order['zope'])
+            for k in self.__report_files_order['zope']:
+                self.__language_report_current.file_order.append(k[1])
 
             self.__report_files = {}
             self.__report_files_order = {'zope':[], 'report':[]}

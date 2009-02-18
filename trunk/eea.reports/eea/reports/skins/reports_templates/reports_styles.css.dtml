@@ -47,6 +47,10 @@ font-weight: normal;
   margin-left: 20px;
 }
 
+.publicationClear {
+  clear: left;
+}
+
 .publicationPortlet {
   clear:right;
   float:right;

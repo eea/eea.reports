@@ -117,7 +117,7 @@
         </dl>
 
         <!-- Publishers -->
-        <p class="documentByLine" i18n:translate="Published by"> Published by: </p>
+        <p class="documentByLine publicationClear" i18n:translate="Published by"> Published by: </p>
         <ul tal:define="
             field python:here.getField('publishers');
             publishers python:field.getAccessor(here)();
@@ -231,7 +231,7 @@
             oo_value        python:oo_field.getAccessor(here)();
             oe_field        python:here.getField('order_extra_text');
             oe_value        python:oe_field.getAccessor(here)();"
-            tal:condition="fs_value">
+            tal:condition="python:fs_value and oid_value">
 
         <h2 i18n:translate="title_order_info">Order information</h2>
 

@@ -98,6 +98,9 @@ def parse_metadata(obj, evt):
     if not metadata:
         return
 
+    # Do not modify effective date
+    metadata['effectiveDate'] = obj.getEffectiveDate()
+
     # Get themes from keywords
     keywords = metadata.get('subject', ())
     themes = _get_themes_from_keywords(obj, keywords)

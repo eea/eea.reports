@@ -21,24 +21,32 @@ class GroupRelations(object):
 
     def backward(self):
         """ Get older references """
+        membershipTool = getToolByName(self.context, 'portal_membership')
+        anon = membershipTool.isAnonymousUser()
         refs = []
         for ref in self.references():
-            ref_effective = ref.effective
-            if ref_effective.lessThan(DateTime('1990/01/01')):
-                ref_effective = ref.created
-            if ref_effective.lessThan(self.effective):
-                refs.append(ref)
+            state = ref.review_state
+            if (anon and state == 'published') or (not anon):
+                ref_effective = ref.effective
+                if ref_effective.lessThan(DateTime('1990/01/01')):
+                    ref_effective = ref.created
+                if ref_effective.lessThan(self.effective):
+                    refs.append(ref)
         return refs
 
     def forward(self):
         """ Get newer references """
+        membershipTool = getToolByName(self.context, 'portal_membership')
+        anon = membershipTool.isAnonymousUser()
         refs = []
         for ref in self.references():
-            ref_effective = ref.effective
-            if ref_effective.lessThan(DateTime('1990/01/01')):
-                ref_effective = ref.created
-            if ref_effective.greaterThan(self.effective):
-                refs.append(ref)
+            state = ref.review_state
+            if (anon and state == 'published') or (not anon):
+                ref_effective = ref.effective
+                if ref_effective.lessThan(DateTime('1990/01/01')):
+                    ref_effective = ref.created
+                if ref_effective.greaterThan(self.effective):
+                    refs.append(ref)
         return refs
 
     def references(self):

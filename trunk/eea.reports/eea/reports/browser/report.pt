@@ -90,6 +90,11 @@
         <!-- Tags (themes) -->
         <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
 
+        <!-- Related multimedia -->
+        <div metal:use-macro="here/document_relateditems/macros/multimedia">
+            show related multimedia items if they exist
+        </div>
+
         <!-- Older versions -->
         <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"
             tal:condition="brains">

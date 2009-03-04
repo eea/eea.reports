@@ -25,7 +25,7 @@ setup(name='eea.reports',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'slc.publications',
       ],
       entry_points="""
       # -*- Entry points: -*-

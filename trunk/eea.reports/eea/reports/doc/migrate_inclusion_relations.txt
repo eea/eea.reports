@@ -73,8 +73,10 @@ Now let's see our relations
 
     >>> from Products.EEAContentTypes.interfaces import IRelations
     >>> res = IRelations(a).forwardReferences()
-    >>> [x.getId() for x in res]
-    ['c', 'b']
+    >>> rel = [x.getId() for x in res]
+    >>> rel.sort()
+    >>> rel
+    ['b', 'c']
     >>> IRelations(a).backReferences()
     []
     >>> res = IRelations(b).forwardReferences()

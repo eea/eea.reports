@@ -110,8 +110,8 @@ Edit report like properties:
 Check file saved
 
     >>> report_file = myreport.getField('file').getAccessor(myreport)()
-    >>> report_file.get_size()
-    2365565L
+    >>> int(report_file.get_size())
+    2365565
 
 Serial title and creators
 

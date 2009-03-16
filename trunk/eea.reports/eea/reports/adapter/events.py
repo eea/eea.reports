@@ -116,6 +116,8 @@ def parse_metadata(obj, evt):
         field = obj.getField(key)
         if not field:
             continue
+        if not value:
+            continue
         field.getMutator(obj)(value)
 #
 # Report initialize

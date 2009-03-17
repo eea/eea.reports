@@ -93,6 +93,10 @@ def parse_metadata(obj, evt):
     """ EVENT
         called on new file upload. Tries to import pdf metadata.
     """
+    update_main = evt.update_main
+    if not update_main:
+        return
+
     pdfparser = getUtility(IReportPDFParser)
     metadata = pdfparser.parse(evt.data.read())
     if not metadata:
@@ -106,11 +110,6 @@ def parse_metadata(obj, evt):
     themes = _get_themes_from_keywords(obj, keywords)
     if themes:
         metadata['themes'] = themes
-
-    update_main = evt.update_main
-    if not update_main:
-        metadata.pop('title', None)
-        metadata.pop('description', None)
 
     for key, value in metadata.items():
         field = obj.getField(key)

@@ -46,4 +46,8 @@ def test_suite():
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
                   test_class=ReportFunctionalTestCase) ,
+            Suite('doc/search.txt',
+                  optionflags=OPTIONFLAGS,
+                  package='eea.reports',
+                  test_class=ReportFunctionalTestCase) ,
               ))

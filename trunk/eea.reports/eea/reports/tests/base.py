@@ -91,6 +91,13 @@ class ReportTestCase(PloneTestCase):
         # Set the local component registry
         setSite(self.portal)
 
+        setup = getattr(self.portal, 'portal_setup', None)
+        profile = 'ThemeCentre:themecentre'
+        if not self.portal._installed_profiles.has_key(profile):
+            setup.setImportContext('profile-%s' % (profile,))
+            setup.runImportStep('catalog')
+            self.portal._installed_profiles[profile] = 1
+
 class ReportFunctionalTestCase(FunctionalTestCase, ReportTestCase):
     """Base class for functional integration tests for the 'Report' product.
     """

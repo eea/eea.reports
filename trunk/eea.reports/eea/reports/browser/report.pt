@@ -222,6 +222,20 @@
         </ul>
         </tal:foldercontents>
 
+        <!-- Maps and graphs -->
+        <tal:mapsandgraphs define="
+          field python:here.getField('eeaid');
+          eeaid python:field.getAccessor(here)()"
+          condition="eeaid">
+          <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
+          <ul>
+            <li><a tal:attributes="
+              href string:http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=${eeaid}"
+              i18n:translate="publication_maps_and_graphs_link">See list of maps and graphs used in this publication</a>
+            </li>
+          </ul>
+        </tal:mapsandgraphs>
+
         <!-- Order information -->
         <tal:order define="
             oid_field       python:here.getField('order_id');

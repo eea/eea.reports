@@ -3,6 +3,16 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="eea.translations">
 
+<metal:cssslot fill-slot="css_slot">
+  <link rel="stylesheet" type="text/css" media="screen" title="Reports style"
+    tal:attributes="href context/++resource++eea.reports.css" />
+</metal:cssslot>
+
+<metal:jsslot fill-slot="javascript_head_slot">
+  <script language="javascript" type="text/javascript"
+    tal:attributes="src context/++resource++eea.reports.js"></script>
+</metal:jsslot>
+
 <body>
 
 <div metal:fill-slot="main"
@@ -159,7 +169,7 @@
             </li>
         </ul>
 
-        <ul metal:define-macro="folderish">
+        <ul metal:define-macro="folderish" tal:define="level level|python:1;">
         <tal:fileitems repeat="item fileItems">
             <li tal:condition="python:item.portal_type in ['File', 'Document']">
             <tal:file define="
@@ -179,7 +189,8 @@
                     tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
             </li>
-            <li tal:condition="python:item.portal_type=='Folder'">
+            <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
+                class python:'tree-level-%s' % level">
                 <tal:folder define="
                     folder item;
                     folder folder/getObject|folder;
@@ -188,8 +199,11 @@
                     <a tal:attributes="href folder/absolute_url; title folder_title">
                         <span tal:content="folder_title" />
                     </a>
-                    <tal:block define="fileItems folder/getFolderContents;">
-                       <ul metal:use-macro="here/report_view/macros/folderish" />
+                    <tal:block define="
+                        level python:level + 1;
+                        fileItems folder/getFolderContents;"
+                      tal:condition="fileItems">
+                        <ul metal:use-macro="here/report_view/macros/folderish" />
                     </tal:block>
                 </tal:folder>
             </li>

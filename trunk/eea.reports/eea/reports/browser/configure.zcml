@@ -29,6 +29,20 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:resource
+    name="eea.reports.js"
+    file="./report.js"
+   />
+
+  <browser:resource
+    name="eea.reports.css"
+    file="./stylesheets/reports.css"
+   />
+
+  <browser:resourceDirectory
+    name="publication_images"
+    directory="./images" />
+
   <menuItem
     menu="object_buttons"
     for="eea.reports.interfaces.IReportContainerEnhanced"

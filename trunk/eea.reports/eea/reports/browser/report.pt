@@ -244,7 +244,7 @@
           <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
           <ul>
             <li><a tal:attributes="
-              href string:http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=${eeaid}"
+              href string:http://dataservice.eea.europa.eu/atlas/goto.asp?pubid=${eeaid}"
               i18n:translate="publication_maps_and_graphs_link">See list of maps and graphs used in this publication</a>
             </li>
           </ul>
@@ -270,7 +270,16 @@
 
         <tal:order_default condition="not:oo_value">
         <div class="publicationOrder">
-            <div class="publicationField" style="float:left">
+             <p>
+               <a href="" tal:define="eubookshop_link python:oid_value and
+                    'http://bookshop.europa.eu/eubookshop/advancedSearch!firstPage.action?searchData.domain=identifier&amp;request_locale=%s&amp;searchData.expression=%s' % (language, oid_value.replace('-', '')) or
+                    'http://bookshop.europa.eu/eubookshop/searchById.action'"                   
+                      alt="Order a printed copy at EU-Bookshop"
+                      tal:attributes="href eubookshop_link" >
+                      Order a printed copy online               
+               </a> (EU-Bookshop).
+            </p>
+            <div class="publicationField">
                 <div tal:condition="isbn_value">
                     <label for="isbn_filed.name" title="The widget's hint"
                            tal:attributes="
@@ -300,25 +309,12 @@
                         i18n:translate="FREE" />
                 </div>
             </div>
-
-            <div style="float:left" class="publicationOrderButton">
-               <a href="" tal:define="eubookshop_link python:oid_value and
-                    'http://bookshop.europa.eu/eubookshop/advancedSearch!firstPage.action?searchData.domain=identifier&amp;request_locale=%s&amp;searchData.expression=%s' % (language, oid_value.replace('-', '')) or
-                    'http://bookshop.europa.eu/eubookshop/searchById.action'"
-                      target="_blank"
-                      alt="Order a printed copy at EU-Bookshop"
-                      tal:attributes="href eubookshop_link" >
-                          <img src="eu_bookshop.gif"
-                               alt="EU Bookshop: You can order a printed copy of this document"
-                               title="EU Bookshop: You can order a printed copy of this document">
-               </a>
-            </div>
-            <div class="visualClear"></div>
-        </div>
-        <div>
-            <strong i18n:translate="nearst_locations_label">You can also obtain a copy from</strong>
+            <p><span i18n:translate="nearst_locations_label">You can also obtain a copy from</span>
             <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
-              i18n:translate="nearst_locations_link">your nearest sales agent</a>
+              i18n:translate="nearst_locations_link">your nearest sales agent</a> by providing the ordering info.
+            </p>
+
+            <div class="visualClear"></div>
         </div>
         </tal:order_default>
         <tal:order_override tal:condition="oo_value">

@@ -266,10 +266,9 @@
             oe_value        python:oe_field.getAccessor(here)();"
             tal:condition="python:fs_value and oid_value">
 
-        <h2 i18n:translate="title_order_info">Order information</h2>
-
         <tal:order_default condition="not:oo_value">
         <div class="publicationOrder">
+            <h2 i18n:translate="title_order_info">Order information</h2>
              <p>
                <a href="" tal:define="eubookshop_link python:oid_value and
                     'http://bookshop.europa.eu/eubookshop/advancedSearch!firstPage.action?searchData.domain=identifier&amp;request_locale=%s&amp;searchData.expression=%s' % (language, oid_value.replace('-', '')) or

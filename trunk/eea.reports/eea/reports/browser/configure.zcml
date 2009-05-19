@@ -29,6 +29,14 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="..interfaces.IReportContainerEnhanced"
+      name="imgview"
+      class=".imgview.ImageView"
+      permission="zope.Public"
+      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
+      />
+
   <browser:resource
     name="eea.reports.js"
     file="./report.js"

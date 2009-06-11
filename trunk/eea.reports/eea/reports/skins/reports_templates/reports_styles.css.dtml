@@ -36,10 +36,7 @@ font-weight: normal;
 }
 
 .publicationOrder {
-  border: 1px solid #aaaaaa;
-  background-color: #eeeeee;
-  padding: 5px;
-  margin-top: 20px;
+  margin: 2em 0;
 }
 
 .publicationOrderButton {
@@ -51,12 +48,15 @@ font-weight: normal;
 }
 
 .publicationPortlet {
-  clear:right;
-  float:right;
-  margin-right:0;
-  padding:10px ! important;
-  width:17em;
+  padding:1em ! important;
+  margin-top:1em !important;
 }
+
+.publicationText #auto-related {
+ padding: 1em;
+ margin: 1em 1em 0 0;
+}
+
 
 .publicationBlock { margin-bottom:10px;}
 #related_publications_block {border: 1px dashed #999; padding: 5px; margin:5px; margin-top:20px;}
@@ -71,3 +71,5 @@ font-weight: normal;
 .publicationThemes {
   margin-top: 0.5em;
 }
+
+

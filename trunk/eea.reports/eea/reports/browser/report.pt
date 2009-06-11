@@ -105,16 +105,6 @@
             show related multimedia items if they exist
         </div>
 
-        <!-- Older versions -->
-        <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"
-            tal:condition="brains">
-            <dt class="portletHeader" i18n:translate="report_older_versions">Older versions</dt>
-            <dt class="portletItem" tal:repeat="brain brains">
-                <a tal:attributes="href brain/getPath"
-                   tal:content="brain/Title" />
-            </dt>
-        </dl>
-
         <!-- Related items -->
         <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"
             tal:define="related context/@@document_related/other"
@@ -330,9 +320,22 @@
             tr_value python:tr_field.getAccessor(here)();">
             <div tal:content="structure tr_value">Trailer</div>
         </tal:trailer>
+
+             <!-- Older versions -->
+        <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"
+            tal:condition="brains">
+            <dt class="portletHeader" i18n:translate="report_older_versions">Older versions</dt>
+            <dt class="portletItem" tal:repeat="brain brains">
+                <a tal:attributes="href brain/getPath"
+                   tal:content="brain/Title" />
+            </dt>
+        </dl>
+
+
     </div>
 
     <br clear="all" />
+
 </div>
 
 </body>

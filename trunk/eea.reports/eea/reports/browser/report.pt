@@ -15,6 +15,7 @@
 
 <body>
 
+
 <div metal:fill-slot="main"
         tal:define="
         context_url string:${context/absolute_url};
@@ -105,22 +106,6 @@
             show related multimedia items if they exist
         </div>
 
-        <!-- Related items -->
-        <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"
-            tal:define="related context/@@document_related/other"
-            tal:condition="related">
-            <dt class="portletHeader" i18n:domain="plone" i18n:translate="box_related">Related content</dt>
-            <dt class="portletItem" tal:repeat="item related">
-                <a tal:attributes="
-                    href item/url;
-                    title item/description;
-                    class string: ${item/item_wf_state_class}"
-                   tal:content="item/title">
-                    Related Item
-                </a>
-            </dt>
-        </dl>
-
         <!-- Publishers -->
         <p class="documentByLine publicationClear" i18n:translate="Published by"> Published by: </p>
         <ul tal:define="
@@ -158,7 +143,7 @@
                 <span tal:content="python:'[%s]' % rvalue.getObjSize(rvalue)" />
             </li>
         </ul>
-
+ 	
         <ul metal:define-macro="folderish" tal:define="level level|python:1;">
         <tal:fileitems repeat="item fileItems">
             <li tal:condition="python:item.portal_type in ['File', 'Document']">
@@ -320,6 +305,22 @@
             tr_value python:tr_field.getAccessor(here)();">
             <div tal:content="structure tr_value">Trailer</div>
         </tal:trailer>
+
+      <!-- Related items -->
+        <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"
+            tal:define="related context/@@document_related/other"
+            tal:condition="related">
+            <dt class="portletHeader" i18n:domain="plone" i18n:translate="box_related">Related content</dt>
+            <dt class="portletItem" tal:repeat="item related">
+                <a tal:attributes="
+                    href item/url;
+                    title item/description;
+                    class string: ${item/item_wf_state_class}"
+                   tal:content="item/title">
+                    Related Item
+                </a>
+            </dt>
+        </dl>
 
              <!-- Older versions -->
         <dl class="portlet portlet-rss publicationPortlet" tal:define="brains view/does_replace"

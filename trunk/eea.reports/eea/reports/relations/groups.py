@@ -65,6 +65,7 @@ class GroupRelations(object):
 
         catalog = getToolByName(self.context, 'portal_catalog')
         query = {
+            'object_provides': 'eea.reports.interfaces.IReportContainerEnhanced',
             'portal_type' : self.context.portal_type,
             self.group: groups,
             'sort_on': 'effective',

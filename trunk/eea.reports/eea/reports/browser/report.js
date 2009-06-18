@@ -18,6 +18,13 @@ Reports.Tree = {
       });
       jQuery(this).prepend(div);
       div.click();
+
+      jQuery('a:first', jQuery(element)).click(function(evt){
+        if(jQuery(this).attr('href') == '#'){
+          tree.toggle(element, jQuery('div:first', jQuery(element)));
+          return false;
+        }
+      });
     });
   },
 

@@ -143,7 +143,7 @@
                 <span tal:content="python:'[%s]' % rvalue.getObjSize(rvalue)" />
             </li>
         </ul>
- 	
+
         <ul metal:define-macro="folderish" tal:define="level level|python:1;">
         <tal:fileitems repeat="item fileItems">
             <li tal:condition="python:item.portal_type in ['File', 'Document']">
@@ -169,9 +169,10 @@
                 <tal:folder define="
                     folder item;
                     folder folder/getObject|folder;
+                    folder_url python:isAnon and '#' or folder.absolute_url();
                     folder_title folder/pretty_title_or_id;
                     folder_type folder/portal_type;">
-                    <a tal:attributes="href folder/absolute_url; title folder_title">
+                    <a tal:attributes="href folder_url; title folder_title">
                         <span tal:content="folder_title" />
                     </a>
                     <tal:block define="

@@ -31,9 +31,13 @@
   types python:field.Vocabulary(here, 'types_vocabulary');
   years python:field.Vocabulary(here, 'years_vocabulary');
   report_alt python:len(value) >= 4 and value[3] or '';
+  report_alt python:request.get(fieldName + '_alt', report_alt);
   report_type python:len(value) >= 1 and value[0] or '';
+  report_type python:request.get(fieldName + '_type', report_type);
   report_num python:len(value) >= 2 and value[1] or 0;
+  report_num python:request.get(fieldName + '_number', report_num);
   report_year python:len(value) >= 3 and value[2] or 0;
+  report_year python:request.get(fieldName + '_year', report_year);
 ">
 
 <!-- Report Type -->

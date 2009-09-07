@@ -136,6 +136,7 @@ class SchemaExtender(object):
             ReportSerialTitleField('serial_title',
                 schemata='report',
                 languageIndependent=True,
+                validators=('serialTitle',),
                 types_vocabulary=NamedVocabulary("report_types"),
                 years_vocabulary=ReportYearsVocabulary(),
                 default=(u'', 0, -1, u''),

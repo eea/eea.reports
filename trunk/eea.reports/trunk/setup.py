@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1'
+version = '1.0'
 
 setup(name='eea.reports',
       version=version,
@@ -14,7 +14,7 @@ setup(name='eea.reports',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='eea, reports, publications',
+      keywords='eea reports publications',
       author='European Environment Agency',
       author_email='alin.voinea@eaudeweb.ro',
       url='http://reports.eea.europa.eu',

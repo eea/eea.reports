@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="eea.reports">
+
+  <browser:page
+      for="*"
+      name="migrate_reports"
+      class=".migrate.MigrateReports"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="*"
+      name="migrate_relations"
+      class=".migrate_relations.MigrateRelations"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="*"
+      name="migrate_serialtitle"
+      class=".migrate_serialtitle.MigrateSerialTitle"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="*"
+      name="migrate_sortorder"
+      class=".migrate_sortorder.MigrateSortOrder"
+      permission="cmf.ModifyPortalContent"
+      />
+
+</configure>

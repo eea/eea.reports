@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="eea.reports">
+
+    <five:registerPackage package="." initialize=".initialize" />
+
+    <include package=".pdf" />
+    <include package=".browser" />
+    <include package=".adapter" />
+    <include package=".subtypes" />
+    <include package=".relations" />
+    <include package=".migration" />
+    <include package=".search" />
+    <include file="profiles.zcml" />
+
+</configure>

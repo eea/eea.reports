@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:eearep="http://rdfdata.eionet.europa.eu/rdf/eeareports"
+  xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+ >
+
+<metal:block
+  define-macro="master" tal:define="
+  syn context/portal_syndication;
+  max max_items|python:syn.getMaxItems(here);
+  objects python: objectList[:max];
+  cdata python:'&lt;![CDATA[%s]]&gt;'
+  ">
+
+<metal:block tal:define="dummy python:request.RESPONSE.setHeader('Content-Type', 'text/xml;;charset='+context.plone_utils.getSiteEncoding())" />
+
+<channel rdf:about="" tal:attributes="rdf:about request/URL" >
+  <title tal:content="structure python:cdata % context.pretty_title_or_id()">
+    The title
+  </title>
+  <link tal:content="context/portal_url">http://url.to.portal</link>
+
+  <description>
+    <metal:block define-slot="description">
+       <tal:block content="structure python:cdata % context.Description()">
+        Default rss description goes here
+        </tal:block>
+       </metal:block>
+  </description>
+
+  <tal:comment replace="nothing">
+    The syndication tool is pretty brain dead and won't let you access the variables
+    you need for this from something like search_rss, unless you've enable site syndication
+    it really needs rewriting.
+  </tal:comment>
+  <metal:block define-slot="syndication" />
+
+  <image
+    rdf:resource=""
+    tal:attributes="rdf:resource string:${context/portal_url}/${context/base_properties/logoName}" />
+
+  <items>
+    <rdf:Seq>
+        <tal:block repeat="obj_item python: objects">
+            <rdf:li rdf:resource=""
+                tal:attributes="rdf:resource obj_item/getURL|obj_item/absolute_url" />
+        </tal:block>
+    </rdf:Seq>
+  </items>
+
+</channel>
+
+<tal:block repeat="brain python: objects">
+  <item rdf:about="" tal:attributes="rdf:about obj_item/getURL|obj_item/absolute_url"
+    tal:define="
+      obj_item brain/getObject|nocall:brain;
+      modified brain/EffectiveDate|obj_item/modified;
+      modified modified/HTML4|modified">
+    <title tal:content="structure python:cdata % obj_item.pretty_title_or_id()">Title</title>
+    <link tal:content="string:${obj_item/Identifier}">Link</link>
+    <description tal:content="structure python:cdata % obj_item.Description()">Description</description>
+    <dc:publisher tal:content="obj_item/Publisher">Publisher</dc:publisher>
+    <dc:creator tal:content="obj_item/Creator">Creator</dc:creator>
+    <dc:rights tal:content="obj_item/Rights">Rights</dc:rights>
+    <tal:block tal:repeat="item obj_item/Subject">
+      <dc:subject tal:content="item">Item</dc:subject>
+    </tal:block>
+    <dc:date tal:content="modified">Modification date</dc:date>
+    <tal:serial_title define="
+      serial_title obj_item/serial_title|python:();
+      serial_title_type python:len(serial_title) > 0 and serial_title[0] or '';
+      serial_title_num python:len(serial_title) > 1 and serial_title[1] or 0;
+      serial_title_year python:len(serial_title) > 2 and serial_title[2] or '';
+      serial_title_alt python:len(serial_title) > 3 and serial_title[3] or '';
+      report_num python:int(serial_title_num)>0 and ' No %d' % serial_title_num or '';
+      report_year python:int(serial_title_year)>0 and '/%d' % serial_title_year or '';
+      report_title python:serial_title_type not in ('N/A', '', u'N/A', u'') and '%s%s%s' % (serial_title_type, report_num, report_year);">
+    <eearep:serial_title tal:content="report_title">Serial title</eearep:serial_title>
+    <eearep:reporttype tal:content="serial_title_type">Serial title type</eearep:reporttype>
+    <eearep:reportnum tal:content="serial_title_num">Serial title number</eearep:reportnum>
+    </tal:serial_title>
+    <dc:language tal:content="obj_item/getLanguage">Language</dc:language>
+    <dc:relation tal:content="python:obj_item.getCanonical().absolute_url()">Canonical</dc:relation>
+  </item>
+</tal:block>
+
+</metal:block>
+</rdf:RDF>

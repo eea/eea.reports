@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
+<head><title></title></head>
+<body>
+
+<!-- View -->
+<metal:view_macro define-macro="view" tal:define="
+  types python:field.Vocabulary(here, 'types_vocabulary');
+  value python:accessor();
+  report_alt python:len(value) >= 4 and value[3] or '';
+  report_type python:len(value) >= 1 and value[0] or '';
+  report_num python:len(value) >= 2 and value[1] or 0;
+  report_year python:len(value) >= 3 and value[2] or 0;
+">
+  <div tal:condition="report_alt" tal:content="report_alt" />
+  <div tal:condition="not:report_alt">
+    <span tal:content="python:report_type and here.translate(
+      types.getMsgId(report_type), default=types.getValue(report_type))" />
+    <span tal:content="string:No ${report_num}" tal:condition="report_num"/>
+    <span tal:content="string:/${report_year}" tal:condition="report_year"/>
+  </div>
+</metal:view_macro>
+
+<!-- Edit -->
+<metal:define define-macro="edit">
+<metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+<metal:fill fill-slot="widget_body" tal:define="
+  types python:field.Vocabulary(here, 'types_vocabulary');
+  years python:field.Vocabulary(here, 'years_vocabulary');
+  report_alt python:len(value) >= 4 and value[3] or '';
+  report_alt python:request.get(fieldName + '_alt', report_alt);
+  report_type python:len(value) >= 1 and value[0] or '';
+  report_type python:request.get(fieldName + '_type', report_type);
+  report_num python:len(value) >= 2 and value[1] or 0;
+  report_num python:request.get(fieldName + '_number', report_num);
+  report_year python:len(value) >= 3 and value[2] or 0;
+  report_year python:request.get(fieldName + '_year', report_year);
+">
+
+<!-- Report Type -->
+<div style="float: left; width: 20%">
+  <label tal:attributes="for string:${fieldName}_type" i18n:translate="label_report_type">Report type</label><br />
+  <select style="width: 100%" tal:attributes="
+    id string:${fieldName}_type;
+    name string:${fieldName}_type;
+    tabindex tabindex/next;">
+    <option tal:repeat="item types" tal:attributes="
+      value nocall:item;
+      selected python:test(item == report_type, 'selected', None);"
+      tal:content="python:here.translate(types.getMsgId(item), default=types.getValue(item))"
+      i18n:translate="" />
+  </select>
+</div>
+
+<!-- Report number -->
+<div style="float: left; width: 15%">
+  <label tal:attributes="for string:${fieldName}_number" i18n:translate="label_report_number">Report number</label><br />
+  <input type="text" style="width: 100%" tal:attributes="
+    id string:${fieldName}_number;
+    name string:${fieldName}_number:int;
+    value string:${report_num};
+    tabindex tabindex/next;" />
+</div>
+
+<!-- Report year -->
+<div style="float: left; width: 15%">
+  <label tal:attributes="for string:${fieldName}_year" i18n:translate="label_report_year">Report year</label><br />
+  <select style="width: 100%" tal:attributes="
+    id string:${fieldName}_year;
+    name string:${fieldName}_year:int;
+    tabindex tabindex/next;">
+    <option tal:repeat="item years" tal:attributes="
+      value nocall:item;
+      selected python:test(int(item) == report_year, 'selected', None);"
+      tal:content="python:here.translate(years.getMsgId(item), default=years.getValue(item))"
+      i18n:translate="" />
+  </select>
+</div>
+
+<!-- Report alt -->
+<div style="clear: both; width: 50%">
+  <label tal:attributes="for string:${fieldName}_alt" i18n:translate="label_report_alt">Alternative</label>
+  <div class="formHelp" i18n:translate="">use this field if the report type is not listed in the previous Serial Title field</div>
+  <input type="text" style="width: 100%" tal:attributes="
+    id string:${fieldName}_alt;
+    name string:${fieldName}_alt;
+    value string:${report_alt};
+    tabindex tabindex/next;" />
+</div>
+
+
+</metal:fill>
+</metal:use>
+</metal:define>
+
+<!-- Search -->
+<div metal:define-macro="search">
+  <div metal:use-macro="here/report_keywords/macros/edit">
+  </div>
+</div>
+
+</body>
+</html>

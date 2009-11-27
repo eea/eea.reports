@@ -1,9 +1,12 @@
 from setuptools import setup, find_packages
 import os
+from os.path import join
 
-version = '1.0'
+name = 'eea.reports'
+path = name.split('.') + ['version.txt']
+version = open(join(*path)).read().strip()
 
-setup(name='eea.reports',
+setup(name=name,
       version=version,
       description="EEA Reports",
       long_description=open("README.txt").read() + "\n" +

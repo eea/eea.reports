@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="eea.reports">
+
+    <class class="Products.ATContentTypes.content.folder.ATFolder">
+      <implements interface="..interfaces.IPossibleReportContainer" />
+    </class>
+
+    <utility
+        name="eea.reports.FolderReport"
+        factory=".descriptors.FolderReportContainerDescriptor" />
+
+    <adapter
+        name="eea.reports.subtypes.report"
+        for="..interfaces.IReportContainerEnhanced"
+        factory=".report.SchemaExtender" />
+
+</configure>

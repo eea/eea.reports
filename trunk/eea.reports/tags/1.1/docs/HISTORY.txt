@@ -1,0 +1,12 @@
+Changelog
+=========
+
+1.1 (2009-11-27)
+------------------
+ * Related EEAFigures displayed using album view
+   and links to dataservice 2.0 objects [ghicaale #2823]
+
+1.0 (2009-11-09)
+----------------
+
+* Initial release

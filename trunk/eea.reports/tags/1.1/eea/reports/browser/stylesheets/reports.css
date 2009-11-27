@@ -1,0 +1,22 @@
+.tree-level-arrow {
+  width: 16px;
+  height: 19px;
+  float: left;
+  cursor: pointer;
+}
+
+.tree-level-close {
+  background: transparent url(++resource++publication_images/navigation.png) no-repeat scroll 0 1px;
+}
+
+.tree-level-close:hover {
+  background: transparent url(++resource++publication_images/navigation.png) no-repeat scroll 0 -16px;
+}
+
+.tree-level-open {
+  background: transparent url(++resource++publication_images/navigation.png) no-repeat scroll 0 -32px;
+}
+
+.tree-level-open:hover {
+  background: transparent url(++resource++publication_images/navigation.png) no-repeat scroll 0 -48px;
+}

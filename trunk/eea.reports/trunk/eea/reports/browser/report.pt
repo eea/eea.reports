@@ -218,12 +218,10 @@
           eeaid python:field.getAccessor(here)()"
           condition="eeaid">
           <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
-          <ul>
-            <li><a tal:attributes="
-              href string:http://dataservice.eea.europa.eu/atlas/goto.asp?pubid=${eeaid}"
-              i18n:translate="publication_maps_and_graphs_link">See list of maps and graphs used in this publication</a>
-            </li>
-          </ul>
+          <div metal:define-macro="figures-album" class="map-photo-album"
+               tal:define="folderContents context/@@publicationBasedOn">
+            <metal:figures use-macro="here/atct_album_view/macros/listing" />
+          </div>
         </tal:mapsandgraphs>
 
         <!-- Order information -->

@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+1.3 (Unreleased)
+----------------
+
 1.2 (2010-01-18)
 ------------------
  * Batch on album view for displaynig figures

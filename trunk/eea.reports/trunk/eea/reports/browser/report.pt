@@ -222,6 +222,7 @@
                tal:define="Batch python:modules['Products.CMFPlone'].Batch;
                            b_start python:request.get('b_start', 0);
                            figures context/@@publicationBasedOn;
+                           template_id string:;
                            folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
             <metal:figures use-macro="here/atct_album_view/macros/listing" />
           </div>

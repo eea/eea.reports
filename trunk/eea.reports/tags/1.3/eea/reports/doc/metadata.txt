@@ -1,0 +1,136 @@
+Overview
+========
+Update old reports attached pdf files metadata from zope objects properties
+
+Data to test
+============
+    >>> metadata = {'allowDiscussion': False,
+    ... 'authors_str': 'EEA',
+    ... 'constrainTypesMode': 1,
+    ... 'contributors': (),
+    ... 'copyrights': '(c) Copyrights - EEA (European Environment Agency)',
+    ... 'creators_keywords': ('EEA',),
+    ... 'description': '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f',
+    ... 'eeaid': 0,
+    ... 'excludeFromNav': False,
+    ... 'expirationDate': None,
+    ... 'for_sale': False,
+    ... 'id': '627644646638627645',
+    ... 'immediatelyAddableTypes': ('File', 'Link', 'Folder', 'Image', 'Document'),
+    ... 'isbn': 'SDFHSDJKFSDGHJ344354353',
+    ... 'keywords': (
+    ...        '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f',
+    ...        '\xd0\x92\xd1\x81\xd0\xb5\xd0\xb1\xd0\xb0\xd0\xbb\xd1\x82\xd0\xb8\xd0\xb9\xd1\x81\xd0\xba\xd0\xb8\xd0\xb9',
+    ...        'M\xc3\xa5lungdom',
+    ...        's\xc3\xad\xc3\xb0unni',
+    ...        'v\xc3\xbdpo\xc4\x8dtovou',
+    ...        'poi\xc5\xa1\xc4\x8di',
+    ...        'm\xc3\xa5lr\xc3\xb8rsla',
+    ...        '\xd8\xa7\xd9\x84\xd9\x86\xd8\xb8\xd8\xa7\xd9\x85',
+    ...        '\xc3\xa1skrifendu',
+    ...        'S\xc3\xa1rv\xc3\xa1r',
+    ...        'Edici\xc3\xb3n',
+    ...        'l\xc3\xb6yt\xc3\xa4m\xc3\xa4\xc3\xa4n',
+    ...        'Le\xc3\xb3n',
+    ...        '\xd1\x85\xd1\x83\xd0\xb4\xd0\xbe\xd0\xb6\xd0\xb5\xd1\x81\xd1\x82\xd0\xb2\xd0\xb5\xd0\xbd\xd0\xbd\xd0\xb0\xd1\x8f',
+    ...        'Confedera\xc3\xa7\xc3\xa3o',
+    ...        'oportunit\xc4\x83\xc5\xa3i',
+    ...        'Na\xc5\x82\xc4\x99cz\xc3\xb3w',
+    ...       '\xc3\x87ocuk Poliklini\xc4\x9fi',
+    ...        'K\xc3\xb6ln',
+    ...        '\xe1\x8b\xa8\xe1\x8a\xa2\xe1\x8d\x8c\xe1\x8b\xb2\xe1\x88\xaa'),
+    ... 'keywords_str': '\xd0\x9d\xd0\xb0\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f; \xd0\x92\xd1\x81\xd0\xb5\xd0\xb1\xd0\xb0\xd0\xbb\xd1\x82\xd0\xb8\xd0\xb9\xd1\x81\xd0\xba\xd0\xb8\xd0\xb9; M\xc3\xa5lungdom; s\xc3\xad\xc3\xb0unni; v\xc3\xbdpo\xc4\x8dtovou; poi\xc5\xa1\xc4\x8di; m\xc3\xa5lr\xc3\xb8rsla; \xd8\xa7\xd9\x84\xd9\x86\xd8\xb8\xd8\xa7\xd9\x85; \xc3\xa1skrifendu; S\xc3\xa1rv\xc3\xa1r; Edici\xc3\xb3n; l\xc3\xb6yt\xc3\xa4m\xc3\xa4\xc3\xa4n; Le\xc3\xb3n; \xd1\x85\xd1\x83\xd0\xb4\xd0\xbe\xd0\xb6\xd0\xb5\xd1\x81\xd1\x82\xd0\xb2\xd0\xb5\xd0\xbd\xd0\xbd\xd0\xb0\xd1\x8f; Confedera\xc3\xa7\xc3\xa3o; oportunit\xc4\x83\xc5\xa3i; Na\xc5\x82\xc4\x99cz\xc3\xb3w; \xc3\x87ocuk Poliklini\xc4\x9fi; K\xc3\xb6ln; \xe1\x8b\xa8\xe1\x8a\xa2\xe1\x8d\x8c\xe1\x8b\xb2\xe1\x88\xaa; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas',
+    ... 'lang': 'en',
+    ... 'locallyAllowedTypes': ('File', 'Link', 'Folder', 'Image', 'Document'),
+    ... 'order_extra_text': '',
+    ... 'order_id': 'SDFDRTWEYTUIOTYRWEUTIRE',
+    ... 'order_override_text': '',
+    ... 'pages': 4,
+    ... 'price': 0.0,
+    ... 'publication_groups': (),
+    ... 'publishers_keywords': ('EEA (European Environment Agency)',),
+    ... 'publishers_str': 'EEA (European Environment Agency)',
+    ... 'relatedItems': [],
+    ... 'rights': '',
+    ... 'serial_title': ('N/A', 0, -1, ''),
+    ... 'serial_title_str': ' 0/1970',
+    ... 'themes': ['Air pollution',
+    ...            'Biodiversity',
+    ...            'Chemicals',
+    ...            'Climate change',
+    ...            'Coasts and seas'],
+    ... 'title': '\xd9\x85\xd8\xac\xd8\xa7\xd9\x84 \xd8\xa7\xd9\x84\xd9\x85\xd9\x8a\xd8\xa7\xd9\x87',
+    ... 'trailer': ''}
+
+    >>> from eea.reports.pdf.interfaces import IPDFMetadataUpdater
+    >>> from zope.component import getUtility
+    >>> updater = getUtility(IPDFMetadataUpdater)
+
+UTF to HTML entity conversion
+=============================
+    >>> ar = u'\u0627\u0644\u0646\u0634\u0631\u0629 \u0627\u0644\u0634\u0647\u0631\u064a\u0629 58 - \u0641\u0644\u0627\u0634'
+    >>> updater._utf2entity(ar)
+    u'&#1575;&#1604;&#1606;&#1588;&#1585;&#1577; &#1575;&#1604;&#1588;&#1607;&#1585;&#1610;&#1577; 58 - &#1601;&#1604;&#1575;&#1588;'
+
+    >>> ru = u'\u0417\u0430\u0449\u0438\u0442\u0430'
+    >>> updater._utf2entity(ru)
+    u'&#1047;&#1072;&#1097;&#1080;&#1090;&#1072;'
+
+    >>> fr = u'Conseil g\xe9n\xe9ral des Bouches-du-Rh\xf4ne'
+    >>> updater._utf2entity(fr)
+    u'Conseil g&#233;n&#233;ral des Bouches-du-Rh&#244;ne'
+
+Metadata dictionary to pdftk text structure
+===========================================
+
+Check to see if it creates the right metadata output text in order to
+update pdfs properties.
+
+    >>> print updater._process_metadata(metadata)
+    <BLANKLINE>
+    InfoKey: Title
+    InfoValue: &#1605;&#1580;&#1575;&#1604; &#1575;&#1604;&#1605;&#1610;&#1575;&#1607;
+    InfoKey: Subject
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;
+    InfoKey: Keywords
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;; &#1042;&#1089;&#1077;&#1073;&#1072;&#1083;&#1090;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;; M&#229;lungdom; s&#237;&#240;unni; v&#253;po&#269;tovou; poi&#353;&#269;i; m&#229;lr&#248;rsla; &#1575;&#1604;&#1606;&#1592;&#1575;&#1605;; &#225;skrifendu; S&#225;rv&#225;r; Edici&#243;n; l&#246;yt&#228;m&#228;&#228;n; Le&#243;n; &#1093;&#1091;&#1076;&#1086;&#1078;&#1077;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103;; Confedera&#231;&#227;o; oportunit&#259;&#355;i; Na&#322;&#281;cz&#243;w; &#199;ocuk Poliklini&#287;i; K&#246;ln; &#4840;&#4770;&#4940;&#4850;&#4650;; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas
+    InfoKey: Creator
+    InfoValue: EEA
+    InfoKey: Producer
+    InfoValue: reports.eea.europa.eu
+    InfoKey: Authors
+    InfoValue: EEA
+    InfoKey: Publishers
+    InfoValue: EEA (European Environment Agency)
+    InfoKey: ISBN
+    InfoValue: SDFHSDJKFSDGHJ344354353
+    InfoKey: OrderId
+    InfoValue: SDFDRTWEYTUIOTYRWEUTIRE
+    InfoKey: Copyrights
+    InfoValue: (c) Copyrights - EEA (European Environment Agency)
+    InfoKey: Language
+    InfoValue: en
+    InfoKey: Price
+    InfoValue: 0.0
+    InfoKey: SerialTitle
+    InfoValue:  0/1970
+    InfoKey: Themes
+    InfoValue: &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1072;&#1103;; &#1042;&#1089;&#1077;&#1073;&#1072;&#1083;&#1090;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;; M&#229;lungdom; s&#237;&#240;unni; v&#253;po&#269;tovou; poi&#353;&#269;i; m&#229;lr&#248;rsla; &#1575;&#1604;&#1606;&#1592;&#1575;&#1605;; &#225;skrifendu; S&#225;rv&#225;r; Edici&#243;n; l&#246;yt&#228;m&#228;&#228;n; Le&#243;n; &#1093;&#1091;&#1076;&#1086;&#1078;&#1077;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1072;&#1103;; Confedera&#231;&#227;o; oportunit&#259;&#355;i; Na&#322;&#281;cz&#243;w; &#199;ocuk Poliklini&#287;i; K&#246;ln; &#4840;&#4770;&#4940;&#4850;&#4650;; Air pollution; Biodiversity; Chemicals; Climate change; Coasts and seas
+    <BLANKLINE>
+
+Update pdf metadata
+===================
+
+If pdftk is installed try to update pdf metadata. If something goes wrong the
+original pdf file is returned, that's why we'll test to see if output pdf is
+not the same as original. If pdftk is not installed safely pass this test.
+
+    >>> can_convert = updater._can_convert()
+    >>> inp = 'in'
+    >>> out = 'out'
+    >>> if can_convert:
+    ...     inp = self.loadfile('tests/data/meta-broken.pdf', ctype='application/pdf')
+    ...     inp = inp.read()
+    ...     out = updater.update(inp, metadata)
+    >>> inp != out
+    True

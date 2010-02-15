@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step 
+      id="eea.reports-install-vocabularies" 
+      handler="eea.reports.setuphandlers.installVocabularies"
+      title="Install Vocabularies for eea.reports"
+      version="2008-07-29T17:28:26.213237">
+     Installs the vocabulary files into vocabulary library for eea.reports
+  </import-step>
+</import-steps>

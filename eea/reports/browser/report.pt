@@ -213,15 +213,12 @@
         </tal:foldercontents>
 
         <!-- Maps and graphs -->
-        <tal:mapsandgraphs define="
-          field python:here.getField('eeaid');
-          eeaid python:field.getAccessor(here)()"
-          condition="eeaid">
+        <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
+                           tal:condition="figures">
           <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
           <div metal:define-macro="figures-album" class="map-photo-album"
                tal:define="Batch python:modules['Products.CMFPlone'].Batch;
                            b_start python:request.get('b_start', 0);
-                           figures context/@@publicationBasedOn;
                            template_id string:;
                            folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
             <metal:figures use-macro="here/atct_album_view/macros/listing" />

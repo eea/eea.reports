@@ -109,6 +109,7 @@ class SchemaExtender(object):
                 lanaguageIndependent=False,
                 default=0,
                 widget=atapi.IntegerWidget(
+                    visible=-1,
                     label=_(u'label_eeaid', default=u'EEA Publication Internal ID'),
                     description=_(u'description_eeaid', default=u'Fill in EEA publication internal id'),
                     i18n_domain='eea.reports',

@@ -1,0 +1,11 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="eea.reports">
+
+    <include package="slc.publications.pdf" />
+    <utility factory=".parser.PDFParser" />
+    <utility factory=".updater.PDFMetadataUpdater" />
+    <utility factory=".cover.PDFCoverImage" />
+
+</configure>

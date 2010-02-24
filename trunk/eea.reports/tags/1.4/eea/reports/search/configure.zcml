@@ -1,0 +1,9 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea.reports">
+
+  <adapter
+    for="Products.CMFCore.interfaces.ICatalogTool"
+    provides=".interfaces.IReportCatalog"
+    factory=".catalog.ReportCatalog" />
+
+</configure>

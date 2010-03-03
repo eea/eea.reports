@@ -51,4 +51,7 @@ Reports.Tree = {
 
 jQuery(document).ready(function(){
   Reports.Tree.initialize();
+  if(window.Figures){
+    Figures.Load();
+  }
 });

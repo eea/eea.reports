@@ -1,0 +1,211 @@
+Overview
+========
+
+Migrate old reports from http://reports.eea.europa.eu to http://eea.europa.eu/www/SITE/publications.
+
+Parse exported reports
+======================
+
+    >>> from eea.reports.migration.zReports.parser import zreports_parser
+    >>> from ZPublisher.HTTPRequest import FileUpload
+    >>> xml_file = self.loadfile('tests/data/reports.xml')
+    >>> s = xml_file.read()
+    >>> parser = zreports_parser()
+    >>> data = parser.parseHeader(s)
+    >>> reports = data.get_reports()
+    >>> len(reports)
+    4
+
+Check properties were parsed corectly
+=====================================
+
+    >>> report_en = reports[0]
+    >>> report_ru = reports[1]
+    >>> report_fr = reports[3]
+
+Report id:
+
+    >>> report_en.getId() == report_ru.getId() == 'state_of_environment_report_2007_1'
+    True
+    >>> report_fr.getId()
+    u'briefing_2008_1'
+
+Language:
+
+    >>> report_en.get('lang')
+    u'en'
+    >>> report_ru.get('lang')
+    u'ru'
+    >>> report_fr.get('lang')
+    u'fr'
+
+Title:
+
+    >>> report_en.get('title')
+    u"Europe's environment  \u2014 The fourth assessment"
+    >>> report_ru.get('title')
+    u'\u0417\u0430\u0449\u0438\u0442\u0430 \u043e\u043a\u0440\u0443\u0436\u0430\u044e\u0449\u0435\u0439 \u0441\u0440\u0435\u0434\u044b \u0415\u0432\u0440\u043e\u043f\u044b \u2014 \u0427\u0435\u0442\u0432\u0435\u0440\u0442\u0430\u044f \u043e\u0446\u0435\u043d\u043a\u0430'
+    >>> report_fr.get('title')
+    u'Une meilleure gestion des d\xe9chets municipaux r\xe9duira les \xe9missions de gaz \xe0 effet de serre'
+
+Serial title:
+
+    >>> report_en.get('serial_title_type')
+    u'State of the environment report'
+    >>> report_en.get('serial_title_number')
+    1
+    >>> report_en.get('serial_title_year')
+    2007
+    >>> report_en.get('serial_title_alt')
+    u''
+    >>> report_fr.get('serial_title_type')
+    u'Briefing'
+    >>> report_fr.get('serial_title_number')
+    1
+    >>> report_fr.get('serial_title_year')
+    2008
+    >>> report_fr.get('serial_title_alt')
+    u''
+
+Cover image:
+
+    >>> report_en.get('cover_image_file')
+    u'http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover'
+    >>> report_ru.get('cover_image_file')
+    u'http://reports.eea.europa.eu/state_of_environment_report_2007_1/Cover'
+    >>> report_fr.get('cover_image_file')
+    u'http://reports.eea.europa.eu/briefing_2008_1/cover.jpg'
+
+PDF File:
+    >>> file_en = report_en.get('file')
+    >>> len(file_en.keys())
+    14
+    >>> file_en['http://reports.eea.europa.eu/state_of_environment_report_2007_1/en/chapter5.pdf']
+    u'chapter5.pdf'
+    >>> file_ru = report_ru.get('file')
+    >>> len(file_ru.keys())
+    12
+    >>> file_ru['http://reports.eea.europa.eu/state_of_environment_report_2007_1/ru/chapter9.pdf']
+    u'chapter5.pdf'
+    >>> file_fr = report_fr.get('file')
+    >>> len(file_fr.keys())
+    1
+    >>> file_fr['http://reports.eea.europa.eu/briefing_2008_1/fr/FR_Briefing_01-2008.pdf']
+    u'Une meilleure gestion des d\xe9chets municipaux r\xe9duira les \xe9missions de gaz \xe0 effet de serre'
+
+Creators:
+
+    >>> report_ru.get('creators_existing_keywords')
+    [u'EEA (European Environment Agency)']
+    >>> report_ru.get('creators_keywords')
+    []
+    >>> report_fr.get('creators_existing_keywords')
+    [u'EEA (European Environment Agency)']
+    >>> report_fr.get('creators_keywords')
+    []
+
+Publishers:
+
+    >>> report_ru.get('publishers_existing_keywords')
+    [u'EEA (European Environment Agency)', u'OPOCE (Office for Official Publications of the European Communities)']
+    >>> report_ru.get('publishers_keywords')
+    []
+    >>> report_fr.get('publishers_existing_keywords')
+    [u'OPOCE (Office for Official Publications of the European Communities)']
+    >>> report_fr.get('publishers_keywords')
+    []
+
+Themes:
+
+    >>> report_ru.get('themes')
+    [u'agriculture', u'air', u'air_quality', u'biodiversity', u'chemicals', u'climate', u'coast_sea', u'energy', u'human', u'soil', u'tourism', u'transport', u'waste', u'water']
+    >>> report_fr.get('themes')
+    [u'climate', u'waste']
+
+Chapers:
+
+    >>> chapters = report_en.get('chapters')
+    >>> chapters.keys()
+    [u'page010.html', u'page011.html']
+    >>> chapters['page010.html'][0]
+    u'Group 1: Combustion in energy and transformation industries'
+    >>> chapters['page011.html'][0]
+    u'Group 2: Non-industrial combustion plants'
+    >>> report_fr.get('chapters')
+    {}
+
+Images:
+
+    >>> images = report_ru.get('images', {})
+    >>> images.keys()
+    [u'ieeplogo.gif', u'fig110.gif']
+    >>> images['ieeplogo.gif']
+    u'http://reports.eea.europa.eu/92-827-4083-8/en/ieeplogo.gif'
+    >>> report_fr.get('images', {})
+    {}
+
+Other properties:
+
+    >>> report_ru.get('isbn')
+    u'978-92-9167-933-1'
+    >>> report_fr.get('isbn')
+     u'978-92-9167-337-7'
+    >>> report_ru.get('pages')
+    452
+    >>> report_fr.get('pages')
+    4
+    >>> report_ru.get('order_id')
+    u'TH-78-07-127-RU-C'
+    >>> report_fr.get('order_id')
+    u'TH-AM-08-001-FR-N'
+    >>> report_en.get('for_sale')
+    True
+    >>> report_ru.get('for_sale')
+    True
+    >>> report_fr.get('for_sale')
+    False
+    >>> report_ru.get('copyrights')
+    u'EEA, Copenhagen 2007'
+    >>> report_fr.get('copyrights')
+    u'EEA, Copenhagen 2001'
+    >>> report_en.get('trailer')
+    u'<h2>See also</h2>\n<p><a href="http://www.eea.europa.eu/pan-european/">The EEA pan-European website</a></p>\n<p>\n<a  href="http://dataservice.eea.europa.eu/atlas/available2.asp?type=findkeyword&theme=State%20of%20the%20environment%20report%20No%201/2007">Maps/Graphs included Europe\'s environment - The fourth assessment</a>\n</p>'
+    >>> report_fr.get('trailer')
+    u'<h2>Links</h2>\n<a href="http://waste.eionet.europa.eu/publications/Working_paper_2008_1">Working paper \'Municipal waste management and greenhouse gas  emissions\', European Topic Centre on resources and waste management, 1/2008 </a>\n<br /><br />'
+    >>> report_en.get('description')
+    u"The 'Environment for Europe' process now brings together 56 countries across three continents to jointly address environmental challenges. In support of this process, the European Environment Agency has prepared a series of assessments of the environment for the pan European region to provide policy relevant, up to date and reliable information on the interactions between the environment and society.\nThis is the fourth report in the series. Where possible the report evaluates progress, primarily against the objectives of the Sixth Environment Action Programme of the European Community and the Environment Strategy for Countries of Eastern Europe, Caucasus and Central Asia.\nThe report has been prepared in close partnership with a range of international organisations, governmental institutions and non governmental organisations across the region."
+    >>> report_fr.get('description')[:100]
+    u'La quantit\xe9 de d\xe9chets municipaux produits chaque ann\xe9e devrait augmenter de 25 % entre 2005 et 2020'
+    >>> report_ru.get('effectiveDate')
+    u'2007/10/10 10:00:00 GMT+2'
+    >>> report_fr.get('effectiveDate')
+    u'2008/01/31 10:00:00 GMT+1'
+    >>> report_ru.get('expirationDate')
+    u'2099/12/31'
+    >>> report_fr.get('expirationDate')
+    u'2088/12/31'
+    >>> report_en.get('eeaid')
+    0
+    >>> report_ru.get('eeaid')
+    1605
+    >>> report_fr.get('eeaid')
+    0
+
+Relations:
+
+    >>> report_ru.get('replaces')
+    set([u'EMEPCORINAIR4', u'EMEPCORINAIR3', u'technical_report_2001_3'])
+    >>> report_fr.get('replaces')
+    set([])
+    >>> report_en.get('is_replaced_by')
+    set([u'technical_report_2008_7'])
+    >>> report_fr.get('is_replaced_by')
+    set([])
+    >>> report_en.get('has_part')
+    set([u'state_of_environment_report_2007_2'])
+    >>> report_fr.get('has_part')
+    set([])
+    >>> report_ru.get('is_part_of')
+    set([u'EMEPCORINAIR4', u'EMEPCORINAIR3', u'technical_report_2001_3'])
+    >>> report_fr.get('is_part_of')
+    set([])

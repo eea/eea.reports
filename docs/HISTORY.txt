@@ -4,7 +4,7 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-1.5 (Unreleased)
+1.5 (2010-03-08)
 ------------------
 
  * Added fancybox for related maps and graphs [voineali #2924]

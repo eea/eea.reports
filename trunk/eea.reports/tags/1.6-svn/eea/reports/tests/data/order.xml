@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reports>
+<report>
+<id>report</id>
+<language_report url="http://reports.eea.europa.eu/92-9167-006-5/en">
+<id>fr</id>
+<language>fr</language>
+
+<report_file url="http://reports.eea.europa.eu/92-9167-006-5/en/TopicReportNo09-1996.pdf" id="add 1" pagenumber="1">
+  <report_file_title/>
+</report_file>
+
+<report_file url="http://reports.eea.europa.eu/92-9167-006-5/en/TopicReportNo09-1996.pdf" id="add 2" pagenumber="1">
+  <report_file_title/>
+</report_file>
+
+<report_file url="http://reports.eea.europa.eu/92-9167-006-5/en/TopicReportNo09-1996.pdf" id="add 3" pagenumber="1">
+  <report_file_title/>
+</report_file>
+
+<zope_file url="http://reports.eea.europa.eu/92-9167-006-5/en/9706.pdf" id="Topic report 16 web - part 3 - ">
+  <file_title/>
+</zope_file>
+
+<zope_file url="http://reports.eea.europa.eu/92-9167-006-5/en/9706.pdf" id="add x">
+  <file_title/>
+</zope_file>
+
+</language_report>
+</report>
+</reports>

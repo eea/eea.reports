@@ -7,6 +7,9 @@ Changelog
 1.7 (Unreleased)
 ----------------
 
+ * Set description field on reports required [voineali #3159]
+
+
 1.6 (2010-03-19)
 ----------------
 

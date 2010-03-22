@@ -84,6 +84,20 @@ class SchemaExtender(object):
     """
     implements(IOrderableSchemaExtender)
     _fields = [
+            ReportTextField('description',
+                schemata='default',
+                default='',
+                searchable=1,
+                accessor="Description",
+                required=True,
+                widget=atapi.TextAreaWidget(
+                    label='Description',
+                    description="A short summary of the content",
+                    label_msgid="label_description",
+                    description_msgid="help_description",
+                    i18n_domain="plone"
+                ),
+            ),
             ReportFileField('file',
                 schemata='default',
                 languageIndependent=False,

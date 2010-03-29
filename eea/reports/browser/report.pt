@@ -247,11 +247,10 @@
         <div class="publicationOrder">
             <h2 i18n:translate="title_order_info">Order information</h2>
              <p>
-               <a href="" tal:define="eubookshop_link python:oid_value and
-                    'http://bookshop.europa.eu/eubookshop/advancedSearch!firstPage.action?searchData.domain=identifier&amp;request_locale=%s&amp;searchData.expression=%s' % (language, oid_value.replace('-', '')) or
-                    'http://bookshop.europa.eu/eubookshop/searchById.action'"
-                      alt="Order a printed copy at EU-Bookshop"
-                      tal:attributes="href eubookshop_link" >
+               <a href="" tal:define="
+                    eubookshop_link python:context.getEUBookshopLink(order_id=oid_value);"
+                    alt="Order a printed copy at EU-Bookshop"
+                    tal:attributes="href eubookshop_link" >
                       Order a printed copy online
                </a> (EU-Bookshop).
             </p>

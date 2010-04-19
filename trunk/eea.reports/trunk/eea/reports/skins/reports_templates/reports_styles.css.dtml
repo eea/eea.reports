@@ -64,10 +64,6 @@ font-weight: normal;
 #related_pubs_heading {border-bottom: 1px dashed #999; margin-bottom:5px; }
 #chapterlisting { margin-top: 20px;}
 
-.languages {
-  margin-top: -1.5em;
-}
-
 .publicationThemes {
   margin-top: 0.5em;
 }

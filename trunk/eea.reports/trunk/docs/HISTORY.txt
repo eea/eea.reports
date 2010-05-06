@@ -7,6 +7,7 @@ Changelog
 1.8 (unreleased)
 ----------------
 
+ * Adjust report template to use the new atct_album_view listing macro [voineali #3305]
  * Update EU Bookshop ordering link according with their new portal [voineali #3178]
 
 1.7 (2010-03-26)

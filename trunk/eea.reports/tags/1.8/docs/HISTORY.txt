@@ -1,0 +1,51 @@
+Changelog
+=========
+[Alexandru Ghica - alec.ghica@eaudeweb.ro]
+[Alin Voinea - alin.voinea@eaudeweb.ro]
+[Antonio De Marinis - demarinis@eea.europa.eu]
+
+1.8 (2010-05-07)
+----------------
+
+ * Adjust report template to use the new atct_album_view listing macro [voineali #3305]
+ * Update EU Bookshop ordering link according with their new portal [voineali #3178]
+
+1.7 (2010-03-26)
+----------------
+
+ * Set description field on reports required [voineali #3159]
+
+
+1.6 (2010-03-19)
+----------------
+
+ * Specified required fields [demarant]
+
+1.5 (2010-03-08)
+------------------
+
+ * Added fancybox for related maps and graphs [voineali #2924]
+
+
+1.4 (2010-02-24)
+----------------
+ * eeaid is now deprecated, related field and logic was hidden. [ghicaale #2910]
+
+1.3 (2010-02-15)
+----------------
+ * Fix template_id for batch href. [ghicaale #2948]
+
+1.2 (2010-01-18)
+------------------
+ * Batch on album view for displaynig figures
+   is now customisable. [ghicaale #2908]
+
+1.1 (2009-11-27)
+------------------
+ * Related EEAFigures displayed using album view
+   and links to dataservice 2.0 objects [ghicaale #2823]
+
+1.0 (2009-11-09)
+----------------
+
+* Initial release

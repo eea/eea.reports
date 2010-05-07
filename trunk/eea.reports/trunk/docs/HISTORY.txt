@@ -4,7 +4,7 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-1.8 (unreleased)
+1.8 (2010-05-07)
 ----------------
 
  * Adjust report template to use the new atct_album_view listing macro [voineali #3305]

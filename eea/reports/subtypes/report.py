@@ -166,7 +166,7 @@ class SchemaExtender(object):
             ReportLinesField('creators',
                 schemata='report',
                 required=True,
-                languageIndependent=True,
+                languageIndependent=False,
                 multiValued=1,
                 default=(u'EEA (European Environment Agency)',),
                 vocabulary=NamedVocabulary("report_creators"),

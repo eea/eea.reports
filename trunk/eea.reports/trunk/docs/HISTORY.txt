@@ -6,6 +6,8 @@ Changelog
 
 1.9 (unreleased)
 ----------------
+ * Made 'creators' field language dependent in order to avoid required
+   validation errors on translation form [voineali #3416]
 
 1.8 (2010-05-07)
 ----------------

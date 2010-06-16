@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+2.0 (unreleased)
+----------------
+
 1.9 (2010-06-16)
 ----------------
  * Made 'creators' field language dependent in order to avoid required

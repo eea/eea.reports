@@ -12,7 +12,7 @@ class AbstractReportContainerDescriptor(object):
     description = u'Report file type'
     type_interface = interfaces.IReportContainerEnhanced
 
-class FolderReportContainerDescriptor(AbstractReportContainerDescriptor):
-    """ Folder descriptor
+class PublicationReportContainerDescriptor(AbstractReportContainerDescriptor):
+    """ Publication descriptior
     """
-    for_portal_type = 'Folder'
+    for_portal_type = 'Report'

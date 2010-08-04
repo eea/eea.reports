@@ -8,25 +8,19 @@ from p4a.subtyper.interfaces import ISubtyper
 from eea.reports.config import REPORT_SUBOBJECTS
 from eea.reports.vocabulary import ReportThemesVocabulary
 #
-# Debug
-#
-def printEvent(obj, evt):
-    print "================"
-    print [obj], [evt]
-#
 # Restrict report sub-objects
 #
 def subtype_added(evt):
     """ EVENT
 
-    Called when a Folder is subtyped as report.
+    Called when an object is subtyped as report.
     """
     _restrict_subobjects(evt, 1)
 
 def subtype_removed(evt):
     """ EVENT
 
-    Called when a Folder is un-subtyped as report.
+    Called when an object is un-subtyped as report.
     """
     _restrict_subobjects(evt, -1)
 
@@ -138,28 +132,26 @@ def invalidate_cache(instance, evt):
 #
 def report_initialized(obj, evt):
     """ EVENT
-        called when a Report content-type were added. COnvert it to folder
-        and subtype as report.
+        called when a Report content-type is added. Subtype it as report.
     """
     subtyper = getUtility(ISubtyper)
     canonical = obj.getCanonical()
 
     # Object added
     if obj == canonical and evt.portal_type == 'Report':
-        obj.portal_type = 'Folder'
         obj.setExcludeFromNav(True)
         # Fix language
         parent_lang = obj.getParentNode().getLanguage()
         if obj.getLanguage() != parent_lang:
             obj.setLanguage(parent_lang)
-        return subtyper.change_type(obj, 'eea.reports.FolderReport')
+        return subtyper.change_type(obj, 'eea.reports.PublicationReport')
 
     # Object translated
     subtype = subtyper.existing_type(canonical)
-    if getattr(subtype, 'name', None) == 'eea.reports.FolderReport':
-        obj.portal_type = 'Folder'
+    subtype_name = getattr(subtype, 'name', None)
+    if subtype_name == 'eea.reports.PublicationReport':
         obj.setExcludeFromNav(True)
-        return subtyper.change_type(obj, 'eea.reports.FolderReport')
+        return subtyper.change_type(obj, 'eea.reports.PublicationReport')
 #
 # Set the language independent
 #

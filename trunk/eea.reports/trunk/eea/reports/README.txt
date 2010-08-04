@@ -44,8 +44,6 @@ Installation
 
   * use the QuickInstaller to add this product to your Plone site
 
-  * to migrate old reports see migration/README.txt
-
   * Optional: pdfinfo to parse pdf metadata (part of the xpdf package).
 
     yum install xpdf (fedora)

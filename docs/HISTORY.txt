@@ -7,6 +7,9 @@ Changelog
 2.0 (unreleased)
 ----------------
 
+ * Change Publication portal_type from Folder to Publication [voineali #3521]
+
+
 1.9 (2010-06-16)
 ----------------
  * Made 'creators' field language dependent in order to avoid required

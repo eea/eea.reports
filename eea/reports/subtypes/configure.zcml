@@ -8,8 +8,8 @@
     </class>
 
     <utility
-        name="eea.reports.FolderReport"
-        factory=".descriptors.FolderReportContainerDescriptor" />
+        name="eea.reports.PublicationReport"
+        factory=".descriptors.PublicationReportContainerDescriptor" />
 
     <adapter
         name="eea.reports.subtypes.report"

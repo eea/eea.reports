@@ -2,7 +2,7 @@
 <object name="portal_properties" meta_type="Plone Properties Tool">
  <object name="site_properties" meta_type="Plone Property Sheet">
   <property name="unhide_subtypes" type="lines">
-     <element value="eea.reports.FolderReport"/>
+     <element value="eea.reports.PublicationReport"/>
   </property>
  </object>
 </object>

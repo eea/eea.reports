@@ -7,16 +7,16 @@ Changelog
 2.0 (unreleased)
 ----------------
 
-Upgrade steps
-~~~~~~~~~~~~~
+ Upgrade steps
+ ~~~~~~~~~~~~~
  * Within portal_setup 'EEA Reports' profile import steps:
    - Workflow Tool
    - Portal Factory Tool
  * Within portal_migration, Setup Tab run steps:
    - Update publications portal_type from Folder to Report
 
-Issues and enhancements
-~~~~~~~~~~~~~~~~~~~~~~~
+ Issues and enhancements
+ ~~~~~~~~~~~~~~~~~~~~~~~
  * Change publications portal_type from Folder to Report [voineali #3521]
 
 

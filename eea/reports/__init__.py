@@ -7,6 +7,7 @@ from Products.Archetypes.atapi import process_types, listTypes
 from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
 
 import patches
+import setup
 
 ppath = cmfutils.ProductsPath
 cmfutils.ProductsPath.append(dirname(package_home(globals())))

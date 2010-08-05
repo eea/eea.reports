@@ -7,7 +7,17 @@ Changelog
 2.0 (unreleased)
 ----------------
 
- * Change Publication portal_type from Folder to Publication [voineali #3521]
+Upgrade steps
+~~~~~~~~~~~~~
+ * Within portal_setup 'EEA Reports' profile import steps:
+   - Workflow Tool
+   - Portal Factory Tool
+ * Within portal_migration, Setup Tab run steps:
+   - Update publications portal_type from Folder to Report
+
+Issues and enhancements
+~~~~~~~~~~~~~~~~~~~~~~~
+ * Change publications portal_type from Folder to Report [voineali #3521]
 
 
 1.9 (2010-06-16)

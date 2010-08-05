@@ -144,14 +144,14 @@ def report_initialized(obj, evt):
         parent_lang = obj.getParentNode().getLanguage()
         if obj.getLanguage() != parent_lang:
             obj.setLanguage(parent_lang)
-        return subtyper.change_type(obj, 'eea.reports.PublicationReport')
+        return subtyper.change_type(obj, 'eea.reports.FolderReport')
 
     # Object translated
     subtype = subtyper.existing_type(canonical)
     subtype_name = getattr(subtype, 'name', None)
-    if subtype_name == 'eea.reports.PublicationReport':
+    if subtype_name == 'eea.reports.FolderReport':
         obj.setExcludeFromNav(True)
-        return subtyper.change_type(obj, 'eea.reports.PublicationReport')
+        return subtyper.change_type(obj, 'eea.reports.FolderReport')
 #
 # Set the language independent
 #

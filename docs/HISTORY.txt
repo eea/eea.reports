@@ -4,8 +4,8 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-2.1 (unreleased)
-----------------
+2.1-dev - (unreleased)
+----------------------
 
 2.0 (2010-08-16)
 ----------------

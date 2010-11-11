@@ -6,6 +6,7 @@ Changelog
 
 2.1-dev - (unreleased)
 ----------------------
+ * Change: Added cache metadata to images [ghicaale #3667]
 
 2.0 (2010-08-16)
 ----------------

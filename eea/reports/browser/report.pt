@@ -281,7 +281,7 @@
                         tal:content="python:'EUR %.02f' % price_value" />
                     <span tal:condition="not:price_value"
                         tal:content="string:FREE"
-                        i18n:translate="FREE" />
+                        i18n:translate="" />
                 </div>
             </div>
             <p><span i18n:translate="nearst_locations_label">You can also obtain a copy from</span>

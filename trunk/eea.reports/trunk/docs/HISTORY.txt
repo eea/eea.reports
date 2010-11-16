@@ -6,6 +6,7 @@ Changelog
 
 2.2-dev - (unreleased)
 ----------------------
+* Bug fix: Fix zpt errors found by hudson zptlint [voineali #3821]
 
 2.1 - (2010-11-12)
 ------------------

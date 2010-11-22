@@ -4,8 +4,8 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-2.2-dev - (unreleased)
-----------------------
+2.2 - (2010-11-22)
+------------------
 * Bug fix: Fix zpt errors found by hudson zptlint [voineali #3821]
 
 2.1 - (2010-11-12)

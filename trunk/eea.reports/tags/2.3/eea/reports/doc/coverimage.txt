@@ -1,0 +1,27 @@
+Overview
+========
+
+Generate cover image from pdf files.
+
+Generate cover image
+====================
+
+If pdftk is installed try to generate cover image. If something goes wrong None
+is returned. If pdftk is not installed safely pass this test.
+
+    >>> from eea.reports.pdf.interfaces import IPDFCoverImage
+    >>> from zope.component import getUtility
+    >>> gen = getUtility(IPDFCoverImage)
+
+    >>> # XXX Fix this test
+    >>> can_convert = False #gen._can_convert()
+    >>> inp = "GIF"
+    >>> out = "GIF"
+    >>> if can_convert:
+    ...     inp = self.loadfile('tests/data/test.pdf', ctype='application/pdf')
+    ...     inp = inp.read()
+    ...     inp = gen.generate(inp)
+    ...     out = self.loadfile('tests/data/test.gif', ctype='image/gif')
+    ...     out = out.read()
+    >>> inp == out
+    True

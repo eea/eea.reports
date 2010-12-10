@@ -6,6 +6,7 @@ Changelog
 
 2.4-dev - (unreleased)
 ----------------------
+ * Bug fix: Fixed jslint warnings [voineali #3821]
 
 2.3 - (2010-11-30)
 ------------------

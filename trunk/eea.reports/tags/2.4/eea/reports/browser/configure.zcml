@@ -1,0 +1,63 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="eea.reports">
+
+  <page
+      name="report_view"
+      template="report.pt"
+      class=".displays.ReportContainerView"
+      for="eea.reports.interfaces.IReportContainerEnhanced"
+      permission="zope2.View"
+      />
+
+  <zope:adapter factory=".displays.ReportContainerDynamicViews" />
+
+  <browser:page
+      for="eea.reports.interfaces.IReportContainerEnhanced"
+      name="can_syncronize"
+      class="eea.reports.pdf.syncronize.SyncronizerSupport"
+      permission="zope.Public"
+      />
+
+  <browser:page
+      for="eea.reports.interfaces.IReportContainerEnhanced"
+      name="syncronize"
+      class="eea.reports.pdf.syncronize.Syncronizer"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="..interfaces.IReportContainerEnhanced"
+      name="imgview"
+      class=".imgview.ImageView"
+      permission="zope.Public"
+      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
+      />
+
+  <browser:resource
+    name="eea.reports.js"
+    file="./report.js"
+   />
+
+  <browser:resource
+    name="eea.reports.css"
+    file="./stylesheets/reports.css"
+   />
+
+  <browser:resourceDirectory
+    name="publication_images"
+    directory="./images" />
+
+  <menuItem
+    menu="object_buttons"
+    for="eea.reports.interfaces.IReportContainerEnhanced"
+    title="Syncronize PDF"
+    action="${object_url}/@@syncronize"
+    filter="object/@@can_syncronize"
+    permission="cmf.ModifyPortalContent"
+    />
+
+</configure>

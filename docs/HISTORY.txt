@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+2.5-dev - (unreleased)
+----------------------
+
 2.4 - (2010-12-13)
 ------------------
  * Bug fix: Fixed jslint warnings [voineali #3821]

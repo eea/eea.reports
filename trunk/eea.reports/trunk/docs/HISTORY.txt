@@ -6,6 +6,7 @@ Changelog
 
 2.5-dev - (unreleased)
 ----------------------
+ * Change: added field management plan code and made it required for publishing, refs #4023 [demarant]
 
 2.4 - (2010-12-13)
 ------------------

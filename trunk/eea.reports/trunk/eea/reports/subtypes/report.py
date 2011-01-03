@@ -14,6 +14,9 @@ from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 from eea.reports.subtypes.field import SerialTitleField, ThemesField
 from eea.reports.subtypes.widget import SerialTitleWidget
 from eea.reports.events import FileUploadedEvent
+from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
+from eea.dataservice.vocabulary import DatasetYears
+from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget
 
 
 class ExtensionFieldMixin:
@@ -279,6 +282,26 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                 ),
             ),
+            ManagementPlanField(
+                name='management_plan',
+                languageIndependent=True,
+                required_for_published=True,
+                required=False,
+                default=(datetime.now().year, ''),
+                validators = ('management_plan_code_validator',),
+                vocabulary=DatasetYears(),
+                widget = ManagementPlanWidget(
+                    format="select",
+                    label="EEA Management Plan",
+                    description=("EEA Management plan code. Internal EEA project "
+                         "line code, used to assign an EEA product output to "
+                         "a specific EEA project number in the "
+                         "management plan."),
+                    label_msgid='dataservice_label_eea_mp',
+                    description_msgid='dataservice_help_eea_mp',
+                    i18n_domain='eea.dataservice',
+                )
+	    ),
             ReportStringField('copyrights',
                 schemata='report',
                 languageIndependent=True,
@@ -324,6 +347,7 @@ class SchemaExtender(object):
             'eeaid',
             'price',
             'pages',
+            'management_plan',
             'trailer',
             'order_override_text',
             'order_extra_text',

@@ -7,6 +7,8 @@ Changelog
 2.5-dev - (unreleased)
 ----------------------
  * Change: added field management plan code and made it required for publishing, refs #4023 [demarant]
+ * Change: made report cover smaller, refs #3921 [demarant]
+ * Bug fix: changes in soer style made the style for reports break fixes #3921 [demarant]
 
 2.4 - (2010-12-13)
 ------------------

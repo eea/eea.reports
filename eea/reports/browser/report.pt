@@ -81,7 +81,7 @@
       <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
         tal:condition="cover">
         <div class="figure"><img tal:attributes="
-            src cover/absolute_url;
+            src string:${cover/absolute_url}/image_mini;
             alt cover/title_or_id;
             title cover/title_or_id" />
         </div>

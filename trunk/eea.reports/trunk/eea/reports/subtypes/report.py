@@ -14,6 +14,7 @@ from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 from eea.reports.subtypes.field import SerialTitleField, ThemesField
 from eea.reports.subtypes.widget import SerialTitleWidget
 from eea.reports.events import FileUploadedEvent
+from datetime import datetime
 from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
 from eea.dataservice.vocabulary import DatasetYears
 from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget

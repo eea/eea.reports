@@ -46,6 +46,7 @@
 
 .publicationClear {
   clear: left ! important;
+  margin-top: 1em ! important;
 }
 
 .publicationPortlet {

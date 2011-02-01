@@ -1,0 +1,85 @@
+Changelog
+=========
+[Alexandru Ghica - alec.ghica@eaudeweb.ro]
+[Alin Voinea - alin.voinea@eaudeweb.ro]
+[Antonio De Marinis - demarinis@eea.europa.eu]
+
+2.6 - (2011-02-01)
+------------------
+ * Bug fix: fix management plan field to allow translation [tiberich #4052]
+
+2.5 - (2011-01-05)
+------------------
+ * Change: added field management plan code and made it required for publishing, refs #4023 [demarant]
+ * Change: made report cover smaller, refs #3921 [demarant]
+ * Bug fix: changes in soer style made the style for reports break fixes #3921 [demarant]
+
+2.4 - (2010-12-13)
+------------------
+ * Bug fix: Fixed jslint warnings [voineali #3821]
+
+2.3 - (2010-11-30)
+------------------
+ * Bug fix: Added SOERMessage and SOERFactSheet to tree in report view [tiberich #3921]
+
+2.2 - (2010-11-22)
+------------------
+ * Bug fix: Fix zpt errors found by hudson zptlint [voineali #3821]
+
+2.1 - (2010-11-12)
+------------------
+ * Change: Added cache metadata to images [ghicaale #3667]
+
+2.0 (2010-08-16)
+----------------
+ * Change: Change publications portal_type from Folder to Report [voineali #3521]
+ * Upgrade steps:
+     * Within portal_setup 'EEA Reports' profile import steps:
+       - Workflow Tool
+       - Portal Factory Tool
+     * Within portal_migration, Setup Tab run steps:
+       - Update publications portal_type from Folder to Report
+
+1.9 (2010-06-16)
+----------------
+ * Bug fix: Made 'creators' field language dependent in order to avoid required
+   validation errors on translation form [voineali #3416]
+
+1.8 (2010-05-07)
+----------------
+ * Change: Adjusted report template to use the new atct_album_view listing macro [voineali #3305]
+ * Change: Updated EU Bookshop ordering link according with their new portal [voineali #3178]
+
+1.7 (2010-03-26)
+----------------
+ * Change: Set description field on reports required [voineali #3159]
+
+1.6 (2010-03-19)
+----------------
+ * Feature: Specified required fields [demarant]
+
+1.5 (2010-03-08)
+------------------
+ * Feature: Added fancybox for related maps and graphs [voineali #2924]
+
+1.4 (2010-02-24)
+----------------
+ * Change: eeaid is now deprecated, related field and logic was hidden. [ghicaale #2910]
+
+1.3 (2010-02-15)
+----------------
+ * Bug fix: Fixed template_id for batch href. [ghicaale #2948]
+
+1.2 (2010-01-18)
+------------------
+ * Feature: Batch on album view for displaynig figures is now customisable. [ghicaale #2908]
+
+1.1 (2009-11-27)
+------------------
+ * Feature: Related EEAFigures displayed using album view and links to
+     dataservice 2.0 objects [ghicaale #2823]
+
+1.0 (2009-11-09)
+----------------
+ * Initial release
+

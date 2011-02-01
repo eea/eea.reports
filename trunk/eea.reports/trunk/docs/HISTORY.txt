@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+2.8-dev - (unreleased)
+----------------------
+
 2.7 - (2011-02-01)
 ------------------
  * Bug fix: add proper class to subclass for previous fix [tiberich #4052]

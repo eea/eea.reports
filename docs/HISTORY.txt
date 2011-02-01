@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+2.7-dev - (unreleased)
+----------------------
+
 2.6 - (2011-02-01)
 ------------------
  * Bug fix: fix management plan field to allow translation [tiberich #4052]

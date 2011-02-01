@@ -6,6 +6,7 @@ Changelog
 
 2.7-dev - (unreleased)
 ----------------------
+ * Bug fix: add proper class to subclass for previous fix [tiberich #4052]
 
 2.6 - (2011-02-01)
 ------------------

@@ -6,6 +6,7 @@ Changelog
 
 2.6-dev - (unreleased)
 ----------------------
+ * Bug fix: fix management plan field to allow translation [tiberich #4052]
 
 2.5 - (2011-01-05)
 ------------------

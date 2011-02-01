@@ -54,7 +54,7 @@ class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleFie
 class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
     """ """
 
-class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin, ThemesField):
+class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin, ManagementPlanField):
     """ """
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):

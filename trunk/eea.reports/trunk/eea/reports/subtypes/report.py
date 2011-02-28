@@ -1,10 +1,13 @@
 """ Subtyping
 """
+from plone.app.blob.field import BlobField
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
+from OFS.Image import File as ZFile
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.OrderableReferenceField._field import OrderableReferenceField
+from Products.Archetypes.utils import contentDispositionHeader
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from datetime import datetime
@@ -18,7 +21,6 @@ from eea.reports.subtypes.widget import SerialTitleWidget
 from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 from zope.event import notify
 from zope.interface import implements
-
 
 class ExtensionFieldMixin:
     def translationMutator(self, instance):
@@ -57,9 +59,31 @@ class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
 class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin, ManagementPlanField):
     """ """
 
-class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
+class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
     """ """
+    #XXX Backward compatible index_html, this should be removed from eea.reports > 3.0
+    def index_html(self, instance, REQUEST=None, RESPONSE=None, disposition='inline', **kwargs):
+        """ Field public view
+        """
+        zfile = getattr(instance, self.getName(), None)
+        if not isinstance(zfile, ZFile):
+            return BlobField.index_html(self, instance, REQUEST, RESPONSE, disposition, **kwargs)
+
+        #BBB Backward compatible: OFS.Image.File
+        if not REQUEST:
+            REQUEST = instance.REQUEST
+        if not RESPONSE:
+            RESPONSE = REQUEST.RESPONSE
+        filename = getattr(zfile, 'filename', instance.getId())
+        header_value = contentDispositionHeader(
+            disposition='attachment',
+            filename=filename)
+        RESPONSE.setHeader("Content-disposition", header_value)
+        return zfile.index_html(REQUEST, RESPONSE)
+
     def set(self, instance, value, **kwargs):
+        """ Field mutator
+        """
         is_value = value and value != "DELETE_FILE"
 
         # Handle update title and description checkbox
@@ -70,7 +94,7 @@ class ReportFileField(ExtensionField, ExtensionFieldMixin, atapi.FileField):
         if is_value and not migration:
             notify(FileUploadedEvent(instance, value, update_main))
 
-        atapi.FileField.set(self, instance, value, **kwargs)
+        BlobField.set(self, instance, value, **kwargs)
 
 class ReportFileWidget(atapi.FileWidget):
     """ """
@@ -110,9 +134,9 @@ class SchemaExtender(object):
                 schemata='default',
                 languageIndependent=False,
                 widget=ReportFileWidget(
-                    label = _(u'label_report_file', default=u'Publication file'),
+                    label=_(u'label_report_file', default=u'Publication file'),
                     description=_(u'description_report_file', default=u'Fill in the publication file'),
-                    helper_js = ('widgets/update_metadata.js',),
+                    helper_js=('widgets/update_metadata.js',),
                     macro='widgets/report_file',
                     i18n_domain='eea.reports',
                     ),
@@ -122,7 +146,7 @@ class SchemaExtender(object):
                 required=True,
                 languageIndependent=False,
                 widget=atapi.StringWidget(
-                    label = _(u'label_isbn', default=u'ISBN'),
+                    label=_(u'label_isbn', default=u'ISBN'),
                     description=_(u'description_isbn', default=u'Fill in the ISBN Number of this publication.'),
                     i18n_domain='eea.reports',
                     ),
@@ -132,7 +156,7 @@ class SchemaExtender(object):
                 lanaguageIndependent=False,
                 default=0,
                 widget=atapi.IntegerWidget(
-                    visible=-1,
+                    visible= -1,
                     label=_(u'label_eeaid', default=u'EEA Publication Internal ID'),
                     description=_(u'description_eeaid', default=u'Fill in EEA publication internal id'),
                     i18n_domain='eea.reports',
@@ -142,7 +166,7 @@ class SchemaExtender(object):
                 schemata='report',
                 languageIndependent=False,
                 widget=atapi.StringWidget(
-                    label = _(u'label_order_id', default=u'ORDER ID (Catalogue Number)'),
+                    label=_(u'label_order_id', default=u'ORDER ID (Catalogue Number)'),
                     description=_(u'description_order_id', default=u'Fill in the Order ID of this publication.'),
                     i18n_domain='eea.reports',
                     ),
@@ -152,7 +176,7 @@ class SchemaExtender(object):
                     languageIndependent=True,
                     default=False,
                     widget=atapi.BooleanWidget(
-                        label = _(u'label_for_sale', default=u'For sale?'),
+                        label=_(u'label_for_sale', default=u'For sale?'),
                         description=_(u'description_for_sale', default=u'Is this publication for sale?'),
                         i18n_domain='eea.reports',
                         ),
@@ -228,19 +252,19 @@ class SchemaExtender(object):
             ReportOrderableReferenceField('relatedItems',
                     schemata='relations',
                     languageIndependent=True,
-                    index = 'KeywordIndex',
-                    relationship = 'relatesTo',
-                    multiValued = True,
-                    isMetadata = True,
-                    widget = ReferenceBrowserWidget(
-                        allow_search = True,
-                        allow_browse = True,
-                        allow_sorting = True,
-                        show_indexes = False,
-                        force_close_on_insert = True,
-                        label = _(u'label_related_items', default=u'Related Item(s)'),
-                        description = _(u'help_related_items', default=u''),
-                        i18n_domain = "plone",
+                    index='KeywordIndex',
+                    relationship='relatesTo',
+                    multiValued=True,
+                    isMetadata=True,
+                    widget=ReferenceBrowserWidget(
+                        allow_search=True,
+                        allow_browse=True,
+                        allow_sorting=True,
+                        show_indexes=False,
+                        force_close_on_insert=True,
+                        label=_(u'label_related_items', default=u'Related Item(s)'),
+                        description=_(u'help_related_items', default=u''),
+                        i18n_domain="plone",
                         ),
                     ),
             ReportFloatField('price',
@@ -294,9 +318,9 @@ class SchemaExtender(object):
                     required_for_published=True,
                     required=False,
                     default=(datetime.now().year, ''),
-                    validators = ('management_plan_code_validator',),
+                    validators=('management_plan_code_validator',),
                     vocabulary=DatasetYears(),
-                    widget = ManagementPlanWidget(
+                    widget=ManagementPlanWidget(
                         format="select",
                         label="EEA Management Plan",
                         description=("EEA Management plan code. Internal EEA project "
@@ -325,7 +349,7 @@ class SchemaExtender(object):
                     default_content_type='text/html',
                     default_output_type='text/html',
                     widget=atapi.RichWidget(
-                        label = _(u'label_trailer', default=u'Trailer'),
+                        label=_(u'label_trailer', default=u'Trailer'),
                         description=_(u'description_trailer', default=u'Fill in the trailer.'),
                         i18n_domain='eea.reports',
                         )

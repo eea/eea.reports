@@ -1,6 +1,7 @@
 """ Base test cases
 """
 import os
+from plone.app.blob.tests import db
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 from Testing import ZopeTestCase as ztc
@@ -117,4 +118,6 @@ class ReportFunctionalTestCase(FunctionalTestCase, ReportTestCase):
                    'content-disposition':'attachment; filename=test.txt'}
 
         fs = FieldStorage(fp=fp, environ=env, headers=headers)
-        return FileUpload(fs)
+        ufile = FileUpload(fs)
+        ufile.name = None
+        return ufile

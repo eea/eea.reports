@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vdex orderSignificant="true">
+  <vocabName>
+    <langstring language="en">Report creators</langstring>
+  </vocabName>
+  <vocabIdentifier>eea.reports.report_creators</vocabIdentifier>
+  <term>
+    <termIdentifier>EEA (European Environment Agency)</termIdentifier>
+      <caption>
+        <langstring language="en">EEA (European Environment Agency)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>WHO (World Health Organization)</termIdentifier>
+      <caption>
+        <langstring language="en">WHO (World Health Organization)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>UNEP (United Nations Environment Programme)</termIdentifier>
+      <caption>
+        <langstring language="en">UNEP (United Nations Environment Programme)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Eurostat (the EU statistical office)</termIdentifier>
+      <caption>
+        <langstring language="en">Eurostat (the EU statistical office)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>DG TREN (EU Directorate General on Energy and Transport)</termIdentifier>
+      <caption>
+        <langstring language="en">DG TREN (EU Directorate General on Energy and Transport)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>DG ENV (EU Directorate General on Environment)</termIdentifier>
+      <caption>
+        <langstring language="en">DG ENV (EU Directorate General on Environment)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/ACC (European Topic Centre on Air and Climate Change)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/ACC (European Topic Centre on Air and Climate Change)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/AE (European Topic Centre on Air Emissions)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/AE (European Topic Centre on Air Emissions)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/AQ (European Topic Centre on Air Quality)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/AQ (European Topic Centre on Air Quality)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/CDS (European Topic Centre on Catalogue of Data Sources)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/CDS (European Topic Centre on Catalogue of Data Sources)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/IW (European Topic Centre on Inland Waters)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/IW (European Topic Centre on Inland Waters)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/LC (European Topic Centre on Land Cover)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/LC (European Topic Centre on Land Cover)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/MCE (European Topic Centre on Marine and Coastal Environment)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/MCE (European Topic Centre on Marine and Coastal Environment)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/NC (European Topic Centre on Nature Conservation)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/NC (European Topic Centre on Nature Conservation)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/W (European Topic Centre on Waste)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/W (European Topic Centre on Waste)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/TE (European Topic Centre on Terrestrial Environment)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/TE (European Topic Centre on Terrestrial Environment)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/NPB (European Topic Centre on Nature Protection and Biodiversity)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/NPB (European Topic Centre on Nature Protection and Biodiversity)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ETC/WMF (European Topic Centre on Waste and Material Flows)</termIdentifier>
+      <caption>
+        <langstring language="en">ETC/WMF (European Topic Centre on Waste and Material Flows)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ECNC (European Centre for Nature Conservation)</termIdentifier>
+      <caption>
+        <langstring language="en">ECNC (European Centre for Nature Conservation)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>EFI (European Forest Institute)</termIdentifier>
+      <caption>
+        <langstring language="en">EFI (European Forest Institute)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>ENEA</termIdentifier>
+      <caption>
+        <langstring language="en">ENEA</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>EIONET</termIdentifier>
+      <caption>
+        <langstring language="en">EIONET</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>EMEP Task Force</termIdentifier>
+      <caption>
+        <langstring language="en">EMEP Task Force</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>European Commission Joint Research Center</termIdentifier>
+      <caption>
+        <langstring language="en">European Commission Joint Research Center</langstring>
+      </caption>
+  </term>
+</vdex>

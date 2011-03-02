@@ -1,0 +1,83 @@
+Overview
+========
+
+The following relations can be defined for reports:
+ - Is part of;
+ - Has part;
+ - Is replaced by;
+ - Replaces.
+
+''Is replaced by'' and ''Replaces'' is more important relations. They refer to
+some kind of versioning or publications. In the new CMS these relations can be
+done by assigning the report to same "group". Then the versioning is dynamically
+calculated. E.g. if a report A is published after report B, and they both belong
+to same group, then Report A replaces Report B and a message on the report B
+will appear saying "Please note, a new version is available see Report A."
+
+Group relations
+===============
+
+Add some reports
+
+    >>> self.loginAsPortalOwner()
+    >>> _ = self.folder.invokeFactory('Report', 'myreport_1')
+    >>> _ = self.folder.invokeFactory('Report', 'myreport_2')
+    >>> myreport_1 = self.folder.myreport_1
+    >>> myreport_2 = self.folder.myreport_2
+    >>> form = {
+    ...   'publication_groups': ['Sample Group 1',],
+    ...   'effectiveDate': '11/11/2008',
+    ... }
+    >>> myreport_1.processForm(values=form, data=1, metadata=1)
+    >>> form['effectiveDate'] = '11/11/2007'
+    >>> myreport_2.processForm(values=form, data=1, metadata=1)
+
+Let's get in relation
+
+    >>> from eea.reports.relations.interfaces import IGroupRelations
+    >>> relations_1 = IGroupRelations(myreport_1)
+    >>> relations_2 = IGroupRelations(myreport_2)
+    >>> back = relations_1.backward()
+    >>> back[0].getId
+    'myreport_2'
+    >>> forward = relations_2.forward()
+    >>> forward[0].getId
+    'myreport_1'
+
+Let's see what happend if we don't have an effective date, it should use
+creation date.
+
+    >>> _ = self.folder.invokeFactory('Report', 'myreport_3')
+    >>> myreport_3 = self.folder.myreport_3
+    >>> dummy = form.pop('effectiveDate', None)
+    >>> myreport_3.processForm(values=form, data=1, metadata=1)
+    >>> relations_3 = IGroupRelations(myreport_3)
+    >>> forward = relations_1.forward()
+    >>> forward[0].getId
+    'myreport_3'
+    >>> back = relations_3.backward()
+    >>> back[1].getId
+    'myreport_2'
+
+Inclusion relations
+===================
+
+    >>> _ = self.folder.invokeFactory('Report', 'report_has_parts')
+    >>> _ = self.folder.invokeFactory('Report', 'report_is_part_of')
+    >>> rep_hp = self.folder.report_has_parts
+    >>> rep_ip = self.folder.report_is_part_of
+    >>> rep_ip.getField('relatedItems').getMutator(rep_ip)(rep_hp)
+
+Let's get in relation
+
+    >>> from Products.EEAContentTypes.interfaces import IRelations
+    >>> res = IRelations(rep_ip).forwardReferences()
+    >>> [x.getId() for x in res]
+    ['report_has_parts']
+    >>> IRelations(rep_hp).forwardReferences()
+    []
+    >>> IRelations(rep_ip).backReferences()
+    []
+    >>> res = IRelations(rep_hp).backReferences()
+    >>> [x.getId() for x in res]
+    ['report_is_part_of']

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vdex orderSignificant="true">
+  <vocabName>
+    <langstring language="en">Report publishers</langstring>
+  </vocabName>
+  <vocabIdentifier>eea.reports.report_publishers</vocabIdentifier>
+  <term>
+    <termIdentifier>EEA (European Environment Agency)</termIdentifier>
+      <caption>
+        <langstring language="en">EEA (European Environment Agency)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>OPOCE (Office for Official Publications of the European Communities)</termIdentifier>
+      <caption>
+        <langstring language="en">OPOCE (Office for Official Publications of the European Communities)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>UNEP (United Nations Environment Programme)</termIdentifier>
+      <caption>
+        <langstring language="en">UNEP (United Nations Environment Programme)</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>WHO (World Health Organization)</termIdentifier>
+      <caption>
+        <langstring language="en">WHO (World Health Organization)</langstring>
+      </caption>
+  </term>
+</vdex>

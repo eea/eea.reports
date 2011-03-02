@@ -4,8 +4,8 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-3.0-dev - (unreleased)
-----------------------
+3.0 - (2011-03-02)
+------------------
  * Feature: Use Blobs for Reports file field instead of OFS.Image.File [voineali #2713]
  * Upgrade steps:
    - Within portal_migration > Setup Tab:

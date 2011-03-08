@@ -316,7 +316,7 @@ class SchemaExtender(object):
                     schemata='report',
                     languageIndependent=True,
                     required_for_published=True,
-                    required=False,
+                    required=True,
                     default=(datetime.now().year, ''),
                     validators=('management_plan_code_validator',),
                     vocabulary=DatasetYears(),

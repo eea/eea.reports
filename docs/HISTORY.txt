@@ -6,6 +6,7 @@ Changelog
 
 3.1-dev - (unreleased)
 ----------------------
+ * Change: management plan field is now required refs #4174 [demarant]
 
 3.0 - (2011-03-02)
 ------------------

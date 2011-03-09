@@ -6,6 +6,9 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
+ * Cleanup: Removed portal_migration scripts as portal_migration is deprecated.
+   Please check that there are no un-applied migration scripts before
+   upgrading to this version [voineali #4139]
 
 3.1 - (2011-03-09)
 ------------------

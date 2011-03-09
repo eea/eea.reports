@@ -4,6 +4,9 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
+3.2-dev - (unreleased)
+----------------------
+
 3.1 - (2011-03-09)
 ------------------
  * Change: management plan field is now required refs #4174 [demarant]

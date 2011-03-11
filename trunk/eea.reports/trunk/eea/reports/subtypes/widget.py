@@ -5,6 +5,8 @@ from Products.Archetypes.Widget import TypesWidget
 from Products.Archetypes.Registry import registerWidget
 
 class SerialTitleWidget(TypesWidget):
+    """ Serial title widget
+    """
     _properties = TypesWidget._properties.copy()
     _properties.update({
         'macro' : "widgets/serial_title_widget",

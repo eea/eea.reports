@@ -1,8 +1,10 @@
+""" valentine.imagescales IImageView adapter
+"""
 from zope.interface import implements
 from zope.publisher.interfaces import NotFound
 from Products.Five.browser import BrowserView
 from valentine.imagescales.browser.interfaces import IImageView
-from valentine.imagescales.browser import atfield, atfolder
+from valentine.imagescales.browser import atfolder
 
 class ImageView(BrowserView):
     """ Get cover image from folder contents or from canonical folder contents
@@ -19,6 +21,8 @@ class ImageView(BrowserView):
             self.canonical = self.img
 
     def display(self, scalename='thumb'):
+        """ Display image?
+        """
         return self.img.display(scalename) or self.canonical.display(scalename)
 
     def __call__(self, scalename='thumb'):

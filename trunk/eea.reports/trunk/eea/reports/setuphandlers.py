@@ -1,5 +1,7 @@
+""" Various setup
+"""
 import os
-from config import product_globals
+from eea.reports.config import product_globals
 from Globals import package_home
 from Products.ATVocabularyManager.config import TOOL_NAME as ATVOCABULARYTOOL
 from Products.CMFCore.utils import getToolByName
@@ -30,18 +32,20 @@ def installVocabularies(context):
         if len(atvm[vocabname].contentIds()) < 1:
             if vocabmap[vocabname][0] == "VdexVocabulary":
                 vdexpath = os.path.join(
-                    package_home(product_globals), 'data', 'vocabularies', '%s.vdex' % vocabname)
+                    package_home(product_globals), 'data',
+                    'vocabularies', '%s.vdex' % vocabname)
                 if not (os.path.exists(vdexpath) and os.path.isfile(vdexpath)):
-                    logger.warn('No VDEX import file provided at %s.' % vdexpath)
+                    logger.warn(
+                        'No VDEX import file provided at %s.' % vdexpath)
                     continue
                 try:
                     #read data
                     f = open(vdexpath, 'r')
                     data = f.read()
                     f.close()
-                except:
+                except Exception, err:
                     logger.warn("Problems while reading VDEX import file "+\
-                                "provided at %s." % vdexpath)
+                                "provided at %s: %s" % vdexpath, err)
                     continue
                 # this might take some time!
                 atvm[vocabname].importXMLBinding(data)

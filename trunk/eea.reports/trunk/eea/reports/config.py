@@ -1,4 +1,5 @@
-
+""" Config
+"""
 __author__ = """European Environment Agency <alin.voinea@eaudeweb.ro>"""
 __docformat__ = 'plaintext'
 

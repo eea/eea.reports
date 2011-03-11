@@ -11,7 +11,7 @@ class ReportYearsVocabularyFactory(object):
     """ Report years vocabulary
     """
     implements(IVocabularyFactory,)
-    
+
     def __call__(self):
         now = datetime.now()
         end_year = now.year + 2
@@ -26,18 +26,24 @@ class ReportThemesVocabulary:
     """ Report themes vocabulary
     """
     __implements__ = (IVocabulary,)
-    
+
     def getDisplayList(self, instance):
-        """ Returns 
+        """ Returns
         """
         vocab = ThemesEditVocabularyFactory(instance)
         return [(term.value, term.title) for term in vocab]
 
     def getVocabularyDict(self, instance):
+        """ Getter
+        """
         return {}
-    
+
     def isFlat(self):
+        """ Is flat vocabulary?
+        """
         return False
-    
+
     def showLeafsOnly(self):
+        """ Show leafs only?
+        """
         return False

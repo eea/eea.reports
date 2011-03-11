@@ -1,12 +1,13 @@
+""" Initialize
+"""
 from os.path import dirname
 
 from Globals import package_home
 from Products.CMFCore import utils as cmfutils
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.Archetypes.atapi import process_types, listTypes
-from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
-
-import patches
+from eea.reports.config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
+from eea.reports import patches
 
 ppath = cmfutils.ProductsPath
 cmfutils.ProductsPath.append(dirname(package_home(globals())))
@@ -15,6 +16,8 @@ cmfutils.ProductsPath = ppath
 
 def initialize(context):
     """initialize product (called by zope)"""
+
+    patches.register()
 
     #Initialize portal content
     content_types, constructors, ftis = process_types(

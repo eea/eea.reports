@@ -1,3 +1,5 @@
+""" Interfaces for PDF handlers
+"""
 from zope.interface import Interface
 
 class IReportPDFParser(Interface):

@@ -6,9 +6,12 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
+ * Cleanup: Fixed all pylint, pyflakes violations [voineali $4140]
  * Cleanup: Removed portal_migration scripts as portal_migration is deprecated.
    Please check that there are no un-applied migration scripts before
    upgrading to this version [voineali #4139]
+ * Change: Removed OFS.Image.File backward compatibility. Use version 3.0
+   to upgrade Files to Blobs, then you can safely use this version [voineali #4140]
 
 3.1 - (2011-03-09)
 ------------------

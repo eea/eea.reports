@@ -1,3 +1,5 @@
+""" Reports relations interfaces
+"""
 from zope.interface import Interface
 
 class IGroupRelations(Interface):

@@ -1,7 +1,11 @@
 """ Base test cases
 """
-import os
+# the special storage setup needs to be imported first to make sure
+# the tests run on top of a `BlobStorage`...
 from plone.app.blob.tests import db
+
+import os
+import logging
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 from Testing import ZopeTestCase as ztc
@@ -27,6 +31,12 @@ from Products.PloneTestCase.layer import onsetup
 from cgi import FieldStorage
 from ZPublisher.HTTPRequest import FileUpload
 
+logger = logging.getLogger('eea.reports.tests.base')
+
+@property
+def blobstorage():
+    """ Return blobstorage database """
+    return db
 
 @onsetup
 def setup_eea_reports():
@@ -57,9 +67,9 @@ def setup_eea_reports():
         ztc.installPackage('plone.app.blob')
         ztc.installPackage('slc.publications')
         ztc.installPackage('eea.reports')
-    except AttributeError:
+    except AttributeError, err:
         # Old ZopeTestCase
-        pass
+        logger.exception(err)
 
 # The order here is important: We first call the (deferred) function which
 # installs the products we need for the Optilux package. Then, we let
@@ -71,12 +81,15 @@ EXTRA_PRODUCTS = [
     'PloneLanguageTool',
     'LinguaPlone',
 ]
+
+blob = None
 try:
-    import plone.app.blob
+    from plone.app import blob
 except ImportError, error:
     # No plone.app.blob installed
-    pass
-else:
+    logger.debug(error)
+
+if blob:
     EXTRA_PRODUCTS.append('plone.app.blob')
 
 setupPloneSite(products=EXTRA_PRODUCTS,

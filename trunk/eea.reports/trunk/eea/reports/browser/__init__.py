@@ -1,1 +1,2 @@
-# empty
+""" Browser views and controllers
+"""

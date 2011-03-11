@@ -4,8 +4,8 @@ import os
 import tempfile
 import logging
 from zope import interface
-from interfaces import IPDFMetadataUpdater
-from config import META_TEMPLATE
+from eea.reports.pdf.interfaces import IPDFMetadataUpdater
+from eea.reports.pdf.config import META_TEMPLATE
 from eea.reports.pdf import CAN_UPDATE_PDF_METADATA
 
 logger = logging.getLogger('eea.reports.pdf.updater')
@@ -68,7 +68,7 @@ class PDFMetadataUpdater(object):
         # Run pdftk
         cmd = 'pdftk %s update_info %s output %s' % (tmp_in, tmp_meta, tmp_out)
         logger.debug(cmd)
-        inp, out = os.popen4(cmd)
+        out = os.popen4(cmd)[1]
         res = out.read()
         if res:
             logger.debug(res)
@@ -141,11 +141,11 @@ class PDFMetadataUpdater(object):
             elif isinstance(value, str) or isinstance(value, unicode):
                 try:
                     value = value.decode('utf-8')
-                except UnicodeDecodeError, err:
+                except UnicodeDecodeError:
                     value = self._utf2entity(value)
                 except Exception, err:
                     # Not string or unicode
-                    pass
+                    logger.debug(err)
                 else:
                     value = self._utf2entity(value)
                 res[key] = value

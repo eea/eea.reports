@@ -1,6 +1,7 @@
+""" Metadata parser
+"""
 import tempfile, logging, os, re
-from DateTime import DateTime
-from interfaces import IReportPDFParser
+from eea.reports.pdf.interfaces import IReportPDFParser
 from zope.component import getUtility
 from slc.publications.pdf.interfaces import IPDFParser
 from zope import interface
@@ -24,11 +25,13 @@ class PDFParser(object):
             return metadata
 
     def _split(self, text):
+        """ Split text
+        """
         if not (isinstance(text, str) or isinstance(text, unicode)):
             return text
         if text.find(';') != -1:
             return [x.strip() for x in text.split(';') if x.strip()]
-        return [x.strip() for x in text.split(',') if x.strip()]
+        return [y.strip() for y in text.split(',') if y.strip()]
 
     def _fix_metadata(self, metadata):
         """ Update metadata dict
@@ -53,7 +56,7 @@ class PDFParser(object):
         # Fix description
         description = metadata.pop('subject', metadata.get('description', ''))
         if isinstance(description, tuple) or isinstance(description, list):
-            description = ' '.join([x.strip() for x in description])
+            description = ' '.join([y.strip() for y in description])
         if not description:
             description = ' '
         metadata['description'] = description
@@ -94,8 +97,10 @@ class PDFParser(object):
         os.remove(tmp_pdf[1])
 
         # check for errors or encryption
-        if result.startswith('Error: No paper information available - using defaults'):
-            # Irritating error if libpaper is not configured correctly. For our case this is irrelevant
+        if result.startswith(
+            'Error: No paper information available - using defaults'):
+            # Irritating error if libpaper is not configured correctly.
+            # For our case this is irrelevant
             pass
         elif result.startswith('Error'):
             error =  result.split('\n')[0]

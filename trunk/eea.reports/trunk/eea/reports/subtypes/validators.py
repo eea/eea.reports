@@ -1,3 +1,5 @@
+""" Archetypes fields custom validators
+"""
 from Products.validation.config import validation
 from Products.validation.interfaces import ivalidator
 
@@ -17,7 +19,6 @@ class SerialTitle(object):
         report_type = len(value) > 0 and value[0] or 'N/A'
         report_num = len(value) > 1 and value[1] or 0
         report_year = len(value) > 2 and value[2] or -1
-        report_alt = len(value) > 3 and value[3] or ''
 
         # if no report_type then we ignore other fields
         # and the valdation is always true.
@@ -32,4 +33,7 @@ class SerialTitle(object):
 
         return 1
 
-validation.register(SerialTitle('serialTitle'))
+def register():
+    """ Register validators
+    """
+    validation.register(SerialTitle('serialTitle'))

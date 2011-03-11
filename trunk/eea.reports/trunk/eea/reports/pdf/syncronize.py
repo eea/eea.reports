@@ -79,11 +79,13 @@ class Syncronizer(object):
 
         field = self.context.getField('file')
         if not field:
-            self._redirect('There is no PDF publication file attached to syncronize')
+            self._redirect(
+                'There is no PDF publication file attached to syncronize')
 
         value = field.getAccessor(self.context)()
         if not value:
-            self._redirect('There is no PDF publication file attached to syncronize')
+            self._redirect(
+                'There is no PDF publication file attached to syncronize')
 
         filename = getattr(value, 'filename', self.context.getId())
         pdf = updater.update(str(value), metadata)

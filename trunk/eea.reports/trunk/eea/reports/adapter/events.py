@@ -123,10 +123,7 @@ def invalidate_cache(instance, evt):
     if not stool:
         return
     key = instance.absolute_url(1) + '/at_download/file'
-    res = stool.pruneUrls([
-        key,
-        'http/localhost/81/%s' % key
-    ])
+    stool.pruneUrls([key, 'http/localhost/81/%s' % key])
 #
 # Report initialize
 #
@@ -158,7 +155,6 @@ def report_initialized(obj, evt):
 def setLanguageIndependent(obj, evt):
     """ Set the language independent values on translations.
     """
-    subtyper = getUtility(ISubtyper)
     canonical = obj.getCanonical()
     if obj == canonical:
         # Default
@@ -168,9 +164,13 @@ def setLanguageIndependent(obj, evt):
 
         # Get language independent fields
         for schema_id in obj_schemata.keys():
-            [independent_fields.setdefault(field.getName(), None) for field in obj_schemata[schema_id].filterFields(languageIndependent=True)]
+            for field in obj_schemata[schema_id].filterFields(
+                languageIndependent=True):
+                independent_fields.setdefault(field.getName(), None)
+
         for field_id in independent_fields.keys():
-            independent_fields[field_id] = canonical.getField(field_id).get(canonical)
+            independent_fields[field_id] = canonical.getField(
+                field_id).get(canonical)
 
         # Set (if case) values for langauge independent fields
         for trans in canonical.getTranslations():
@@ -182,4 +182,5 @@ def setLanguageIndependent(obj, evt):
                 if new_value != old_value:
                     detect_diff = True
                     ob_trans.getField(field_id).getMutator(ob_trans)(new_value)
-            if detect_diff: ctool.reindexObject(ob_trans)
+            if detect_diff:
+                ctool.reindexObject(ob_trans)

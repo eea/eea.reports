@@ -1,11 +1,10 @@
+""" Archetypes custom fields
+"""
 import logging
 logger = logging.getLogger('eea.reports.subtypes.field')
 
-from persistent.list import PersistentList
 from types import ListType, TupleType, StringType, UnicodeType
 from AccessControl import ClassSecurityInfo
-from zope.app.annotation.interfaces import IAnnotations
-from eea.themecentre.themetaggable import KEY, checkTheme
 from Products.Archetypes.interfaces.vocabulary import IVocabulary
 from Products.Archetypes.atapi import ObjectField, StringField
 from Products.Archetypes.Field import decode, encode
@@ -57,12 +56,16 @@ class SerialTitleField(ObjectField):
 
     security.declarePrivate('get')
     def get(self, instance, **kwargs):
+        """ Getter
+        """
         value = ObjectField.get(self, instance, **kwargs) or ()
         data = [encode(v, instance, **kwargs) for v in value]
         return tuple(data)
 
     security.declarePrivate('getRaw')
     def getRaw(self, instance, **kwargs):
+        """ Raw getter
+        """
         return self.get(instance, **kwargs)
 
     security.declarePublic('is_empty')
@@ -86,9 +89,9 @@ class SerialTitleField(ObjectField):
     def get_size(self, instance):
         """Get size of the stored data used for get_size in BaseObject
         """
-        size=0
+        size = 0
         for line in self.get(instance):
-            size+=len(str(line))
+            size += len(str(line))
         return size
 
     security.declarePublic('Vocabulary')

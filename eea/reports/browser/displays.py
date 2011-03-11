@@ -1,12 +1,10 @@
+""" Displayes
+"""
 from zope import interface
 from zope import component
 from eea.reports import interfaces
 from eea.reports.relations.interfaces import IGroupRelations
-
-import p4a.z2utils #Patch CMFDynamicViewFTI
 from Products.CMFDynamicViewFTI import interfaces as cmfdynifaces
-from Products.Five.browser import BrowserView
-
 
 class ReportContainerView(object):
     """ Default report view
@@ -16,13 +14,18 @@ class ReportContainerView(object):
         self.request = request
 
     def is_replaced_by(self):
+        """ Is this report replaced by?
+        """
         return IGroupRelations(self.context).forward()
 
     def does_replace(self):
+        """ Does this report replace other reports?
+        """
         return IGroupRelations(self.context).backward()
 
 class ReportContainerDynamicViews(object):
-
+    """ Dynamic views for Report
+    """
     interface.implements(cmfdynifaces.IDynamicallyViewable)
     component.adapts(interfaces.IReportContainerEnhanced)
 
@@ -32,7 +35,7 @@ class ReportContainerDynamicViews(object):
     def getAvailableViewMethods(self):
         """Get a list of registered view method names
         """
-        return [view for view, name in self.getAvailableLayouts()]
+        return [view[0] for view in self.getAvailableLayouts()]
 
     def getDefaultViewMethod(self):
         """Get the default view method name

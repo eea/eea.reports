@@ -1,11 +1,15 @@
+""" Monkey patches
+"""
 from zope import event
-from events import ObjectPortalTypeChanged
+from eea.reports.events import ObjectPortalTypeChanged
 from Products.CMFCore.DynamicType import DynamicType
 from collective.monkey.monkey import warn
 #
 # Patch CMFCore.DynamicType.DynamicType._setPortalTypeName
 #
 def notify_portal_type_changed(original_method):
+    """ Wrap method
+    """
     def wrapper(self, pt, *args, **kwargs):
         """ Set the portal type name.
 
@@ -17,6 +21,11 @@ def notify_portal_type_changed(original_method):
         return res
     return wrapper
 
-warn("Patching CMFCore.DynamicType.DynamicType._setPortalTypeName in order to raise ObjectPortalTypeChanged")
-DynamicType._setPortalTypeName = notify_portal_type_changed(
-    DynamicType._setPortalTypeName)
+def register():
+    """ Apply patched
+    """
+    #XXX Use collective.monkey Patcher
+    warn(("Patching CMFCore.DynamicType.DynamicType._setPortalTypeName in order"
+          " to raise ObjectPortalTypeChanged"))
+    DynamicType._setPortalTypeName = notify_portal_type_changed(
+        DynamicType._setPortalTypeName)

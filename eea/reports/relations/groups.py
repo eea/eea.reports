@@ -3,7 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 
-from interfaces import IGroupRelations
+from eea.reports.relations.interfaces import IGroupRelations
 from zope.interface import implements
 
 class GroupRelations(object):
@@ -65,7 +65,8 @@ class GroupRelations(object):
 
         catalog = getToolByName(self.context, 'portal_catalog')
         query = {
-            'object_provides': 'eea.reports.interfaces.IReportContainerEnhanced',
+            'object_provides':
+                'eea.reports.interfaces.IReportContainerEnhanced',
             'portal_type' : self.context.portal_type,
             self.group: groups,
             'sort_on': 'effective',

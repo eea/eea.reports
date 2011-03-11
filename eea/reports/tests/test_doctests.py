@@ -2,7 +2,7 @@
 """
 import doctest
 import unittest
-from base import ReportFunctionalTestCase
+from eea.reports.tests.base import ReportFunctionalTestCase
 from Testing.ZopeTestCase import FunctionalDocFileSuite as Suite
 
 OPTIONFLAGS = (doctest.REPORT_ONLY_FIRST_FAILURE |

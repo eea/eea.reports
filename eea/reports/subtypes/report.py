@@ -1,13 +1,13 @@
 """ Subtyping
 """
 from plone.app.blob.field import BlobField
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
-from OFS.Image import File as ZFile
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.OrderableReferenceField._field import OrderableReferenceField
-from Products.Archetypes.utils import contentDispositionHeader
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from datetime import datetime
@@ -23,63 +23,50 @@ from zope.event import notify
 from zope.interface import implements
 
 class ExtensionFieldMixin:
+    """ Archetypes SchemaExtender FieldMixin
+    """
     def translationMutator(self, instance):
+        """ Translation mutator
+        """
         return self.getMutator(instance)
 
-class ReportOrderableReferenceField(ExtensionField, ExtensionFieldMixin, OrderableReferenceField):
-    """ """
+class ReportOrderableReferenceField(ExtensionField, ExtensionFieldMixin,
+                                    OrderableReferenceField):
+    """ Archetypes SchemaExtender aware reference field """
 
 class ReportStringField(ExtensionField, ExtensionFieldMixin, atapi.StringField):
-    """ """
+    """ Archetypes SchemaExtender aware string field """
 
-class ReportIntegerField(ExtensionField, ExtensionFieldMixin, atapi.IntegerField):
-    """ """
+class ReportIntegerField(ExtensionField, ExtensionFieldMixin,
+                         atapi.IntegerField):
+    """ Archetypes SchemaExtender aware integer field """
 
-class ReportBooleanField(ExtensionField, ExtensionFieldMixin, atapi.BooleanField):
-    """ """
+class ReportBooleanField(ExtensionField, ExtensionFieldMixin,
+                         atapi.BooleanField):
+    """ Archetypes SchemaExtender aware boolean field """
 
 class ReportLinesField(ExtensionField, ExtensionFieldMixin, atapi.LinesField):
-    """ """
+    """ Archetypes SchemaExtender aware lines field """
 
 class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
-    """ """
-
-class ReportImageField(ExtensionField, ExtensionFieldMixin, atapi.ImageField):
-    """ """
+    """ Archetypes SchemaExtender aware float field """
 
 class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
-    """ """
+    """ Archetypes SchemaExtender aware text field """
 
-class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin, SerialTitleField):
-    """ """
+class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin,
+                             SerialTitleField):
+    """ Archetypes SchemaExtender aware serial title field """
 
 class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
-    """ """
+    """ Archetypes SchemaExtender aware themes field """
 
-class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin, ManagementPlanField):
-    """ """
+class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
+                                ManagementPlanField):
+    """ Archetypes SchemaExtender aware management plan field """
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
-    """ """
-    #XXX Backward compatible index_html, this should be removed from eea.reports > 3.0
-    def index_html(self, instance, REQUEST=None, RESPONSE=None, disposition='inline', **kwargs):
-        """ Field public view
-        """
-        zfile = getattr(instance, self.getName(), None)
-        if not isinstance(zfile, ZFile):
-            return BlobField.index_html(self, instance, REQUEST, RESPONSE, disposition, **kwargs)
-
-        #BBB Backward compatible: OFS.Image.File
-        if not REQUEST:
-            REQUEST = instance.REQUEST
-        if not RESPONSE:
-            RESPONSE = REQUEST.RESPONSE
-        filename = getattr(zfile, 'filename', instance.getId())
-        header_value = contentDispositionHeader(
-            disposition='attachment',
-            filename=filename)
-        RESPONSE.setHeader("Content-disposition", header_value)
-        return zfile.index_html(REQUEST, RESPONSE)
+    """ Archetypes SchemaExtender aware file field """
 
     def set(self, instance, value, **kwargs):
         """ Field mutator
@@ -97,10 +84,13 @@ class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
         BlobField.set(self, instance, value, **kwargs)
 
 class ReportFileWidget(atapi.FileWidget):
-    """ """
+    """ Report widget
+    """
     def process_form(self, instance, field, form, **kwargs):
-        """ """
-        res = atapi.FileWidget.process_form(self, instance, field, form, **kwargs)
+        """ Handle form data
+        """
+        res = atapi.FileWidget.process_form(self, instance,
+                                            field, form, **kwargs)
         if not res:
             return res
         value, res = res
@@ -134,8 +124,10 @@ class SchemaExtender(object):
                 schemata='default',
                 languageIndependent=False,
                 widget=ReportFileWidget(
-                    label=_(u'label_report_file', default=u'Publication file'),
-                    description=_(u'description_report_file', default=u'Fill in the publication file'),
+                    label=_(u'label_report_file',
+                            default=u'Publication file'),
+                    description=_(u'description_report_file',
+                                  default=u'Fill in the publication file'),
                     helper_js=('widgets/update_metadata.js',),
                     macro='widgets/report_file',
                     i18n_domain='eea.reports',
@@ -147,7 +139,8 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 widget=atapi.StringWidget(
                     label=_(u'label_isbn', default=u'ISBN'),
-                    description=_(u'description_isbn', default=u'Fill in the ISBN Number of this publication.'),
+                    description=_(u'description_isbn',
+                       default=u'Fill in the ISBN Number of this publication.'),
                     i18n_domain='eea.reports',
                     ),
                 ),
@@ -157,8 +150,10 @@ class SchemaExtender(object):
                 default=0,
                 widget=atapi.IntegerWidget(
                     visible= -1,
-                    label=_(u'label_eeaid', default=u'EEA Publication Internal ID'),
-                    description=_(u'description_eeaid', default=u'Fill in EEA publication internal id'),
+                    label=_(u'label_eeaid',
+                            default=u'EEA Publication Internal ID'),
+                    description=_(u'description_eeaid',
+                                default=u'Fill in EEA publication internal id'),
                     i18n_domain='eea.reports',
                     ),
                 ),
@@ -166,8 +161,10 @@ class SchemaExtender(object):
                 schemata='report',
                 languageIndependent=False,
                 widget=atapi.StringWidget(
-                    label=_(u'label_order_id', default=u'ORDER ID (Catalogue Number)'),
-                    description=_(u'description_order_id', default=u'Fill in the Order ID of this publication.'),
+                    label=_(u'label_order_id',
+                            default=u'ORDER ID (Catalogue Number)'),
+                    description=_(u'description_order_id',
+                          default=u'Fill in the Order ID of this publication.'),
                     i18n_domain='eea.reports',
                     ),
                 ),
@@ -177,7 +174,8 @@ class SchemaExtender(object):
                     default=False,
                     widget=atapi.BooleanWidget(
                         label=_(u'label_for_sale', default=u'For sale?'),
-                        description=_(u'description_for_sale', default=u'Is this publication for sale?'),
+                        description=_(u'description_for_sale',
+                                      default=u'Is this publication for sale?'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -191,7 +189,8 @@ class SchemaExtender(object):
                     default=(u'', 0, -1, u''),
                     widget=SerialTitleWidget(
                         label=_(u'label_serial_title', default=u'Serial title'),
-                        description=_(u'description_serial_title', default=u'Fill in serial title'),
+                        description=_(u'description_serial_title',
+                                      default=u'Fill in serial title'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -204,7 +203,8 @@ class SchemaExtender(object):
                     vocabulary=NamedVocabulary("report_creators"),
                     widget=atapi.KeywordWidget(
                         label=_(u'label_creators', default=u'Creators/Authors'),
-                        description=_(u'description_creators', default=u'Fill in additional creators/authors'),
+                        description=_(u'description_creators',
+                                default=u'Fill in additional creators/authors'),
                         macro='report_keywords',
                         i18n_domain='eea.reports',
                         ),
@@ -218,7 +218,8 @@ class SchemaExtender(object):
                     vocabulary=NamedVocabulary("report_publishers"),
                     widget=atapi.KeywordWidget(
                         label=_(u'label_publishers', default=u'Publishers'),
-                        description=_(u'description_publishers', default=u'Fill in additional publishers'),
+                        description=_(u'description_publishers',
+                                      default=u'Fill in additional publishers'),
                         macro='report_keywords',
                         i18n_domain='eea.reports',
                         ),
@@ -230,8 +231,10 @@ class SchemaExtender(object):
                     vocabulary=ReportThemesVocabulary(),
                     widget=atapi.InAndOutWidget(
                         maxValues=3,
-                        label=_(u'EEAContentTypes_label_themes', default=u'Themes'),
-                        description=_(u'EEAContentTypes_help_themes', default=u'Choose publication themes'),
+                        label=_(u'EEAContentTypes_label_themes',
+                                default=u'Themes'),
+                        description=_(u'EEAContentTypes_help_themes',
+                                      default=u'Choose publication themes'),
                         i18n_domain='EEAContentTypes',
                         ),
                     languageIndependent=True,
@@ -244,8 +247,10 @@ class SchemaExtender(object):
                     languageIndependent=True,
                     index="KeywordIndex:brains",
                     widget=atapi.InAndOutWidget(
-                        label=_(u'label_publication_groups', default=u'Publication groups'),
-                        description=_(u'description_publication_groups', default=u'Fill in publication groups'),
+                        label=_(u'label_publication_groups',
+                                default=u'Publication groups'),
+                        description=_(u'description_publication_groups',
+                                      default=u'Fill in publication groups'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -262,7 +267,8 @@ class SchemaExtender(object):
                         allow_sorting=True,
                         show_indexes=False,
                         force_close_on_insert=True,
-                        label=_(u'label_related_items', default=u'Related Item(s)'),
+                        label=_(u'label_related_items',
+                                default=u'Related Item(s)'),
                         description=_(u'help_related_items', default=u''),
                         i18n_domain="plone",
                         ),
@@ -273,7 +279,8 @@ class SchemaExtender(object):
                     default=0,
                     widget=atapi.DecimalWidget(
                         label=_(u'label_price', default=u'Price (Euro)'),
-                        description=_(u'description_price', default=u'Fill in publication price'),
+                        description=_(u'description_price',
+                                      default=u'Fill in publication price'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -284,8 +291,10 @@ class SchemaExtender(object):
                     default_content_type='text/html',
                     default_output_type='text/html',
                     widget=atapi.RichWidget(
-                        label=_(u'label_order_override_text', default=u'Override the order text with your own text'),
-                        description=_(u'description_order_override_text', default=u'Fill in to override the order text'),
+                        label=_(u'label_order_override_text',
+                         default=u'Override the order text with your own text'),
+                        description=_(u'description_order_override_text',
+                                 default=u'Fill in to override the order text'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -296,8 +305,10 @@ class SchemaExtender(object):
                     default_content_type='text/html',
                     default_output_type='text/html',
                     widget=atapi.RichWidget(
-                        label=_(u'label_order_extra_text', default=u'OR add some text to the order screen'),
-                        description=_(u'description_order_extra_text', default=u'Fill in to add this text to the order text'),
+                        label=_(u'label_order_extra_text',
+                               default=u'OR add some text to the order screen'),
+                        description=_(u'description_order_extra_text',
+                         default=u'Fill in to add this text to the order text'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -307,7 +318,8 @@ class SchemaExtender(object):
                     default=0,
                     widget=atapi.IntegerWidget(
                         label=_(u'label_pages', default=u'Pages'),
-                        description=_(u'description_pages', default=u'Fill in total number of pages'),
+                        description=_(u'description_pages',
+                                      default=u'Fill in total number of pages'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -323,9 +335,10 @@ class SchemaExtender(object):
                     widget=ManagementPlanWidget(
                         format="select",
                         label="EEA Management Plan",
-                        description=("EEA Management plan code. Internal EEA project "
-                            "line code, used to assign an EEA product output to "
-                            "a specific EEA project number in the "
+                        description=(
+                            "EEA Management plan code. Internal EEA project "
+                            "line code, used to assign an EEA product output to"
+                            " a specific EEA project number in the "
                             "management plan."),
                         label_msgid='dataservice_label_eea_mp',
                         description_msgid='dataservice_help_eea_mp',
@@ -338,7 +351,8 @@ class SchemaExtender(object):
                     default=COPYRIGHTS,
                     widget=atapi.StringWidget(
                         label=_(u'label_copyrights', default=u'Copyrights'),
-                        description=_(u'description_copyrights', default=u'Fill in copyrights'),
+                        description=_(u'description_copyrights',
+                                      default=u'Fill in copyrights'),
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -350,7 +364,8 @@ class SchemaExtender(object):
                     default_output_type='text/html',
                     widget=atapi.RichWidget(
                         label=_(u'label_trailer', default=u'Trailer'),
-                        description=_(u'description_trailer', default=u'Fill in the trailer.'),
+                        description=_(u'description_trailer',
+                                      default=u'Fill in the trailer.'),
                         i18n_domain='eea.reports',
                         )
                     ),
@@ -360,9 +375,13 @@ class SchemaExtender(object):
         self.context = context
 
     def getFields(self):
+        """ Returns available fields
+        """
         return self._fields
 
     def getOrder(self, original):
+        """ Returns fields order
+        """
         order = original.get('report', [])
         new_order = [
                 'serial_title',

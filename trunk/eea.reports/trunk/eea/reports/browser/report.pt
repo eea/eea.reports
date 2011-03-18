@@ -212,6 +212,13 @@
           </ul>
         </tal:foldercontents>
 
+        <!-- Trailer -->
+        <tal:trailer define="
+          tr_field python:here.getField('trailer');
+          tr_value python:tr_field.getAccessor(here)();">
+          <div tal:content="structure tr_value">Trailer</div>
+        </tal:trailer>
+
         <!-- Maps and graphs -->
         <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
           tal:condition="figures">
@@ -299,13 +306,6 @@
             <div tal:content="structure oe_value">Order extra text</div>
           </tal:order_extra>
         </tal:order>
-
-        <!-- Trailer -->
-        <tal:trailer define="
-          tr_field python:here.getField('trailer');
-          tr_value python:tr_field.getAccessor(here)();">
-          <div tal:content="structure tr_value">Trailer</div>
-        </tal:trailer>
 
         <!-- Related items -->
         <dl class="portlet portlet-rss publicationPortlet" id="relatedItems"

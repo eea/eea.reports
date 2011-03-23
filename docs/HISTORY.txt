@@ -6,7 +6,8 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
- * Cleanup: Fixed all pylint, pyflakes violations [voineali $4140]
+ * Bug fix: Fixed getCoverImage to work with new ATBlob [ghicaale #4200]
+ * Cleanup: Fixed all pylint, pyflakes violations [voineali #4140]
  * Cleanup: Removed portal_migration scripts as portal_migration is deprecated.
    Please check that there are no un-applied migration scripts before
    upgrading to this version [voineali #4139]

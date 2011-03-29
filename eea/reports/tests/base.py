@@ -65,6 +65,7 @@ def setup_eea_reports():
     # run without this. (Plone3.1?)
     try:
         ztc.installPackage('plone.app.blob')
+        ztc.installPackage('slc.publications')
         ztc.installPackage('eea.reports')
     except AttributeError, err:
         # Old ZopeTestCase

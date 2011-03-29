@@ -4,8 +4,8 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-3.2-dev - (unreleased)
-----------------------
+3.2 - (2011-03-29)
+------------------
  * Bug fix: Fixed getCoverImage to work with new ATBlob [ghicaale #4200]
  * Cleanup: Fixed all pylint, pyflakes violations [voineali #4140]
  * Cleanup: Removed portal_migration scripts as portal_migration is deprecated.

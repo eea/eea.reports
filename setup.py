@@ -31,7 +31,6 @@ setup(name=name,
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'slc.publications',
       ],
       entry_points="""
       # -*- Entry points: -*-

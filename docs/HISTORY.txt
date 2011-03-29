@@ -6,6 +6,7 @@ Changelog
 
 3.2-dev - (unreleased)
 ----------------------
+ * Cleanup: Removed slc.publications dependency [voineali #4207]
  * Bug fix: Fixed getCoverImage to work with new ATBlob [ghicaale #4200]
  * Cleanup: Fixed all pylint, pyflakes violations [voineali #4140]
  * Cleanup: Removed portal_migration scripts as portal_migration is deprecated.

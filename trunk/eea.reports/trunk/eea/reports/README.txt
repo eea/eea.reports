@@ -17,6 +17,8 @@ Installation
 
     - p4a.subtyper, p4a.common, p4a.z2utils
 
+    - slc.publications
+
     - archetypes.schemaextender
 
     - LinguaPlone

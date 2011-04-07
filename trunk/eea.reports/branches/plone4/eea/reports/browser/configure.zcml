@@ -3,6 +3,7 @@
     xmlns:zope="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="eea.reports">
 
   <page
@@ -12,8 +13,6 @@
       for="eea.reports.interfaces.IReportContainerEnhanced"
       permission="zope2.View"
       />
-
-  <zope:adapter factory=".displays.ReportContainerDynamicViews" />
 
   <browser:page
       for="eea.reports.interfaces.IReportContainerEnhanced"
@@ -27,14 +26,6 @@
       name="syncronize"
       class="eea.reports.pdf.syncronize.Syncronizer"
       permission="cmf.ModifyPortalContent"
-      />
-
-  <browser:page
-      for="..interfaces.IReportContainerEnhanced"
-      name="imgview"
-      class=".imgview.ImageView"
-      permission="zope.Public"
-      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
       />
 
   <browser:resource
@@ -51,13 +42,24 @@
     name="publication_images"
     directory="./images" />
 
-  <menuItem
-    menu="object_buttons"
-    for="eea.reports.interfaces.IReportContainerEnhanced"
-    title="Syncronize PDF"
-    action="${object_url}/@@syncronize"
-    filter="object/@@can_syncronize"
-    permission="cmf.ModifyPortalContent"
-    />
+<!--  <menuItem-->
+<!--    menu="object_buttons"-->
+<!--    for="eea.reports.interfaces.IReportContainerEnhanced"-->
+<!--    title="Syncronize PDF"-->
+<!--    action="${object_url}/@@syncronize"-->
+<!--    filter="object/@@can_syncronize"-->
+<!--    permission="cmf.ModifyPortalContent"-->
+<!--    />-->
 
+  <!-- Valentine imagescales -->
+  <configure zcml:condition="installed valentine.imagescale">
+    <browser:page
+      for="..interfaces.IReportContainerEnhanced"
+      name="imgview"
+      class=".imgview.ImageView"
+      permission="zope.Public"
+      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
+      />
+  </configure>
+      
 </configure>

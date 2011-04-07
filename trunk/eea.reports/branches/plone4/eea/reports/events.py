@@ -1,6 +1,6 @@
 """ New events
 """
-from zope.app.event.interfaces import IObjectEvent
+from zope.component.interfaces import IObjectEvent
 from zope.interface import Attribute, implements
 
 class IFileUploadedEvent(IObjectEvent):

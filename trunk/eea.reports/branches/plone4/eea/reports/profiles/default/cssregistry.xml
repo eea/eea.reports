@@ -2,6 +2,6 @@
 <object name="portal_css" meta_type="Stylesheets Registry">
  <stylesheet title="" cacheable="True" compression="safe" cookable="True"
     enabled="on" expression="python: 'report_view' in request.get('URL0')"
-    id="reports_styles.css" media="all" rel="stylesheet"
+    id="++resource++eea.reports.css" media="all" rel="stylesheet"
     rendering="import" />
 </object>

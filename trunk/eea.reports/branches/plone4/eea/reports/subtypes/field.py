@@ -12,7 +12,7 @@ from Products.Archetypes.utils import DisplayList, mapply, Vocabulary
 from Products.Archetypes.Registry import registerField
 from Products.Archetypes.Registry import registerPropertyType
 from eea.reports.subtypes.widget import SerialTitleWidget
-from eea.themecentre.interfaces import IThemeTagging
+#from eea.themecentre.interfaces import IThemeTagging
 
 STRING_TYPES = [StringType, UnicodeType]
 
@@ -21,12 +21,17 @@ class ThemesField(StringField):
     def set(self, instance, value, **kwargs):
         """ Save as annotation
         """
-        IThemeTagging(instance).tags = value
+        # XXX Fix Themes setter
+        raise NotImplementedError
+#        IThemeTagging(instance).tags = value
 
     def get(self, instance, **kwargs):
         """ Get from annotation
         """
-        return IThemeTagging(instance).tags
+        # XXX Fix Themes getter
+        logger.exception("Not implemented error")
+        return []
+#        return IThemeTagging(instance).tags
 
 class SerialTitleField(ObjectField):
     """For creating lines objects"""
@@ -38,7 +43,7 @@ class SerialTitleField(ObjectField):
         'widget' : SerialTitleWidget,
     })
 
-    security  = ClassSecurityInfo()
+    security = ClassSecurityInfo()
 
     security.declarePrivate('set')
     def set(self, instance, value, **kwargs):
@@ -128,51 +133,52 @@ class SerialTitleField(ObjectField):
                 the "getDisplayList" method of the class will be called.
 
         """
-
-        value = getattr(self, vocabulary, ())
-        if not isinstance(value, DisplayList):
-
-            if content_instance is not None and type(value) in STRING_TYPES:
-                # Dynamic vocabulary by method on class of content_instance
-                method = getattr(content_instance, value, None)
-                if method and callable(method):
-                    args = []
-                    kw = {'content_instance' : content_instance,
-                          'field' : self}
-                    value = mapply(method, *args, **kw)
-            elif content_instance is not None and \
-                 IVocabulary.isImplementedBy(value):
-                # Dynamic vocabulary provided by a class that
-                # implements IVocabulary
-                value = value.getDisplayList(content_instance)
-
-            # Post process value into a DisplayList
-            # Templates will use this interface
-            sample = value[:1]
-            if isinstance(sample, DisplayList):
-                # Do nothing, the bomb is already set up
-                pass
-            elif type(sample) in (TupleType, ListType):
-                # Assume we have ((value, display), ...)
-                # and if not ('', '', '', ...)
-                if sample and type(sample[0]) not in (TupleType, ListType):
-                    # if not a 2-tuple
-                    value = zip(value, value)
-                value = DisplayList(value)
-            elif len(sample) and type(sample[0]) is StringType:
-                value = DisplayList(zip(value, value))
-            else:
-                logger.debug('Unhandled type in Vocab')
-                logger.debug(value)
-
-        if content_instance:
-            # Translate vocabulary
-            i18n_domain = (getattr(self, 'i18n_domain', None) or
-                          getattr(self.widget, 'i18n_domain', None))
-
-            return Vocabulary(value, content_instance, i18n_domain)
-
-        return value
+        return ()
+#
+#        value = getattr(self, vocabulary, ())
+#        if not isinstance(value, DisplayList):
+#
+#            if content_instance is not None and type(value) in STRING_TYPES:
+#                # Dynamic vocabulary by method on class of content_instance
+#                method = getattr(content_instance, value, None)
+#                if method and callable(method):
+#                    args = []
+#                    kw = {'content_instance' : content_instance,
+#                          'field' : self}
+#                    value = mapply(method, *args, **kw)
+#            elif content_instance is not None and \
+#                 IVocabulary.implementedBy(value):
+#                # Dynamic vocabulary provided by a class that
+#                # implements IVocabulary
+#                value = value.getDisplayList(content_instance)
+#
+#            # Post process value into a DisplayList
+#            # Templates will use this interface
+#            sample = value[:1]
+#            if isinstance(sample, DisplayList):
+#                # Do nothing, the bomb is already set up
+#                pass
+#            elif type(sample) in (TupleType, ListType):
+#                # Assume we have ((value, display), ...)
+#                # and if not ('', '', '', ...)
+#                if sample and type(sample[0]) not in (TupleType, ListType):
+#                    # if not a 2-tuple
+#                    value = zip(value, value)
+#                value = DisplayList(value)
+#            elif len(sample) and type(sample[0]) is StringType:
+#                value = DisplayList(zip(value, value))
+#            else:
+#                logger.debug('Unhandled type in Vocab')
+#                logger.debug(value)
+#
+#        if content_instance:
+#            # Translate vocabulary
+#            i18n_domain = (getattr(self, 'i18n_domain', None) or
+#                          getattr(self.widget, 'i18n_domain', None))
+#
+#            return Vocabulary(value, content_instance, i18n_domain)
+#
+#        return value
 
 registerField(SerialTitleField,
               title='Serial Title Field',

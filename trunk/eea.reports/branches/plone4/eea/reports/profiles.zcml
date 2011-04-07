@@ -11,4 +11,9 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:importStep
+    name="eea.reports-install-vocabularies"
+    title="EEA Reports setup various" description="Setup EEA Reports"
+    handler="eea.reports.setuphandlers.installVocabularies" />
+
 </configure>

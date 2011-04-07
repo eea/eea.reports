@@ -1,49 +1,18 @@
 """ Events
 """
-from eea.reports import interfaces
-from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from zope.component import getUtility
+from zope.interface import alsoProvides
+
 from Products.CMFCore.utils import getToolByName
-from p4a.subtyper.interfaces import ISubtyper
-from eea.reports.config import REPORT_SUBOBJECTS
+
+from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from eea.reports.vocabulary import ReportThemesVocabulary
-#
-# Restrict report sub-objects
-#
-def subtype_added(evt):
-    """ EVENT
+from eea.reports.interfaces import IReportContainerEnhanced
 
-    Called when an object is subtyped as report.
-    """
-    _restrict_subobjects(evt, 1)
-
-def subtype_removed(evt):
-    """ EVENT
-
-    Called when an object is un-subtyped as report.
-    """
-    _restrict_subobjects(evt, -1)
-
-def _restrict_subobjects(evt, rtype=-1):
-    """ Restrict report subobjects
-    """
-    obj = evt.object
-    subtype = evt.subtype
-    # Nothing to do
-    if not subtype:
-        return
-    # Only possible report
-    if not interfaces.IPossibleReportContainer.providedBy(obj):
-        return
-    # Only report subtype
-    if subtype.type_interface is not interfaces.IReportContainerEnhanced:
-        return
-    # Restrict
-    obj.setConstrainTypesMode(rtype)
-    if rtype != 1:
-        return
-    obj.setImmediatelyAddableTypes(REPORT_SUBOBJECTS)
-    obj.setLocallyAllowedTypes(REPORT_SUBOBJECTS)
+def printEvent(obj, evt):
+    print "========================================"
+    print obj
+    print evt
 #
 # Generate cover image
 #
@@ -113,42 +82,29 @@ def parse_metadata(obj, evt):
             continue
         field.getMutator(obj)(value)
 #
-# Invalidate squid cache
-#
-def invalidate_cache(instance, evt):
-    """ EVENT
-        called on new file upload. Tries to invalidate squid cache
-    """
-    stool = getToolByName(instance, 'portal_squid', None)
-    if not stool:
-        return
-    key = instance.absolute_url(1) + '/at_download/file'
-    stool.pruneUrls([key, 'http/localhost/81/%s' % key])
-#
 # Report initialize
 #
 def report_initialized(obj, evt):
     """ EVENT
         called when a Report content-type is added. Subtype it as report.
     """
-    subtyper = getUtility(ISubtyper)
+    if obj.portal_type != 'Report':
+        return
+
     canonical = obj.getCanonical()
 
     # Object added
-    if obj == canonical and evt.portal_type == 'Report':
+    if obj == canonical:
         obj.setExcludeFromNav(True)
-        # Fix language
-        parent_lang = obj.getParentNode().getLanguage()
-        if obj.getLanguage() != parent_lang:
-            obj.setLanguage(parent_lang)
-        return subtyper.change_type(obj, 'eea.reports.FolderReport')
-
-    # Object translated
-    subtype = subtyper.existing_type(canonical)
-    subtype_name = getattr(subtype, 'name', None)
-    if subtype_name == 'eea.reports.FolderReport':
+        # XXX Fix language
+#        parent_lang = obj.getParentNode().getLanguage()
+#        if obj.getLanguage() != parent_lang:
+#            obj.setLanguage(parent_lang)
+        alsoProvides(obj, IReportContainerEnhanced)
+    else:
+        # Object translated
         obj.setExcludeFromNav(True)
-        return subtyper.change_type(obj, 'eea.reports.FolderReport')
+#        alsoProvides(obj, IReportContainerEnhanced)
 #
 # Set the language independent
 #

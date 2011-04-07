@@ -1,19 +1,26 @@
 """ Subtyping
 """
 from plone.app.blob.field import BlobField
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+
 from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.CMFPlone import PloneMessageFactory as _
-from Products.OrderableReferenceField._field import OrderableReferenceField
+
+try:
+    from Products.OrderableReferenceField._field import OrderableReferenceField
+except ImportError:
+    from Products.Archetypes.Field import ReferenceField as OrderableReferenceField
+
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from datetime import datetime
-from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
-from eea.dataservice.vocabulary import DatasetYears
-from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget
+
+# XXX WTF eea.dataservice dependency?
+#from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
+#from eea.dataservice.vocabulary import DatasetYears
+#from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget
+
 from eea.reports.config import COPYRIGHTS
 from eea.reports.events import FileUploadedEvent
 from eea.reports.subtypes.field import SerialTitleField, ThemesField
@@ -61,9 +68,9 @@ class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin,
 class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
     """ Archetypes SchemaExtender aware themes field """
 
-class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
-                                ManagementPlanField):
-    """ Archetypes SchemaExtender aware management plan field """
+#class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
+#                                ManagementPlanField):
+#    """ Archetypes SchemaExtender aware management plan field """
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
     """ Archetypes SchemaExtender aware file field """
@@ -224,23 +231,23 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportThemesField('themes',
-                    schemata='report',
-                    required=True,
-                    validators=('maxValues',),
-                    vocabulary=ReportThemesVocabulary(),
-                    widget=atapi.InAndOutWidget(
-                        maxValues=3,
-                        label=_(u'EEAContentTypes_label_themes',
-                                default=u'Themes'),
-                        description=_(u'EEAContentTypes_help_themes',
-                                      default=u'Choose publication themes'),
-                        i18n_domain='EEAContentTypes',
-                        ),
-                    languageIndependent=True,
-                    index="KeywordIndex:brains",
-                    enforceVocabulary=1
-                    ),
+#            ReportThemesField('themes',
+#                    schemata='report',
+#                    required=True,
+#                    validators=('maxValues',),
+#                    vocabulary=ReportThemesVocabulary(),
+#                    widget=atapi.InAndOutWidget(
+#                        maxValues=3,
+#                        label=_(u'EEAContentTypes_label_themes',
+#                                default=u'Themes'),
+#                        description=_(u'EEAContentTypes_help_themes',
+#                                      default=u'Choose publication themes'),
+#                        i18n_domain='EEAContentTypes',
+#                        ),
+#                    languageIndependent=True,
+#                    index="KeywordIndex:brains",
+#                    enforceVocabulary=1
+#                    ),
             ReportLinesField('publication_groups',
                     schemata='relations',
                     vocabulary=NamedVocabulary("publications_groups"),
@@ -323,28 +330,28 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportManagementPlanField(
-                    name='management_plan',
-                    schemata='report',
-                    languageIndependent=True,
-                    required_for_published=True,
-                    required=True,
-                    default=(datetime.now().year, ''),
-                    validators=('management_plan_code_validator',),
-                    vocabulary=DatasetYears(),
-                    widget=ManagementPlanWidget(
-                        format="select",
-                        label="EEA Management Plan",
-                        description=(
-                            "EEA Management plan code. Internal EEA project "
-                            "line code, used to assign an EEA product output to"
-                            " a specific EEA project number in the "
-                            "management plan."),
-                        label_msgid='dataservice_label_eea_mp',
-                        description_msgid='dataservice_help_eea_mp',
-                        i18n_domain='eea.dataservice',
-                        )
-                    ),
+#            ReportManagementPlanField(
+#                    name='management_plan',
+#                    schemata='report',
+#                    languageIndependent=True,
+#                    required_for_published=True,
+#                    required=True,
+#                    default=(datetime.now().year, ''),
+#                    validators=('management_plan_code_validator',),
+#                    vocabulary=DatasetYears(),
+#                    widget=ManagementPlanWidget(
+#                        format="select",
+#                        label="EEA Management Plan",
+#                        description=(
+#                            "EEA Management plan code. Internal EEA project "
+#                            "line code, used to assign an EEA product output to"
+#                            " a specific EEA project number in the "
+#                            "management plan."),
+#                        label_msgid='dataservice_label_eea_mp',
+#                        description_msgid='dataservice_help_eea_mp',
+#                        i18n_domain='eea.dataservice',
+#                        )
+#                    ),
             ReportStringField('copyrights',
                     schemata='report',
                     languageIndependent=True,
@@ -388,7 +395,7 @@ class SchemaExtender(object):
                 'isbn',
                 'creators',
                 'publishers',
-                'themes',
+#                'themes',
                 'publication_groups',
                 'copyrights',
                 'for_sale',
@@ -396,7 +403,7 @@ class SchemaExtender(object):
                 'eeaid',
                 'price',
                 'pages',
-                'management_plan',
+#                'management_plan',
                 'trailer',
                 'order_override_text',
                 'order_extra_text',

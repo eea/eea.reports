@@ -1,62 +1,34 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="eea.reports">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  i18n_domain="eea.reports">
 
-    <!-- XXX Debug
+  <!-- XXX Debug -->
+  <subscriber
+    for="..interfaces.IPossibleReportContainer
+         zope.component.interfaces.IObjectEvent"
+    handler=".events.printEvent" />
 
-    <subscriber
-        for="..interfaces.IPossibleReportContainer
-             zope.app.event.interfaces.IObjectEvent"
-        handler=".events.printEvent"
-    />
+  <!-- Debug -->
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         ..events.IFileUploadedEvent"
+    handler=".events.generate_image" />
+    
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         ..events.IFileUploadedEvent"
+    handler=".events.parse_metadata" />
+    
+  <subscriber
+    for="eea.reports.interfaces.IPossibleReportContainer
+         zope.lifecycleevent.ObjectCreatedEvent"
+    handler=".events.report_initialized" />
 
-    Debug -->
-    <subscriber
-       for="eea.reports.interfaces.IReportContainerEnhanced
-            ..events.IFileUploadedEvent"
-       handler=".events.generate_image"
-   />
-
-   <subscriber
-       for="eea.reports.interfaces.IReportContainerEnhanced
-            ..events.IFileUploadedEvent"
-       handler=".events.parse_metadata"
-   />
-
-   <subscriber
-       for="eea.reports.interfaces.IReportContainerEnhanced
-            ..events.IFileUploadedEvent"
-       handler=".events.invalidate_cache"
-   />
-
-    <subscriber
-        for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
-        handler=".events.subtype_added"
-    />
-
-    <subscriber
-       for="eea.reports.interfaces.IPossibleReportContainer
-            ..events.IObjectPortalTypeChanged"
-       handler=".events.report_initialized"
-   />
-
-    <subscriber
-        for="p4a.subtyper.interfaces.ISubtypeRemovedEvent"
-        handler=".events.subtype_removed"
-    />
-
-    <!-- Fix for #2168 -->
-    <subscriber
-        for="eea.reports.interfaces.IReportContainerEnhanced
-             zope.app.event.interfaces.IObjectModifiedEvent"
-        handler=".events.setLanguageIndependent"
-    />
-
-    <adapter
-        for="..interfaces.IPossibleReportContainer"
-        provides="zope.app.annotation.interfaces.IAnnotations"
-        factory="zope.app.annotation.attribute.AttributeAnnotations"
-        />
-
+  <!-- Fix for #2168 -->
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".events.setLanguageIndependent" />
+    
 </configure>

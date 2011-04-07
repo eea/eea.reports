@@ -1,14 +1,15 @@
 """ Archetypes fields custom validators
 """
+from zope.interface import implements
 from Products.validation.config import validation
-from Products.validation.interfaces import ivalidator
+from Products.validation.interfaces.IValidator import IValidator
 
 class SerialTitle(object):
     """ Validator for report serial title field.
     """
-    __implements__ = (ivalidator,)
+    implements(IValidator)
 
-    def __init__( self, name, title='', description=''):
+    def __init__(self, name, title='', description=''):
         self.name = name
         self.title = title or name
         self.description = description
@@ -18,7 +19,7 @@ class SerialTitle(object):
         """
         report_type = len(value) > 0 and value[0] or 'N/A'
         report_num = len(value) > 1 and value[1] or 0
-        report_year = len(value) > 2 and value[2] or -1
+        report_year = len(value) > 2 and value[2] or - 1
 
         # if no report_type then we ignore other fields
         # and the valdation is always true.

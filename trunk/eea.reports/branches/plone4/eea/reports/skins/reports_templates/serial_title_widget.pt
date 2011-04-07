@@ -45,8 +45,7 @@
   <label tal:attributes="for string:${fieldName}_type" i18n:translate="label_report_type">Report type</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_type;
-    name string:${fieldName}_type;
-    tabindex tabindex/next;">
+    name string:${fieldName}_type;">
     <option tal:repeat="item types" tal:attributes="
       value nocall:item;
       selected python:test(item == report_type, 'selected', None);"
@@ -61,8 +60,7 @@
   <input type="text" style="width: 100%" tal:attributes="
     id string:${fieldName}_number;
     name string:${fieldName}_number:int;
-    value string:${report_num};
-    tabindex tabindex/next;" />
+    value string:${report_num};" />
 </div>
 
 <!-- Report year -->
@@ -70,8 +68,7 @@
   <label tal:attributes="for string:${fieldName}_year" i18n:translate="label_report_year">Report year</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_year;
-    name string:${fieldName}_year:int;
-    tabindex tabindex/next;">
+    name string:${fieldName}_year:int;">
     <option tal:repeat="item years" tal:attributes="
       value nocall:item;
       selected python:test(int(item) == report_year, 'selected', None);"
@@ -87,8 +84,7 @@
   <input type="text" style="width: 100%" tal:attributes="
     id string:${fieldName}_alt;
     name string:${fieldName}_alt;
-    value string:${report_alt};
-    tabindex tabindex/next;" />
+    value string:${report_alt};" />
 </div>
 
 

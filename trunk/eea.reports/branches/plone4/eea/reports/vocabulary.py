@@ -4,7 +4,7 @@ from datetime import datetime
 from zope.interface.declarations import implements
 from zope.app.schema.vocabulary import IVocabularyFactory
 from eea.reports.config import STARTING_YEAR
-from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
+#from eea.themecentre.vocabulary import ThemesEditVocabularyFactory
 from Products.Archetypes.interfaces.vocabulary import IVocabulary
 
 class ReportYearsVocabularyFactory(object):
@@ -22,28 +22,15 @@ class ReportYearsVocabularyFactory(object):
 
 ReportYearsVocabulary = ReportYearsVocabularyFactory()
 
-class ReportThemesVocabulary:
+class ReportThemesVocabulary(object):
     """ Report themes vocabulary
     """
-    __implements__ = (IVocabulary,)
+    implements(IVocabularyFactory)
 
-    def getDisplayList(self, instance):
+    def __call__(self):
         """ Returns
         """
-        vocab = ThemesEditVocabularyFactory(instance)
-        return [(term.value, term.title) for term in vocab]
-
-    def getVocabularyDict(self, instance):
-        """ Getter
-        """
-        return {}
-
-    def isFlat(self):
-        """ Is flat vocabulary?
-        """
-        return False
-
-    def showLeafsOnly(self):
-        """ Show leafs only?
-        """
-        return False
+        #XXX Fix themes vocabulary
+        return []
+#        vocab = ThemesEditVocabularyFactory(instance)
+#        return [(term.value, term.title) for term in vocab]

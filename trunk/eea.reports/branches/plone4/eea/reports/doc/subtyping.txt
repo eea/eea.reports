@@ -33,7 +33,8 @@ do not introduce yet another content type.
     >>> _ = self.folder.invokeFactory('Report', 'myreport')
     >>> myreport = self.folder.myreport
     >>> myreport.Language()
-    ''
+    'en'
+    
     >>> myreport.setLanguage(default_language)
     >>> myreport.Language() == default_language
     True
@@ -44,16 +45,14 @@ do not introduce yet another content type.
     >>> myreport.Language()
     'en'
 
-Now we use subtyping to make this file a report.
+Check report meta_type and subtype
 
-    >>> from p4a.subtyper.interfaces import ISubtyper
-    >>> from zope.component import getUtility
-    >>> subtyper = getUtility(ISubtyper)
-    >>> possible_types = [x.name for x in subtyper.possible_types(myreport)]
-    >>> 'eea.reports.FolderReport' in possible_types
-    True
-    >>> subtyper.existing_type(myreport).name
-    'eea.reports.FolderReport'
+	>>> myreport.meta_type
+	'ATFolder'
+	
+	>>> from eea.reports.interfaces import IReportContainerEnhanced
+	>>> IReportContainerEnhanced.providedBy(myreport)
+	True
 
 Now we load a demonstration pdf file from doc/test.pdf which has the following
 metadata set within the pdf file:
@@ -91,7 +90,6 @@ Edit report like properties:
     ... 'creators_existing_keywords': ('EEA (European Environment Agency)',),
     ... 'eeaid': 23456,
     ... 'isbn': 'WETROET-3543-GFSFGDF',
-    ... 'themes': ['biodiversity', 'agriculture', 'chemicals'],
     ... 'pages': 34,
     ... 'trailer': 'Sample trailer',
     ... 'order_override_text': 'Sample order override text',
@@ -130,8 +128,7 @@ Other properties
     23456
     >>> myreport.getField('isbn').getAccessor(myreport)()
     'WETROET-3543-GFSFGDF'
-    >>> myreport.getField('themes').getAccessor(myreport)()
-    ['biodiversity', 'agriculture', 'chemicals']
+    
     >>> myreport.getField('pages').getAccessor(myreport)()
     34
     >>> myreport.getField('trailer').getAccessor(myreport)()

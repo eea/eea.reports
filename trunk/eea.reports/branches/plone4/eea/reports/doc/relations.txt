@@ -25,7 +25,7 @@ Add some reports
     >>> myreport_1 = self.folder.myreport_1
     >>> myreport_2 = self.folder.myreport_2
     >>> form = {
-    ...   'publication_groups': ['Sample Group 1',],
+    ...   'publication_groups': ['airpollutionbyozone',],
     ...   'effectiveDate': '11/11/2008',
     ... }
     >>> myreport_1.processForm(values=form, data=1, metadata=1)

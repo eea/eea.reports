@@ -1,12 +1,10 @@
 """ Events
 """
-from zope.component import getUtility
 from zope.interface import alsoProvides
-
+from zope.component import getUtility, queryUtility
+from zope.app.schema.vocabulary import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
-
 from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
-from eea.reports.vocabulary import ReportThemesVocabulary
 from eea.reports.interfaces import IReportContainerEnhanced
 
 def printEvent(obj, evt):
@@ -46,10 +44,16 @@ def _get_themes_from_keywords(instance, keywords):
     """
     if not keywords:
         return []
-    vocab = ReportThemesVocabulary()
-    all_themes = vocab.getDisplayList(instance)
+
+    vocab = queryUtility(IVocabularyFactory, name=u'Allowed themes for edit')
+
+    # eea.themecentre is not installed
+    if not vocab:
+        return []
+
     keywords = set([x.lower() for x in keywords])
-    res = set([key for key, value in all_themes if value.lower() in keywords])
+    res = set([term.value for term in vocab(instance)
+                if term.title.lower() in keywords])
     return tuple(res)
 
 def parse_metadata(obj, evt):

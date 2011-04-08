@@ -12,5 +12,30 @@
     for="..interfaces.IReportContainerEnhanced"
     factory=".report.SchemaExtender"
     />
+
+  <utility
+    factory=".vocabulary.ReportTypes"
+    name="eea.reports.vocabulary.ReportTypes"
+    />
     
+  <utility
+    factory=".vocabulary.ReportYears"
+    name="eea.reports.vocabulary.ReportYears"
+    />
+
+  <utility
+    factory=".vocabulary.ReportCreators"
+    name="eea.reports.vocabulary.ReportCreators"
+    />
+
+  <utility
+    factory=".vocabulary.ReportPublishers"
+    name="eea.reports.vocabulary.ReportPublishers"
+    />
+
+  <utility
+    factory=".vocabulary.PublicationGroups"
+    name="eea.reports.vocabulary.PublicationGroups"
+    />
+        
 </configure>

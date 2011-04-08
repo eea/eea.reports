@@ -3,6 +3,8 @@
 import os
 import tempfile
 import logging
+from subprocess import Popen, PIPE, STDOUT
+
 from zope import interface
 from eea.reports.pdf.interfaces import IPDFCoverImage
 from eea.reports.pdf import CAN_GENERATE_COVER_IMAGE
@@ -48,15 +50,17 @@ class PDFCoverImage(object):
         # Run pdftk
         cmd = "pdftk %s cat 1 output %s" % (tmp_inp, tmp_out)
         logger.debug(cmd)
-        out = os.popen4(cmd)[1]
-        res = out.read()
+        process = Popen(cmd, shell=True,
+                        stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        res = process.stdout.read()
         if res:
             logger.debug(res)
 
         # Run image magick convert
         cmd = "convert %s -resize %sx%s %s" % (tmp_out, width, height, tmp_img)
-        out = os.popen4(cmd)[1]
-        res = out.read()
+        process = Popen(cmd, shell=True,
+                        stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        res = process.stdout.read()
         if res:
             logger.debug(res)
 

@@ -4,10 +4,10 @@
   i18n_domain="eea.reports">
 
   <!-- XXX Debug -->
-  <subscriber
-    for="..interfaces.IPossibleReportContainer
-         zope.component.interfaces.IObjectEvent"
-    handler=".events.printEvent" />
+<!--  <subscriber-->
+<!--    for="..interfaces.IPossibleReportContainer-->
+<!--         zope.component.interfaces.IObjectEvent"-->
+<!--    handler=".events.printEvent" />-->
 
   <!-- Debug -->
   <subscriber

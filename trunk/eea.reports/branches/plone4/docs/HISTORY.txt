@@ -4,8 +4,10 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-3.3-dev - (unreleased)
+4.0-dev - (unreleased)
 ----------------------
+ * Feature: Plone4 compatible [voineali #4231]
+   This version is not backward compatible.
 
 3.2 - (2011-03-29)
 ------------------

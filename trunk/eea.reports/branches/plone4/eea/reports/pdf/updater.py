@@ -3,6 +3,8 @@
 import os
 import tempfile
 import logging
+from subprocess import Popen, PIPE, STDOUT
+
 from zope import interface
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
 from eea.reports.pdf.config import META_TEMPLATE
@@ -68,8 +70,9 @@ class PDFMetadataUpdater(object):
         # Run pdftk
         cmd = 'pdftk %s update_info %s output %s' % (tmp_in, tmp_meta, tmp_out)
         logger.debug(cmd)
-        out = os.popen4(cmd)[1]
-        res = out.read()
+        process = Popen(cmd, shell=True,
+                        stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        res = process.stdout.read()
         if res:
             logger.debug(res)
 
@@ -117,17 +120,17 @@ class PDFMetadataUpdater(object):
 
         authors = metadata.get('creators_existing_keywords', [])
         authors.extend(metadata.get('creators_keywords', []))
-        metadata['authors_str']  = '; '.join(authors)
+        metadata['authors_str'] = '; '.join(authors)
 
         publishers = metadata.get('publishers_existing_keywords', [])
         publishers.extend(metadata.get('publishers_keywords', []))
         metadata['publishers_str'] = '; '.join(publishers)
 
-        serial_title =  metadata.get('serial_title_alt', u'')
+        serial_title = metadata.get('serial_title_alt', u'')
         if not serial_title:
-            st_number =  metadata.get('serial_title_number', 0)
-            st_type =  metadata.get('serial_title_type', '')
-            st_year =  metadata.get('serial_title_year', 1970)
+            st_number = metadata.get('serial_title_number', 0)
+            st_type = metadata.get('serial_title_type', '')
+            st_year = metadata.get('serial_title_year', 1970)
             serial_title = '%s %s/%s' % (st_type, st_number, st_year)
         metadata['serial_title_str'] = serial_title
 

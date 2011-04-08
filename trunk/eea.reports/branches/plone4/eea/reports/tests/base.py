@@ -10,7 +10,7 @@ from Products.Five import zcml
 from Products.Five import fiveconfigure
 from Testing import ZopeTestCase as ztc
 from StringIO import StringIO
-from Globals import package_home
+from App.Common import package_home
 from zope.app.component.hooks import setSite
 from eea.reports.config import product_globals
 
@@ -20,7 +20,6 @@ from eea.reports.config import product_globals
 ztc.installProduct('PloneLanguageTool')
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('Five')
-ztc.installProduct('FiveSite')
 ztc.installProduct('ATVocabularyManager')
 
 # Import PloneTestCase - this registers more products with Zope as a side effect
@@ -48,8 +47,6 @@ def setup_eea_reports():
     fiveconfigure.debug_mode = True
     import Products.Five
     zcml.load_config('meta.zcml', Products.Five)
-    import Products.FiveSite
-    zcml.load_config('configure.zcml', Products.FiveSite)
     # Load the ZCML configuration for the eea.reports package.
     # This includes the other products below as well.
 
@@ -97,19 +94,6 @@ setupPloneSite(products=EXTRA_PRODUCTS,
 class ReportTestCase(PloneTestCase):
     """Base class for integration tests for the 'Report' product.
     """
-    def _setup(self):
-        """ Setup test case
-        """
-        PloneTestCase._setup(self)
-        # Set the local component registry
-        setSite(self.portal)
-
-        setup = getattr(self.portal, 'portal_setup', None)
-        profile = 'ThemeCentre:themecentre'
-        if not self.portal._installed_profiles.has_key(profile):
-            setup.setImportContext('profile-%s' % (profile,))
-            setup.runImportStep('catalog')
-            self.portal._installed_profiles[profile] = 1
 
 class ReportFunctionalTestCase(FunctionalTestCase, ReportTestCase):
     """Base class for functional integration tests for the 'Report' product.

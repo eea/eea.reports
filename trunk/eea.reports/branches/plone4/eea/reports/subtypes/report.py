@@ -3,14 +3,14 @@
 from plone.app.blob.field import BlobField
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.CMFPlone import PloneMessageFactory as _
 
 try:
     from Products.OrderableReferenceField._field import OrderableReferenceField
 except ImportError:
-    from Products.Archetypes.Field import ReferenceField as OrderableReferenceField
+    from Products.Archetypes.Field import \
+        ReferenceField as OrderableReferenceField
 
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
@@ -25,9 +25,10 @@ from eea.reports.config import COPYRIGHTS
 from eea.reports.events import FileUploadedEvent
 from eea.reports.subtypes.field import SerialTitleField, ThemesField
 from eea.reports.subtypes.widget import SerialTitleWidget
-from eea.reports.vocabulary import ReportYearsVocabulary, ReportThemesVocabulary
 from zope.event import notify
 from zope.interface import implements
+
+_marker = []
 
 class ExtensionFieldMixin:
     """ Archetypes SchemaExtender FieldMixin
@@ -96,10 +97,11 @@ class ReportFileWidget(atapi.FileWidget):
     def process_form(self, instance, field, form, **kwargs):
         """ Handle form data
         """
-        res = atapi.FileWidget.process_form(self, instance,
-                                            field, form, **kwargs)
-        if not res:
-            return res
+        empty_marker = kwargs.pop('empty_marker', _marker)
+        res = super(ReportFileWidget, self).process_form(instance,
+                               field, form, empty_marker=_marker, **kwargs)
+        if res is _marker:
+            return empty_marker
         value, res = res
 
         meta = form.get('%s_update_meta_input' % field.getName(), None)
@@ -191,8 +193,8 @@ class SchemaExtender(object):
                     required=True,
                     languageIndependent=True,
                     validators=('serialTitle',),
-                    types_vocabulary=NamedVocabulary("report_types"),
-                    years_vocabulary=ReportYearsVocabulary(),
+                    types_vocabulary="eea.reports.vocabulary.ReportTypes",
+                    years_vocabulary="eea.reports.vocabulary.ReportYears",
                     default=(u'', 0, -1, u''),
                     widget=SerialTitleWidget(
                         label=_(u'label_serial_title', default=u'Serial title'),
@@ -207,7 +209,7 @@ class SchemaExtender(object):
                     languageIndependent=False,
                     multiValued=1,
                     default=(u'EEA (European Environment Agency)',),
-                    vocabulary=NamedVocabulary("report_creators"),
+                    vocabulary_factory="eea.reports.vocabulary.ReportCreators",
                     widget=atapi.KeywordWidget(
                         label=_(u'label_creators', default=u'Creators/Authors'),
                         description=_(u'description_creators',
@@ -217,50 +219,33 @@ class SchemaExtender(object):
                         ),
                     ),
             ReportLinesField('publishers',
-                    schemata='report',
-                    required=True,
-                    languageIndependent=False,
-                    multiValued=1,
-                    default=(u'EEA (European Environment Agency)',),
-                    vocabulary=NamedVocabulary("report_publishers"),
-                    widget=atapi.KeywordWidget(
-                        label=_(u'label_publishers', default=u'Publishers'),
-                        description=_(u'description_publishers',
-                                      default=u'Fill in additional publishers'),
-                        macro='report_keywords',
-                        i18n_domain='eea.reports',
-                        ),
+                schemata='report',
+                required=True,
+                languageIndependent=False,
+                multiValued=1,
+                default=(u'EEA (European Environment Agency)',),
+                vocabulary_factory="eea.reports.vocabulary.ReportPublishers",
+                widget=atapi.KeywordWidget(
+                    label=_(u'label_publishers', default=u'Publishers'),
+                    description=_(u'description_publishers',
+                                  default=u'Fill in additional publishers'),
+                    macro='report_keywords',
+                    i18n_domain='eea.reports',
                     ),
-#            ReportThemesField('themes',
-#                    schemata='report',
-#                    required=True,
-#                    validators=('maxValues',),
-#                    vocabulary=ReportThemesVocabulary(),
-#                    widget=atapi.InAndOutWidget(
-#                        maxValues=3,
-#                        label=_(u'EEAContentTypes_label_themes',
-#                                default=u'Themes'),
-#                        description=_(u'EEAContentTypes_help_themes',
-#                                      default=u'Choose publication themes'),
-#                        i18n_domain='EEAContentTypes',
-#                        ),
-#                    languageIndependent=True,
-#                    index="KeywordIndex:brains",
-#                    enforceVocabulary=1
-#                    ),
+                ),
             ReportLinesField('publication_groups',
-                    schemata='relations',
-                    vocabulary=NamedVocabulary("publications_groups"),
-                    languageIndependent=True,
-                    index="KeywordIndex:brains",
-                    widget=atapi.InAndOutWidget(
-                        label=_(u'label_publication_groups',
-                                default=u'Publication groups'),
-                        description=_(u'description_publication_groups',
-                                      default=u'Fill in publication groups'),
-                        i18n_domain='eea.reports',
-                        ),
+                schemata='relations',
+                vocabulary_factory="eea.reports.vocabulary.PublicationGroups",
+                languageIndependent=True,
+                index="KeywordIndex:brains",
+                widget=atapi.InAndOutWidget(
+                    label=_(u'label_publication_groups',
+                            default=u'Publication groups'),
+                    description=_(u'description_publication_groups',
+                                  default=u'Fill in publication groups'),
+                    i18n_domain='eea.reports',
                     ),
+                ),
             ReportOrderableReferenceField('relatedItems',
                     schemata='relations',
                     languageIndependent=True,
@@ -395,7 +380,6 @@ class SchemaExtender(object):
                 'isbn',
                 'creators',
                 'publishers',
-#                'themes',
                 'publication_groups',
                 'copyrights',
                 'for_sale',

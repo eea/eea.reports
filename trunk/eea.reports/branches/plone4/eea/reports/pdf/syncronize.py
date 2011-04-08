@@ -1,9 +1,9 @@
 """ PDF Syncronizer
 """
+from zope.component import queryUtility, getUtility
+from zope.app.schema.vocabulary import IVocabularyFactory
 from Products.statusmessages.interfaces import IStatusMessage
-from zope.component import getUtility
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
-from eea.reports.vocabulary import ReportThemesVocabulary
 
 class SyncronizerSupport(object):
     """ PDF Syncronizer support
@@ -43,9 +43,15 @@ class Syncronizer(object):
     def _get_themes_labels(self, themes):
         """ Get themes labels
         """
-        vocab = ReportThemesVocabulary()
-        all_themes = vocab.getDisplayList(self.context)
-        return [value for key, value in all_themes if key in themes]
+        vocab = queryUtility(IVocabularyFactory,
+                              name=u'Allowed themes for edit')
+
+        # eea.themecentre not installed
+        if not vocab:
+            return []
+
+        return [term.title for term in vocab(self.context)
+                if term.value in themes]
 
     def _get_metadata(self):
         """ Return context metadata to syncronize with pdf file

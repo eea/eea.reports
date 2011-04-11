@@ -22,7 +22,7 @@
     
   <subscriber
     for="eea.reports.interfaces.IPossibleReportContainer
-         zope.lifecycleevent.ObjectCreatedEvent"
+         OFS.event.ObjectWillBeAddedEvent"
     handler=".events.report_initialized" />
 
   <!-- Fix for #2168 -->

@@ -13,13 +13,13 @@ class ReportYears(object):
     """
     implements(IVocabularyFactory)
 
-    def __call__(self):
+    def __call__(self, context=None):
         now = datetime.now()
         end_year = now.year + 2
-        terms = [('-1', 'N/A')]
-        terms.extend((str(key), str(key))
-                     for key in reversed(range(STARTING_YEAR, end_year)))
-        return terms
+        terms = [SimpleTerm('-1', '-1', 'N/A'), ]
+        terms.extend(SimpleTerm(str(key), str(key), str(key))
+                        for key in reversed(range(STARTING_YEAR, end_year)))
+        return SimpleVocabulary(terms)
 
 class ReportTypes(object):
     """ Report types

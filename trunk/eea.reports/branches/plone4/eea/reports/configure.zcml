@@ -5,6 +5,7 @@
  
   <include package="Products.ATVocabularyManager" />
   <include package="Products.LinguaPlone" />
+  <include package="Products.AddRemoveWidget" />
 
   <include package=".pdf" />
   <include package=".browser" />

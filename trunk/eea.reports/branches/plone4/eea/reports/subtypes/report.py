@@ -5,6 +5,7 @@ from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
 from Products.Archetypes import atapi
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.AddRemoveWidget import AddRemoveWidget
 
 try:
     from Products.OrderableReferenceField._field import OrderableReferenceField
@@ -23,7 +24,7 @@ from datetime import datetime
 
 from eea.reports.config import COPYRIGHTS
 from eea.reports.events import FileUploadedEvent
-from eea.reports.subtypes.field import SerialTitleField, ThemesField
+from eea.reports.subtypes.field import SerialTitleField
 from eea.reports.subtypes.widget import SerialTitleWidget
 from zope.event import notify
 from zope.interface import implements
@@ -65,9 +66,6 @@ class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
 class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin,
                              SerialTitleField):
     """ Archetypes SchemaExtender aware serial title field """
-
-class ReportThemesField(ExtensionField, ExtensionFieldMixin, ThemesField):
-    """ Archetypes SchemaExtender aware themes field """
 
 #class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
 #                                ManagementPlanField):
@@ -193,8 +191,8 @@ class SchemaExtender(object):
                     required=True,
                     languageIndependent=True,
                     validators=('serialTitle',),
-                    types_vocabulary="eea.reports.vocabulary.ReportTypes",
-                    years_vocabulary="eea.reports.vocabulary.ReportYears",
+                    types_vocabulary=u"eea.reports.vocabulary.ReportTypes",
+                    years_vocabulary=u"eea.reports.vocabulary.ReportYears",
                     default=(u'', 0, -1, u''),
                     widget=SerialTitleWidget(
                         label=_(u'label_serial_title', default=u'Serial title'),
@@ -210,11 +208,10 @@ class SchemaExtender(object):
                     multiValued=1,
                     default=(u'EEA (European Environment Agency)',),
                     vocabulary_factory="eea.reports.vocabulary.ReportCreators",
-                    widget=atapi.KeywordWidget(
+                    widget=AddRemoveWidget(
                         label=_(u'label_creators', default=u'Creators/Authors'),
                         description=_(u'description_creators',
                                 default=u'Fill in additional creators/authors'),
-                        macro='report_keywords',
                         i18n_domain='eea.reports',
                         ),
                     ),
@@ -225,16 +222,15 @@ class SchemaExtender(object):
                 multiValued=1,
                 default=(u'EEA (European Environment Agency)',),
                 vocabulary_factory="eea.reports.vocabulary.ReportPublishers",
-                widget=atapi.KeywordWidget(
+                widget=AddRemoveWidget(
                     label=_(u'label_publishers', default=u'Publishers'),
                     description=_(u'description_publishers',
                                   default=u'Fill in additional publishers'),
-                    macro='report_keywords',
                     i18n_domain='eea.reports',
                     ),
                 ),
             ReportLinesField('publication_groups',
-                schemata='relations',
+                schemata='categorization',
                 vocabulary_factory="eea.reports.vocabulary.PublicationGroups",
                 languageIndependent=True,
                 index="KeywordIndex:brains",
@@ -247,7 +243,7 @@ class SchemaExtender(object):
                     ),
                 ),
             ReportOrderableReferenceField('relatedItems',
-                    schemata='relations',
+                    schemata='categorization',
                     languageIndependent=True,
                     index='KeywordIndex',
                     relationship='relatesTo',
@@ -371,16 +367,16 @@ class SchemaExtender(object):
         """
         return self._fields
 
-    def getOrder(self, original):
+    def getOrder(self, schematas):
         """ Returns fields order
         """
-        order = original.get('report', [])
+        # Report schemata
+        order = schematas.get('report', [])
         new_order = [
                 'serial_title',
                 'isbn',
                 'creators',
                 'publishers',
-                'publication_groups',
                 'copyrights',
                 'for_sale',
                 'order_id',
@@ -391,8 +387,19 @@ class SchemaExtender(object):
                 'trailer',
                 'order_override_text',
                 'order_extra_text',
-                ]
-        new_order.extend([x for x in order if x not in new_order])
-        original['report'] = new_order
+        ]
 
-        return original
+        new_order.extend([x for x in order if x not in new_order])
+        schematas['report'] = new_order
+
+        # Categorization schemata
+        order = schematas.get('categorization', [])
+        new_order = [
+            'publication_groups',
+            'relatedItems',
+        ]
+        order = [y for y in order if y not in new_order]
+        order.extend(new_order)
+        schematas['categorization'] = order
+
+        return schematas

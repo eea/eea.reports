@@ -89,26 +89,15 @@ def parse_metadata(obj, evt):
 # Report initialize
 #
 def report_initialized(obj, evt):
-    """ EVENT
-        called when a Report content-type is added. Subtype it as report.
+    """ EVENT: called when a Report content-type is added. Subtype it as Report.
     """
-    if obj.portal_type != 'Report':
+    if not getattr(evt, 'newName', '').startswith('report'):
         return
 
-    canonical = obj.getCanonical()
-
-    # Object added
-    if obj == canonical:
-        obj.setExcludeFromNav(True)
-        # XXX Fix language
-#        parent_lang = obj.getParentNode().getLanguage()
-#        if obj.getLanguage() != parent_lang:
-#            obj.setLanguage(parent_lang)
+    obj.setExcludeFromNav(True)
+    if not IReportContainerEnhanced.providedBy(obj):
         alsoProvides(obj, IReportContainerEnhanced)
-    else:
-        # Object translated
-        obj.setExcludeFromNav(True)
-#        alsoProvides(obj, IReportContainerEnhanced)
+
 #
 # Set the language independent
 #

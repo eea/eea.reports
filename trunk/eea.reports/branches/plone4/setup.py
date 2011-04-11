@@ -33,6 +33,7 @@ setup(name=name,
           'setuptools',
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
+          'Products.AddRemoveWidget',
       ],
       entry_points="""
       # -*- Entry points: -*-

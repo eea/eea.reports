@@ -2,7 +2,8 @@
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  i18n:domain="plone">
+  i18n:domain="eea.reports">
+
 <head><title></title></head>
 <body>
 
@@ -17,8 +18,7 @@
 ">
   <div tal:condition="report_alt" tal:content="report_alt" />
   <div tal:condition="not:report_alt">
-    <span tal:content="python:report_type and here.translate(
-      types.getMsgId(report_type), default=types.getValue(report_type))" />
+    <span tal:content="python:types.getValue(report_type)" />
     <span tal:content="string:No ${report_num}" tal:condition="report_num"/>
     <span tal:content="string:/${report_year}" tal:condition="report_year"/>
   </div>
@@ -42,21 +42,23 @@
 
 <!-- Report Type -->
 <div style="float: left; width: 20%">
-  <label tal:attributes="for string:${fieldName}_type" i18n:translate="label_report_type">Report type</label><br />
+  <label tal:attributes="for string:${fieldName}_type"
+    i18n:translate="label_report_type">Report type</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_type;
     name string:${fieldName}_type;">
     <option tal:repeat="item types" tal:attributes="
-      value nocall:item;
-      selected python:test(item == report_type, 'selected', None);"
-      tal:content="python:here.translate(types.getMsgId(item), default=types.getValue(item))"
+      value item;
+      selected python:item == report_type and 'selected'; "
+      tal:content="python:types.getValue(item)"
       i18n:translate="" />
   </select>
 </div>
 
 <!-- Report number -->
 <div style="float: left; width: 15%">
-  <label tal:attributes="for string:${fieldName}_number" i18n:translate="label_report_number">Report number</label><br />
+  <label tal:attributes="for string:${fieldName}_number"
+    i18n:translate="label_report_number">Report number</label><br />
   <input type="text" style="width: 100%" tal:attributes="
     id string:${fieldName}_number;
     name string:${fieldName}_number:int;
@@ -65,22 +67,27 @@
 
 <!-- Report year -->
 <div style="float: left; width: 15%">
-  <label tal:attributes="for string:${fieldName}_year" i18n:translate="label_report_year">Report year</label><br />
+  <label tal:attributes="for string:${fieldName}_year"
+    i18n:translate="label_report_year">Report year</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_year;
     name string:${fieldName}_year:int;">
     <option tal:repeat="item years" tal:attributes="
-      value nocall:item;
-      selected python:test(int(item) == report_year, 'selected', None);"
-      tal:content="python:here.translate(years.getMsgId(item), default=years.getValue(item))"
+      value item;
+      selected python:int(item) == report_year and 'selected';"
+      tal:content="python:years.getValue(item)"
       i18n:translate="" />
   </select>
 </div>
 
 <!-- Report alt -->
 <div style="clear: both; width: 50%">
-  <label tal:attributes="for string:${fieldName}_alt" i18n:translate="label_report_alt">Alternative</label>
-  <div class="formHelp" i18n:translate="">use this field if the report type is not listed in the previous Serial Title field</div>
+  <label tal:attributes="for string:${fieldName}_alt"
+    i18n:translate="label_report_alt">Alternative</label>
+  <div class="formHelp" i18n:translate="">
+    use this field if the report type is not listed in the
+    previous Serial Title field
+  </div>
   <input type="text" style="width: 100%" tal:attributes="
     id string:${fieldName}_alt;
     name string:${fieldName}_alt;
@@ -94,7 +101,7 @@
 
 <!-- Search -->
 <div metal:define-macro="search">
-  <div metal:use-macro="here/report_keywords/macros/edit">
+  <div metal:use-macro="here/serial_title_widget/macros/edit">
   </div>
 </div>
 

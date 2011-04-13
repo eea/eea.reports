@@ -2,6 +2,6 @@
     xmlns="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="eea.reports">
+    i18n_domain="eea">
 
 </configure>

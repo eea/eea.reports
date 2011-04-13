@@ -25,6 +25,7 @@ def add_image_file(obj, image, image_id='cover', image_title='Cover Image'):
     if image_id not in obj.objectIds():
         image_id = obj.invokeFactory('Image', id=image_id, title=image_title)
     img_obj = obj._getOb(image_id)
+    img_obj.setExcludeFromNav(True)
     img_obj.getField('image').getMutator(img_obj)(image)
 
 def generate_image(obj, evt):

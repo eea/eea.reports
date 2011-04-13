@@ -29,6 +29,11 @@
     scroll 0 -48px;
 }
 
+.figure-left {
+  float: left;
+  margin-right: 0.5em;
+}
+
 .publicationText {
   background-color: transparent;
   border-bottom: 1px dotted gray;

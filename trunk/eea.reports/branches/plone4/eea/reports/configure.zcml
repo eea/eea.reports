@@ -1,8 +1,8 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:five="http://namespaces.zope.org/five"
-  i18n_domain="eea.reports">
- 
+  i18n_domain="eea">
+
   <include package="Products.ATVocabularyManager" />
   <include package="Products.LinguaPlone" />
   <include package="Products.AddRemoveWidget" />
@@ -12,7 +12,7 @@
   <include package=".adapter" />
   <include package=".subtypes" />
   <include package=".relations" />
-  
+
   <include file="profiles.zcml" />
   <include file="skins.zcml" />
 

@@ -123,14 +123,13 @@ Update pdf metadata
 
 If pdftk is installed try to update pdf metadata. If something goes wrong the
 original pdf file is returned, that's why we'll test to see if output pdf is
-not the same as original. If pdftk is not installed safely pass this test.
+not the same as original.
 
-    >>> can_convert = updater._can_convert()
-    >>> inp = 'in'
-    >>> out = 'out'
-    >>> if can_convert:
-    ...     inp = self.loadfile('tests/data/meta-broken.pdf', ctype='application/pdf')
-    ...     inp = inp.read()
-    ...     out = updater.update(inp, metadata)
+    >>> updater._can_convert()
+    True
+
+    >>> inp = self.loadfile('tests/data/meta-broken.pdf', ctype='application/pdf')
+    >>> inp = inp.read()
+    >>> out = updater.update(inp, metadata)
     >>> inp != out
     True

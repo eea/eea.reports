@@ -28,9 +28,10 @@ class ReportTypes(object):
 
     def __call__(self, context):
         voc = NamedVocabulary('report_types')
-        items = voc.getDisplayList(context).items()
-        return SimpleVocabulary([SimpleTerm(value, key, value)
-                                 for key, value in items])
+        items = [SimpleTerm('N/A', 'N/A', 'N/A'), ]
+        items.extend([SimpleTerm(value, key, value) for key, value in
+                      voc.getDisplayList(context).items()])
+        return SimpleVocabulary(items)
 
 
 class ReportCreators(object):

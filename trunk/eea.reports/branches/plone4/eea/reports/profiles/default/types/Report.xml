@@ -42,4 +42,11 @@
     visible="True">
   <permission value="Modify portal content"/>
  </action>
+ <action title="Syncronize PDF" action_id="syncronize" category="object_buttons"
+    condition_expr="object/@@can_syncronize"
+    icon_expr="" link_target=""
+    url_expr="string:${object_url}/@@syncronize"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
 </object>

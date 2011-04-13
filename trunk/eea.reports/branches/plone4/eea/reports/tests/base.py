@@ -5,32 +5,21 @@
 from plone.app.blob.tests import db
 
 import os
-import logging
+from StringIO import StringIO
+from cgi import FieldStorage
+from ZPublisher.HTTPRequest import FileUpload
+from Testing import ZopeTestCase as ztc
+from App.Common import package_home
 from Products.Five import zcml
 from Products.Five import fiveconfigure
-from Testing import ZopeTestCase as ztc
-from StringIO import StringIO
-from App.Common import package_home
-from zope.app.component.hooks import setSite
-from eea.reports.config import product_globals
-
-# Let Zope know about the two products we require above-and-beyond a basic
-# Plone install (PloneTestCase takes care of these).
-
-ztc.installProduct('PloneLanguageTool')
-ztc.installProduct('LinguaPlone')
-ztc.installProduct('Five')
-ztc.installProduct('ATVocabularyManager')
-
-# Import PloneTestCase - this registers more products with Zope as a side effect
-from Products.PloneTestCase.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Products.PloneTestCase.layer import onsetup
-from cgi import FieldStorage
-from ZPublisher.HTTPRequest import FileUpload
+from eea.reports.config import product_globals
 
-logger = logging.getLogger('eea.reports.tests.base')
+ztc.installProduct('LinguaPlone')
+ztc.installProduct('ATVocabularyManager')
+ztc.installPackage('eea.reports')
 
 @property
 def blobstorage():
@@ -45,57 +34,14 @@ def setup_eea_reports():
     until the setup of the Plone site testing layer.
     """
     fiveconfigure.debug_mode = True
-    import Products.Five
-    zcml.load_config('meta.zcml', Products.Five)
-    # Load the ZCML configuration for the eea.reports package.
-    # This includes the other products below as well.
-
     import eea.reports
     zcml.load_config('configure.zcml', eea.reports)
     fiveconfigure.debug_mode = False
 
-    # We need to tell the testing framework that these products
-    # should be available. This can't happen until after we have loaded
-    # the ZCML.
-
-    # It seems that files are automatically blobs, but my test won't
-    # run without this. (Plone3.1?)
-    try:
-        ztc.installPackage('plone.app.blob')
-        ztc.installPackage('eea.reports')
-    except AttributeError, err:
-        # Old ZopeTestCase
-        logger.exception(err)
-
-# The order here is important: We first call the (deferred) function which
-# installs the products we need for the Optilux package. Then, we let
-# PloneTestCase set up this product on installation.
-
 setup_eea_reports()
-EXTRA_PRODUCTS = [
-    'ATVocabularyManager',
-    'PloneLanguageTool',
-    'LinguaPlone',
-]
+setupPloneSite(extension_profiles=('eea.reports:default',))
 
-blob = None
-try:
-    from plone.app import blob
-except ImportError, error:
-    # No plone.app.blob installed
-    logger.debug(error)
-
-if blob:
-    EXTRA_PRODUCTS.append('plone.app.blob')
-
-setupPloneSite(products=EXTRA_PRODUCTS,
-               extension_profiles=('eea.reports:default',))
-
-class ReportTestCase(PloneTestCase):
-    """Base class for integration tests for the 'Report' product.
-    """
-
-class ReportFunctionalTestCase(FunctionalTestCase, ReportTestCase):
+class ReportFunctionalTestCase(FunctionalTestCase):
     """Base class for functional integration tests for the 'Report' product.
     """
     def loadfile(self, rel_filename, ctype='application/pdf'):

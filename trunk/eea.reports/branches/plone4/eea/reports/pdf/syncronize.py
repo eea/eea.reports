@@ -67,10 +67,6 @@ class Syncronizer(object):
             # Fix some metadata
             if key == 'subject':
                 metadata['keywords'] = value
-            elif key == 'creators':
-                metadata['creators_keywords'] = value
-            elif key == 'publishers':
-                metadata['publishers_keywords'] = value
             elif key == 'language':
                 metadata['lang'] = value
             elif key == 'themes':

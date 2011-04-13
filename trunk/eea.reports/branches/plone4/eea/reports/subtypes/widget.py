@@ -1,8 +1,33 @@
 """ Reports custom widgets.
 """
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.Widget import TypesWidget
+from Products.Archetypes.Widget import TypesWidget, FileWidget
 from Products.Archetypes.Registry import registerWidget
+
+_marker = []
+
+class ReportFileWidget(FileWidget):
+    """ Report widget
+    """
+    def process_form(self, instance, field, form, **kwargs):
+        """ Handle form data
+        """
+        empty_marker = kwargs.pop('empty_marker', _marker)
+        res = super(ReportFileWidget, self).process_form(instance,
+                               field, form, empty_marker=_marker, **kwargs)
+        if res is _marker:
+            return empty_marker
+
+        if not res:
+            return empty_marker
+
+        value, res = res
+
+        meta = form.get('%s_update_meta_input' % field.getName(), None)
+        if meta:
+            res['_update_main_'] = True
+        return value, res
+
 
 class SerialTitleWidget(TypesWidget):
     """ Serial title widget

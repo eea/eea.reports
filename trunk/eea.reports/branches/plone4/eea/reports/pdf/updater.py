@@ -118,12 +118,10 @@ class PDFMetadataUpdater(object):
         keywords.extend([x for x in themes if x not in keywords])
         metadata['keywords_str'] = '; '.join(keywords)
 
-        authors = metadata.get('creators_existing_keywords', [])
-        authors.extend(metadata.get('creators_keywords', []))
+        authors = metadata.get('creators', [])
         metadata['authors_str'] = '; '.join(authors)
 
-        publishers = metadata.get('publishers_existing_keywords', [])
-        publishers.extend(metadata.get('publishers_keywords', []))
+        publishers = metadata.get('publishers', [])
         metadata['publishers_str'] = '; '.join(publishers)
 
         serial_title = metadata.get('serial_title_alt', u'')

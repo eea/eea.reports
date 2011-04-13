@@ -94,7 +94,6 @@ VOCABULARIES = {
      "WHO (World Health Organization)"),
   ),
   'report_types': (
-    ("term.n_a", "N/A"),
     ("term.briefing", "Briefing"),
     ("term.brochure", "Brochure"),
     ("term.corporate_document", "Corporate document"),

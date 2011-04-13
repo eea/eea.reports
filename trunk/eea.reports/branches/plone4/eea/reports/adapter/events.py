@@ -91,12 +91,12 @@ def parse_metadata(obj, evt):
 def report_initialized(obj, evt):
     """ EVENT: called when a Report content-type is added. Subtype it as Report.
     """
-    if not getattr(evt, 'newName', '').startswith('report'):
-        return
-
-    obj.setExcludeFromNav(True)
     if not IReportContainerEnhanced.providedBy(obj):
-        alsoProvides(obj, IReportContainerEnhanced)
+        if getattr(obj, 'portal_type', '') == 'Report':
+            alsoProvides(obj, IReportContainerEnhanced)
+        # Portal type not changed yet, check name
+        elif getattr(evt, 'newName', '').startswith('report'):
+            alsoProvides(obj, IReportContainerEnhanced)
 
 #
 # Set the language independent

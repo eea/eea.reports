@@ -1,119 +1,30 @@
 """ Subtyping
 """
-from plone.app.blob.field import BlobField
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-
-from Products.Archetypes import atapi
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.AddRemoveWidget import AddRemoveWidget
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.Archetypes import atapi
 
-try:
-    from Products.OrderableReferenceField._field import OrderableReferenceField
-except ImportError:
-    from Products.Archetypes.Field import \
-        ReferenceField as OrderableReferenceField
-
-from archetypes.schemaextender.field import ExtensionField
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
-from datetime import datetime
 
 # XXX WTF eea.dataservice dependency?
 #from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
 #from eea.dataservice.vocabulary import DatasetYears
 #from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget
 
+from eea.reports.subtypes import field
+from eea.reports.subtypes import widget
 from eea.reports.config import COPYRIGHTS
-from eea.reports.events import FileUploadedEvent
-from eea.reports.subtypes.field import SerialTitleField
 from eea.reports.subtypes.widget import SerialTitleWidget
-from zope.event import notify
+
 from zope.interface import implements
-
-_marker = []
-
-class ExtensionFieldMixin:
-    """ Archetypes SchemaExtender FieldMixin
-    """
-    def translationMutator(self, instance):
-        """ Translation mutator
-        """
-        return self.getMutator(instance)
-
-class ReportOrderableReferenceField(ExtensionField, ExtensionFieldMixin,
-                                    OrderableReferenceField):
-    """ Archetypes SchemaExtender aware reference field """
-
-class ReportStringField(ExtensionField, ExtensionFieldMixin, atapi.StringField):
-    """ Archetypes SchemaExtender aware string field """
-
-class ReportIntegerField(ExtensionField, ExtensionFieldMixin,
-                         atapi.IntegerField):
-    """ Archetypes SchemaExtender aware integer field """
-
-class ReportBooleanField(ExtensionField, ExtensionFieldMixin,
-                         atapi.BooleanField):
-    """ Archetypes SchemaExtender aware boolean field """
-
-class ReportLinesField(ExtensionField, ExtensionFieldMixin, atapi.LinesField):
-    """ Archetypes SchemaExtender aware lines field """
-
-class ReportFloatField(ExtensionField, ExtensionFieldMixin, atapi.FloatField):
-    """ Archetypes SchemaExtender aware float field """
-
-class ReportTextField(ExtensionField, ExtensionFieldMixin, atapi.TextField):
-    """ Archetypes SchemaExtender aware text field """
-
-class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin,
-                             SerialTitleField):
-    """ Archetypes SchemaExtender aware serial title field """
-
-#class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
-#                                ManagementPlanField):
-#    """ Archetypes SchemaExtender aware management plan field """
-
-class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
-    """ Archetypes SchemaExtender aware file field """
-
-    def set(self, instance, value, **kwargs):
-        """ Field mutator
-        """
-        is_value = value and value != "DELETE_FILE"
-
-        # Handle update title and description checkbox
-        update_main = kwargs.pop('_update_main_', False)
-
-        # Handle migration
-        migration = kwargs.pop('_migration_', False)
-        if is_value and not migration:
-            notify(FileUploadedEvent(instance, value, update_main))
-
-        BlobField.set(self, instance, value, **kwargs)
-
-class ReportFileWidget(atapi.FileWidget):
-    """ Report widget
-    """
-    def process_form(self, instance, field, form, **kwargs):
-        """ Handle form data
-        """
-        empty_marker = kwargs.pop('empty_marker', _marker)
-        res = super(ReportFileWidget, self).process_form(instance,
-                               field, form, empty_marker=_marker, **kwargs)
-        if res is _marker:
-            return empty_marker
-        value, res = res
-
-        meta = form.get('%s_update_meta_input' % field.getName(), None)
-        if meta:
-            res['_update_main_'] = True
-        return value, res
-
 
 class SchemaExtender(object):
     """ Schema extender
     """
     implements(IOrderableSchemaExtender)
     _fields = [
-            ReportTextField('description',
+            field.ReportTextField('description',
                 schemata='default',
                 default='',
                 searchable=1,
@@ -127,10 +38,11 @@ class SchemaExtender(object):
                     i18n_domain="plone"
                     ),
                 ),
-            ReportFileField('file',
+            field.ReportFileField('file',
                 schemata='default',
                 languageIndependent=False,
-                widget=ReportFileWidget(
+                required=True,
+                widget=widget.ReportFileWidget(
                     label=_(u'label_report_file',
                             default=u'Publication file'),
                     description=_(u'description_report_file',
@@ -140,9 +52,8 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportStringField('isbn',
+            field.ReportStringField('isbn',
                 schemata='report',
-                required=True,
                 languageIndependent=False,
                 widget=atapi.StringWidget(
                     label=_(u'label_isbn', default=u'ISBN'),
@@ -151,7 +62,7 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportIntegerField('eeaid',
+            field.ReportIntegerField('eeaid',
                 schemata='report',
                 lanaguageIndependent=False,
                 default=0,
@@ -164,7 +75,7 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportStringField('order_id',
+            field.ReportStringField('order_id',
                 schemata='report',
                 languageIndependent=False,
                 widget=atapi.StringWidget(
@@ -175,7 +86,7 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportBooleanField('for_sale',
+            field.ReportBooleanField('for_sale',
                     schemata='report',
                     languageIndependent=True,
                     default=False,
@@ -186,7 +97,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportSerialTitleField('serial_title',
+            field.ReportSerialTitleField('serial_title',
                     schemata='report',
                     required=True,
                     languageIndependent=True,
@@ -201,7 +112,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportLinesField('creators',
+            field.ReportLinesField('creators',
                     schemata='report',
                     required=True,
                     languageIndependent=False,
@@ -215,7 +126,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportLinesField('publishers',
+            field.ReportLinesField('publishers',
                 schemata='report',
                 required=True,
                 languageIndependent=False,
@@ -229,7 +140,7 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportLinesField('publication_groups',
+            field.ReportLinesField('publication_groups',
                 schemata='categorization',
                 vocabulary_factory="eea.reports.vocabulary.PublicationGroups",
                 languageIndependent=True,
@@ -242,7 +153,7 @@ class SchemaExtender(object):
                     i18n_domain='eea.reports',
                     ),
                 ),
-            ReportOrderableReferenceField('relatedItems',
+            field.ReportOrderableReferenceField('relatedItems',
                     schemata='categorization',
                     languageIndependent=True,
                     index='KeywordIndex',
@@ -261,7 +172,7 @@ class SchemaExtender(object):
                         i18n_domain="plone",
                         ),
                     ),
-            ReportFloatField('price',
+            field.ReportFloatField('price',
                     schemata='report',
                     languageIndependent=True,
                     default=0,
@@ -272,7 +183,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportTextField('order_override_text',
+            field.ReportTextField('order_override_text',
                     schemata='report',
                     languageIndependent=False,
                     allowable_content_types=('text/html',),
@@ -286,7 +197,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportTextField('order_extra_text',
+            field.ReportTextField('order_extra_text',
                     schemata='report',
                     languageIndependent=False,
                     allowable_content_types=('text/html',),
@@ -300,7 +211,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportIntegerField('pages',
+            field.ReportIntegerField('pages',
                     schemata='report',
                     lanaguageIndependent=False,
                     default=0,
@@ -311,7 +222,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-#            ReportManagementPlanField(
+#            field.ReportManagementPlanField(
 #                    name='management_plan',
 #                    schemata='report',
 #                    languageIndependent=True,
@@ -325,7 +236,7 @@ class SchemaExtender(object):
 #                        label="EEA Management Plan",
 #                        description=(
 #                            "EEA Management plan code. Internal EEA project "
-#                            "line code, used to assign an EEA product output to"
+#                           "line code, used to assign an EEA product output to"
 #                            " a specific EEA project number in the "
 #                            "management plan."),
 #                        label_msgid='dataservice_label_eea_mp',
@@ -333,7 +244,7 @@ class SchemaExtender(object):
 #                        i18n_domain='eea.dataservice',
 #                        )
 #                    ),
-            ReportStringField('copyrights',
+            field.ReportStringField('copyrights',
                     schemata='report',
                     languageIndependent=True,
                     default=COPYRIGHTS,
@@ -344,7 +255,7 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         ),
                     ),
-            ReportTextField('trailer',
+            field.ReportTextField('trailer',
                     schemata='report',
                     languageIndependent=False,
                     allowable_content_types=('text/html',),
@@ -357,6 +268,23 @@ class SchemaExtender(object):
                         i18n_domain='eea.reports',
                         )
                     ),
+            field.ReportBooleanField('excludeFromNav',
+                    required = False,
+                    languageIndependent = True,
+                    schemata = 'settings',
+                    default=True,
+                    widget = atapi.BooleanWidget(
+                        description=_(u'help_exclude_from_nav',
+                                      default=(
+                                          u'If selected, this item will '
+                                          'not appear in the navigation tree')),
+                        label = _(u'label_exclude_from_nav',
+                                  default=u'Exclude from navigation'),
+                        visible={'view' : 'hidden',
+                                 'edit' : 'visible'},
+                        i18n_domain='plone',
+                        ),
+                ),
             ]
 
     def __init__(self, context):

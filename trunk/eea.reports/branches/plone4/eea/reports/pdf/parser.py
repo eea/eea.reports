@@ -5,6 +5,7 @@ import re
 import tempfile
 import logging
 import StringIO
+from subprocess import Popen, PIPE, STDOUT
 from types import InstanceType, StringType, UnicodeType, FileType
 from zope import interface
 from zope.app.component.hooks import getSite
@@ -90,11 +91,9 @@ class PDFParser(object):
         statement = 'pdfinfo '
         statement += tmp_pdf[1]
         logger.debug('pdfinfo commandline: %s' % statement)
-        ph = os.popen4(statement)
-        result = ph[1].read()
-
-        ph[0].close()
-        ph[1].close()
+        process = Popen(statement, shell=True,
+                        stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        result = process.stdout.read()
 
         # cleanup the tempfile
         os.remove(tmp_pdf[1])
@@ -159,14 +158,12 @@ class PDFParser(object):
 
         statement += ' '+tmp_pdf[1]
         logger.debug('pdfinfo commandline: %s' % statement)
-        ph = os.popen4( statement )
+        process = Popen(statement, shell=True,
+                        stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 
         # get the result
-        result = ph[1].read()
+        result = process.stdout.read()
         logger.debug('metadata extracted by pdfinfo :\n---------\n%s ' % result)
-
-        ph[0].close()
-        ph[1].close()
 
         # cleanup the tempfile
         os.remove(tmp_pdf[1])

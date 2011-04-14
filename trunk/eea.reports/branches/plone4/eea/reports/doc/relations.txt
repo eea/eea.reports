@@ -37,8 +37,8 @@ Add some reports
     >>> myreport_1.getField('publication_groups').getAccessor(myreport_1)()
     ('airpollutionbyozone',)
 
-    >>> myreport_1.getEffectiveDate()
-    DateTime('2008/11/11')
+    >>> myreport_1.getEffectiveDate().strftime('%Y/%m/%d')
+    '2008/11/11'
 
     >>> form['effectiveDate'] = '2007/11/11'
     >>> form['effectiveDate_year'] = '2007'
@@ -47,8 +47,8 @@ Add some reports
     ('airpollutionbyozone',)
 
     >>> myreport_2.setEffectiveDate('2007/11/11')
-    >>> myreport_2.getEffectiveDate()
-    DateTime('2007/11/11')
+    >>> myreport_2.getEffectiveDate().strftime('%Y/%m/%d')
+    '2007/11/11'
 
 Let's get in relation
 

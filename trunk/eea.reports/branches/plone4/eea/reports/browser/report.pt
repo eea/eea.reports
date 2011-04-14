@@ -11,17 +11,20 @@
 <metal:content define-macro="content-core">
 
   <!-- New versions -->
-  <div class="portalMessage" tal:define="is_replaced view/is_replaced_by"
+  <dl class="portalMessage warning publicationMessage"
+    tal:define="is_replaced view/is_replaced_by"
     tal:condition="is_replaced">
-    <strong i18n:translate="new_version_available">
+    <dt i18n:translate="new_version_available">
       Note: new versions are available!
-    </strong>
-    <ul>
-      <li tal:repeat="brain is_replaced">
-        <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
-      </li>
-    </ul>
-  </div>
+    </dt>
+    <dd>
+      <ul>
+        <li tal:repeat="brain is_replaced">
+          <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+        </li>
+      </ul>
+    </dd>
+  </dl>
 
   <!-- Serial title -->
   <div class="documentDescription" tal:content="view/serial_title">
@@ -255,15 +258,19 @@
     </tal:order>
 
     <!--Older versions-->
-    <dl class="portlet portlet-rss publicationPortlet"
+    <dl class="portalMessage warning publicationMessage"
       tal:define="brains view/does_replace"
       tal:condition="brains">
       <dt class="portletHeader"
         i18n:translate="">Older versions</dt>
-      <dt class="portletItem" tal:repeat="brain brains">
-        <a tal:attributes="href brain/getPath"
-          tal:content="brain/Title" />
-      </dt>
+      <dd>
+      <ul>
+        <li class="portletItem" tal:repeat="brain brains">
+          <a tal:attributes="href brain/getPath"
+            tal:content="brain/Title" />
+        </li>
+      </ul>
+      </dd>
     </dl>
 
   </div>

@@ -99,6 +99,14 @@
   margin-bottom: 10px;
 }
 
+.publicationMessage {
+  background-color: #DD8800 ! important;
+}
+
+.publicationMessage dd {
+  clear: both;
+}
+
 #related_publications_block {
   border: 1px dashed #999;
   padding: 5px;

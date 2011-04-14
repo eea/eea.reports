@@ -7,9 +7,9 @@ The following relations can be defined for reports:
  - Is replaced by;
  - Replaces.
 
-''Is replaced by'' and ''Replaces'' is more important relations. They refer to
+''Is replaced by'' and ''Replaces'' are more important relations. They refer to
 some kind of versioning or publications. In the new CMS these relations can be
-done by assigning the report to same "group". Then the versioning is dynamically
+done by assigning the report to the same "group". Then the versioning is dynamically
 calculated. E.g. if a report A is published after report B, and they both belong
 to same group, then Report A replaces Report B and a message on the report B
 will appear saying "Please note, a new version is available see Report A."
@@ -24,13 +24,31 @@ Add some reports
     >>> _ = self.folder.invokeFactory('Report', 'myreport_2')
     >>> myreport_1 = self.folder.myreport_1
     >>> myreport_2 = self.folder.myreport_2
+
     >>> form = {
     ...   'publication_groups': ['airpollutionbyozone',],
-    ...   'effectiveDate': '11/11/2008',
+    ...   'effectiveDate': '2008/11/11',
+    ...   'effectiveDate_year': '2008',
+    ...   'effectiveDate_month': '11',
+    ...   'effectiveDate_day': '11',
     ... }
+
     >>> myreport_1.processForm(values=form, data=1, metadata=1)
-    >>> form['effectiveDate'] = '11/11/2007'
+    >>> myreport_1.getField('publication_groups').getAccessor(myreport_1)()
+    ('airpollutionbyozone',)
+
+    >>> myreport_1.getEffectiveDate()
+    DateTime('2008/11/11')
+
+    >>> form['effectiveDate'] = '2007/11/11'
+    >>> form['effectiveDate_year'] = '2007'
     >>> myreport_2.processForm(values=form, data=1, metadata=1)
+    >>> myreport_2.getField('publication_groups').getAccessor(myreport_2)()
+    ('airpollutionbyozone',)
+
+    >>> myreport_2.setEffectiveDate('2007/11/11')
+    >>> myreport_2.getEffectiveDate()
+    DateTime('2007/11/11')
 
 Let's get in relation
 
@@ -70,14 +88,13 @@ Inclusion relations
 
 Let's get in relation
 
-    >>> from Products.EEAContentTypes.interfaces import IRelations
-    >>> res = IRelations(rep_ip).forwardReferences()
+    >>> res = rep_ip.getRelatedItems()
     >>> [x.getId() for x in res]
     ['report_has_parts']
-    >>> IRelations(rep_hp).forwardReferences()
+    >>> rep_hp.getRelatedItems()
     []
-    >>> IRelations(rep_ip).backReferences()
+    >>> rep_ip.getBRefs('relatesTo')
     []
-    >>> res = IRelations(rep_hp).backReferences()
+    >>> res = rep_hp.getBRefs('relatesTo')
     >>> [x.getId() for x in res]
     ['report_is_part_of']

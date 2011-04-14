@@ -6,11 +6,6 @@ from zope.app.schema.vocabulary import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
 from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from eea.reports.interfaces import IReportContainerEnhanced
-
-def printEvent(obj, evt):
-    print "========================================"
-    print obj
-    print evt
 #
 # Generate cover image
 #

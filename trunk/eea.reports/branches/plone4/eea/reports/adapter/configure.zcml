@@ -3,13 +3,6 @@
   xmlns:five="http://namespaces.zope.org/five"
   i18n_domain="eea">
 
-  <!-- XXX Debug -->
-  <!--<subscriber-->
-    <!--for="..interfaces.IPossibleReportContainer-->
-         <!--zope.component.interfaces.IObjectEvent"-->
-    <!--handler=".events.printEvent" />-->
-
-  <!-- Debug -->
   <subscriber
     for="eea.reports.interfaces.IReportContainerEnhanced
          ..events.IFileUploadedEvent"

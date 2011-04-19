@@ -13,16 +13,14 @@ setup(name=name,
       description="EEA Reports",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings
-      # from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='eea reports publications',
-      author='European Environment Agency',
-      author_email='alin.voinea@eaudeweb.ro',
+      author='Alin Voinea (eaudeweb), European Environment Agency',
+      author_email='webadmin@eea.europa.eu',
       url='http://reports.eea.europa.eu',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),

@@ -12,4 +12,6 @@
     <include package=".relations" />
     <include file="profiles.zcml" />
 
+    <adapter factory=".marshaller.SerialTitle2Surf" />
+
 </configure>

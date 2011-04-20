@@ -6,6 +6,7 @@ Changelog
 
 3.3-dev - (unreleased)
 ----------------------
+ * Feature: Added SerialTitle2Surf adapter [tiberich #4250]
 
 3.2 - (2011-03-29)
 ------------------

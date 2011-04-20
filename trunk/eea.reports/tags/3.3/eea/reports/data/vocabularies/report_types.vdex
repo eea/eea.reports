@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vdex orderSignificant="true">
+  <vocabName>
+    <langstring language="en">Report type</langstring>
+  </vocabName>
+  <vocabIdentifier>eea.reports.report_type</vocabIdentifier>
+  <term>
+    <termIdentifier>N/A</termIdentifier>
+      <caption>
+        <langstring language="en">N/A</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Briefing</termIdentifier>
+      <caption>
+        <langstring language="en">Briefing</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Brochure</termIdentifier>
+      <caption>
+        <langstring language="en">Brochure</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Corporate document</termIdentifier>
+      <caption>
+        <langstring language="en">Corporate document</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Technical report</termIdentifier>
+      <caption>
+        <langstring language="en">Technical report</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Topic report</termIdentifier>
+      <caption>
+        <langstring language="en">Topic report</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>EEA Report</termIdentifier>
+      <caption>
+        <langstring language="en">EEA Report</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Environmental issue report</termIdentifier>
+      <caption>
+        <langstring language="en">Environmental issue report</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Environmental assessment report</termIdentifier>
+      <caption>
+        <langstring language="en">Environmental assessment report</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Environmental monograph</termIdentifier>
+      <caption>
+        <langstring language="en">Environmental monograph</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>Expert's corner</termIdentifier>
+      <caption>
+        <langstring language="en">Expert's corner</langstring>
+      </caption>
+  </term>
+  <term>
+    <termIdentifier>State of the environment report</termIdentifier>
+      <caption>
+        <langstring language="en">State of the environment report</langstring>
+      </caption>
+  </term>
+</vdex>

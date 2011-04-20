@@ -4,7 +4,7 @@
 from eea.rdfmarshaller.interfaces import ISurfSession
 from eea.rdfmarshaller.marshaller import ATField2Surf
 from eea.reports.subtypes.field import SerialTitleField
-from zope.component import adapts                                                                                                                                
+from zope.component import adapts
 
 
 class SerialTitle2Surf(ATField2Surf):

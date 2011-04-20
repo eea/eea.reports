@@ -4,8 +4,8 @@ Changelog
 [Alin Voinea - alin.voinea@eaudeweb.ro]
 [Antonio De Marinis - demarinis@eea.europa.eu]
 
-3.3-dev - (unreleased)
-----------------------
+3.3 - (2011-04-20)
+------------------
  * Feature: Added SerialTitle2Surf adapter [tiberich #4250]
 
 3.2 - (2011-03-29)

@@ -6,6 +6,7 @@ Changelog
 
 3.5-dev - (unreleased)
 ----------------------
+ * Bug fix: fix serial_title entry in the @@rdf view [tiberich #4360]
 
 3.4 - (2011-04-20)
 ------------------

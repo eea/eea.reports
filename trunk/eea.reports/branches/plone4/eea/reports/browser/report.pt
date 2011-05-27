@@ -14,7 +14,7 @@
   <dl class="portalMessage warning publicationMessage"
     tal:define="is_replaced view/is_replaced_by"
     tal:condition="is_replaced">
-    <dt i18n:translate="new_version_available">
+    <dt class="portletHeader" i18n:translate="new_version_available">
       Note: new versions are available!
     </dt>
     <dd>

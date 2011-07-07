@@ -12,6 +12,7 @@
   <include package=".adapter" />
   <include package=".subtypes" />
   <include package=".relations" />
+  <include package=".upgrades" />
 
   <include file="profiles.zcml" />
   <include file="skins.zcml" />

@@ -15,7 +15,7 @@ STARTING_YEAR = 1990
 VOCABULARIES = {
   'publications_groups': (
     ('airpollutionbyozone', 'Air pollution by ozone'),
-    ('climate_report_2_2004' , 'Climate impacts and trends'),
+    ('climate_report_2_2004', 'Climate impacts and trends'),
     ('corporate_document_2007_5', 'EEA accounts'),
     ('technical_report_2002_75', 'EC Greenhouse Gas Inventory'),
     ('Emissions_trading_directive', 'Emissions Trading Directive'),
@@ -33,7 +33,7 @@ VOCABULARIES = {
     ('state_of_the_environment_reports_soer',
         'State of the environment reports'),
     ('environmental_assessment_report_2002_9', 'Signals'),
-    ('ENVISSUENo', 'TERM reports'),
+    ('ENVISSUENo12', 'TERM reports'),
   ),
   'report_creators': (
     ("term.eea_european_environment_agency",

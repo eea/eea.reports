@@ -1,17 +1,21 @@
 Changelog
 =========
-[Alexandru Ghica - alec.ghica@eaudeweb.ro]
-[Alin Voinea - alin.voinea@eaudeweb.ro]
-[Antonio De Marinis - Antonio.DeMarinis@eea.europa.eu]
+
 
 4.0-dev - (unreleased)
 ----------------------
- * TODO:
-   - Migrate existing vocabularies from VdexVocabulary to SimpleVocabulary
-   - Find a solution to dynamically insert eea.themecentre, eea.dataservice
-     content in report_view (grep for XXX in report.pt)
-   - Fix eea.dataservice dependency in subtypes/report.py (grep for XXX in report.py)
- * Feature: Plone 4.0.4 compatible release [voineali #4231]
+
+* TODO, plone4:
+  - Migrate existing vocabularies from VdexVocabulary to SimpleVocabulary
+  - Find a solution to dynamically insert eea.themecentre, eea.dataservice
+    content in report_view (grep for XXX in report.pt)
+  - Fix eea.dataservice dependency in subtypes/report.py (grep for XXX in report.py)
+
+* Feature: Added upgrade steps
+  [voineali #4392]
+
+* Feature: Plone 4.0.4 compatible release
+  [voineali #4231]
 
 3.2 - (2011-03-29)
 ------------------

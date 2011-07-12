@@ -13,10 +13,10 @@ class ImageView(BrowserView):
 
     def __init__(self, context, request):
         super(ImageView, self).__init__(context, request)
-        self.img = atfolder.ImageView(context, request)
+        self.img = atfolder.FolderImageView(context, request)
         canonical = context.getCanonical()
         if context != canonical:
-            self.canonical = atfolder.ImageView(canonical, request)
+            self.canonical = atfolder.FolderImageView(canonical, request)
         else:
             self.canonical = self.img
 

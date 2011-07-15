@@ -54,13 +54,11 @@
       <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())" />
     </div>
 
-    <!-- XXX Tags (themes) XXX USE vielets within eea.themecentre -->
-    <!--<metal:themes use-macro="here/portlet_themes_object/macros/portlet" />-->
+    <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
 
-    <!-- XXX Related multimedia XXX USE viewlets within eea.multimedia -->
-    <!--<div metal:use-macro="here/document_relateditems/macros/multimedia">-->
+    <div metal:use-macro="here/document_relateditems/macros/multimedia">
       <!--show related multimedia items if they exist-->
-    <!--</div>-->
+    </div>
 
     <!--Publishers-->
     <p class="documentByLine publicationClear"

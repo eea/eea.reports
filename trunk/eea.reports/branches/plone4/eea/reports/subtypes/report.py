@@ -7,15 +7,15 @@ from Products.Archetypes import atapi
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 
-# XXX WTF eea.dataservice dependency?
-#from eea.dataservice.fields.ManagementPlanField import ManagementPlanField
-#from eea.dataservice.vocabulary import DatasetYears
-#from eea.dataservice.widgets.ManagementPlanWidget import ManagementPlanWidget
+from eea.forms.fields.ManagementPlanField import ManagementPlanField
+from eea.forms.widgets.ManagementPlanWidget import ManagementPlanWidget
 
 from eea.reports.subtypes import field
 from eea.reports.subtypes import widget
 from eea.reports.config import COPYRIGHTS
 from eea.reports.subtypes.widget import SerialTitleWidget
+
+from datetime import datetime
 
 from zope.interface import implements
 
@@ -222,29 +222,28 @@ class SchemaExtender(object):
                         i18n_domain='eea',
                         ),
                     ),
-            #XXX Fix me
-#            field.ReportManagementPlanField(
-#                    name='management_plan',
-#                    schemata='report',
-#                    languageIndependent=True,
-#                    required_for_published=True,
-#                    required=True,
-#                    default=(datetime.now().year, ''),
-#                    validators=('management_plan_code_validator',),
-#                    vocabulary=DatasetYears(),
-#                    widget=ManagementPlanWidget(
-#                        format="select",
-#                        label="EEA Management Plan",
-#                        description=(
-#                            "EEA Management plan code. Internal EEA project "
-#                           "line code, used to assign an EEA product output to"
-#                            " a specific EEA project number in the "
-#                            "management plan."),
-#                        label_msgid='dataservice_label_eea_mp',
-#                        description_msgid='dataservice_help_eea_mp',
-#                        i18n_domain='eea',
-#                        )
-#                    ),
+            field.ReportManagementPlanField(
+                    name='management_plan',
+                    schemata='report',
+                    languageIndependent=True,
+                    required_for_published=True,
+                    required=True,
+                    default=(datetime.now().year, ''),
+                    validators=('management_plan_code_validator',),
+                    vocabulary_factory=u"Temporal coverage",
+                    widget=ManagementPlanWidget(
+                        format="select",
+                        label="EEA Management Plan",
+                        description=(
+                            "EEA Management plan code. Internal EEA project "
+                            "line code, used to assign an EEA product output to"
+                            " a specific EEA project number in the "
+                            "management plan."),
+                        label_msgid='dataservice_label_eea_mp',
+                        description_msgid='dataservice_help_eea_mp',
+                        i18n_domain='eea',
+                        )
+                    ),
             field.ReportStringField('copyrights',
                     schemata='report',
                     languageIndependent=True,

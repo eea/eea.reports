@@ -18,6 +18,8 @@ from zope.app.schema.vocabulary import IVocabularyFactory
 from zope.event import notify
 from zope.component import queryUtility
 
+from eea.forms.fields.ManagementPlanField import ManagementPlanField
+
 import logging
 logger = logging.getLogger('eea.reports.subtypes.field')
 
@@ -142,9 +144,9 @@ class ReportSerialTitleField(ExtensionField, ExtensionFieldMixin,
                              SerialTitleField):
     """ Archetypes SchemaExtender aware serial title field """
 
-#class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
-#                                ManagementPlanField):
-#    """ Archetypes SchemaExtender aware management plan field """
+class ReportManagementPlanField(ExtensionField, ExtensionFieldMixin,
+                                ManagementPlanField):
+    """ Archetypes SchemaExtender aware management plan field """
 
 class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
     """ Archetypes SchemaExtender aware file field """

@@ -24,7 +24,7 @@
   <title tal:content="structure python:cdata % context.pretty_title_or_id()">
     The title
   </title>
-  <link tal:content="context/portal_url">http://url.to.portal</link>
+  <link tal:attributes="href context/portal_url"/>
 
   <description>
     <metal:block define-slot="description">
@@ -63,7 +63,7 @@
       modified brain/EffectiveDate|obj_item/modified;
       modified modified/HTML4|modified">
     <title tal:content="structure python:cdata % obj_item.pretty_title_or_id()">Title</title>
-    <link tal:content="string:${obj_item/Identifier}">Link</link>
+    <link tal:attributes="href string:${obj_item/Identifier}"/>
     <description tal:content="structure python:cdata % obj_item.Description()">Description</description>
     <dc:publisher tal:content="obj_item/Publisher">Publisher</dc:publisher>
     <dc:creator tal:content="obj_item/Creator">Creator</dc:creator>

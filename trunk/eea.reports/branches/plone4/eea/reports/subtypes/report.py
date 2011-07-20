@@ -7,7 +7,6 @@ from Products.Archetypes import atapi
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 
-from eea.forms.fields.ManagementPlanField import ManagementPlanField
 from eea.forms.widgets.ManagementPlanWidget import ManagementPlanWidget
 
 from eea.reports.subtypes import field

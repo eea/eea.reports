@@ -87,8 +87,7 @@
         </li>
       </ul>
 
-      <ul metal:define-macro="folderish"
-        tal:define="level level|python:1;">
+      <ul metal:define-macro="folderish" tal:define="level level|python:1;">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File', 'Document', 'SOERMessage', 'SOERKeyFact']">
             <tal:file define="

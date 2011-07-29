@@ -166,21 +166,21 @@
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
 
-  <!-- Maps and graphs, XXX USE VIEWLETS -->
-<!--        <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"-->
-<!--          tal:condition="figures">-->
-<!--          <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>-->
-<!--          <div metal:define-macro="figures-album" class="map-photo-album"-->
-<!--            tal:define="Batch python:modules['Products.CMFPlone'].Batch;-->
-<!--            entry_macro here/eeafigure_albumentry/macros/entry;-->
-<!--            b_start python:request.get('b_start', 0);-->
-<!--            template_id string:;-->
-<!--            folderContents python:Batch(figures, 12, int(b_start), orphan=1)">-->
-<!--            <h4 id="maps-and-graphs" style="display: none">Fancybox relations</h4>-->
-<!--            <metal:figures use-macro="here/atct_album_view/macros/listing" />-->
-<!--          </div>-->
-<!--        </tal:mapsandgraphs>-->
-<!---->
+  <!--Maps and graphs, TODO USE VIEWLETS-->
+       <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
+         tal:condition="figures">
+         <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
+         <div metal:define-macro="figures-album" class="map-photo-album"
+           tal:define="Batch python:modules['Products.CMFPlone'].Batch;
+           entry_macro here/eeafigure_albumentry/macros/entry;
+           b_start python:request.get('b_start', 0);
+           template_id string:;
+           folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
+           <h4 id="maps-and-graphs" style="display: none">Fancybox relations</h4>
+           <metal:figures use-macro="here/atct_album_view/macros/listing" />
+         </div>
+       </tal:mapsandgraphs>
+
 
     <!--Order information-->
     <tal:order define="

@@ -54,8 +54,6 @@
       <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())" />
     </div>
 
-    <metal:themes use-macro="here/portlet_themes_object/macros/portlet" />
-
     <div metal:use-macro="here/document_relateditems/macros/multimedia">
       <!--show related multimedia items if they exist-->
     </div>

@@ -48,12 +48,6 @@
       <strong tal:content="here/Description" />
     </div>
 
-    <!--Publication effective date -->
-    <div class="discreet">
-      <tal:published i18n:translate="Published">Published</tal:published>:
-      <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())" />
-    </div>
-
     <div metal:use-macro="here/document_relateditems/macros/multimedia">
       <!--show related multimedia items if they exist-->
     </div>
@@ -67,7 +61,7 @@
       </li>
     </ul>
 
-  <!--Additional files content-->
+    <!--Additional files content-->
     <tal:foldercontents define="
       filename python:view.filename;
       fileItems python:view.items;
@@ -130,7 +124,7 @@
       </ul>
     </tal:foldercontents>
 
-  <!--Additional links content-->
+    <!--Additional links content-->
     <tal:foldercontents define="
       folderContents python:here.getFolderContents({'portal_type': 'Link'});"
       condition="folderContents">
@@ -163,7 +157,7 @@
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
 
-  <!--Maps and graphs, TODO USE VIEWLETS-->
+       <!--Maps and graphs, TODO USE VIEWLETS-->
        <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
          tal:condition="figures">
          <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>

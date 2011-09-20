@@ -4,6 +4,7 @@ Changelog
 
 4.0-dev - (unreleased)
 ----------------------
+ * Change: include effective/publish date on template since Folder types do not show document_byline [demarant].
  * Change: include published and public draft images when determining the cover of a publication [tiberich]
  * Change: removed the old themes portlet, now part of the main template as viewlet [demarant]
 

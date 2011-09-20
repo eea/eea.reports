@@ -25,12 +25,12 @@
       </ul>
     </dd>
   </dl>
-
+  
   <!-- Serial title -->
   <div class="documentDescription" tal:content="view/serial_title">
     Serial title
   </div>
-
+  
   <!-- Cover image -->
   <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
     tal:condition="cover">
@@ -52,15 +52,21 @@
       <!--show related multimedia items if they exist-->
     </div>
 
-    <!--Publishers-->
-    <p class="documentByLine publicationClear"
-      i18n:translate="Published by"> Published by: </p>
+    <!--Publishing info-->
+    <h2 class="publicationClear" i18n:translate="Published by">Published by</h2> 
     <ul>
       <li tal:repeat="publisher view/publishers">
         <tal:publisher tal:replace="publisher" />
       </li>
+      <li>
+       <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())">
+        August 16, 2001 at 23:35:59
+       </span>
+      </li>
     </ul>
-
+    
+   
+    
     <!--Additional files content-->
     <tal:foldercontents define="
       filename python:view.filename;

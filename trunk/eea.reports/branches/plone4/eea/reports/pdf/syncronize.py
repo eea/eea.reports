@@ -1,7 +1,7 @@
 """ PDF Syncronizer
 """
 from zope.component import queryUtility, getUtility
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 from Products.statusmessages.interfaces import IStatusMessage
 from eea.reports.pdf.interfaces import IPDFMetadataUpdater
 

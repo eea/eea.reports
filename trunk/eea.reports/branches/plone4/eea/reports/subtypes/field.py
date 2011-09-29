@@ -14,7 +14,7 @@ from eea.reports.events import FileUploadedEvent
 
 from plone.app.blob.field import BlobField
 
-from zope.app.schema.vocabulary import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 from zope.event import notify
 from zope.component import queryUtility
 

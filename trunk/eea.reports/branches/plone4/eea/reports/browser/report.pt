@@ -253,7 +253,7 @@
     </tal:order>
 
     <!--Older versions-->
-    <dl class="portalMessage warning publicationMessage"
+    <dl class="portalMessage publicationMessage"
       tal:define="brains view/does_replace"
       tal:condition="brains">
       <dt class="portletHeader"

@@ -127,10 +127,10 @@ VOCABULARIES = {
     ("term.state_of_the_environment_report", "State of the environment report"),
   ),
   'report_types_active': (
-      ('term.briefing', 'Briefing'),
-      ('term.brochure', 'Brochure'),
-      ('term.corporate_document', 'Corporate document'),
-      ('term.eea_report', 'EEA Report'),
-      ('term.technical_report', 'Technical report'),
+      ('Briefing', 'Briefing'),
+      ('Brochure', 'Brochure'),
+      ('Corporate document', 'Corporate document'),
+      ('EEA Report', 'EEA Report'),
+      ('Technical report', 'Technical report'),
   ),
 }

@@ -19,4 +19,6 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
+  <adapter factory=".marshaller.SerialTitle2Surf" />
+
 </configure>

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
+<head><title></title></head>
+<body>
+
+<!-- View -->
+<metal:view_macro define-macro="view" tal:define="
+  vocab python:field.Vocabulary(here);
+  value python:accessor();
+  display python:here.displayValue(vocab, value);"
+  tal:replace="structure display"
+/>
+
+<!-- Edit -->
+<metal:define define-macro="edit">
+<metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+<metal:fill fill-slot="widget_body" tal:define="
+  vocab python:field.Vocabulary(here);
+  format string:select;
+  vlen python: len(vocab);
+  new_values python:[v for v in value if v not in vocab];
+">
+
+  <!-- New items -->
+  <div style="width: 45%; float: right;">
+    <span i18n:translate="label_new_report_items">New items</span>
+    <br />
+    <textarea rows="4" cols="15" wrap="off" tal:attributes="
+      id string:${fieldName}_keywords;
+      name string:${fieldName}_keywords:lines;
+      tabindex tabindex/next;"></textarea>
+  </div>
+  <!-- Existing items -->
+  <div style="width: 45%">
+    <span i18n:translate="label_existing_report_items">Existing items</span><br />
+    <select style="width: 90%" size="5" multiple="multiple" tal:attributes="
+      id string:${fieldName}_existing_keywords;
+      name string:${fieldName}_existing_keywords:list;
+      tabindex tabindex/next;">
+      <option tal:repeat="item vocab" tal:attributes="
+        value nocall:item;
+        selected python:test(here.unicodeTestIn(item, value), 'selected', None);"
+        tal:content="python:here.translate(vocab.getMsgId(item), default=vocab.getValue(item))"
+        i18n:translate="" />
+      <option tal:repeat="item new_values" selected="selected"
+        tal:attributes="value nocall:item;" tal:content="item" i18n:translate=""/>
+    </select>
+  </div>
+
+</metal:fill>
+</metal:use>
+</metal:define>
+
+<!-- Search -->
+<div metal:define-macro="search">
+  <div metal:use-macro="here/report_keywords/macros/edit">
+  </div>
+</div>
+
+</body>
+</html>

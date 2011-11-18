@@ -1,0 +1,53 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="eea">
+
+  <browser:page
+    name="report_view"
+    template="report.pt"
+    class=".displays.ReportContainerView"
+    for="eea.reports.interfaces.IReportContainerEnhanced"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="eea.reports.interfaces.IReportContainerEnhanced"
+    name="can_syncronize"
+    class="eea.reports.pdf.syncronize.SyncronizerSupport"
+    permission="zope.Public"
+    />
+
+  <browser:page
+    for="eea.reports.interfaces.IReportContainerEnhanced"
+    name="syncronize"
+    class="eea.reports.pdf.syncronize.Syncronizer"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <browser:resource
+    name="eea.reports.js"
+    file="./report.js"
+  />
+
+  <browser:resource
+    name="eea.reports.css"
+    file="./stylesheets/reports.css"
+  />
+
+  <browser:resourceDirectory
+    name="publication_images"
+    directory="./images" />
+
+  <!-- Valentine imagescales -->
+  <configure zcml:condition="installed valentine.imagescales">
+    <browser:page
+      for="..interfaces.IReportContainerEnhanced"
+      name="imgview"
+      class=".imgview.ImageView"
+      permission="zope.Public"
+      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
+      />
+  </configure>
+
+</configure>

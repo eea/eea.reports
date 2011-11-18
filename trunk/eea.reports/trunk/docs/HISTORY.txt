@@ -1,20 +1,15 @@
 Changelog
 =========
 
-
-4.0-dev - (unreleased)
-----------------------
+4.0 - (2011-11-18)
+------------------
  * Feature: Added SerialTitle2Surf adapter [tiberich #4250] (backport v3.3)
-
  * Change: include effective/publish date on template since Folder types do not show document_byline [demarant].
  * Change: include published and public draft images when determining the cover of a publication [tiberich]
  * Change: removed the old themes portlet, now part of the main template as viewlet [demarant]
-
  * Change: Included ManagementPlan Field and Widget from eea.forms instead of eea.dataservice [szabozo0]
-
  * Feature: Added upgrade steps
   [voineali #4392]
-
  * Feature: Plone 4.0.4 compatible release
   [voineali #4231]
 

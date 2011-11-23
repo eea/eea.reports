@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.3-dev - (unreleased)
+----------------------
+
 4.2 - (2011-11-23)
 ------------------
  * Bug fix: Removed duplicated multimedia in template, now we have viewlets.

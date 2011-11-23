@@ -48,10 +48,6 @@
       <strong tal:content="here/Description" />
     </div>
 
-    <div metal:use-macro="here/document_relateditems/macros/multimedia">
-      <!--show related multimedia items if they exist-->
-    </div>
-
     <!--Publishing info-->
     <h2 class="publicationClear" i18n:translate="Published by">Published by</h2> 
     <ul>

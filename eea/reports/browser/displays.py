@@ -42,6 +42,10 @@ class ReportContainerView(object):
         year =  value[2] if len(value) > 2 else -1
 
         text = rtype
+        
+        if text is None:
+            text = value[0]
+        
         if number:
             text += " No %s" % number
 

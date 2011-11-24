@@ -4,6 +4,8 @@ Changelog
 4.3-dev - (unreleased)
 ----------------------
  * Bug fix: Fixed 'NoneType' and 'str' error on some publications view [ghicaale]
+ * Bug fix: Allow reports_view browser_view to be customized by portal_view_customizations by making it inherit 
+   from BrowserView instead of object [ichimdav #4783]
 
 4.2 - (2011-11-23)
 ------------------

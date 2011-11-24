@@ -2,8 +2,9 @@
 """
 from zope.component import getAdapter
 from eea.reports.relations.interfaces import IGroupRelations
+from Products.Five import BrowserView
 
-class ReportContainerView(object):
+class ReportContainerView(BrowserView):
     """ Default report view
     """
     def __init__(self, context, request):

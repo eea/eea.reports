@@ -1,0 +1,271 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+  lang="en-US"
+  metal:use-macro="here/main_template/macros/master"
+  i18n:domain="eea">
+
+<body>
+
+<metal:description fill-slot="content-description" />
+
+<div metal:fill-slot="content-core">
+<metal:content define-macro="content-core">
+
+  <!-- New versions -->
+  <dl class="portalMessage warning publicationMessage"
+    tal:define="is_replaced view/is_replaced_by"
+    tal:condition="is_replaced">
+    <dt class="portletHeader" i18n:translate="new_version_available">
+      Note: new versions are available!
+    </dt>
+    <dd>
+      <ul>
+        <li tal:repeat="brain is_replaced">
+          <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  
+  <!-- Serial title -->
+  <div class="documentDescription" tal:content="view/serial_title">
+    Serial title
+  </div>
+  
+  <!-- Cover image -->
+  <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
+    tal:condition="cover">
+    <div class="figure">
+      <img tal:attributes="
+        src string:${cover/absolute_url}/image_mini;
+        alt cover/title_or_id;
+        title cover/title_or_id" />
+    </div>
+  </div>
+
+  <div class="publicationText">
+    <!--Description-->
+    <div class="publicationDescription">
+      <strong tal:content="here/Description" />
+    </div>
+
+    <!--Publishing info-->
+    <h2 class="publicationClear" i18n:translate="Published by">Published by</h2> 
+    <ul>
+      <li tal:repeat="publisher view/publishers">
+        <tal:publisher tal:replace="publisher" />
+      </li>
+      <li>
+       <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())">
+        August 16, 2001 at 23:35:59
+       </span>
+      </li>
+    </ul>
+    
+   
+    
+    <!--Additional files content-->
+    <tal:foldercontents define="
+      filename python:view.filename;
+      fileItems python:view.items;
+      has_children view/has_children"
+      tal:condition="has_children">
+
+      <h2 i18n:translate="Contents" tal:condition="has_children">Content</h2>
+      <ul tal:condition="filename">
+        <li>
+          <a tal:attributes="href string:${here/absolute_url}/at_download/file">
+            <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+            <span tal:content="filename" />
+          </a>
+          <span tal:content="python:'[%s]' % view.size" />
+        </li>
+      </ul>
+
+      <ul metal:define-macro="folderish" tal:define="level level|python:1;">
+        <tal:fileitems repeat="item fileItems">
+          <li tal:condition="python:item.portal_type in ['File', 'Document', 'SOERMessage', 'SOERKeyFact']">
+            <tal:file define="
+              item_type item/portal_type;
+              wtool python:here.portal_workflow;
+              item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+              item_wf_state_class python:'state-' + item_wf_state;
+              item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+              item_object item/getObject|item;
+              item_title_or_id item/pretty_title_or_id;">
+              <a tal:attributes="
+                class item_wf_state_class;
+                href item_object/absolute_url;
+                title item_title_or_id">
+                <span tal:content="item_title_or_id" />
+              </a>
+              <span tal:condition="python:item_type == 'File'"
+                tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
+            </tal:file>
+          </li>
+          <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
+            class python:'tree-level-%s' % level">
+            <tal:folder define="
+              isAnon python: here.portal_membership.isAnonymousUser();
+              folder item;
+              folder folder/getObject|folder;
+              folder_url python:isAnon and '#' or folder.absolute_url();
+              folder_title folder/pretty_title_or_id;
+              folder_type folder/portal_type;">
+              <a tal:attributes="href folder_url; title folder_title">
+                <span tal:content="folder_title" />
+              </a>
+              <tal:block define="
+                level python:level + 1;
+                fileItems folder/getFolderContents;"
+                tal:condition="fileItems">
+                <ul metal:use-macro="here/report_view/macros/folderish" />
+              </tal:block>
+            </tal:folder>
+          </li>
+        </tal:fileitems>
+      </ul>
+    </tal:foldercontents>
+
+    <!--Additional links content-->
+    <tal:foldercontents define="
+      folderContents python:here.getFolderContents({'portal_type': 'Link'});"
+      condition="folderContents">
+      <h2 i18n:translate="publication_links">Links</h2>
+      <ul>
+        <li tal:repeat="item folderContents">
+          <tal:link define="
+            item_type item/portal_type;
+            wtool python:here.portal_workflow;
+            item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+            item_wf_state_class  python:'state-' + item_wf_state;
+            item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+            item_object item/getObject|item;
+            item_title_or_id item/pretty_title_or_id;">
+            <a tal:attributes="
+              class item_wf_state_class;
+              href item_object/remote_url;
+              title item_title_or_id">
+              <span tal:content="item_title_or_id" />
+            </a>
+          </tal:link>
+        </li>
+      </ul>
+    </tal:foldercontents>
+
+    <!--Trailer-->
+    <tal:trailer define="
+      tr_field python:here.getField('trailer');
+      tr_value python:tr_field.getAccessor(here)();">
+      <div tal:content="structure tr_value">Trailer</div>
+    </tal:trailer>
+
+       <!--Maps and graphs, TODO USE VIEWLETS-->
+       <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
+         tal:condition="figures">
+         <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
+         <div metal:define-macro="figures-album" class="map-photo-album"
+           tal:define="Batch python:modules['Products.CMFPlone'].Batch;
+           entry_macro here/eeafigure_albumentry/macros/entry;
+           b_start python:request.get('b_start', 0);
+           template_id string:;
+           folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
+           <h4 id="maps-and-graphs" style="display: none">Fancybox relations</h4>
+           <metal:figures use-macro="here/atct_album_view/macros/listing" />
+         </div>
+       </tal:mapsandgraphs>
+
+
+    <!--Order information-->
+    <tal:order define="
+      oid_field       python:here.getField('order_id');
+      oid_value       python:oid_field.getAccessor(here)();
+      fs_field        python:here.getField('for_sale');
+      fs_value        python:fs_field.getAccessor(here)();
+      isbn_filed      python:here.getField('isbn');
+      isbn_value      python:isbn_filed.getAccessor(here)();
+      price_field     python:here.getField('price');
+      price_value     python:price_field.getAccessor(here)();
+      oo_field        python:here.getField('order_override_text');
+      oo_value        python:oo_field.getAccessor(here)();
+      oe_field        python:here.getField('order_extra_text');
+      oe_value        python:oe_field.getAccessor(here)();"
+      tal:condition="python:fs_value and oid_value">
+
+          <tal:order_default condition="not:oo_value">
+            <div class="publicationOrder">
+              <h2 i18n:translate="title_order_info">Order information</h2>
+              <p>
+                <a href="" tal:define="
+                  eubookshop_link python:context.getEUBookshopLink(order_id=oid_value);"
+                  alt="Order a printed copy at EU-Bookshop"
+                  tal:attributes="href eubookshop_link" >
+                  Order a printed copy online
+                </a> (EU-Bookshop).
+              </p>
+              <div class="publicationField">
+                <div tal:condition="isbn_value">
+                  <label for="isbn_filed.name" title="The widget's hint"
+                    tal:attributes="
+                    for python:isbn_filed.widget.Label(here);
+                    title python:isbn_filed.widget.Label(here)"
+                    tal:content="python:isbn_filed.widget.Label(here)"></label>:
+                  <span tal:content="isbn_value" />
+                </div>
+                <div tal:condition="oid_value">
+                  <label for="oid_field.name" title="The widget's hint"
+                    tal:attributes="
+                    for python:oid_field.widget.Label(here);
+                    title python:oid_field.widget.Label(here)"
+                    tal:content="python:oid_field.widget.Label(here)"></label>:
+                  <span tal:content="oid_value" />
+                </div>
+                <div>
+                  <label for="price_field.name" title="The widget's hint"
+                    tal:attributes="
+                    for python:price_field.widget.Label(here);
+                    title python:price_field.widget.Label(here)"
+                    tal:content="python:price_field.widget.Label(here)"></label>:
+                  <span tal:condition="price_value"
+                    tal:content="python:'EUR %.02f' % price_value" />
+                  <span tal:condition="not:price_value"
+                    tal:content="string:FREE"
+                    i18n:translate="" />
+                </div>
+              </div>
+              <p><span i18n:translate="nearst_locations_label">You can also obtain a copy from</span>
+                <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
+                  i18n:translate="nearst_locations_link">your nearest sales agent</a> by providing the ordering info.
+              </p>
+
+              <div class="visualClear"></div>
+            </div>
+          </tal:order_default>
+      <tal:order_override tal:condition="oo_value">
+        <div tal:content="structure oo_value">Order override text</div>
+      </tal:order_override>
+      <tal:order_extra tal:condition="oe_value">
+        <div tal:content="structure oe_value">Order extra text</div>
+      </tal:order_extra>
+    </tal:order>
+
+    <!--Older versions-->
+    <dl class="portalMessage publicationMessage"
+      tal:define="brains view/does_replace"
+      tal:condition="brains">
+      <dt class="portletHeader"
+        i18n:translate="">Older versions</dt>
+      <dd>
+      <ul>
+        <li class="portletItem" tal:repeat="brain brains">
+          <a tal:attributes="href brain/getPath"
+            tal:content="brain/Title" />
+        </li>
+      </ul>
+      </dd>
+    </dl>
+
+  </div>
+</metal:content>
+</div>
+</body>
+</html>

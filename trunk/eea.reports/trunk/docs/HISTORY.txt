@@ -3,11 +3,13 @@ Changelog
 
 4.4-dev - (unreleased)
 ----------------------
+ * Bug fix: Made Publication file field non-required
+   [voineali #4833]
 
 4.3 - (2011-11-24)
 ------------------
  * Bug fix: Fixed 'NoneType' and 'str' error on some publications view [ghicaale]
- * Bug fix: Allow reports_view browser_view to be customized by portal_view_customizations by making it inherit 
+ * Bug fix: Allow reports_view browser_view to be customized by portal_view_customizations by making it inherit
    from BrowserView instead of object [ichimdav #4783]
 
 4.2 - (2011-11-23)
@@ -17,7 +19,7 @@ Changelog
 
 4.1 - (2011-11-18)
 ------------------
- * Rerelease broken egg  
+ * Rerelease broken egg
 
 4.0 - (2011-11-18)
 ------------------

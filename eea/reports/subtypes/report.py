@@ -40,7 +40,7 @@ class SchemaExtender(object):
             field.ReportFileField('file',
                 schemata='default',
                 languageIndependent=False,
-                required=True,
+                required=False,
                 widget=widget.ReportFileWidget(
                     label=_(u'label_report_file',
                             default=u'Publication file'),

@@ -1,6 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:five="http://namespaces.zope.org/five"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
   <include package="Products.ATVocabularyManager" />
@@ -19,6 +20,8 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
-  <adapter factory=".marshaller.SerialTitle2Surf" />
+  <adapter 
+    zcml:condition="installed eea.rdfmarshaller"
+    factory=".marshaller.SerialTitle2Surf" />
 
 </configure>

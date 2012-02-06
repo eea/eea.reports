@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.5-dev - (unreleased)
-----------------------
+4.5 - (2012-02-06)
+------------------
  * Bug fix: Removed eea.rdfmarshaller dependency
    [voineali]
 

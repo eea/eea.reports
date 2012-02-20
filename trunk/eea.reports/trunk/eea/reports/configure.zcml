@@ -4,6 +4,8 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
+  <include package="eea.forms" />
+  <include package="eea.vocab" />
   <include package="Products.ATVocabularyManager" />
   <include package="Products.LinguaPlone" />
   <include package="Products.AddRemoveWidget" />
@@ -20,7 +22,7 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
-  <adapter 
+  <adapter
     zcml:condition="installed eea.rdfmarshaller"
     factory=".marshaller.SerialTitle2Surf" />
 

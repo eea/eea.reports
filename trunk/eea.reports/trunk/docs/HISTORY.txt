@@ -3,6 +3,8 @@ Changelog
 
 4.6-dev - (unreleased)
 ----------------------
+ * Bug fix: Fixed dependencies to eea.forms and eea.vocab
+   [voineali]
 
 4.5 - (2012-02-06)
 ------------------

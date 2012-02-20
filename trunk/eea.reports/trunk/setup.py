@@ -32,7 +32,8 @@ setup(name=name,
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
           'Products.AddRemoveWidget',
-          'eea.forms'
+          'eea.forms',
+          'eea.vocab',
       ],
       entry_points="""
       # -*- Entry points: -*-

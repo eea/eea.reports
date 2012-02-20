@@ -25,12 +25,12 @@
       </ul>
     </dd>
   </dl>
-  
+
   <!-- Serial title -->
   <div class="documentDescription" tal:content="view/serial_title">
     Serial title
   </div>
-  
+
   <!-- Cover image -->
   <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
     tal:condition="cover">
@@ -49,7 +49,7 @@
     </div>
 
     <!--Publishing info-->
-    <h2 class="publicationClear" i18n:translate="Published by">Published by</h2> 
+    <h2 class="publicationClear" i18n:translate="Published by">Published by</h2>
     <ul>
       <li tal:repeat="publisher view/publishers">
         <tal:publisher tal:replace="publisher" />
@@ -60,9 +60,9 @@
        </span>
       </li>
     </ul>
-    
-   
-    
+
+
+
     <!--Additional files content-->
     <tal:foldercontents define="
       filename python:view.filename;
@@ -160,7 +160,7 @@
     </tal:trailer>
 
        <!--Maps and graphs, TODO USE VIEWLETS-->
-       <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn"
+       <tal:mapsandgraphs tal:define="figures context/@@publicationBasedOn | nothing"
          tal:condition="figures">
          <h2 i18n:translate="publication_maps_and_graphs">Maps and graphs</h2>
          <div metal:define-macro="figures-album" class="map-photo-album"

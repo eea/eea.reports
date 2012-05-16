@@ -85,7 +85,8 @@ def parse_metadata(obj, evt):
 # Report initialize
 #
 def report_initialized(obj, evt):
-    """ EVENT: called when a Report content-type is added. Subtype it as Report.
+    """ EVENT
+        called when a Report content-type is added. Subtype it as Report.
     """
     if not IReportContainerEnhanced.providedBy(obj):
         if getattr(obj, 'portal_type', '') == 'Report':
@@ -93,6 +94,15 @@ def report_initialized(obj, evt):
         # Portal type not changed yet, check name
         elif getattr(evt, 'newName', '').startswith('report'):
             alsoProvides(obj, IReportContainerEnhanced)
+
+#
+# Restrict subobjects
+#
+def restrict_subobjects(obj, evt):
+    """ EVENT
+        called when a Report content-type is added. Setup its subobjects.
+    """
+    obj.setConstrainTypesMode(1)
 
 #
 # Set the language independent

@@ -23,6 +23,11 @@
          zope.lifecycleevent.ObjectCreatedEvent"
     handler=".events.report_initialized" />
 
+  <subscriber
+    for="eea.reports.interfaces.IPossibleReportContainer
+         zope.lifecycleevent.ObjectCreatedEvent"
+    handler=".events.restrict_subobjects" />
+
   <!-- Fix for #2168 -->
   <subscriber
     for="eea.reports.interfaces.IReportContainerEnhanced

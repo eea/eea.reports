@@ -3,6 +3,11 @@ Changelog
 
 4.7-dev - (unreleased)
 ----------------------
+ * Bug fix: Fixed publications subobjects as after migration
+   to Plone 4 was reseted to inherit from parent. Now available
+   subojects will be those defined under portal_type.
+   [ghicaale refs #5178]
+   
 
 4.6 - (2012-03-05)
 ------------------

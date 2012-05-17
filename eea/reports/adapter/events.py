@@ -100,9 +100,10 @@ def report_initialized(obj, evt):
 #
 def restrict_subobjects(obj, evt):
     """ EVENT
-        called when a Report content-type is added. Setup its subobjects.
+        called when a Report content-type is added. Setup its subobjects type
+        restrictions to "Allow the standard types to be added"
     """
-    obj.setConstrainTypesMode(1)
+    obj.setConstrainTypesMode(0)
 
 #
 # Set the language independent

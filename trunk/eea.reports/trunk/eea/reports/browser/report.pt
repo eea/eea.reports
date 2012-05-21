@@ -198,9 +198,11 @@
                 <a href="" tal:define="
                   eubookshop_link python:context.getEUBookshopLink(order_id=oid_value);"
                   alt="Order a printed copy at EU-Bookshop"
-                  tal:attributes="href eubookshop_link" >
+                  tal:attributes="href eubookshop_link" 
+                  i18n:attributes="alt"
+                  i18n:translate="order_printed_copy_online">
                   Order a printed copy online
-                </a> (EU-Bookshop).
+                </a> (<span i18n:translate="eu_bookshop">EU-Bookshop</span>).
               </p>
               <div class="publicationField">
                 <div tal:condition="isbn_value">
@@ -232,9 +234,15 @@
                     i18n:translate="" />
                 </div>
               </div>
-              <p><span i18n:translate="nearst_locations_label">You can also obtain a copy from</span>
-                <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
-                  i18n:translate="nearst_locations_link">your nearest sales agent</a> by providing the ordering info.
+
+             <p i18n:translate="">
+                You can also obtain a copy from
+                    <span i18n:name="nearest-sale-agent">
+                        <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
+                            i18n:translate="nearest_locations_link">
+                           your nearest sales agent</a>
+                    </span> 
+                by providing the ordering info.
               </p>
 
               <div class="visualClear"></div>

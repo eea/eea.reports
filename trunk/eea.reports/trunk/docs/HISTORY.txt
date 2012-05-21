@@ -7,8 +7,9 @@ Changelog
    to Plone 4 was reseted to inherit from parent. Now available
    subojects will be those defined under portal_type.
    [ghicaale refs #5178]
+ * Change: Change code in eea.reports to fix translation problem
+   [prospchr refs #5159]
    
-
 4.6 - (2012-03-05)
 ------------------
  * Bug fix: Fixed dependencies to eea.forms and eea.vocab

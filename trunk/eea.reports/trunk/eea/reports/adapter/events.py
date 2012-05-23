@@ -103,7 +103,10 @@ def restrict_subobjects(obj, evt):
         called when a Report content-type is added. Setup its subobjects type
         restrictions to "Allow the standard types to be added"
     """
-    obj.setConstrainTypesMode(0)
+    try:
+        obj.setConstrainTypesMode(0)
+    except AttributeError:
+        pass
 
 #
 # Set the language independent

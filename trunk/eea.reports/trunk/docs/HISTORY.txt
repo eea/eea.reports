@@ -3,6 +3,8 @@ Changelog
 
 4.7-dev - (unreleased)
 ----------------------
+ * Bug fix: use try/except in event handler to avoid error in
+   eea.indicators test [tiberich]
  * Bug fix: Fixed publications subobjects as after migration
    to Plone 4 was reseted to inherit from parent. Now available
    subojects will be those defined under portal_type.

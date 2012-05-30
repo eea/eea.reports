@@ -169,7 +169,7 @@
            b_start python:request.get('b_start', 0);
            template_id string:;
            folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
-           <h4 id="maps-and-graphs" style="display: none">Fancybox relations</h4>
+           <h4 id="maps-and-graphs" style="display: none" i18n:translate="fancybox_relations">Fancybox relations</h4>
            <metal:figures use-macro="here/atct_album_view/macros/listing" />
          </div>
        </tal:mapsandgraphs>
@@ -206,7 +206,7 @@
               </p>
               <div class="publicationField">
                 <div tal:condition="isbn_value">
-                  <label for="isbn_filed.name" title="The widget's hint"
+                  <label for="isbn_filed.name"
                     tal:attributes="
                     for python:isbn_filed.widget.Label(here);
                     title python:isbn_filed.widget.Label(here)"
@@ -214,7 +214,7 @@
                   <span tal:content="isbn_value" />
                 </div>
                 <div tal:condition="oid_value">
-                  <label for="oid_field.name" title="The widget's hint"
+                  <label for="oid_field.name"
                     tal:attributes="
                     for python:oid_field.widget.Label(here);
                     title python:oid_field.widget.Label(here)"
@@ -222,7 +222,7 @@
                   <span tal:content="oid_value" />
                 </div>
                 <div>
-                  <label for="price_field.name" title="The widget's hint"
+                  <label for="price_field.name"
                     tal:attributes="
                     for python:price_field.widget.Label(here);
                     title python:price_field.widget.Label(here)"

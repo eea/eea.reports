@@ -65,13 +65,13 @@
     <title tal:content="structure python:cdata % obj_item.pretty_title_or_id()">Title</title>
     <link tal:attributes="href string:${obj_item/Identifier}"/>
     <description tal:content="structure python:cdata % obj_item.Description()">Description</description>
-    <dc:publisher tal:content="obj_item/Publisher">Publisher</dc:publisher>
-    <dc:creator tal:content="obj_item/Creator">Creator</dc:creator>
-    <dc:rights tal:content="obj_item/Rights">Rights</dc:rights>
+    <dc:publisher tal:content="obj_item/Publisher"></dc:publisher>
+    <dc:creator tal:content="obj_item/Creator"></dc:creator>
+    <dc:rights tal:content="obj_item/Rights"></dc:rights>
     <tal:block tal:repeat="item obj_item/Subject">
-      <dc:subject tal:content="item">Item</dc:subject>
+      <dc:subject tal:content="item"></dc:subject>
     </tal:block>
-    <dc:date tal:content="modified">Modification date</dc:date>
+    <dc:date tal:content="modified"></dc:date>
     <tal:serial_title define="
       serial_title obj_item/serial_title|python:();
       serial_title_type python:len(serial_title) > 0 and serial_title[0] or '';
@@ -81,12 +81,12 @@
       report_num python:int(serial_title_num)>0 and ' No %d' % serial_title_num or '';
       report_year python:int(serial_title_year)>0 and '/%d' % serial_title_year or '';
       report_title python:serial_title_type not in ('N/A', '', u'N/A', u'') and '%s%s%s' % (serial_title_type, report_num, report_year);">
-    <eearep:serial_title tal:content="report_title">Serial title</eearep:serial_title>
-    <eearep:reporttype tal:content="serial_title_type">Serial title type</eearep:reporttype>
-    <eearep:reportnum tal:content="serial_title_num">Serial title number</eearep:reportnum>
+    <eearep:serial_title tal:content="report_title"></eearep:serial_title>
+    <eearep:reporttype tal:content="serial_title_type"></eearep:reporttype>
+    <eearep:reportnum tal:content="serial_title_num"></eearep:reportnum>
     </tal:serial_title>
-    <dc:language tal:content="obj_item/getLanguage">Language</dc:language>
-    <dc:relation tal:content="python:obj_item.getCanonical().absolute_url()">Canonical</dc:relation>
+    <dc:language tal:content="obj_item/getLanguage"></dc:language>
+    <dc:relation tal:content="python:obj_item.getCanonical().absolute_url()"></dc:relation>
   </item>
 </tal:block>
 

@@ -1,22 +1,20 @@
 """ Subtyping
 """
-from Products.AddRemoveWidget import AddRemoveWidget
-from Products.CMFPlone import PloneMessageFactory as _
-from Products.Archetypes import atapi
 
+from Products.AddRemoveWidget import AddRemoveWidget
+from Products.Archetypes import atapi
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.validation import V_REQUIRED
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
-
+from datetime import datetime
 from eea.forms.widgets.ManagementPlanWidget import ManagementPlanWidget
-
+from eea.reports.config import COPYRIGHTS
 from eea.reports.subtypes import field
 from eea.reports.subtypes import widget
-from eea.reports.config import COPYRIGHTS
 from eea.reports.subtypes.widget import SerialTitleWidget
-
-from datetime import datetime
-
 from zope.interface import implements
+
 
 class SchemaExtender(object):
     """ Schema extender
@@ -41,6 +39,8 @@ class SchemaExtender(object):
                 schemata='default',
                 languageIndependent=False,
                 required=False,
+                validators = (('isNonEmptyFile', V_REQUIRED), 
+                              ('checkFileMaxSize', V_REQUIRED)), 
                 widget=widget.ReportFileWidget(
                     label=_(u'label_report_file',
                             default=u'Publication file'),

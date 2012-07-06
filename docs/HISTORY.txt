@@ -5,6 +5,8 @@ Changelog
 ----------------------
 * Bug fix: use a max filesize validator for report file field
   [tiberich #5259]
+* Bug Fix: Fixed duplicate key for translation in *.pt
+  [prospchr refs #5162]
 
 4.7 - (2012-06-12)
 ------------------

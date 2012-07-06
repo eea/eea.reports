@@ -166,7 +166,7 @@ class SchemaExtender(object):
                         show_indexes=False,
                         force_close_on_insert=True,
                         label=_(u'label_related_items',
-                                default=u'Related Item(s)'),
+                                default=u'Related Items'),
                         description=_(u'help_related_items', default=u''),
                         i18n_domain="plone",
                         ),

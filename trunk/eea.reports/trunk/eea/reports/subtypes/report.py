@@ -13,6 +13,7 @@ from eea.reports.subtypes import field
 from eea.reports.subtypes import widget
 from eea.reports.subtypes.widget import SerialTitleWidget
 from zope.interface import implements
+import logging
 
 logger = logging.getLogger('eea.reports')
 #

@@ -3,6 +3,8 @@ Changelog
 
 4.8-dev - (unreleased)
 ----------------------
+* Feature: use eea.relations widget if available for relatedItems
+  [ichimdav #4705]
 * Bug fix: use a max filesize validator for report file field
   [tiberich #5259]
 * Bug Fix: Fixed duplicate key for translation in *.pt

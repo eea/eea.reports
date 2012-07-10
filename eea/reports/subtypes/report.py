@@ -5,7 +5,6 @@ from Products.AddRemoveWidget import AddRemoveWidget
 from Products.Archetypes import atapi
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.validation import V_REQUIRED
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from datetime import datetime
 from eea.forms.widgets.ManagementPlanWidget import ManagementPlanWidget
@@ -15,6 +14,16 @@ from eea.reports.subtypes import widget
 from eea.reports.subtypes.widget import SerialTitleWidget
 from zope.interface import implements
 
+logger = logging.getLogger('eea.reports')
+#
+# eea.relations
+#
+try:
+    from eea.relations.widget.referencewidget import EEAReferenceBrowserWidget
+except ImportError:
+    from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+    EEAReferenceBrowserWidget = ReferenceBrowserWidget
+    logger.warn('eea.relations is not installed')
 
 class SchemaExtender(object):
     """ Schema extender
@@ -159,7 +168,7 @@ class SchemaExtender(object):
                     relationship='relatesTo',
                     multiValued=True,
                     isMetadata=True,
-                    widget=ReferenceBrowserWidget(
+                    widget=EEAReferenceBrowserWidget(
                         allow_search=True,
                         allow_browse=True,
                         allow_sorting=True,
@@ -330,3 +339,4 @@ class SchemaExtender(object):
         schematas['categorization'] = order
 
         return schematas
+

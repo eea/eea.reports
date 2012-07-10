@@ -13,17 +13,18 @@ from eea.reports.subtypes import field
 from eea.reports.subtypes import widget
 from eea.reports.subtypes.widget import SerialTitleWidget
 from zope.interface import implements
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 import logging
 
 logger = logging.getLogger('eea.reports')
 #
 # eea.relations
 #
+EEAReferenceBrowserWidget = ReferenceBrowserWidget
+
 try:
     from eea.relations.widget.referencewidget import EEAReferenceBrowserWidget
 except ImportError:
-    from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-    EEAReferenceBrowserWidget = ReferenceBrowserWidget
     logger.warn('eea.relations is not installed')
 
 class SchemaExtender(object):

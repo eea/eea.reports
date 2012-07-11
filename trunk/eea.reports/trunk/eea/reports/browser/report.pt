@@ -55,7 +55,7 @@
         <tal:publisher tal:replace="publisher" />
       </li>
       <li>
-       <tal:published  i18n:translate="">
+        <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())"> 
         August 16, 2001 at 23:35:59
        </span>
       </li>
@@ -70,7 +70,7 @@
       has_children view/has_children"
       tal:condition="has_children">
 
-      <h2 i18n:translate="">Content</h2>
+      <h2 i18n:translate="Contents" tal:condition="has_children">Content</h2> 
       <ul tal:condition="filename">
         <li>
           <a tal:attributes="href string:${here/absolute_url}/at_download/file">

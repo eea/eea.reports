@@ -43,7 +43,7 @@
 <!-- Report Type -->
 <div style="float: left; width: 20%">
   <label tal:attributes="for string:${fieldName}_type"
-    i18n:translate="label_report_type">Report type</label><br />
+    i18n:translate="">Report type</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_type;
     name string:${fieldName}_type;">
@@ -58,7 +58,7 @@
 <!-- Report number -->
 <div style="float: left; width: 15%">
   <label tal:attributes="for string:${fieldName}_number"
-    i18n:translate="label_report_number">Report number</label><br />
+    i18n:translate="">Report number</label><br />
   <input type="text" style="width: 100%" tal:attributes="
     id string:${fieldName}_number;
     name string:${fieldName}_number:int;
@@ -68,7 +68,7 @@
 <!-- Report year -->
 <div style="float: left; width: 15%">
   <label tal:attributes="for string:${fieldName}_year"
-    i18n:translate="label_report_year">Report year</label><br />
+    i18n:translate="">Report year</label><br />
   <select style="width: 100%" tal:attributes="
     id string:${fieldName}_year;
     name string:${fieldName}_year:int;">
@@ -83,7 +83,7 @@
 <!-- Report alt -->
 <div style="clear: both; width: 50%">
   <label tal:attributes="for string:${fieldName}_alt"
-    i18n:translate="label_report_alt">Alternative</label>
+    i18n:translate="">Alternative</label>
   <div class="formHelp" i18n:translate="">
     use this field if the report type is not listed in the
     previous Serial Title field

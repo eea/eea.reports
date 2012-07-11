@@ -22,7 +22,7 @@
         onclick string:document.getElementById('${fieldName}_file').disabled=true;" />
       <label for=""
         tal:attributes="for string:${fieldName}_nochange;"
-        i18n:translate="nochange_file"> Keep existing file </label>
+        i18n:translate=""> Keep existing file </label>
       <br />
       <tal:delete tal:condition="python: not field.required">
         <input class="noborder" type="radio" value="delete"
@@ -32,7 +32,7 @@
           onclick string:document.getElementById('${fieldName}_file').disabled=true;" />
         <label for=""
           tal:attributes="for string:${fieldName}_delete;"
-          i18n:translate="delete_file"> Delete current file </label>
+          i18n:translate=""> Delete current file </label>
         <br />
       </tal:delete>
       <input class="noborder" type="radio" value=""
@@ -42,7 +42,7 @@
         onclick string:document.getElementById('${fieldName}_file').disabled=false" />
 
       <label for="" tal:attributes="for string:${fieldName}_upload;"
-        i18n:translate="upload_file"> Replace with new file: </label>
+        i18n:translate=""> Replace with new file: </label>
     </tal:hide_if_no_file>
     <div style="padding-left: 1.5em; padding-top: 0.5em;"><metal
         metal:use-macro="here/widgets/report_file/macros/file_upload" /></div>
@@ -76,7 +76,7 @@
       onclick string:toggle_fields(this, 'title', 'description');
       checked python:value;" />
     <label tal:attributes="for string:${fieldName}_update_meta_input;"
-      i18n:translate="label_update_metadata">Automatically update
+      i18n:translate="">Automatically update
       properties from pdf publication file metadata?</label></div>
   <script type="text/javascript"
     tal:content="string:

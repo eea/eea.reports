@@ -70,7 +70,7 @@
       has_children view/has_children"
       tal:condition="has_children">
 
-      <h2 i18n:translate="Contents" tal:condition="has_children">Content</h2> 
+      <h2 i18n:translate="" tal:condition="has_children">Content</h2> 
       <ul tal:condition="filename">
         <li>
           <a tal:attributes="href string:${here/absolute_url}/at_download/file">

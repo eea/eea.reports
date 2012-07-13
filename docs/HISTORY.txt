@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.8-dev - (unreleased)
-----------------------
+4.8 - (2012-07-13)
+------------------
 * Feature: use eea.relations widget if available for relatedItems
   [ichimdav #4705]
 * Bug fix: use a max filesize validator for report file field

@@ -65,7 +65,8 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 widget=atapi.StringWidget(
                     label=_('ISBN'),
-                    description=_(u'Fill in the ISBN Number of this publication.'),
+                    description=_(u'Fill in the ISBN Number '
+                                   'of this publication.'),
                     i18n_domain='eea',
                     ),
                 ),
@@ -198,7 +199,8 @@ class SchemaExtender(object):
                     default_output_type='text/html',
                     widget=atapi.RichWidget(
                         label=_(u'OR add some text to the order screen'),
-                        description=_(u'Fill in to add this text to the order text'),
+                        description=_(u'Fill in to add this text '
+					'to the order text'),
                         i18n_domain='eea',
                         ),
                     ),
@@ -260,7 +262,8 @@ class SchemaExtender(object):
                     schemata = 'settings',
                     default=True,
                     widget = atapi.BooleanWidget(
-                        description=_( u'If selected, this item will not appear in the navigation tree'),
+                        description=_(u'If selected, this item will '
+                                        'not appear in the navigation tree'),
                         label = _(u'Exclude from navigation'),
                         visible={'view' : 'hidden',
                                  'edit' : 'visible'},

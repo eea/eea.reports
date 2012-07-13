@@ -1,0 +1,37 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  i18n_domain="eea">
+
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         ..events.IFileUploadedEvent"
+    handler=".events.generate_image" />
+
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         ..events.IFileUploadedEvent"
+    handler=".events.parse_metadata" />
+
+  <subscriber
+    for="eea.reports.interfaces.IPossibleReportContainer
+         OFS.event.ObjectWillBeAddedEvent"
+    handler=".events.report_initialized" />
+
+  <subscriber
+    for="eea.reports.interfaces.IPossibleReportContainer
+         zope.lifecycleevent.ObjectCreatedEvent"
+    handler=".events.report_initialized" />
+
+  <subscriber
+    for="eea.reports.interfaces.IPossibleReportContainer
+         zope.lifecycleevent.ObjectCreatedEvent"
+    handler=".events.restrict_subobjects" />
+
+  <!-- Fix for #2168 -->
+  <subscriber
+    for="eea.reports.interfaces.IReportContainerEnhanced
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".events.setLanguageIndependent" />
+
+</configure>

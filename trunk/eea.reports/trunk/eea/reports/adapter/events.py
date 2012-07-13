@@ -1,11 +1,14 @@
 """ Events
 """
+import logging
 from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
 from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
 from eea.reports.interfaces import IReportContainerEnhanced
+logger = logging.getLogger('eea.reports')
+
 #
 # Generate cover image
 #
@@ -105,8 +108,8 @@ def restrict_subobjects(obj, evt):
     """
     try:
         obj.setConstrainTypesMode(0)
-    except AttributeError:
-        pass
+    except AttributeError, err:
+        logger.debug(err)
 
 #
 # Set the language independent

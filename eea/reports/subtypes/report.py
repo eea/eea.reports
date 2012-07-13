@@ -76,7 +76,7 @@ class SchemaExtender(object):
                 widget=atapi.IntegerWidget(
                     visible= -1,
                     label=_(u'EEA Publication Internal ID'),
-                    description=_(=u'Fill in EEA publication internal id'),
+                    description=_(u'Fill in EEA publication internal id'),
                     i18n_domain='eea',
                     ),
                 ),

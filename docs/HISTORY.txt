@@ -3,6 +3,8 @@ Changelog
 
 4.9-dev - (unreleased)
 ----------------------
+* Change: Update references to eea.imagescales (formerly valentine.imagescales)
+  [voineali refs #5497]
 
 4.8 - (2012-07-13)
 ------------------

@@ -39,14 +39,14 @@
     name="publication_images"
     directory="./images" />
 
-  <!-- Valentine imagescales -->
-  <configure zcml:condition="installed valentine.imagescales">
+  <!-- EEA Image Scales -->
+  <configure zcml:condition="installed eea.imagescales">
     <browser:page
       for="..interfaces.IReportContainerEnhanced"
       name="imgview"
       class=".imgview.ImageView"
       permission="zope.Public"
-      allowed_interface="valentine.imagescales.browser.interfaces.IImageView"
+      allowed_interface="eea.imagescales.browser.interfaces.IImageView"
       />
   </configure>
 

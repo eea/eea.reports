@@ -1,10 +1,10 @@
-""" eea.imagescales IImageView adapter
+""" eea.depiction IImageView adapter
 """
 from zope.interface import implements
 from zope.publisher.interfaces import NotFound
 from Products.Five.browser import BrowserView
-from eea.imagescales.browser.interfaces import IImageView
-from eea.imagescales.browser import atfolder
+from eea.depiction.browser.interfaces import IImageView
+from eea.depiction.browser import atfolder
 
 class ImageView(BrowserView):
     """ Get cover image from folder contents or from canonical folder contents

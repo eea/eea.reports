@@ -3,6 +3,8 @@ Changelog
 
 4.9-dev - (unreleased)
 ----------------------
+* Bug fix: Cleanup zope.app.content.interfaces.IContentType dependency
+  [voineali]
 * Change: Update references to eea.depiction (formerly valentine.imagescales)
   [voineali refs #5497]
 

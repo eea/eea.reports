@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.0-dev - (unreleased)
+----------------------
+
 4.9 - (2012-09-27)
 ------------------
 * Bug fix: Cleanup zope.app.content.interfaces.IContentType dependency

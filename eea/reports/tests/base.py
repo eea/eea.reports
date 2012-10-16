@@ -36,7 +36,15 @@ def setup_eea_reports():
     fiveconfigure.debug_mode = True
     import eea.reports
     zcml.load_config('configure.zcml', eea.reports)
+
+    try:
+        import eea.rdfmarshaller
+        zcml.load_config('configure.zcml', eea.rdfmarshaller)
+    except ImportError:
+        pass
+
     fiveconfigure.debug_mode = False
+
 
 setup_eea_reports()
 setupPloneSite(extension_profiles=('eea.reports:default',))

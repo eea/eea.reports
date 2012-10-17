@@ -38,10 +38,12 @@ def setup_eea_reports():
     zcml.load_config('configure.zcml', eea.reports)
 
     try:
-        import eea.rdfmarshaller
-        zcml.load_config('configure.zcml', eea.rdfmarshaller)
+        import eea.rdfmarshaller as HAS_EEARDFMARSHALLER
     except ImportError:
-        pass
+        HAS_EEARDFMARSHALLER = False
+
+    if HAS_EEARDFMARSHALLER:
+        zcml.load_config('configure.zcml', eea.rdfmarshaller)
 
     fiveconfigure.debug_mode = False
 

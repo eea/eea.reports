@@ -16,6 +16,9 @@ from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Products.PloneTestCase.layer import onsetup
 from eea.reports.config import product_globals
+import logging
+
+logger = logging.getLogger("eea.report")
 
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('ATVocabularyManager')
@@ -38,12 +41,10 @@ def setup_eea_reports():
     zcml.load_config('configure.zcml', eea.reports)
 
     try:
-        import eea.rdfmarshaller as HAS_EEARDFMARSHALLER
-    except ImportError:
-        HAS_EEARDFMARSHALLER = False
-
-    if HAS_EEARDFMARSHALLER:
+        import eea.rdfmarshaller 
         zcml.load_config('configure.zcml', eea.rdfmarshaller)
+    except ImportError:
+        logger.warning("Could not import eea.rdfmarshaller")
 
     fiveconfigure.debug_mode = False
 

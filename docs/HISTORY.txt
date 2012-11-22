@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.0-dev - (unreleased)
-----------------------
+5.0 - (2012-11-22)
+------------------
 * Bug fix: use new api from eea.rdfmarshaller for serial title field
   [tiberich #3981]
 

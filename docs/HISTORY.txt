@@ -3,6 +3,8 @@ Changelog
 
 5.1-dev - (unreleased)
 ----------------------
+* Feature: show/hide older versions using jquery
+  [ichimdav #10182]
 
 5.0 - (2012-11-22)
 ------------------

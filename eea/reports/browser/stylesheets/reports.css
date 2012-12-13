@@ -137,3 +137,14 @@ dl.publicationMessage dd {
 .publicationThemes {
   margin-top: 0.5em;
 }
+
+#publication_versions_controls {
+    position: relative;
+    top: -2.7em;
+    left: 90%;
+    width: 6em;
+}
+
+.hidden {
+    display: none;
+}

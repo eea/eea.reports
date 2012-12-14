@@ -10,7 +10,7 @@
                 entry_macro here/eeafigure_albumentry/macros/entry;
                 b_start python:request.get('b_start', 0);
                 template_id string:;
-                folderContents python:Batch(figures, 12, int(b_start), orphan=1)">
+                folderContents python:Batch(figures, 20, int(b_start), orphan=1)">
                 <h4 id="maps-and-graphs" style="display: none" i18n:translate="">Fancybox relations</h4>
                 <metal:figures use-macro="here/atct_album_view/macros/listing" />
             </div>

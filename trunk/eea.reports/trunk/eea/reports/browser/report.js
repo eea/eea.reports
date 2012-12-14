@@ -82,8 +82,10 @@ jQuery(document).ready(function($){
         });
     });
     var figure_batch = function() {
-        $(".map-photo-album").delegate('.listingBar', "click", function(e){
+        var $map_album = $(".map-photo-album");
+        $map_album.delegate('.listingBar', "click", function(e){
             var item = e.target, queries_index, queries, link;
+            $map_album.html('<img src="++resource++faceted_images/ajax-loader.gif" />');
             if ( item.tagName === "A" ) {
                 item = item.href;
                 queries_index = item.indexOf('?');
@@ -91,7 +93,7 @@ jQuery(document).ready(function($){
                 link = item.slice(0, queries_index);
                 link = link + '/report_figures' + queries;
                 $.get(link, function(data) {
-                    $(".map-photo-album").html($(data).find('.map-photo-album').children());
+                    $map_album.html($(data).find('.map-photo-album').children());
                 });
             }
             e.preventDefault();

@@ -146,6 +146,10 @@ dl.publicationMessage dd {
     width: 6em;
 }
 
+#reports_related {
+    margin-top: 2em;
+}
+
 .hidden {
     display: none;
 }

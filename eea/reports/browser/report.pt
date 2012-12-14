@@ -8,16 +8,7 @@
 <metal:description fill-slot="content-description" />
 
 <div metal:fill-slot="content-core">
-<metal:content define-macro="content-core"
-           tal:define="older_versions view/does_replace">
-
-
-
-    <div class="portalMessage informationMessage" tal:condition="older_versions">
-        <span i18n:translate="">This is the latest published version. </span>
-        <a tal:attributes="href string:${context/absolute_url}#previous-versions" 
-           i18n:translate="">See older versions.</a>
-    </div>
+<metal:content define-macro="content-core">
 
   <!-- New versions -->
   <dl class="portalMessage warning publicationMessage"
@@ -259,6 +250,7 @@
 
     <!--Older versions-->
     <dl class="portalMessage publicationMessage"
+        tal:define="older_versions view/does_replace"
         tal:condition="older_versions">
         <dt class="portletHeader" id="previous-versions"
             i18n:translate="">Older versions

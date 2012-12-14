@@ -168,7 +168,7 @@
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
     <div id="reports_related">
-        <ul id="eea-tabs">
+        <ul id="eea-tabs" class="two-rows">
         </ul>
         <div id="eea-tabs-panels">
         </div>

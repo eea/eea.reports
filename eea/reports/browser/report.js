@@ -74,7 +74,7 @@ jQuery(document).ready(function($){
         var $children = $(this).children();
         $children.each(function(i,v){
             if ( this.tagName === "H3" ) {
-                $(this).detach().replaceWith('<li>' + this.innerHTML + '</li>').appendTo('#eea-tabs');
+                $('<li />').html($(this).detach().html()).appendTo('#eea-tabs');
             }
             else {
                 $(this).addClass('eea-tabs-panel').appendTo('#eea-tabs-panels'); 

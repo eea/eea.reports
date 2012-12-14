@@ -20,7 +20,7 @@ Reports.Tree = {
             div.click();
 
             jQuery('a:first', jQuery(element)).click(function(evt){
-                if(jQuery(this).attr('href') == '#'){
+                if(jQuery(this).attr('href') === '#'){
                     tree.toggle(element, jQuery('div:first', jQuery(element)));
                     return false;
                 }
@@ -54,6 +54,7 @@ jQuery(document).ready(function($){
     if(window.Figures){
         window.Figures.Load();
     }
+    
     var $publication_controls = $("#publication_versions_controls");
     $publication_controls.click(function(e){
         var $target = $(e.target);
@@ -68,4 +69,22 @@ jQuery(document).ready(function($){
         e.preventDefault();
     });
 
+    var related_items = $("#relatedItems, #publicationMaps");
+    related_items.find('.visualNoMarker').each(function(i,v) {
+        var $children = $(this).children();
+        $children.each(function(i,v){
+            if ( this.tagName === "H3" ) {
+                $(this).detach().replaceWith('<li>' + this.innerHTML + '</li>').appendTo('#eea-tabs');
+            }
+            else {
+                $(this).addClass('eea-tabs-panel').appendTo('#eea-tabs-panels'); 
+            }
+        });
+    });
+
+    if ( related_items.length ) {
+        $("#eea-tabs-panels").addClass('eea-tabs-panels');
+        $("#eea-tabs").addClass('eea-tabs');
+        window.EEA.eea_tabs();
+    }
 });

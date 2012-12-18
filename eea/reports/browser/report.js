@@ -71,29 +71,39 @@ jQuery(document).ready(function($){
 
     var related_items = $("#relatedItems, #publicationMaps");
     related_items.find('.visualNoMarker').each(function(i,v) {
-        var $children = $(this).children();
+        var $self = $(this);
+        var $children = $self.children();
         $children.each(function(i,v){
             if ( this.tagName === "H3" ) {
                 $('<li />').html($(this).detach().html()).appendTo('#eea-tabs');
             }
             else {
-                $(this).addClass('eea-tabs-panel').appendTo('#eea-tabs-panels'); 
+                $(this).addClass('eea-tabs-panel')
+                       .appendTo('#eea-tabs-panels');
+                $(this).data($self.data());
             }
         });
     });
     var figure_batch = function() {
-        var $map_album = $(".map-photo-album");
-        $map_album.delegate('.listingBar', "click", function(e){
-            var item = e.target, queries_index, queries, link;
-            $map_album.html('<img src="++resource++faceted_images/ajax-loader.gif" />');
+        var $tab_panels = $("#eea-tabs-panels");
+        $tab_panels.delegate('.listingBar', "click", function(e){
+            var item = e.target, queries_index, queries, href, link, data_attr;
+            var $panel = $(this).closest('.eea-tabs-panel');
             if ( item.tagName === "A" ) {
-                item = item.href;
-                queries_index = item.indexOf('?');
-                queries = item.slice(queries_index);
-                link = item.slice(0, queries_index);
-                link = link + '/report_figures' + queries;
-                $.get(link, function(data) {
-                    $map_album.html($(data).find('.map-photo-album').children());
+                $panel.html('<img src="++resource++faceted_images/ajax-loader.gif" />');
+                data_attr = $panel.data();
+                href = item.href;
+                if ( href.indexOf('b=true') === -1 ) {
+                    queries_index = href.indexOf('?');
+                    queries = href.slice(queries_index);
+                    link = href.slice(0, queries_index);
+                    href = link + data_attr.template 
+                                + queries 
+                                + '&' 
+                                + $.param({ m: data_attr.relation, b: true, c: data_attr.count });
+                }
+                $.get(href, function(data) {
+                    $panel.html($(data).children().eq(1).remove());
                 });
             }
             e.preventDefault();

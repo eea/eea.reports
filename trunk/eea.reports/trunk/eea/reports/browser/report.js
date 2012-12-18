@@ -97,10 +97,11 @@ jQuery(document).ready(function($){
                     queries_index = href.indexOf('?');
                     queries = href.slice(queries_index);
                     link = href.slice(0, queries_index);
-                    href = link + data_attr.template 
-                                + queries 
-                                + '&' 
-                                + $.param({ m: data_attr.relation, b: true, c: data_attr.count });
+                    href = link               +
+                           data_attr.template +
+                           queries            +
+                           '&'                +
+                           $.param({ m: data_attr.relation, b: true, c: data_attr.count });
                 }
                 $.get(href, function(data) {
                     $panel.html($(data).children().eq(1).remove());

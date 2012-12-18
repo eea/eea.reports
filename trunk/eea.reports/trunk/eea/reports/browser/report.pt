@@ -165,7 +165,9 @@
         </div>
     </div>
 
-    <metal:figures metal:use-macro="here/report_figures/macros/figures" />
+    <div id="publicationMaps">
+        <metal:figures metal:use-macro="here/report_figures/macros/figures" />
+    </div>
 
     <!--Order information-->
     <tal:order define="

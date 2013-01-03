@@ -165,10 +165,6 @@
         </div>
     </div>
 
-    <div id="publicationMaps">
-        <metal:figures metal:use-macro="here/report_figures/macros/figures" />
-    </div>
-
     <!--Order information-->
     <tal:order define="
       oid_field       python:here.getField('order_id');

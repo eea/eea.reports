@@ -3,7 +3,8 @@ Changelog
 
 5.1-dev - (unreleased)
 ----------------------
-* Feature: bundle maps figures and relations with tabs widget for reports
+* Change: removed figures macro since it's logic overlaps that of backward
+  relations
   [ichimdav #10182]
 * Feature: show/hide older versions using jquery
   [ichimdav #10182]

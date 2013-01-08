@@ -16,7 +16,7 @@
 
         <span i18n:translate="">This is the latest published version. </span>
 
-        <a tal:attributes="href>
+        <a tal:attributes="href
                            string:${context/absolute_url}#previous-versions"
            i18n:translate="" class="showOlderVersions">See older versions.</a>
 

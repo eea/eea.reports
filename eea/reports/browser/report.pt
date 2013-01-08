@@ -10,6 +10,29 @@
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core">
 
+    <div class="portalMessage informationMessage"
+         tal:define="older_versions view/does_replace"
+         tal:condition="older_versions">
+
+        <span i18n:translate="">This is the latest published version. </span>
+
+        <a tal:attributes="href>
+                           string:${context/absolute_url}#previous-versions"
+           i18n:translate="" class="showOlderVersions">See older versions.</a>
+
+        <dl id="previous-versions">
+            <dd>
+                <ul>
+                    <li class="portletItem" tal:repeat="brain older_versions">
+                        <a tal:attributes="href brain/getPath"
+                           tal:content="brain/Title" />
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+
+    </div>
+
   <!-- New versions -->
   <dl class="portalMessage warning publicationMessage"
     tal:define="is_replaced view/is_replaced_by"
@@ -158,12 +181,6 @@
       tr_value python:tr_field.getAccessor(here)();">
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
-    <div id="reports_related">
-        <ul id="eea-tabs" class="two-rows">
-        </ul>
-        <div id="eea-tabs-panels">
-        </div>
-    </div>
 
     <!--Order information-->
     <tal:order define="
@@ -245,27 +262,6 @@
         <div tal:content="structure oe_value">Order extra text</div>
       </tal:order_extra>
     </tal:order>
-
-    <!--Older versions-->
-    <dl class="portalMessage publicationMessage"
-        tal:define="older_versions view/does_replace"
-        tal:condition="older_versions">
-        <dt class="portletHeader" id="previous-versions"
-            i18n:translate="">Older versions
-        </dt>
-        <dd>
-            <div id="publication_versions_controls">
-                <a href="#" class="first" i18n:translate="">Show</a>
-                <a href="#" class="hidden" i18n:translate="">Hide</a>
-            </div>
-            <ul style="display:none;">
-                <li class="portletItem" tal:repeat="brain older_versions">
-                    <a tal:attributes="href brain/getPath"
-                        tal:content="brain/Title" />
-                </li>
-            </ul>
-        </dd>
-    </dl>
 
   </div>
 </metal:content>

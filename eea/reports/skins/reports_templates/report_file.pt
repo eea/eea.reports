@@ -5,7 +5,7 @@
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="eea">
 
-  <head><title></title></head>
+  <head><title>Publication</title></head>
   <body>
 <!-- File Widgets -->
 
@@ -20,7 +20,7 @@
         name string:${fieldName}_delete;
         id string:${fieldName}_nochange;
         onclick string:document.getElementById('${fieldName}_file').disabled=true;" />
-      <label for=""
+      <label
         tal:attributes="for string:${fieldName}_nochange;"
         i18n:translate=""> Keep existing file </label>
       <br />
@@ -30,7 +30,7 @@
           name string:${fieldName}_delete;
           id string:${fieldName}_delete;
           onclick string:document.getElementById('${fieldName}_file').disabled=true;" />
-        <label for=""
+        <label
           tal:attributes="for string:${fieldName}_delete;"
           i18n:translate=""> Delete current file </label>
         <br />
@@ -41,7 +41,7 @@
         id string:${fieldName}_upload;
         onclick string:document.getElementById('${fieldName}_file').disabled=false" />
 
-      <label for="" tal:attributes="for string:${fieldName}_upload;"
+      <label tal:attributes="for string:${fieldName}_upload;"
         i18n:translate=""> Replace with new file: </label>
     </tal:hide_if_no_file>
     <div style="padding-left: 1.5em; padding-top: 0.5em;"><metal
@@ -65,7 +65,7 @@
   <script type="text/javascript"
     tal:define="
     isDisabled python:test(accessor() and size!=0, 'true', 'false')"
-    tal:content="string: document.getElementById('${fieldName}_file').disabled=$isDisabled;"></script>
+    tal:content="string: document.getElementById('${fieldName}_file').disabled=$isDisabled;">js</script>
   <div class="field"
     tal:attributes="
     id string:${fieldName}_update_meta"><input
@@ -81,7 +81,7 @@
   <script type="text/javascript"
     tal:content="string:
     display_div('${fieldName}_update_meta', 'none');
-    "></script>
+    ">js</script>
 </metal:define>
 
 <metal:define define-macro="view">

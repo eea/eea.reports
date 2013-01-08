@@ -54,19 +54,4 @@ jQuery(document).ready(function($){
     if(window.Figures){
         window.Figures.Load();
     }
-    
-    var $publication_controls = $("#publication_versions_controls");
-    $publication_controls.click(function(e){
-        var $target = $(e.target);
-        if ( $target.hasClass('first') ) {
-            $target.addClass('hidden').next().removeClass('hidden');
-            $publication_controls.next().slideDown();
-        }
-        else {
-            $target.addClass('hidden').prev().removeClass('hidden');
-            $publication_controls.next().slideUp();
-        }
-        e.preventDefault();
-    });
-
 });

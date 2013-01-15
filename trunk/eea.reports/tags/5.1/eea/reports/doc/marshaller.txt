@@ -1,0 +1,30 @@
+Test for the serial title field adapter
+================================
+
+We have a special field adapter that extracts values from the serial title field:
+
+    >>> self.loginAsPortalOwner()
+    >>> _ = self.folder.invokeFactory('Report', 'myreport')
+    >>> myreport = self.folder.myreport
+    >>> docpdf = self.loadfile('tests/data/test.pdf', ctype='application/pdf')
+    >>> from ZPublisher.HTTPRequest import FileUpload
+    >>> form = {
+    ... 'file_delete': '',
+    ... 'file_file': docpdf,
+    ... 'serial_title_type': 'Briefing',
+    ... 'serial_title_number': 20,
+    ... 'serial_title_year': 1999,
+    ... 'serial_title_alt': '',
+    ... 'creators': ('EEA (European Environment Agency)', 'new creator'),
+    ... 'publishers': ('EIONET', 'new publisher'),
+    ... 'eeaid': 23456,
+    ... 'isbn': 'WETROET-3543-GFSFGDF',
+    ... 'pages': 34,
+    ... 'trailer': 'Sample trailer',
+    ... 'order_override_text': 'Sample order override text',
+    ... 'order_extra_text': 'Sample order extra text',
+    ... }
+    >>> myreport.processForm(values=form)
+    >>> rdf = myreport.restrictedTraverse("@@rdf")()
+    >>> '<report:serial_title xml:lang="en">Briefing - 20 - 1999 -</report:serial_title>' in rdf
+    True

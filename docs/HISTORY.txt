@@ -3,6 +3,8 @@ Changelog
 
 5.2-dev - (unreleased)
 ----------------------
+* Bug fix: Corrected missing i18n attributes for translations.
+  [prospchr refs #13827]
 
 5.1 - (2013-01-15)
 ------------------

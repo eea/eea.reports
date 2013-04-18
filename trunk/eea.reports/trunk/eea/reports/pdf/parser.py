@@ -90,7 +90,7 @@ class PDFParser(object):
         fd.close()
         statement = 'pdfinfo '
         statement += tmp_pdf[1]
-        logger.debug('pdfinfo commandline: %s' % statement)
+        logger.debug('pdfinfo commandline: %s', statement)
         process = Popen(statement, shell=True,
                         stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
         result = process.stdout.read()
@@ -106,7 +106,7 @@ class PDFParser(object):
             pass
         elif result.startswith('Error'):
             error =  result.split('\n')[0]
-            logger.error("Error in pdfinfo conversion: %s" % error)
+            logger.error("Error in pdfinfo conversion: %s", error)
             return metadata
         elif 'command not found' in result:
             return metadata
@@ -157,13 +157,13 @@ class PDFParser(object):
         fd.close()
 
         statement += ' '+tmp_pdf[1]
-        logger.debug('pdfinfo commandline: %s' % statement)
+        logger.debug('pdfinfo commandline: %s', statement)
         process = Popen(statement, shell=True,
                         stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 
         # get the result
         result = process.stdout.read()
-        logger.debug('metadata extracted by pdfinfo :\n---------\n%s ' % result)
+        logger.debug('metadata extracted by pdfinfo :\n---------\n%s ', result)
 
         # cleanup the tempfile
         os.remove(tmp_pdf[1])
@@ -176,7 +176,7 @@ class PDFParser(object):
             pass
         elif result.startswith('Error'):
             error =  result.split('\n')[0]
-            logger.error("Error in pdfinfo conversion: %s" % error)
+            logger.error("Error in pdfinfo conversion: %s", error)
             return False
 
         crypt_patt = re.compile('Encrypted:.*?copy:no', re.I)
@@ -259,7 +259,7 @@ class PDFParser(object):
 
                 META_MAP[patt[0].strip().lower()] = value
             else:
-                logger.debug("No matches for "+ str(patt[1]))
+                logger.debug("No matches for %s", str(patt[1]))
 
 
         # Get the user-defined meta-data

@@ -8,13 +8,14 @@
 <metal:description fill-slot="content-description" />
 
 <div metal:fill-slot="content-core">
-<metal:content define-macro="content-core">
+<metal:content define-macro="content-core" 
+     tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by">
 
     <div class="portalMessage informationMessage"
-         tal:define="older_versions view/does_replace"
          tal:condition="older_versions">
 
-        <span i18n:translate="">This is the latest published version. </span>
+        <span i18n:translate="" 
+            tal:condition="not:newer_versions">This is the latest published version. </span>
 
         <a tal:attributes="href
                            string:${context/absolute_url}#previous-versions"
@@ -35,14 +36,13 @@
 
   <!-- New versions -->
   <dl class="portalMessage warning publicationMessage"
-    tal:define="is_replaced view/is_replaced_by"
-    tal:condition="is_replaced">
+    tal:condition="newer_versions">
     <dt class="portletHeader" i18n:translate="">
       Note: new versions are available!
     </dt>
     <dd>
       <ul>
-        <li tal:repeat="brain is_replaced">
+        <li tal:repeat="brain newer_versions">
           <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
         </li>
       </ul>

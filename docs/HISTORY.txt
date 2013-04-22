@@ -3,6 +3,8 @@ Changelog
 
 5.3-dev - (unreleased)
 ----------------------
+* Bug fix: avoid misleading viewers saying that report is latest when it's not
+  [tiberich #14356]
 
 5.2 - (2013-02-25)
 ------------------

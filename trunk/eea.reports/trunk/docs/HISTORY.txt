@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.4-dev - (unreleased)
+----------------------
+
 5.3 - (2013-04-22)
 ------------------
 * Bug fix: avoid misleading viewers saying that report is latest when it's not

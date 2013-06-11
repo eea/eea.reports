@@ -17,11 +17,9 @@ from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 import logging
 
 logger = logging.getLogger('eea.reports')
-#
-# eea.relations
-#
-EEAReferenceBrowserWidget = ReferenceBrowserWidget
 
+# eea.relations widget
+EEAReferenceBrowserWidget = ReferenceBrowserWidget
 try:
     from eea.relations.widget.referencewidget import EEAReferenceBrowserWidget
 except ImportError:
@@ -50,8 +48,8 @@ class SchemaExtender(object):
                 schemata='default',
                 languageIndependent=False,
                 required=False,
-                validators = (('isNonEmptyFile', V_REQUIRED), 
-                              ('checkFileMaxSize', V_REQUIRED)), 
+                validators = (('isNonEmptyFile', V_REQUIRED),
+                              ('checkFileMaxSize', V_REQUIRED)),
                 widget=widget.ReportFileWidget(
                     label=_('Publication file'),
                     description=_('Fill in the publication file'),

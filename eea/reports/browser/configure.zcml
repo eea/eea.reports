@@ -13,6 +13,13 @@
 
   <browser:page
     for="eea.reports.interfaces.IReportContainerEnhanced"
+    name="download"
+    class=".displays.ReportContainerDownload"
+    permission="zope.Public"
+    />
+
+  <browser:page
+    for="eea.reports.interfaces.IReportContainerEnhanced"
     name="can_syncronize"
     class="eea.reports.pdf.syncronize.SyncronizerSupport"
     permission="zope.Public"

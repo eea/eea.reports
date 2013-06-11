@@ -43,10 +43,10 @@ class ReportContainerView(BrowserView):
         year =  value[2] if len(value) > 2 else -1
 
         text = rtype
-        
+
         if text is None:
             text = value[0]
-        
+
         if number:
             text += " No %s" % number
 
@@ -116,3 +116,16 @@ class ReportContainerView(BrowserView):
         """ Report has children?
         """
         return self.size or self.items
+
+class ReportContainerDownload(BrowserView):
+    """ Report download
+    """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        """ Download
+        """
+        field = self.context.getField('file')
+        return field.download(self.context, self.request, self.request.response)

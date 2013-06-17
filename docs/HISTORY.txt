@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.4-dev - (unreleased)
-----------------------
+5.4 - (2013-06-17)
+------------------
 * Feature: added /download method for Report/Publication to have same API as
   Image/File like objects.
   [ghicaale refs #14735]

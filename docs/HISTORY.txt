@@ -3,6 +3,8 @@ Changelog
 
 5.5-dev - (unreleased)
 ----------------------
+* Change: Updated versions for rdflib and surf.rdflib
+  [szabozo0 refs #14323]
 
 5.4 - (2013-06-17)
 ------------------

@@ -8,13 +8,13 @@
 <metal:description fill-slot="content-description" />
 
 <div metal:fill-slot="content-core">
-<metal:content define-macro="content-core" 
+<metal:content define-macro="content-core"
      tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by">
 
     <div class="portalMessage informationMessage"
          tal:condition="older_versions">
 
-        <span i18n:translate="" 
+        <span i18n:translate=""
             tal:condition="not:newer_versions">This is the latest published version. </span>
 
         <a tal:attributes="href
@@ -34,7 +34,6 @@
 
     </div>
 
-  <!-- New versions -->
   <dl class="portalMessage warning publicationMessage"
     tal:condition="newer_versions">
     <dt class="portletHeader" i18n:translate="">
@@ -49,12 +48,10 @@
     </dd>
   </dl>
 
-  <!-- Serial title -->
   <div class="documentDescription" tal:content="view/serial_title">
     Serial title
   </div>
 
-  <!-- Cover image -->
   <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
     tal:condition="cover">
     <div class="figure">
@@ -66,34 +63,29 @@
   </div>
 
   <div class="publicationText">
-    <!--Description-->
     <div class="publicationDescription">
       <strong tal:content="here/Description" />
     </div>
 
-    <!--Publishing info-->
     <h2 class="publicationClear" i18n:translate="">Published by</h2>
     <ul>
       <li tal:repeat="publisher view/publishers">
         <tal:publisher tal:replace="publisher" />
       </li>
       <li>
-        <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())"> 
+        <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())">
         August 16, 2001 at 23:35:59
        </span>
       </li>
     </ul>
 
-
-
-    <!--Additional files content-->
     <tal:foldercontents define="
       filename python:view.filename;
       fileItems python:view.items;
       has_children view/has_children"
       tal:condition="has_children">
 
-      <h2 i18n:translate="" tal:condition="has_children">Content</h2> 
+      <h2 i18n:translate="" tal:condition="has_children">Content</h2>
       <ul tal:condition="filename">
         <li>
           <a tal:attributes="href string:${here/absolute_url}/at_download/file">
@@ -125,6 +117,27 @@
                 tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
           </li>
+
+          <li tal:condition="python:item.portal_type == 'Link'">
+            <tal:conditionMediaServer condition="python:item.getRemoteUrl().startswith('http://ftp.eea.europa.eu')">
+            <tal:link define="
+              item_type item/portal_type;
+              wtool python:here.portal_workflow;
+              item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
+              item_wf_state_class python:'state-' + item_wf_state;
+              item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
+              item_object item/getObject|item;
+              item_title_or_id item/pretty_title_or_id;">
+              <a tal:attributes="
+                class item_wf_state_class;
+                href item_object/absolute_url;
+                title item_title_or_id">
+                <span tal:content="item_title_or_id" />
+              </a>
+            </tal:link>
+            </tal:conditionMediaServer>
+          </li>
+
           <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
             class python:'tree-level-%s' % level">
             <tal:folder define="
@@ -149,13 +162,13 @@
       </ul>
     </tal:foldercontents>
 
-    <!--Additional links content-->
     <tal:foldercontents define="
       folderContents python:here.getFolderContents({'portal_type': 'Link'});"
       condition="folderContents">
       <h2 i18n:translate="">Links</h2>
       <ul>
         <li tal:repeat="item folderContents">
+          <tal:conditionMediaServer condition="not python:item.getRemoteUrl().startswith('http://ftp.eea.europa.eu')">
           <tal:link define="
             item_type item/portal_type;
             wtool python:here.portal_workflow;
@@ -171,18 +184,17 @@
               <span tal:content="item_title_or_id" />
             </a>
           </tal:link>
+          </tal:conditionMediaServer>
         </li>
       </ul>
     </tal:foldercontents>
 
-    <!--Trailer-->
     <tal:trailer define="
       tr_field python:here.getField('trailer');
       tr_value python:tr_field.getAccessor(here)();">
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
 
-    <!--Order information-->
     <tal:order define="
       oid_field       python:here.getField('order_id');
       oid_value       python:oid_field.getAccessor(here)();
@@ -205,7 +217,7 @@
                 <a href="" tal:define="
                   eubookshop_link python:context.getEUBookshopLink(order_id=oid_value);"
                   alt="Order a printed copy at EU-Bookshop"
-                  tal:attributes="href eubookshop_link" 
+                  tal:attributes="href eubookshop_link"
                   i18n:attributes="alt"
                   i18n:translate="">
                   Order a printed copy online
@@ -248,7 +260,7 @@
                         <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
                             i18n:translate="">
                            your nearest sales agent</a>
-                    </span> 
+                    </span>
                 by providing the ordering info.
               </p>
 

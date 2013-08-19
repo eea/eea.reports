@@ -118,9 +118,9 @@
             </tal:file>
           </li>
 
-          <li tal:condition="python:item.portal_type == 'Link'">
-            <tal:conditionMediaServer condition="python:item.getRemoteUrl().startswith('http://ftp.eea.europa.eu')">
-            <tal:link define="
+          <tal:link condition="python:item.portal_type == 'Link'">
+            <tal:conditionMediaServer condition="python:item.getRemoteUrl.startswith('http://ftp.eea.europa.eu')">
+            <li tal:define="
               item_type item/portal_type;
               wtool python:here.portal_workflow;
               item_wf_state item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
@@ -134,9 +134,9 @@
                 title item_title_or_id">
                 <span tal:content="item_title_or_id" />
               </a>
-            </tal:link>
+            </li>
             </tal:conditionMediaServer>
-          </li>
+          </tal:link>
 
           <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
             class python:'tree-level-%s' % level">
@@ -168,7 +168,7 @@
       <h2 i18n:translate="">Links</h2>
       <ul>
         <li tal:repeat="item folderContents">
-          <tal:conditionMediaServer condition="not python:item.getRemoteUrl().startswith('http://ftp.eea.europa.eu')">
+          <tal:conditionMediaServer condition="python:not item.getRemoteUrl.startswith('http://ftp.eea.europa.eu')">
           <tal:link define="
             item_type item/portal_type;
             wtool python:here.portal_workflow;

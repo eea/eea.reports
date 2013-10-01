@@ -8,7 +8,7 @@ import StringIO
 from subprocess import Popen, PIPE, STDOUT
 from types import InstanceType, StringType, UnicodeType, FileType
 from zope import interface
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from eea.reports.pdf.interfaces import IReportPDFParser
 

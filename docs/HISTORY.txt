@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.8-dev - (unreleased)
+----------------------
+
 5.7 - (2013-10-04)
 ------------------
 * Change: updated zope imports with the versions that require minimum Plone 4.1

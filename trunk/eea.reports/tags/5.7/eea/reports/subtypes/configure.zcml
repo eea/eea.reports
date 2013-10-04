@@ -1,0 +1,41 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  i18n_domain="eea">
+
+  <class class="Products.ATContentTypes.content.folder.ATFolder">
+    <implements interface="..interfaces.IPossibleReportContainer" />
+  </class>
+
+  <adapter
+    name="eea.reports.subtypes.report"
+    for="..interfaces.IReportContainerEnhanced"
+    factory=".report.SchemaExtender"
+    />
+
+  <utility
+    factory=".vocabulary.ReportTypes"
+    name="eea.reports.vocabulary.ReportTypes"
+    />
+
+  <utility
+    factory=".vocabulary.ReportYears"
+    name="eea.reports.vocabulary.ReportYears"
+    />
+
+  <utility
+    factory=".vocabulary.ReportCreators"
+    name="eea.reports.vocabulary.ReportCreators"
+    />
+
+  <utility
+    factory=".vocabulary.ReportPublishers"
+    name="eea.reports.vocabulary.ReportPublishers"
+    />
+
+  <utility
+    factory=".vocabulary.PublicationGroups"
+    name="eea.reports.vocabulary.PublicationGroups"
+    />
+
+</configure>

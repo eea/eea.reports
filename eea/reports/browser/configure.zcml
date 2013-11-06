@@ -15,7 +15,7 @@
     for="eea.reports.interfaces.IReportContainerEnhanced"
     name="download"
     class=".displays.ReportContainerDownload"
-    permission="zope.Public"
+    permission="zope2.View"
     />
 
   <browser:page

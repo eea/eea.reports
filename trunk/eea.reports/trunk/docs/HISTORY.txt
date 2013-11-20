@@ -1,8 +1,8 @@
 Changelog
 =========
 
-5.8-dev - (unreleased)
-----------------------
+5.8 - (2013-11-20)
+------------------
 * Bug fix: download view had bad security settings
   [simiamih refs #16889]
 

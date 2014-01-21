@@ -3,6 +3,8 @@ Changelog
 
 5.9-dev - (unreleased)
 ----------------------
+* Bug fix: removed wrongly added blockquotes within README.rst
+  [ichim-david refs #18064]
 
 5.8 - (2013-11-20)
 ------------------

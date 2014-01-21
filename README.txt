@@ -28,44 +28,44 @@ To get started you will simply need to add the package to your "eggs" and
 "eea.reports" package using the quick-installer or via the "Add-on
 Products" section in "Site Setup".
 
-  .. _`zc.buildout`: http://pypi.python.org/pypi/zc.buildout/
+.. _`zc.buildout`: http://pypi.python.org/pypi/zc.buildout/
 
 You can download a sample buildout at:
 
-  http://svn.eionet.europa.eu/repositories/Zope/trunk/eea.reports/buildouts/plone4/
+http://svn.eionet.europa.eu/repositories/Zope/trunk/eea.reports/buildouts/plone4/
 
 
 Dependencies
 ============
 
-  * Optional: pdfinfo to parse pdf metadata (part of the xpdf package).
+* Optional: pdfinfo to parse pdf metadata (part of the xpdf package).
 
-    yum install xpdf (fedora)
-    apt-get install xpdf (debian)
+  yum install xpdf (fedora)
+  apt-get install xpdf (debian)
 
-  * Optional: pdftk and ImageMagick (6.3.7+) convert to generate a
-    cover image from a pdf file.
+* Optional: pdftk and ImageMagick (6.3.7+) convert to generate a
+  cover image from a pdf file.
 
-    yum install pdftk (fedora)
-    apt-get install pdftk (debian)
+  yum install pdftk (fedora)
+  apt-get install pdftk (debian)
 
-    yum install ImageMagick
-    apt-get install imagemagick
+  yum install ImageMagick
+  apt-get install imagemagick
 
 
 Documentation
 =============
 
-  See the **doc** directory in this package.
+See the **doc** directory in this package.
 
 
 API Doc
 =======
 
-  http://apidoc.eea.europa.eu/eea.reports-module.html
+http://apidoc.eea.europa.eu/eea.reports-module.html
 
 
 Authors
 =======
 
-  - "European Environment Agency", webadmin at eea europa eu
+- "European Environment Agency", webadmin at eea europa eu

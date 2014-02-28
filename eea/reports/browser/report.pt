@@ -88,7 +88,8 @@
       <h2 i18n:translate="" tal:condition="has_children">Content</h2>
       <ul tal:condition="filename">
         <li>
-          <a tal:attributes="href string:${here/absolute_url}/at_download/file">
+          <a tal:attributes="href string:${here/absolute_url}/at_download/file;
+                             onClick string:_gaq.push(['_trackEvent', 'Files', 'Downloaded', '${filename}']);">
             <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
             <span tal:content="filename" />
           </a>
@@ -113,8 +114,9 @@
                 title item_title_or_id">
                 <span tal:content="item_title_or_id" />
               </a>
+ 
               <span tal:condition="python:item_type == 'File'"
-                tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
+                    tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>
           </li>
 

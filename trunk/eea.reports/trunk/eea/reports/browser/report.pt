@@ -89,7 +89,7 @@
       <ul tal:condition="filename">
         <li>
           <a tal:attributes="href string:${here/absolute_url}/at_download/file;
-                             onClick string:_gaq.push(['_trackEvent', 'Files', 'Downloaded', '${filename}']);">
+                             onClick string:_gaq.push(['_trackEvent', 'Publications', 'Downloads', '${filename}']);">
             <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
             <span tal:content="filename" />
           </a>

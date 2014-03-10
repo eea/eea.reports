@@ -1,6 +1,9 @@
 Changelog
 =========
 
+6.1-dev - (unreleased)
+----------------------
+
 6.0 - (2014-03-10)
 ------------------
 * Feature: Added Tracking of file downloaded with Google analytics,

@@ -1,8 +1,8 @@
 Changelog
 =========
 
-6.0-dev - (unreleased)
-----------------------
+6.0 - (2014-03-10)
+------------------
 * Feature: Added Tracking of file downloaded with Google analytics,
   in the report view.
   [prospchr refs #8059]

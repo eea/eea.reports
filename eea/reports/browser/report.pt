@@ -114,7 +114,7 @@
                 title item_title_or_id">
                 <span tal:content="item_title_or_id" />
               </a>
- 
+
               <span tal:condition="python:item_type == 'File'"
                     tal:content="python:'[%s]' % item_object.getObjSize(item_object)" />
             </tal:file>

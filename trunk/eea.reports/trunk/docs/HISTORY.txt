@@ -3,6 +3,9 @@ Changelog
 
 6.2.dev0 - (unreleased)
 -----------------------
+* Change: removed Tracking of file downloaded with Google Analytics,
+  this feature has been enhanced as is now part of eea.design
+  [ichimdav refs #23277]
 
 6.1 - (2015-03-17)
 ------------------

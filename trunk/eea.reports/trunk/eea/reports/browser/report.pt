@@ -88,8 +88,7 @@
       <h2 i18n:translate="" tal:condition="has_children">Content</h2>
       <ul tal:condition="filename">
         <li>
-          <a tal:attributes="href string:${here/absolute_url}/at_download/file;
-                             onClick string:_gaq.push(['_trackEvent', 'Publications', 'Downloads', '${filename}']);">
+          <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
             <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
             <span tal:content="filename" />
           </a>

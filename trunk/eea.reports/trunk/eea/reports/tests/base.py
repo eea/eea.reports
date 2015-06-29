@@ -41,7 +41,7 @@ def setup_eea_reports():
     zcml.load_config('configure.zcml', eea.reports)
 
     try:
-        import eea.rdfmarshaller 
+        import eea.rdfmarshaller
         zcml.load_config('configure.zcml', eea.rdfmarshaller)
     except ImportError:
         logger.warning("Could not import eea.rdfmarshaller")

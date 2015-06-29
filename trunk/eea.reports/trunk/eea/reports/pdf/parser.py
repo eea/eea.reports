@@ -86,7 +86,7 @@ class PDFParser(object):
         # Get plain/text metadata
         tmp_pdf = tempfile.mkstemp(suffix='.pdf')
         fd = open(tmp_pdf[1], 'w')
-        fd.write( pdf )
+        fd.write(pdf)
         fd.close()
         statement = 'pdfinfo '
         statement += tmp_pdf[1]
@@ -105,7 +105,7 @@ class PDFParser(object):
             # For our case this is irrelevant
             pass
         elif result.startswith('Error'):
-            error =  result.split('\n')[0]
+            error = result.split('\n')[0]
             logger.error("Error in pdfinfo conversion: %s", error)
             return metadata
         elif 'command not found' in result:
@@ -146,12 +146,12 @@ class PDFParser(object):
         # pdfinfo needs to work on a file. Write the file and start pdfinfo
         tmp_pdf = tempfile.mkstemp(suffix='.pdf')
         fd = open(tmp_pdf[1], 'w')
-        if type(pdf) == InstanceType and pdf.__class__ == StringIO.StringIO:
-            fd.write( pdf.getvalue() )
-        elif type(pdf) in [StringType, UnicodeType]:
-            fd.write( pdf )
-        elif type(pdf) == FileType:
-            fd.write( str(pdf) )
+        if isinstance(pdf, InstanceType) and pdf.__class__ == StringIO.StringIO:
+            fd.write(pdf.getvalue())
+        elif isinstance(pdf, StringType) or isinstance(pdf, UnicodeType):
+            fd.write(pdf)
+        elif isinstance(pdf, FileType):
+            fd.write(str(pdf))
         else:
             raise ValueError, 'Cannot determine type of pdf variable'
         fd.close()
@@ -175,7 +175,7 @@ class PDFParser(object):
             # For our case this is irrelevant
             pass
         elif result.startswith('Error'):
-            error =  result.split('\n')[0]
+            error = result.split('\n')[0]
             logger.error("Error in pdfinfo conversion: %s", error)
             return False
 
@@ -190,7 +190,7 @@ class PDFParser(object):
         # Caution: do not use the metalist, it's not unicode!
         # Note that pdfinfo returns a ini style list and an xml version.
         METADATA = result.split('Metadata:')
-        if len(METADATA)>1:
+        if len(METADATA) > 1:
             metaxml = METADATA[1]
         else:
             metaxml = ''
@@ -200,50 +200,50 @@ class PDFParser(object):
         # It even would be smart to use an xml parser here.
         patt_list = []
         patt_list.append(
-            ('Keywords', "<pdf:Keywords>(.*?)</pdf:Keywords>") )
+            ('Keywords', "<pdf:Keywords>(.*?)</pdf:Keywords>"))
         patt_list.append(
-            ('Keywords', "pdf:Keywords='(.*?)'") )
+            ('Keywords', "pdf:Keywords='(.*?)'"))
         patt_list.append(
-            ('Language', "<pdf:Language>(.*?)</pdf:Language>") )
+            ('Language', "<pdf:Language>(.*?)</pdf:Language>"))
         patt_list.append(
-            ('Language', "pdf:Language='(.*?)'") )
+            ('Language', "pdf:Language='(.*?)'"))
         patt_list.append(
-            ('UUID', "xapMM:DocumentID='uuid:(.*?)'") )
+            ('UUID', "xapMM:DocumentID='uuid:(.*?)'"))
         patt_list.append(
-            ('UUID', 'rdf:about="uuid:(.*?)"') )
+            ('UUID', 'rdf:about="uuid:(.*?)"'))
         patt_list.append(
-            ('CreationDate', "xap:CreateDate='(.*?)'") )
+            ('CreationDate', "xap:CreateDate='(.*?)'"))
         patt_list.append(
-            ('CreationDate', "<xap:CreateDate>(.*?)</xap:CreateDate>") )
+            ('CreationDate', "<xap:CreateDate>(.*?)</xap:CreateDate>"))
         patt_list.append(
-            ('ModificationDate', "xap:ModifyDate='(.*?)'") )
+            ('ModificationDate', "xap:ModifyDate='(.*?)'"))
         patt_list.append(
-            ('ModificationDate', "<xap:ModifyDate>(.*?)</xap:ModifyDate>") )
+            ('ModificationDate', "<xap:ModifyDate>(.*?)</xap:ModifyDate>"))
         patt_list.append(
-            ('MetadataDate', "xap:MetadataDate='(.*?)'") )
+            ('MetadataDate', "xap:MetadataDate='(.*?)'"))
         patt_list.append(
-            ('MetadataDate', "<xap:MetadataDate>(.*?)</xap:MetadataDate>") )
+            ('MetadataDate', "<xap:MetadataDate>(.*?)</xap:MetadataDate>"))
         patt_list.append(
             ('Rights Webstatement',
-             "<xapRights:WebStatement>(.*?)</xapRights:WebStatement>") )
+             "<xapRights:WebStatement>(.*?)</xapRights:WebStatement>"))
         patt_list.append(
-            ('Producer', "<pdf:Producer>(.*?)</pdf:Producer>") )
+            ('Producer', "<pdf:Producer>(.*?)</pdf:Producer>"))
         patt_list.append(
-            ('CreatorTool', "<xap:CreatorTool>(.*?)</xap:CreatorTool>") )
+            ('CreatorTool', "<xap:CreatorTool>(.*?)</xap:CreatorTool>"))
         patt_list.append(
-            ('Title', "<dc:title>(.*?)</dc:title>") )
+            ('Title', "<dc:title>(.*?)</dc:title>"))
         patt_list.append(
-            ('Description', "<dc:description>(.*?)</dc:description>") )
+            ('Description', "<dc:description>(.*?)</dc:description>"))
         patt_list.append(
-            ('Rights', "<dc:rights>(.*?)</dc:rights>") )
+            ('Rights', "<dc:rights>(.*?)</dc:rights>"))
         patt_list.append(
-            ('Format', "<dc:format>(.*?)</dc:format>") )
+            ('Format', "<dc:format>(.*?)</dc:format>"))
         patt_list.append(
-            ('Creator', "<dc:creator>(.*?)</dc:creator>") )
+            ('Creator', "<dc:creator>(.*?)</dc:creator>"))
         patt_list.append(
-            ('OPOCE', "pdfx:OPOCE='(.*?)'") )
+            ('OPOCE', "pdfx:OPOCE='(.*?)'"))
         patt_list.append(
-            ('OPOCE', "<pdfx:OPOCE>(.*?)</pdfx:OPOCE>") )
+            ('OPOCE', "<pdfx:OPOCE>(.*?)</pdfx:OPOCE>"))
 
         for patt in patt_list:
             pobj = re.compile(patt[1], re.I | re.S)
@@ -325,18 +325,18 @@ class PDFParser(object):
         def findAbbrev(fid):
             """ Find abbreviation
             """
-            if len(fid)>3 and fid[2] in ['_', '-']:
+            if len(fid) > 3 and fid[2] in ['_', '-']:
                 lang = fid[0:2].lower()
                 if lang in langs:
                     return lang
-            if len(fid)>3 and '.' in fid:
+            if len(fid) > 3 and '.' in fid:
                 elems = fid.split('.')
                 filename = ".".join(elems[:-1])
-                if len(filename)>3 and filename[-3] in ['_', '-']:
+                if len(filename) > 3 and filename[-3] in ['_', '-']:
                     lang = filename[-2:].strip()
                     if lang in langs:
                         return lang
-                elif len(filename)==2:
+                elif len(filename) == 2:
                     lang = filename
                     if lang in langs:
                         return lang

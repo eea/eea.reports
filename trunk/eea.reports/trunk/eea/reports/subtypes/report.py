@@ -48,7 +48,7 @@ class SchemaExtender(object):
                 schemata='default',
                 languageIndependent=False,
                 required=False,
-                validators = (('isNonEmptyFile', V_REQUIRED),
+                validators=(('isNonEmptyFile', V_REQUIRED),
                               ('checkFileMaxSize', V_REQUIRED)),
                 widget=widget.ReportFileWidget(
                     label=_('Publication file'),
@@ -73,7 +73,7 @@ class SchemaExtender(object):
                 lanaguageIndependent=False,
                 default=0,
                 widget=atapi.IntegerWidget(
-                    visible= -1,
+                    visible=-1,
                     label=_(u'EEA Publication Internal ID'),
                     description=_(u'Fill in EEA publication internal id'),
                     i18n_domain='eea',
@@ -255,14 +255,14 @@ class SchemaExtender(object):
                         )
                     ),
             field.ReportBooleanField('excludeFromNav',
-                    required = False,
-                    languageIndependent = True,
-                    schemata = 'settings',
+                    required=False,
+                    languageIndependent=True,
+                    schemata='settings',
                     default=True,
-                    widget = atapi.BooleanWidget(
+                    widget=atapi.BooleanWidget(
                         description=_(u'If selected, this item will '
                                         'not appear in the navigation tree'),
-                        label = _(u'Exclude from navigation'),
+                        label=_(u'Exclude from navigation'),
                         visible={'view' : 'hidden',
                                  'edit' : 'visible'},
                         i18n_domain='plone',

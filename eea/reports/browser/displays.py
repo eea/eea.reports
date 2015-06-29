@@ -40,7 +40,7 @@ class ReportContainerView(BrowserView):
         vocab = field.Vocabulary(self.context)
         rtype = vocab.getValue(value[0]) if len(value) > 0  else ''
         number = value[1] if len(value) > 1 else 0
-        year =  value[2] if len(value) > 2 else -1
+        year = value[2] if len(value) > 2 else -1
 
         text = rtype
 

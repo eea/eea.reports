@@ -108,7 +108,7 @@ class SerialTitleField(atapi.ObjectField):
         return DisplayList(((term.value, term.title, term.token) for term in
                             vocab(content_instance)))
 
-class ExtensionFieldMixin:
+class ExtensionFieldMixin(object):
     """ Archetypes SchemaExtender FieldMixin
     """
     def translationMutator(self, instance):

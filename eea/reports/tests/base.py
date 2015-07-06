@@ -2,7 +2,14 @@
 """
 # the special storage setup needs to be imported first to make sure
 # the tests run on top of a `BlobStorage`...
-from plone.app.blob.tests import db
+import logging
+logger = logging.getLogger("eea.report")
+
+db = None
+try:
+    from plone.app.blob.tests import db
+except ImportError, err:
+    logger.debug(err)
 
 import os
 from StringIO import StringIO
@@ -16,9 +23,6 @@ from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Products.PloneTestCase.layer import onsetup
 from eea.reports.config import product_globals
-import logging
-
-logger = logging.getLogger("eea.report")
 
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('ATVocabularyManager')

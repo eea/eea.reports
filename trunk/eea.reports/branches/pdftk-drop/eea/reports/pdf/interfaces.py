@@ -2,13 +2,7 @@
 """
 from zope.interface import Interface
 from eea.converter.interfaces import IPDFCoverImage
-
-class IReportPDFParser(Interface):
-    """Parser Utility to parse pdf files
-    """
-
-    def parse(pdf):
-        """ parses the given pdf file and returns a mapping of attributes """
+from eea.converter.interfaces import IPDFParser as IReportPDFParser
 
 class IPDFMetadataUpdater(Interface):
     """ Metadata updater utility to update pdf files metadata.
@@ -25,7 +19,8 @@ class IPDFMetadataUpdater(Interface):
             }
         """
 
+# BBB
 __all__ = [
     IPDFCoverImage.__name__,
+    IReportPDFParser.__name__,
 ]
-

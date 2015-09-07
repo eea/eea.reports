@@ -1,6 +1,7 @@
 """ Interfaces for PDF handlers
 """
 from zope.interface import Interface
+from eea.converter.interfaces import IPDFCoverImage
 
 class IReportPDFParser(Interface):
     """Parser Utility to parse pdf files
@@ -24,14 +25,7 @@ class IPDFMetadataUpdater(Interface):
             }
         """
 
-class IPDFCoverImage(Interface):
-    """ Utility to genrate pdf cover image
-    """
+__all__ = [
+    IPDFCoverImage.__name__,
+]
 
-    def generate(pdf, width, height):
-        """ Generate a cover image from given pdf data stream and return it.
-
-        @param pdf: pdf data stream
-        @param width: output image width
-        @param height: output image height
-        """

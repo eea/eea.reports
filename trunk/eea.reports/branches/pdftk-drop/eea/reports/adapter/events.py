@@ -5,7 +5,8 @@ from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
-from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
+from eea.converter.interfaces import IPDFCoverImage
+from eea.reports.pdf.interfaces import IReportPDFParser
 from eea.reports.interfaces import IReportContainerEnhanced
 logger = logging.getLogger('eea.reports')
 

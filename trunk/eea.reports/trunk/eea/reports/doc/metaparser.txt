@@ -1,0 +1,26 @@
+Overview
+========
+Extract metadata from PDF
+
+    >>> from pprint import pprint
+    >>> from eea.converter.interfaces import IPDFMetadataParser
+    >>> from zope.component import getUtility
+    >>> parser = getUtility(IPDFMetadataParser)
+
+    >>> inp = self.loadfile('tests/data/encrypted.pdf', ctype='application/pdf')
+    >>> metadata = parser.parse(inp, password='password')
+    >>> pprint(metadata)
+    {...
+     'creators': [u'Alin Voinea'...
+     'producer': u'LibreOffice 4.4'}
+
+    >>> inp = self.loadfile('tests/data/test.pdf', ctype='application/pdf')
+    >>> metadata = parser.parse(inp)
+
+    >>> pprint(metadata)
+    {...
+     'creators': [u'Peder Gabrielsen/Martin Adams', u'Adobe InDesign CS2 (4.0.2)'],
+     'description': u'The report presents an overview of air pollutant emission data reported by the EU-27 Member States between the years 1990 to 2006. ',
+    ...
+     'title': u'Annual European Community LRTAP Convention emission inventory report 1990-2006',
+    ...}

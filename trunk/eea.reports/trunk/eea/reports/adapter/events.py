@@ -5,7 +5,7 @@ from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
-from eea.reports.pdf.interfaces import IReportPDFParser, IPDFCoverImage
+from eea.converter.interfaces import IPDFCoverImage, IPDFMetadataParser
 from eea.reports.interfaces import IReportContainerEnhanced
 logger = logging.getLogger('eea.reports')
 
@@ -63,8 +63,8 @@ def parse_metadata(obj, evt):
     if not update_main:
         return
 
-    pdfparser = getUtility(IReportPDFParser)
-    metadata = pdfparser.parse(evt.data.read())
+    pdfparser = getUtility(IPDFMetadataParser)
+    metadata = pdfparser.parse(evt.data)
     if not metadata:
         return
 
@@ -83,7 +83,13 @@ def parse_metadata(obj, evt):
             continue
         if not value:
             continue
-        field.getMutator(obj)(value)
+        try:
+            field.getMutator(obj)(value)
+        except Exception, err:
+            logger.warn("Invalid key - value: %s - %s", key, value)
+            logger.exception(err)
+            continue
+
 #
 # Report initialize
 #

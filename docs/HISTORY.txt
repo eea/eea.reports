@@ -1,8 +1,11 @@
 Changelog
 =========
 
-6.4.dev0 - (unreleased)
+7.0.dev0 - (unreleased)
 -----------------------
+* Change: Refactoring PDF utilities - moved to eea.converter and drop pdftk and
+  pdfinfo/xpdf dependency
+  [voineali refs #28522]
 * Change: cleaned report.css of unused css
   [ichimdav refs #27220]
 

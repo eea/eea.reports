@@ -1,14 +1,9 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
-  xmlns:five="http://namespaces.zope.org/five"
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
-  <include package="eea.forms" />
-  <include package="eea.vocab" />
-  <include package="Products.ATVocabularyManager" />
-  <include package="Products.LinguaPlone" />
-  <include package="Products.AddRemoveWidget" />
+  <includeDependencies package="."/>
 
   <include package=".pdf" />
   <include package=".browser" />
@@ -19,8 +14,6 @@
 
   <include file="profiles.zcml" />
   <include file="skins.zcml" />
-
-  <five:registerPackage package="." initialize=".initialize" />
 
   <adapter
     zcml:condition="installed eea.rdfmarshaller"

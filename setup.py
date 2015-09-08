@@ -34,7 +34,7 @@ setup(name=name,
           'Products.AddRemoveWidget',
           'eea.forms',
           'eea.vocab',
-          'eea.converter',
+          'eea.converter > 9.9',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]

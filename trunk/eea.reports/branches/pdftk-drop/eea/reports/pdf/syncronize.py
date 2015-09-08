@@ -23,8 +23,10 @@ class SyncronizerSupport(object):
         if not value:
             return False
 
-        updater = getUtility(IPDFMetadataUpdater)
-        return updater._can_convert()
+        updater = queryUtility(IPDFMetadataUpdater)
+        if updater is not None:
+            return True
+        return False
 
 class Syncronizer(object):
     """ Class used to syncronize attached pdf publication with zodb metadata

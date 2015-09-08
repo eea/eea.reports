@@ -2,6 +2,4 @@
   xmlns="http://namespaces.zope.org/zope"
   i18n_domain="eea">
 
-  <utility factory=".updater.PDFMetadataUpdater" />
-
 </configure>

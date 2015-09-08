@@ -5,7 +5,7 @@ from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.CMFCore.utils import getToolByName
-from eea.converter.interfaces import IPDFCoverImage, IPDFParser
+from eea.converter.interfaces import IPDFCoverImage, IPDFMetadataParser
 from eea.reports.interfaces import IReportContainerEnhanced
 logger = logging.getLogger('eea.reports')
 
@@ -63,7 +63,7 @@ def parse_metadata(obj, evt):
     if not update_main:
         return
 
-    pdfparser = getUtility(IPDFParser)
+    pdfparser = getUtility(IPDFMetadataParser)
     metadata = pdfparser.parse(evt.data.read())
     if not metadata:
         return

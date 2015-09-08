@@ -64,7 +64,7 @@ def parse_metadata(obj, evt):
         return
 
     pdfparser = getUtility(IPDFMetadataParser)
-    metadata = pdfparser.parse(evt.data.read())
+    metadata = pdfparser.parse(evt.data)
     if not metadata:
         return
 
@@ -83,7 +83,13 @@ def parse_metadata(obj, evt):
             continue
         if not value:
             continue
-        field.getMutator(obj)(value)
+        try:
+            field.getMutator(obj)(value)
+        except Exception, err:
+            logger.warn("Invalid key - value: %s - %s", key, value)
+            logger.exception(err)
+            continue
+
 #
 # Report initialize
 #

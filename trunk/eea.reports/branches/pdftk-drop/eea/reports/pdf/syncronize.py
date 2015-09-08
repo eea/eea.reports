@@ -23,10 +23,9 @@ class SyncronizerSupport(object):
         if not value:
             return False
 
-        updater = queryUtility(IPDFMetadataUpdater)
-        if updater is not None:
-            return True
-        return False
+        if not queryUtility(IPDFMetadataUpdater):
+            return False
+        return True
 
 class Syncronizer(object):
     """ Class used to syncronize attached pdf publication with zodb metadata
@@ -92,7 +91,7 @@ class Syncronizer(object):
                 'There is no PDF publication file attached to syncronize')
 
         filename = getattr(value, 'filename', self.context.getId())
-        pdf = updater.update(str(value), metadata)
+        pdf = updater.update(value.index_html(), metadata)
         kwargs = {'_migration_': True, 'filename': filename}
         field.getMutator(self.context)(pdf, **kwargs)
         self._redirect('PDF publication file metadata updated')

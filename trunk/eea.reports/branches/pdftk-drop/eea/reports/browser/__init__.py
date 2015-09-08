@@ -1,2 +1,0 @@
-""" Browser views and controllers
-"""

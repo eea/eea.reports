@@ -1,30 +1,27 @@
-var Reports = {'version': '1.0.0'};
+/*
+ * Hides the content of a Publication with Folders through a
+ * slider similar to the data-and-maps table show and hide
+ * eg: http://eea.europa.eu/publications/corinair-nomenclatures
+ * */
+var Reports = {'version': '1.1.0'};
 Reports.Tree = {
     initialize: function(){
         this.elements = jQuery('li.tree-level-3:has(ul)');
         var tree = this;
         this.elements.each(function(){
-            jQuery(this).css('list-style', 'none');
+            var $li = jQuery(this).css('list-style', 'none');
+            var $link = $li.children('a');
             var div = jQuery('<div>');
             div.addClass('tree-level-arrow');
             div.addClass('tree-level-open');
             div.css('margin-left', '-1.7em');
-            if (jQuery.browser.msie && jQuery.browser.version < 8){
-                div.css('margin-left', '-2.1em');
-            }
             var element = this;
-            div.click(function(evt){
-                tree.toggle(element, this);
+            $link.add(div).click(function(ev){
+                tree.toggle(element, div);
+                ev.preventDefault();
             });
             jQuery(this).prepend(div);
-            div.click();
-
-            jQuery('a:first', jQuery(element)).click(function(evt){
-                if(jQuery(this).attr('href') === '#'){
-                    tree.toggle(element, jQuery('div:first', jQuery(element)));
-                    return false;
-                }
-            });
+            $link.click();
         });
     },
 
@@ -49,9 +46,6 @@ Reports.Tree = {
     }
 };
 
-jQuery(document).ready(function($){
+jQuery(document).ready(function(){
     Reports.Tree.initialize();
-    if(window.Figures){
-        window.Figures.Load();
-    }
 });

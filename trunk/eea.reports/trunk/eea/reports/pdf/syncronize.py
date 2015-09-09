@@ -3,7 +3,7 @@
 from zope.component import queryUtility, getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.statusmessages.interfaces import IStatusMessage
-from eea.reports.pdf.interfaces import IPDFMetadataUpdater
+from eea.converter.interfaces import IPDFMetadataUpdater
 
 class SyncronizerSupport(object):
     """ PDF Syncronizer support

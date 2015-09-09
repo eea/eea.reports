@@ -3,6 +3,9 @@ Changelog
 
 7.0.dev0 - (unreleased)
 -----------------------
+* Change: removed jquery browser call and documented the use of Reports.Tree
+  functionality and usage
+  [ichimdav refs #27220]
 * Change: Refactoring PDF utilities - moved to eea.converter and drop pdftk and
   pdfinfo/xpdf dependency
   [voineali refs #28522]

@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.0.dev0 - (unreleased)
------------------------
+7.0 - (2015-09-10)
+------------------
 * Change: removed jquery browser call and documented the use of Reports.Tree
   functionality and usage
   [ichimdav refs #27220]

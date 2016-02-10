@@ -3,6 +3,9 @@ Changelog
 
 7.1.dev0 - (unreleased)
 -----------------------
+* Change: removed the "sales agent link" and simplified view by
+  removing the unnecessary "published by"
+  [demarant refs #68719]
 
 7.0 - (2015-09-10)
 ------------------

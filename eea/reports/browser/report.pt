@@ -67,17 +67,7 @@
       <strong tal:content="here/Description" />
     </div>
 
-    <h2 class="publicationClear" i18n:translate="">Published by</h2>
-    <ul>
-      <li tal:repeat="publisher view/publishers">
-        <tal:publisher tal:replace="publisher" />
-      </li>
-      <li>
-        <tal:published  i18n:translate="Published">Published</tal:published>: <span tal:replace="python:plone_view.toLocalizedTime(here.getEffectiveDate())">
-        August 16, 2001 at 23:35:59
-       </span>
-      </li>
-    </ul>
+    <div class="visualClear"></div>
 
     <tal:foldercontents define="
       filename python:view.filename;
@@ -254,16 +244,6 @@
                     i18n:translate="" />
                 </div>
               </div>
-
-             <p i18n:translate="">
-                You can also obtain a copy from
-                    <span i18n:name="nearest-sale-agent">
-                        <a href="http://publications.europa.eu/others/agents/index_en.htm" target="_blank"
-                            i18n:translate="">
-                           your nearest sales agent</a>
-                    </span>
-                by providing the ordering info.
-              </p>
 
               <div class="visualClear"></div>
             </div>

@@ -206,7 +206,9 @@
               <h2 i18n:translate="">Order information</h2>
               <p>
                 <a href="" tal:define="
-                  eubookshop_link python:context.getEUBookshopLink(order_id=oid_value);"
+                  dquote python:'\x22';
+                  oid_value_quoted string:${dquote}${oid_value}${dquote};
+                  eubookshop_link python:context.getEUBookshopLink(order_id=oid_value_quoted);"
                   alt="Order a printed copy at EU-Bookshop"
                   tal:attributes="href eubookshop_link"
                   i18n:attributes="alt"

@@ -1,0 +1,78 @@
+.tree-level-arrow {
+    width: 16px;
+    height: 19px;
+    float: left;
+    cursor: pointer;
+}
+
+.tree-level-close {
+    background: transparent
+    url("++resource++publication_images/navigation.png") no-repeat
+    scroll 0 1px;
+}
+
+.tree-level-close:hover {
+    background: transparent
+    url("++resource++publication_images/navigation.png") no-repeat
+    scroll 0 -16px;
+}
+
+.tree-level-open {
+    background: transparent
+    url("++resource++publication_images/navigation.png") no-repeat
+    scroll 0 -32px;
+}
+
+.tree-level-open:hover {
+    background: transparent
+    url("++resource++publication_images/navigation.png") no-repeat
+    scroll 0 -48px;
+}
+/* used by frontpage.css */
+.figure-left {
+    float: left;
+    margin-right: 0.5em;
+}
+/* /used by frontpage.css */
+.publicationText {
+    background-color: transparent;
+    border-bottom: 1px dotted gray;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    clear: right;
+    margin-left: 0;
+}
+
+.publicationDescription {
+    margin-bottom: 0;
+}
+
+.publicationField {
+    margin-bottom: 0.5em;
+}
+
+.publicationOrder {
+    margin: 2em 0;
+}
+
+.publicationClear {
+    clear: left ! important;
+    margin-top: 1em ! important;
+}
+
+.publicationText #auto-related {
+    padding: 1em;
+    margin: 1em 1em 0 0;
+}
+
+dl.publicationMessage {
+    background-color: #f3f3f3;
+}
+
+dl.publicationMessage dt.portletHeader {
+    background-image: none;
+}
+
+dl.publicationMessage dd {
+    clear: both;
+}

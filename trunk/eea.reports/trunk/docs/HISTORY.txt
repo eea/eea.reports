@@ -1,8 +1,8 @@
 Changelog
 =========
 
-7.1.dev0 - (unreleased)
------------------------
+7.1 - (2016-02-15)
+------------------
 * Bug fix: Fixed an issue with the EUBookshop link
   which returned wrong books if the report was yet not 
   registered in EUBookshop.

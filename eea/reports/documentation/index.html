@@ -1,4 +1,3 @@
-
 <tal:block define="context python: request.PARENTS[1]; here nocall:context">
 <html metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
@@ -87,14 +86,7 @@ Products&#8221; section in &#8220;Site Setup&#8221;.</p>
 <div class="section" id="dependencies">
 <h2><a class="toc-backref" href="#id3">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Optional: pdfinfo to parse pdf metadata (part of the xpdf package).</p>
-<p>yum install xpdf (fedora)
-apt-get install xpdf (debian)</p>
-</li>
-<li><p class="first">Optional: pdftk and ImageMagick (6.3.7+) convert to generate a
-cover image from a pdf file.</p>
-<p>yum install pdftk (fedora)
-apt-get install pdftk (debian)</p>
+<li><p class="first">ImageMagick (6.3.7+) convert to generate a cover image from a pdf file.</p>
 <p>yum install ImageMagick
 apt-get install imagemagick</p>
 </li>
@@ -126,7 +118,7 @@ apt-get install imagemagick</p>
                     &copy;
                         Copyright 2012, European Environment Agency.
                 Created using <a
-                        href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3
+                        href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2
                     .
                 Theme <a href="https://github.com/scotch/sphinx-bootstrap">Sphinx-Bootstrap</a>
                 adapted from

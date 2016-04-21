@@ -5,6 +5,11 @@ import unittest
 from eea.reports.tests.base import ReportFunctionalTestCase
 from Testing.ZopeTestCase import FunctionalDocFileSuite as Suite
 
+try:
+    from eea import rdfmarshaller as RDF
+except ImportError:
+    RDF = None
+
 OPTIONFLAGS = (doctest.REPORT_ONLY_FIRST_FAILURE |
                doctest.ELLIPSIS |
                doctest.NORMALIZE_WHITESPACE)
@@ -13,7 +18,7 @@ OPTIONFLAGS = (doctest.REPORT_ONLY_FIRST_FAILURE |
 def test_suite():
     """ Suite
     """
-    return unittest.TestSuite((
+    suite = (
             Suite('doc/subtyping.txt',
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
@@ -34,8 +39,14 @@ def test_suite():
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
                   test_class=ReportFunctionalTestCase),
+            )
+
+    if RDF is not None:
+        suite += (
             Suite('doc/marshaller.txt',
                   optionflags=OPTIONFLAGS,
                   package='eea.reports',
                   test_class=ReportFunctionalTestCase),
-              ))
+              )
+
+    return unittest.TestSuite(suite)

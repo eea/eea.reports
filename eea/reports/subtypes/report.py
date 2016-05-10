@@ -1,29 +1,32 @@
 """ Subtyping
 """
 
+import logging
+from datetime import datetime
+
+from zope.interface import implements
+
 from Products.AddRemoveWidget import AddRemoveWidget
 from Products.Archetypes import atapi
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.validation import V_REQUIRED
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
-from datetime import datetime
 from eea.forms.widgets.ManagementPlanWidget import ManagementPlanWidget
 from eea.reports.config import COPYRIGHTS
 from eea.reports.subtypes import field
 from eea.reports.subtypes import widget
 from eea.reports.subtypes.widget import SerialTitleWidget
-from zope.interface import implements
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-import logging
 
-logger = logging.getLogger('eea.reports')
-
-# eea.relations widget
-EEAReferenceBrowserWidget = ReferenceBrowserWidget
 try:
     from eea.relations.widget.referencewidget import EEAReferenceBrowserWidget
 except ImportError:
+    # eea.relations widget
+    EEAReferenceBrowserWidget = ReferenceBrowserWidget
+    logger = logging.getLogger('eea.reports')
     logger.warn('eea.relations is not installed')
+
+logger = logging.getLogger('eea.reports')
 
 class SchemaExtender(object):
     """ Schema extender

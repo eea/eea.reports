@@ -3,26 +3,29 @@
 # the special storage setup needs to be imported first to make sure
 # the tests run on top of a `BlobStorage`...
 import logging
-logger = logging.getLogger("eea.report")
-
-db = None
-try:
-    from plone.app.blob.tests import db
-except ImportError, err:
-    logger.debug(err)
-
-import os
 from StringIO import StringIO
 from cgi import FieldStorage
-from ZPublisher.HTTPRequest import FileUpload
-from Testing import ZopeTestCase as ztc
+
+import os
+
 from App.Common import package_home
-from Products.Five import zcml
 from Products.Five import fiveconfigure
+from Products.Five import zcml
 from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Products.PloneTestCase.layer import onsetup
+from Testing import ZopeTestCase as ztc
+from ZPublisher.HTTPRequest import FileUpload
 from eea.reports.config import product_globals
+
+try:
+    from plone.app.blob.tests import db
+except ImportError, err:
+    db = None
+    logger = logging.getLogger("eea.report")
+    logger.debug(err)
+
+logger = logging.getLogger("eea.report")
 
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('ATVocabularyManager')

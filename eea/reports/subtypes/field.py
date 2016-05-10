@@ -1,26 +1,22 @@
 """ Archetypes custom fields
 """
+import logging
 from AccessControl import ClassSecurityInfo
+
+from Products.Archetypes import atapi
+from Products.Archetypes.Field import ReferenceField
 from Products.Archetypes.Field import decode, encode
 from Products.Archetypes.Registry import registerField, registerPropertyType
 from Products.Archetypes.utils import DisplayList
-from Products.Archetypes.Field import ReferenceField
-from Products.Archetypes import atapi
-
 from archetypes.schemaextender.field import ExtensionField
-
-from eea.reports.subtypes.widget import SerialTitleWidget
-from eea.reports.events import FileUploadedEvent
-
-from plone.app.blob.field import BlobField
-
-from zope.schema.interfaces import IVocabularyFactory
-from zope.event import notify
-from zope.component import queryUtility
-
 from eea.forms.fields.ManagementPlanField import ManagementPlanField
+from eea.reports.events import FileUploadedEvent
+from eea.reports.subtypes.widget import SerialTitleWidget
+from plone.app.blob.field import BlobField
+from zope.component import queryUtility
+from zope.event import notify
+from zope.schema.interfaces import IVocabularyFactory
 
-import logging
 logger = logging.getLogger('eea.reports.subtypes.field')
 
 class SerialTitleField(atapi.ObjectField):

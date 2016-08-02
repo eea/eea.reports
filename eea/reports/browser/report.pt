@@ -34,6 +34,18 @@
 
     </div>
 
+   <tal:order define="
+      poo_field       python:here.getField('published_online_only');
+      poo_value       python:poo_field.getAccessor(here)();"
+      tal:condition="python:poo_value">
+ 
+      <div class="portalMessage informationMessage">
+        <span i18n:translate=""
+                     tal:condition="poo_value">This report is being published online only. No printed edition of this report will be produced.</span>
+      </div>
+
+   </tal:order>
+
   <dl class="portalMessage warning publicationMessage"
     tal:condition="newer_versions">
     <dt class="portletHeader" i18n:translate="">
@@ -200,6 +212,8 @@
       oe_field        python:here.getField('order_extra_text');
       oe_value        python:oe_field.getAccessor(here)();"
       tal:condition="python:fs_value and oid_value">
+          
+           
 
           <tal:order_default condition="not:oo_value">
             <div class="publicationOrder">

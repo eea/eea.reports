@@ -271,6 +271,16 @@ class SchemaExtender(object):
                         i18n_domain='plone',
                         ),
                 ),
+            field.ReportBooleanField('published_online_only',
+                    schemata='report',
+                    languageIndependent=True,
+                    default=False,
+                    widget=atapi.BooleanWidget(
+                        label=_('Published online only'),
+                        description=_('Is this publication published online only?'),
+                        i18n_domain='eea',
+                        ),
+                   ),
             ]
 
     def __init__(self, context):
@@ -301,6 +311,7 @@ class SchemaExtender(object):
                 'trailer',
                 'order_override_text',
                 'order_extra_text',
+                'published_online_only'
         ]
 
         new_order.extend([x for x in order if x not in new_order])

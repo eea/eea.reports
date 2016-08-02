@@ -3,6 +3,8 @@ Changelog
 
 7.4.dev0 - (unreleased)
 -----------------------
+* Feature: Display message if there is no printed edition
+  [catalin refs #73796]
 
 7.3 - (2016-05-19)
 ------------------

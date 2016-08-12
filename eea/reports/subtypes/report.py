@@ -277,7 +277,8 @@ class SchemaExtender(object):
                     default=False,
                     widget=atapi.BooleanWidget(
                         label=_('Published online only'),
-                        description=_('Is this publication published online only?'),
+                        description=_(
+                            'Is this publication published online only?'),
                         i18n_domain='eea',
                         ),
                    ),

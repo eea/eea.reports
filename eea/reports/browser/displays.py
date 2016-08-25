@@ -91,24 +91,12 @@ class ReportContainerView(BrowserView):
         """
         return self.report.getObjSize(self.report)
 
-
-    @property
-    def documents(self):
-        """ Documents children
-        """
-        return self.context.getFolderContents({'portal_type':'Document'})
-
     @property
     def items(self):
         """ Files children
         """
-        if self.documents:
-            return self.context.getFolderContents({
-                'portal_type': ['Document', 'Folder']
-            })
-
         return self.context.getFolderContents({
-            'portal_type': ['File', 'Link', 'Folder']
+            'portal_type': ['Document', 'File', 'Link', 'Folder']
         })
 
     @property

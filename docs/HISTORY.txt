@@ -3,6 +3,8 @@ Changelog
 
 7.5.dev0 - (unreleased)
 -----------------------
+* Feature: Show Files no matter if there are Document/Page in root
+  [catalin refs #75197]
 
 7.4 - (2016-08-03)
 ------------------

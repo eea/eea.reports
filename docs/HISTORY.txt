@@ -1,6 +1,9 @@
 Changelog
 =========
 
+7.6.dev0 - (unreleased)
+-----------------------
+
 7.5 - (2016-08-29)
 ------------------
 * Feature: Show Files no matter if there are Document/Page in root

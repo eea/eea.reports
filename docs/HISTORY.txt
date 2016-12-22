@@ -3,7 +3,9 @@ Changelog
 
 7.6.dev0 - (unreleased)
 -----------------------
-
+* Change: removed condition which states that media link must be from ftp.eea
+  and show folder url also for anonymous from report.pt
+  [ichim-david refs #79977]
 7.5 - (2016-08-29)
 ------------------
 * Feature: Show Files no matter if there are Document/Page in root

@@ -38,7 +38,7 @@
       poo_field       python:here.getField('published_online_only');
       poo_value       python:poo_field.getAccessor(here)();"
       tal:condition="python:poo_value">
- 
+
       <div class="portalMessage informationMessage">
         <span i18n:translate=""
                      tal:condition="poo_value">This report is being published online only. No printed edition of this report will be produced.</span>
@@ -122,7 +122,6 @@
           </li>
 
           <tal:link condition="python:item.portal_type == 'Link'">
-            <tal:conditionMediaServer condition="python:item.getRemoteUrl.startswith('http://ftp.eea.europa.eu')">
             <li tal:define="
               item_type item/portal_type;
               wtool python:here.portal_workflow;
@@ -138,16 +137,14 @@
                 <span tal:content="item_title_or_id" />
               </a>
             </li>
-            </tal:conditionMediaServer>
           </tal:link>
 
           <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
             class python:'tree-level-%s' % level">
             <tal:folder define="
-              isAnon python: here.portal_membership.isAnonymousUser();
               folder item;
               folder folder/getObject|folder;
-              folder_url python:isAnon and '#' or folder.absolute_url();
+              folder_url python:folder.absolute_url();
               folder_title folder/pretty_title_or_id;
               folder_type folder/portal_type;">
               <a tal:attributes="href folder_url; title folder_title">
@@ -212,8 +209,8 @@
       oe_field        python:here.getField('order_extra_text');
       oe_value        python:oe_field.getAccessor(here)();"
       tal:condition="python:fs_value and oid_value">
-          
-           
+
+
 
           <tal:order_default condition="not:oo_value">
             <div class="publicationOrder">

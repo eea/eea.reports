@@ -3,10 +3,10 @@
 from datetime import datetime
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
-from eea.reports.config import STARTING_YEAR
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
+from eea.reports.config import STARTING_YEAR
+from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 class ReportYears(object):
     """ Report years vocabulary

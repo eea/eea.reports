@@ -329,4 +329,3 @@ class SchemaExtender(object):
         schematas['categorization'] = order
 
         return schematas
-

@@ -3,8 +3,8 @@
 import logging
 from Products.ATVocabularyManager.types.simple import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
-from eea.reports.config import VOCABULARIES
 from Products.ATVocabularyManager.utils.vocabs import createSimpleVocabs
+from eea.reports.config import VOCABULARIES
 logger = logging.getLogger('eea.reports')
 
 def installVocabularies(context):

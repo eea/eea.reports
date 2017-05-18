@@ -2,9 +2,9 @@
 """
 import doctest
 import unittest
-from eea.reports.tests.base import ReportFunctionalTestCase
 from Testing.ZopeTestCase import FunctionalDocFileSuite as Suite
 
+from eea.reports.tests.base import ReportFunctionalTestCase
 try:
     from eea import rdfmarshaller as RDF
 except ImportError:

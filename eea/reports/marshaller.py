@@ -19,5 +19,4 @@ class SerialTitle2Surf(ATField2Surf):
         v = self.field.getAccessor(self.context)()
         if v:
             return " - ".join(str(x).strip() for x in v if x is not None)
-        else:
-            return None
+        return None

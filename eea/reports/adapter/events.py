@@ -136,7 +136,7 @@ def setLanguageIndependent(obj, evt):
                 languageIndependent=True):
                 independent_fields.setdefault(field.getName(), None)
 
-        for field_id in independent_fields.keys():
+        for field_id in independent_fields:
             independent_fields[field_id] = canonical.getField(
                 field_id).get(canonical)
 
@@ -144,7 +144,7 @@ def setLanguageIndependent(obj, evt):
         for trans in canonical.getTranslations():
             detect_diff = False
             ob_trans = canonical.getTranslation(trans)
-            for field_id in independent_fields.keys():
+            for field_id in independent_fields:
                 new_value = independent_fields[field_id]
                 old_value = ob_trans.getField(field_id).get(ob_trans)
                 if new_value != old_value:

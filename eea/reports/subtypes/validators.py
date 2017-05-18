@@ -17,9 +17,9 @@ class SerialTitle(object):
     def __call__(self, value, instance, *args, **kwargs):
         """ Validate
         """
-        report_type = len(value) > 0 and value[0] or 'N/A'
-        report_num = len(value) > 1 and value[1] or 0
-        report_year = len(value) > 2 and value[2] or - 1
+        report_type = value[0] if value else 'N/A'
+        report_num = value[1] if len(value) > 1 else 0
+        report_year = value[2] if len(value) > 2 else - 1
 
         # if no report_type then we ignore other fields
         # and the valdation is always true.

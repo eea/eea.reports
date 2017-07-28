@@ -21,16 +21,14 @@
                            string:${context/absolute_url}#previous-versions"
            i18n:translate="" class="showOlderVersions">See older versions.</a>
 
-        <dl id="previous-versions">
-            <dd>
-                <ul>
-                    <li class="portletItem" tal:repeat="brain older_versions">
-                        <a tal:attributes="href brain/getPath"
-                           tal:content="brain/Title" />
-                    </li>
-                </ul>
-            </dd>
-        </dl>
+        <div id="previous-versions">
+            <ul>
+                <li class="portletItem" tal:repeat="brain older_versions">
+                    <a tal:attributes="href brain/getPath"
+                       tal:content="brain/Title" />
+                </li>
+            </ul>
+        </div>
 
     </div>
 

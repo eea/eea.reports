@@ -1,0 +1,96 @@
+Canonical URL viewlet
+====================================
+
+The publications are grouped by the publication_groups field. The canonical 
+publication is the latest one that is published in that publication group.
+    
+    >>> from datetime import datetime
+    >>> from datetime import timedelta
+
+Initialize first report
+
+    >>> self.loginAsPortalOwner()
+    >>> id = self.folder.invokeFactory('Report', 'rep1')
+    >>> rep1 = self.folder[id]
+    >>> rep1.setTitle('First report')
+    >>> rep1.reindexObject()
+
+When report has no publication group or effective date, the report is its own 
+canonical object.
+
+    >>> from eea.reports.browser.viewlets import CanonicalURL
+    >>> req = self.app.REQUEST
+    >>> viewlet = CanonicalURL(rep1, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    True
+    
+Set some dates for testing
+
+    >>> now = datetime.now()
+    >>> tom = now + timedelta(days=1)
+
+Also, when report has a publication group but no effective date.
+
+    >>> rep1.getField('publication_groups').getMutator(rep1)(['Group1'])
+    >>> rep1.reindexObject()
+    >>> viewlet = CanonicalURL(rep1, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    True
+
+Again, when report has no publication group but has effective date:
+
+    >>> rep1.getField('publication_groups').getMutator(rep1)("")
+    >>> rep1.setEffectiveDate(now)
+    >>> rep1.reindexObject()
+    >>> viewlet = CanonicalURL(rep1, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    True
+
+Initialize second report:
+
+    >>> _ = self.folder.invokeFactory('Report', 'rep2')
+    >>> rep2 = self.folder.rep2
+    >>> rep2.setTitle('Second report')
+    >>> rep2.reindexObject()
+
+When another report has the same publication group and a more recent effective 
+date, it becomes the canonical object:
+    
+    >>> viewlet = CanonicalURL(rep2, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    False
+    >>> rep2.absolute_url() in viewlet.render()
+    True
+
+When both reports are in the same publication group, but only one has the
+effective date set, that one will be the canonical:
+    
+    >>> rep1.getField('publication_groups').getMutator(rep1)(['Group1'])
+    >>> rep2.getField('publication_groups').getMutator(rep2)(['Group1'])
+    >>> rep1.setEffectiveDate(now)
+    >>> rep1.reindexObject()
+    >>> rep2.reindexObject()
+    >>> viewlet = CanonicalURL(rep2, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    True
+
+Second report gets a publication group and both reports have effective date:
+    
+    >>> rep1.setEffectiveDate(now)
+    >>> rep2.setEffectiveDate(tom)
+    >>> rep1.reindexObject()
+    >>> rep2.reindexObject()
+    >>> viewlet = CanonicalURL(rep2, req, None, None)
+    >>> rep2.absolute_url() in viewlet.render()
+    True
+
+Of course, when effective dates are inverted, the first object becomes the 
+canonical:
+
+    >>> rep1.setEffectiveDate(tom)
+    >>> rep2.setEffectiveDate(now)
+    >>> rep1.reindexObject()
+    >>> rep2.reindexObject()
+    >>> viewlet = CanonicalURL(rep2, req, None, None)
+    >>> rep1.absolute_url() in viewlet.render()
+    True

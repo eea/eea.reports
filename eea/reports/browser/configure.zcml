@@ -57,4 +57,13 @@
       />
   </configure>
 
+  <browser:viewlet
+    name="plone.links.canonical_url"
+    manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+    class=".viewlets.CanonicalURL"
+    permission="zope2.View"
+    for="eea.reports.interfaces.IReportContainerEnhanced"
+  />
+
+
 </configure>

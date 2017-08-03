@@ -5,6 +5,9 @@ Changelog
 -----------------------
 * Bug fix W3C compliance modifications
   [valipod refs #86295]
+* Feature: Canonical is now pointing to latest report from publication group
+  Added tests for this feature
+  [zoltan_andras refs #86570]
 
 7.9 - (2017-05-22)
 ------------------

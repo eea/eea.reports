@@ -1,8 +1,6 @@
 """ eea.reports viewlets
 """
 from eea.versions.browser.viewlets import CanonicalURL as ViewletBase
-from zope.component import getMultiAdapter
-from zope.component import queryAdapter
 
 
 class CanonicalURL(ViewletBase):
@@ -12,8 +10,9 @@ class CanonicalURL(ViewletBase):
     def render(self):
         """ render canonical url
         """
+        field = self.context.getField('publication_groups')
 
-        if self.context.getField('publication_groups').getAccessor(self.context)():
+        if field.getAccessor(self.context)():
             cat = self.context.portal_catalog
             brains = cat.searchResults(
                 publication_groups=self.context.publication_groups[0],

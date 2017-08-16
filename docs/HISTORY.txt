@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.0.dev0 - (unreleased)
------------------------
+8.0 - (2017-08-16)
+------------------
 * Bug fix W3C compliance modifications
   [valipod refs #86295]
 * Feature: Canonical is now pointing to latest report from publication group

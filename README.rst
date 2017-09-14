@@ -1,6 +1,8 @@
 ===========
 EEA Reports
 ===========
+.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.reports/job/master/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea/job/eea.reports/job/master/display/redirect
 
 The EEA Reports Product can be used to organise printed publications that are
 available online for download. Such Reports usually have a publication

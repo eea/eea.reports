@@ -41,9 +41,10 @@ setup(name=name,
           'Products.ATVocabularyManager',
           'Products.LinguaPlone',
           'Products.AddRemoveWidget',
+          'eea.converter > 9.9',
           'eea.forms',
           'eea.vocab',
-          'eea.converter > 9.9',
+          'eea.versions',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]

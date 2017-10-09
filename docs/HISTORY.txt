@@ -3,6 +3,8 @@ Changelog
 
 8.1.dev0 - (unreleased)
 -----------------------
+* Change: Remove Sphinx generated documentation
+  [petchesi-iulian refs #88212]
 
 8.0 - (2017-08-16)
 ------------------

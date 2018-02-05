@@ -1,8 +1,11 @@
 Changelog
 =========
 
-8.3.dev0 - (unreleased)
+8.3 - (2018-02-06)
 -----------------------
+* Feature: Modified the report template and added a browser view which 'serves'
+  the pdf file to the viewer
+  [petchesi-iulian refs #90589]
 
 8.2 - (2017-12-12)
 ------------------

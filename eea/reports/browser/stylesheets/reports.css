@@ -76,3 +76,10 @@ dl.publicationMessage dt.portletHeader {
 dl.publicationMessage dd {
     clear: both;
 }
+
+/* Overrides for PDF Viewer */
+
+.portaltype-report #region-content {
+    background-color: #ffffff;
+    padding: 1.5em;
+}

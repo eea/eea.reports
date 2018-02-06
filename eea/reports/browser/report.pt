@@ -403,9 +403,9 @@
               item_state_title python:wtool.getTitleForStateOnType(item_wf_state, item_type);
               item_object item/getObject|item;
               item_title_or_id item/pretty_title_or_id;">
-              <a tal:define="url item_object/absolute_url" tal:attributes="
+              <a tal:define="href item_object/absolute_url" tal:attributes="
                 class item_wf_state_class;
-                href item_object/absolute_url;
+                href python:href + '/view';
                 title item_title_or_id">
                 <span tal:content="item_title_or_id" />
               </a>

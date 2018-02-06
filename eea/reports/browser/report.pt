@@ -88,13 +88,6 @@
       <h2 i18n:translate="" tal:condition="has_children">Content</h2>
 
       <ul tal:condition="filename">
-        <li>
-          <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
-            <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
-            <span tal:content="filename" />
-          </a>
-          <span tal:content="python:'[%s]' % view.size" />
-
           <div class="pdfjs">
               <div id="outerContainer">
                 <div id="sidebarContainer">
@@ -389,6 +382,12 @@
               </div> <!-- outerContainer -->
               <div id="printContainer"></div>
           </div>
+        <li>
+          <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
+            <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+            <span tal:content="filename" />
+          </a>
+          <span tal:content="python:'[%s]' % view.size" />
         </li>
       </ul>
 

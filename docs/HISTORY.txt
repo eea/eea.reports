@@ -3,6 +3,8 @@ Changelog
 
 8.3.dev0 - (unreleased)
 -----------------------
+* Bug fix: avoid js error within report_file.pt by calling js within dom ready
+  [ichim-david refs #91577]
 
 8.2 - (2017-12-12)
 ------------------

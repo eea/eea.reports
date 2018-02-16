@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.3 - (2018-02-06)
+8.3 - (2018-02-16)
 ------------------
 * Feature: Modified the report template and added a browser view which 'serves'
   the pdf file to the viewer, also modified the styling of the reports

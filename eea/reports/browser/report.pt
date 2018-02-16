@@ -6,6 +6,7 @@
 <body>
 
 <metal:description fill-slot="content-description" />
+<!--<metal:description fill-slot="content-title" />-->
 
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core"
@@ -58,11 +59,8 @@
     </dd>
   </dl>
 
-  <div class="documentDescription" tal:content="view/serial_title">
-    Serial title
-  </div>
-
-  <div class="figure-left" tal:define="cover here/getCoverImage|nothing"
+  <div class="figure-left publicationHidden"
+    tal:define="cover here/getCoverImage|nothing"
     tal:condition="cover">
     <div class="figure">
       <img tal:attributes="
@@ -73,11 +71,12 @@
   </div>
 
   <div class="publicationText">
-    <div class="publicationDescription">
+    <!--<div class="visualClear"></div>-->
+
+    <div class="publicationDescription publicationHidden hiddenDesc">
       <strong tal:content="here/Description" />
     </div>
 
-    <div class="visualClear"></div>
 
     <tal:foldercontents define="
       filename python:view.filename;
@@ -85,9 +84,21 @@
       has_children view/has_children"
       tal:condition="has_children">
 
-      <h2 i18n:translate="" tal:condition="has_children">Content</h2>
+      <h2 class="publicationHidden" i18n:translate="" tal:condition="has_children">Content</h2>
 
-      <ul tal:condition="filename">
+      <metal:title define-slot="content-title">
+        <metal:comment tal:content="nothing">
+            <tal:comment replace="nothing">
+                If you write a custom title always use
+                <h1 class="documentFirstHeading"></h1> for it
+            </tal:comment>
+        </metal:comment>
+        <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view">
+            Generic KSS Title. Is rendered with class="documentFirstHeading".
+        </h1>
+      </metal:title>
+
+      <ul tal:condition="filename" class="report-pdf">
           <div class="pdfjs">
               <div id="outerContainer">
                 <div id="sidebarContainer">
@@ -391,7 +402,31 @@
         </li>
       </ul>
 
-      <ul metal:define-macro="folderish" tal:define="level level|python:1;">
+      <metal:content define-macro="content-header">
+      <div class="inline-content-header">
+          <div tal:replace="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+          <tal:not4AjaxLoad  tal:condition="not:ajax_load">
+              <tal:not4Print tal:condition="python:not isPrint">
+                  <div tal:replace="structure provider:plone.belowcontenttitle" />
+              </tal:not4Print>
+          </tal:not4AjaxLoad>
+          <div tal:replace="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
+      </div>
+      </metal:content>
+
+      <div class="documentDescription" tal:content="view/serial_title">
+        Serial title
+      </div>
+
+      <div class="publicationDescription">
+        <strong tal:content="here/Description" />
+      </div>
+
+      <div class="moreFiles">
+        <a href="#report-files">See additional files</a>
+      </div>
+
+      <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File']">
             <tal:file define="

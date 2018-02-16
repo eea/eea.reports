@@ -423,7 +423,7 @@
       </div>
 
       <div class="moreFiles">
-        <a href="#report-files">See additional files</a>
+        <a i18n:translate="" href="#report-files">See additional files</a>
       </div>
 
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">

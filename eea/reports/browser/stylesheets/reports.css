@@ -76,3 +76,102 @@ dl.publicationMessage dt.portletHeader {
 dl.publicationMessage dd {
     clear: both;
 }
+
+/* Overrides for PDF Viewer */
+
+.portaltype-report #region-content {
+    background-color: #ffffff;
+    padding: 1.5em;
+}
+
+.portaltype-report #content .report-pdf {
+    display: block;
+    float: left;
+    width: 66%;
+}
+
+.portaltype-report #content .publicationDescription {
+    display: block;
+    width: 30%;
+    float: right;
+}
+
+.portaltype-report #content .report-files {
+    display: inline-block;
+}
+
+.portaltype-report #content .inline-content-header {
+    display: block;
+    width: 30%;
+    float: right;
+}
+
+.portaltype-report #content .content-header {
+    display: none;
+}
+
+.portaltype-report #content .documentDescription {
+    margin-right: 14%;
+    float: right;
+}
+
+.portaltype-report #content .moreFiles {
+    display: block;
+    float: right;
+    width: 30%;
+    margin-top: 2em;
+}
+
+.portaltype-report #content-core p,
+.portaltype-report #content-core li {
+    font-size: 115%;
+}
+
+.portaltype-report #content .eea-tabs-panel .page {
+    margin-left: 0;
+}
+
+.portaltype-report #content .languageCodes li {
+    font-size: inherit;
+}
+
+.portaltype-report #content .pdfjs #toolbarViewerMiddle {
+    left: 57%;
+}
+
+.portaltype-report #content .publicationHidden {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .portaltype-report #content .publicationText .inline-content-header,
+    .portaltype-report #content .publicationText .documentFirstHeading,
+    .portaltype-report #content .publicationText .publicationDescription,
+    .portaltype-report #content .documentDescription,
+    .portaltype-report #content .publicationText .moreFiles {
+        display: none;
+    }
+
+    .portaltype-report #content .content-header {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationText .report-pdf {
+        float: none;
+        width: 100%;
+    }
+
+    .portaltype-report #content .publicationText .report-files {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationHidden {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationText .hiddenDesc {
+        display: block;
+        float: none;
+        width: 100%;
+    }
+}

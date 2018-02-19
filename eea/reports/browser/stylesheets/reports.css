@@ -131,7 +131,7 @@ dl.publicationMessage dd {
     margin-left: 0;
 }
 
-.portaltype-report #content .languageCodes li {
+.portaltype-report #content #languageCodes li {
     font-size: inherit;
 }
 

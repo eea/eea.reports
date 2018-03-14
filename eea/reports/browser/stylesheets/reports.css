@@ -76,3 +76,216 @@ dl.publicationMessage dt.portletHeader {
 dl.publicationMessage dd {
     clear: both;
 }
+
+/* Overrides for PDF Viewer */
+
+.portaltype-report #region-content {
+    background-color: #ffffff;
+    padding: 1.5em;
+}
+
+.portaltype-report #content .report-pdf {
+    display: block;
+    float: left;
+    width: 68%;
+}
+
+.portaltype-report #content .publicationDescription {
+    display: block;
+    width: 30%;
+    float: right;
+}
+
+.portaltype-report #content .report-files {
+    display: inline-block;
+}
+
+.portaltype-report #content .inline-content-header {
+    display: block;
+    width: 30%;
+    float: right;
+}
+
+.portaltype-report #content .publicationText {
+    border-bottom: none;
+}
+
+.portaltype-report #content .content-header .panel-content #languageCodes {
+    display: block;
+}
+
+.portaltype-report #content .content-header .documentFirstHeading,
+.portaltype-report #content .content-header #languageCodes,
+.portaltype-report #content .content-header .documentByLine {
+    display: none;
+}
+
+.portaltype-report #content .content-header #article-language {
+    margin-top: 7%;
+}
+
+.portaltype-report #content .inline-content-header #article-language {
+    display: none;
+}
+
+.portaltype-report #content .content-header #tip-article-language {
+    margin-top: 6%;
+}
+
+.portaltype-report #content .documentDescription {
+    float: right;
+    width: 30%;
+}
+
+.portaltype-report #content .moreFiles {
+    display: block;
+    float: right;
+    width: 30%;
+    margin-top: 2em;
+}
+
+.portaltype-report #content-core p,
+.portaltype-report #content-core li {
+    font-size: 115%;
+}
+
+.portaltype-report #content .eea-tabs-panel .page {
+    margin-left: 0;
+}
+
+.portaltype-report #content #languageCodes li {
+    font-size: inherit;
+}
+
+.portaltype-report #content .pdfjs #toolbarViewerMiddle {
+    left: 57%;
+}
+
+.portaltype-report #content .publicationHidden {
+    display: none;
+}
+
+.portaltype-report #content .documentByLine {
+    max-width: 100%;
+}
+
+#content .pdfjs #sidebarContainer {
+    width: 20%;
+}
+
+#content .pdfjs #toolbarSidebar {
+    width: 100%;
+}
+
+#content .pdfjs #sidebarContent {
+    width: 100%;
+}
+
+#content .pdfjs #outlineView {
+    padding-right: 0;
+    padding-left: 4px;
+}
+
+#content .pdfjs #outlineView,
+#content .pdfjs #attachmentsView {
+    width: 96%;
+}
+
+html[dir='ltr'] #content .pdfjs .outlineWithDeepNesting>.outlineItem,
+html[dir='ltr'] #content .pdfjs .outlineItem>.outlineItems {
+    margin-left: 0;
+}
+
+html[dir='ltr'] #content .pdfjs .outlineItem>a {
+    padding-left: 0;
+}
+
+#content .pdfjs .outlineItem>a,
+#content .pdfjs .attachmentsItem>button {
+    font-size: 11px;
+}
+
+#content .pdfjs #thumbnailView {
+    padding: 10px 0 0;
+}
+
+html[dir='ltr'] #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
+    left: 20%;
+    width: 80% !important;
+}
+
+html[dir='ltr'] #content .pdfjs #outerContainer>#mainContainer {
+    width: 100% !important;
+}
+
+html #content .pdfjs #outerContainer .dropdownToolbarButton {
+    width: 70%;
+}
+
+html #content .pdfjs #outerContainer.sidebarOpen .dropdownToolbarButton {
+    min-width: 60px !important;
+    width: 50%;
+}
+
+#content .pdfjs .toolbarButtonSpacer {
+    width: 1px;
+}
+
+#content .report-pdf {
+    margin-left: 0;
+}
+
+html[dir='ltr'] #content .pdfjs .findbar {
+    left: 7%;
+}
+
+@media (max-width: 840px) {
+    html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
+        left: 20%;
+        width: 80% !important;
+    }
+
+    html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer>#mainContainer {
+        width: 100% !important;
+    }
+
+    html[dir='ltr'] #content .pdfjs .splitToolbarButton:first-child,
+    html[dir='ltr'] #content .pdfjs .toolbarButton:first-child,
+    html[dir='rtl'] #content .pdfjs .splitToolbarButton:last-child,
+    html[dir='rtl'] #content .pdfjs .toolbarButton:last-child {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .portaltype-report #content .publicationText .inline-content-header,
+    .portaltype-report #content .publicationText .documentFirstHeading,
+    .portaltype-report #content .publicationText .publicationDescription,
+    .portaltype-report #content .documentDescription,
+    .portaltype-report #content .publicationText .moreFiles {
+        display: none;
+    }
+
+    .portaltype-report #content .content-header {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationText .report-pdf {
+        float: none;
+        width: 100%;
+    }
+
+    .portaltype-report #content .publicationText .report-files {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationHidden {
+        display: block;
+    }
+
+    .portaltype-report #content .publicationText .hiddenDesc {
+        display: block;
+        float: none;
+        width: 100%;
+    }
+}

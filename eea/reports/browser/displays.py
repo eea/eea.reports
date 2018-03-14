@@ -117,3 +117,26 @@ class ReportContainerDownload(BrowserView):
         """
         field = self.context.getField('file')
         return field.download(self.context, self.request, self.request.response)
+
+
+class ReportContainerViewPdf(BrowserView):
+    """ Report View Pdf File
+    """
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self):
+        """ View
+        """
+        field = self.context.getField('file')
+        file = self.context.file
+        fname = field.getFilename(self.context)
+
+        resp = self.request.RESPONSE
+        resp.setHeader('Filename', fname)
+        resp.setHeader('Content-Type', 'application/pdf')
+        resp.setHeader('Content-Disposition', 'inline; filename="%s"' % fname)
+
+        return file

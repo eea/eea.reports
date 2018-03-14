@@ -1,8 +1,18 @@
 Changelog
 =========
 
-8.2.dev0 - (unreleased)
------------------------
+8.3 - (2018-03-01)
+------------------
+* Feature: Implemented responsive design and resized the viewer
+  [petchesi-iulian refs #90589]
+* Feature: Modified the report template and added a browser view which 'serves'
+  the pdf file to the viewer, also modified the styling of the reports
+  [petchesi-iulian refs #90589]
+* Bug fix: avoid js error within report_file.pt by calling js within dom ready
+  [ichim-david refs #91577]
+
+8.2 - (2017-12-12)
+------------------
 * Change: Replace eeacms/zptlint with eeacms/plone-test:4 zptlint
   [avoinea refs #90415]
 

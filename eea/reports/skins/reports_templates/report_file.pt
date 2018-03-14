@@ -80,7 +80,9 @@
       properties from pdf publication file metadata?</label></div>
   <script type="text/javascript"
     tal:content="string:
-    display_div('${fieldName}_update_meta', 'none');
+          jQuery(function($){
+              display_div('${fieldName}_update_meta', 'none');
+          });
     ">js</script>
 </metal:define>
 

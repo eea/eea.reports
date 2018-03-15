@@ -3,6 +3,8 @@ Changelog
 
 8.3 - (2018-03-01)
 ------------------
+* Feature: Modified the ordering of elementes in the template
+  [petchesi-iulian refs #90589]
 * Feature: Implemented responsive design and resized the viewer
   [petchesi-iulian refs #90589]
 * Feature: Modified the report template and added a browser view which 'serves'

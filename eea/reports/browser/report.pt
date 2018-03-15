@@ -10,7 +10,7 @@
 
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core"
-     tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by">
+     tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by;pdf_enabled python: view.is_pdf();">
 
     <div class="portalMessage informationMessage"
          tal:condition="older_versions">
@@ -98,7 +98,7 @@
         </h1>
       </metal:title>
 
-      <ul tal:condition="filename" class="report-pdf">
+      <div tal:condition="filename" class="report-pdf">
           <div class="pdfjs">
               <div id="outerContainer">
                 <div id="sidebarContainer">
@@ -393,14 +393,7 @@
               </div> <!-- outerContainer -->
               <div id="printContainer"></div>
           </div>
-        <li>
-          <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
-            <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
-            <span tal:content="filename" />
-          </a>
-          <span tal:content="python:'[%s]' % view.size" />
-        </li>
-      </ul>
+      </div>
 
       <metal:content define-macro="content-header">
       <div class="inline-content-header">
@@ -422,10 +415,20 @@
         <strong tal:content="here/Description" />
       </div>
 
+      <h2 style="float:right;width:30%;">Download</h2>
+      <li style="float:right;width:30%;">
+        <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
+          <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+          <span tal:content="filename" />
+        </a>
+        <span tal:content="python:'[%s]' % view.size" />
+      </li>
+
       <div class="moreFiles">
-        <a i18n:translate="" href="#report-files">See additional files</a>
+        <a i18n:translate="" href="#additional-files">See additional files</a>
       </div>
 
+      <h2 style="float:left;width:100%;">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File']">

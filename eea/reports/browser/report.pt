@@ -6,11 +6,14 @@
 <body>
 
 <metal:description fill-slot="content-description" />
-<!--<metal:description fill-slot="content-title" />-->
 
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core"
-     tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by;pdf_enabled python: view.is_pdf();">
+     tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by;pdf_enabled python: not view.is_pdf()">
+    <script tal:condition="pdf_enabled">
+      var page_content = document.getElementById('content');
+      page_content.classList.add('pdf-viewer-disabled');
+    </script>
 
     <div class="portalMessage informationMessage"
          tal:condition="older_versions">
@@ -415,8 +418,8 @@
         <strong tal:content="here/Description" />
       </div>
 
-      <h2 style="float:right;width:30%;">Download</h2>
-      <li style="float:right;width:30%;">
+      <h2 tal:condition="python: not pdf_enabled" style="float:right;width:30%;">Download</h2>
+      <li tal:condition="python: not pdf_enabled" style="float:right;width:30%;">
         <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
           <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
           <span tal:content="filename" />

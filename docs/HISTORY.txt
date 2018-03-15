@@ -3,7 +3,8 @@ Changelog
 
 8.3 - (2018-03-01)
 ------------------
-* Feature: Modified the ordering of elementes in the template
+* Feature: Modified the ordering of elements in the template, modify elements
+  style depending on pdf enabled status
   [petchesi-iulian refs #90589]
 * Feature: Implemented responsive design and resized the viewer
   [petchesi-iulian refs #90589]

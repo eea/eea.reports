@@ -239,6 +239,17 @@ html[dir='ltr'] #content .pdfjs .findbar {
     left: 7%;
 }
 
+.portaltype-report #region-content .pdf-viewer-disabled .publicationDescription,
+.portaltype-report #region-content .pdf-viewer-disabled .documentDescription,
+.portaltype-report #region-content .pdf-viewer-disabled .inline-content-header {
+    width: 100%;
+    float: none;
+}
+
+.portaltype-report #region-content .pdf-viewer-disabled .moreFiles {
+    display: none;
+}
+
 @media (max-width: 840px) {
     html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
         left: 20%;

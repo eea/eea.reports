@@ -5,7 +5,7 @@
 
 <body>
 
-<metal:description fill-slot="content-description" />
+<metal:description fill-slot="content-description"/>
 
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core"
@@ -14,27 +14,6 @@
       var page_content = document.getElementById('content');
       page_content.classList.add('pdf-viewer-disabled');
     </script>
-
-    <div class="portalMessage informationMessage"
-         tal:condition="older_versions">
-
-        <span i18n:translate=""
-            tal:condition="not:newer_versions">This is the latest published version. </span>
-
-        <a tal:attributes="href
-                           string:${context/absolute_url}#previous-versions"
-           i18n:translate="" class="showOlderVersions">See older versions.</a>
-
-        <div id="previous-versions">
-            <ul>
-                <li class="portletItem" tal:repeat="brain older_versions">
-                    <a tal:attributes="href brain/getPath"
-                       tal:content="brain/Title" />
-                </li>
-            </ul>
-        </div>
-
-    </div>
 
    <tal:order define="
       poo_field       python:here.getField('published_online_only');
@@ -89,7 +68,7 @@
 
       <h2 class="publicationHidden" i18n:translate="" tal:condition="has_children">Content</h2>
 
-      <metal:title define-slot="content-title">
+      <metal:title define-slot="content-title" tal:condition="pdf_enabled">
         <metal:comment tal:content="nothing">
             <tal:comment replace="nothing">
                 If you write a custom title always use
@@ -418,7 +397,7 @@
         <strong tal:content="here/Description" />
       </div>
 
-      <h2 tal:condition="python: not pdf_enabled" style="float:right;width:30%;">Download</h2>
+      <h2 tal:condition="python: not pdf_enabled" style="float:right;width:30%;" i18n:translate="">Download</h2>
       <li tal:condition="python: not pdf_enabled" style="float:right;width:30%;">
         <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
           <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
@@ -431,7 +410,7 @@
         <a i18n:translate="" href="#additional-files">See additional files</a>
       </div>
 
-      <h2 style="float:left;width:100%;">Additional Files</h2>
+      <h2 style="float:left;width:100%;" i18n:translate="">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File']">
@@ -620,6 +599,27 @@
         <div tal:content="structure oe_value">Order extra text</div>
       </tal:order_extra>
     </tal:order>
+
+    <div class="portalMessage informationMessage"
+         tal:condition="older_versions">
+
+        <span i18n:translate=""
+            tal:condition="not:newer_versions">This is the latest published version. </span>
+
+        <a tal:attributes="href
+                           string:${context/absolute_url}#previous-versions"
+           i18n:translate="" class="showOlderVersions">See older versions.</a>
+
+        <div id="previous-versions">
+            <ul>
+                <li class="portletItem" tal:repeat="brain older_versions">
+                    <a tal:attributes="href brain/getPath"
+                       tal:content="brain/Title" />
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
   </div>
 </metal:content>

@@ -250,6 +250,18 @@ html[dir='ltr'] #content .pdfjs .findbar {
     display: none;
 }
 
+.portaltype-report #region-content .pdf-viewer-disabled > .content-header #tip-article-language {
+    margin-top: 25%;
+}
+
+.portaltype-report #region-content .pdf-viewer-disabled > .content-header #article-language {
+    margin-top: 28%;
+}
+
+.portaltype-report #content-core > div > .portalMessage {
+    width: 84%;
+}
+
 @media (max-width: 840px) {
     html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
         left: 20%;
@@ -298,5 +310,11 @@ html[dir='ltr'] #content .pdfjs .findbar {
         display: block;
         float: none;
         width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .portaltype-report #content-core > div > .portalMessage {
+        width: 75%;
     }
 }

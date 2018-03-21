@@ -173,7 +173,7 @@ dl.publicationMessage dd {
     margin-left: 0;
 }
 
-html[dir='ltr'] #content .pdfjs .findbar {
+html[dir='ltr'] .portaltype-report #content .pdfjs .findbar {
     left: 7%;
 }
 

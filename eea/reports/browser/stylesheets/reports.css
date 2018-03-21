@@ -169,68 +169,6 @@ dl.publicationMessage dd {
     max-width: 100%;
 }
 
-#content .pdfjs #sidebarContainer {
-    width: 20%;
-}
-
-#content .pdfjs #toolbarSidebar {
-    width: 100%;
-}
-
-#content .pdfjs #sidebarContent {
-    width: 100%;
-}
-
-#content .pdfjs #outlineView {
-    padding-right: 0;
-    padding-left: 4px;
-}
-
-#content .pdfjs #outlineView,
-#content .pdfjs #attachmentsView {
-    width: 96%;
-}
-
-html[dir='ltr'] #content .pdfjs .outlineWithDeepNesting>.outlineItem,
-html[dir='ltr'] #content .pdfjs .outlineItem>.outlineItems {
-    margin-left: 0;
-}
-
-html[dir='ltr'] #content .pdfjs .outlineItem>a {
-    padding-left: 0;
-}
-
-#content .pdfjs .outlineItem>a,
-#content .pdfjs .attachmentsItem>button {
-    font-size: 11px;
-}
-
-#content .pdfjs #thumbnailView {
-    padding: 10px 0 0;
-}
-
-html[dir='ltr'] #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
-    left: 20%;
-    width: 80% !important;
-}
-
-html[dir='ltr'] #content .pdfjs #outerContainer>#mainContainer {
-    width: 100% !important;
-}
-
-html #content .pdfjs #outerContainer .dropdownToolbarButton {
-    width: 70%;
-}
-
-html #content .pdfjs #outerContainer.sidebarOpen .dropdownToolbarButton {
-    min-width: 60px !important;
-    width: 50%;
-}
-
-#content .pdfjs .toolbarButtonSpacer {
-    width: 1px;
-}
-
 #content .report-pdf {
     margin-left: 0;
 }

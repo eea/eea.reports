@@ -66,7 +66,7 @@
       has_children view/has_children"
       tal:condition="has_children">
 
-      <h2 class="publicationHidden" i18n:translate="" tal:condition="has_children">Content</h2>
+      <!--<h2 class="publicationHidden" i18n:translate="" tal:condition="has_children">Content</h2>-->
 
       <metal:title define-slot="content-title" tal:condition="pdf_enabled">
         <metal:comment tal:content="nothing">
@@ -397,8 +397,8 @@
         <strong tal:content="here/Description" />
       </div>
 
-      <h2 tal:condition="python: not pdf_enabled" style="float:right;width:30%;" i18n:translate="">Download</h2>
-      <li tal:condition="python: not pdf_enabled" style="float:right;width:30%;display:block;">
+      <h2 class="pdf-right-alignment" tal:condition="python: not pdf_enabled" i18n:translate="">Download</h2>
+      <li class="pdf-right-alignment" tal:condition="python: not pdf_enabled">
         <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
           <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
           <span tal:content="filename" />
@@ -410,7 +410,7 @@
         <a i18n:translate="" href="#additional-files">See additional files</a>
       </div>
 
-      <h2 style="float:left;width:100%;" i18n:translate="">Additional Files</h2>
+      <h2 class="pdf-left-alignment" i18n:translate="">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File']">

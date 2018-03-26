@@ -200,6 +200,21 @@ html[dir='ltr'] .portaltype-report #content .pdfjs .findbar {
     width: 84%;
 }
 
+#content .inline-content-header .eea-available-version {
+    display: none;
+}
+
+#content .publicationText .pdf-right-alignment {
+    float:right;
+    width:30%;
+    display:block;
+}
+
+#content .publicationText .pdf-left-alignment {
+    float: left;
+    width:100%;
+}
+
 @media (max-width: 840px) {
     html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
         left: 20%;
@@ -248,6 +263,19 @@ html[dir='ltr'] .portaltype-report #content .pdfjs .findbar {
         display: block;
         float: none;
         width: 100%;
+    }
+
+    #content .publicationText .pdf-right-alignment {
+        float: none;
+        width:100%;
+        display:block;
+    }
+
+    #content .publicationText .pdf-left-alignment {
+        float: none;
+        width:100%;
+        display:block;
+        margin-top: 2em;
     }
 }
 

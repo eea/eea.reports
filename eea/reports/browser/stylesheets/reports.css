@@ -226,6 +226,16 @@ div > .portalMessage {
         display: none;
     }
 
+    .content-header .documentFirstHeading,
+    .content-header #languageCodes,
+    #content .content-header .documentByLine {
+        display: block;
+    }
+
+    .pdf-viewer-disabled > .content-header #article-language {
+        margin-top: 0;
+    }
+
     .content-header {
         display: block;
     }

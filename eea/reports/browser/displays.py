@@ -105,6 +105,16 @@ class ReportContainerView(BrowserView):
         """
         return self.size or self.items
 
+    def is_pdf(self):
+        """ Report file is pdf?
+        """
+        if hasattr(self.context, 'getFile'):
+            file = self.context.getFile()
+        else:
+            file = self.context.file
+        return file.getContentType() in ['application/pdf']
+
+
 class ReportContainerDownload(BrowserView):
     """ Report download
     """

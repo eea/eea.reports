@@ -1,6 +1,15 @@
 Changelog
 =========
 
+8.4 - (2018-03-19)
+------------------
+* Feature: Modified portal messages styling and moved the see older versions
+  notification to the bottom of the page
+  [petchesi-iulian refs #90589]
+* Feature: Modified the ordering of elements in the template, modify elements
+  style depending on pdf enabled status
+  [petchesi-iulian refs #90589]
+
 8.3 - (2018-03-01)
 ------------------
 * Feature: Implemented responsive design and resized the viewer

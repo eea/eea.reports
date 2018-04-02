@@ -79,213 +79,226 @@ dl.publicationMessage dd {
 
 /* Overrides for PDF Viewer */
 
-.portaltype-report #region-content {
+body #region-content {
     background-color: #ffffff;
     padding: 1.5em;
 }
 
-.portaltype-report #content .report-pdf {
+.report-pdf {
     display: block;
     float: left;
     width: 68%;
+    margin-left: 0;
 }
 
-.portaltype-report #content .publicationDescription {
+.publicationDescription {
     display: block;
     width: 30%;
     float: right;
 }
 
-.portaltype-report #content .report-files {
+.report-files {
     display: inline-block;
 }
 
-.portaltype-report #content .inline-content-header {
+.inline-content-header {
     display: block;
     width: 30%;
     float: right;
 }
 
-.portaltype-report #content .publicationText {
+.publicationText {
     border-bottom: none;
 }
 
-.portaltype-report #content .content-header .panel-content #languageCodes {
+.content-header .panel-content #languageCodes {
     display: block;
 }
 
-.portaltype-report #content .content-header .documentFirstHeading,
-.portaltype-report #content .content-header #languageCodes,
-.portaltype-report #content .content-header .documentByLine {
+.content-header .documentFirstHeading,
+.content-header #languageCodes,
+#content .content-header .documentByLine {
     display: none;
 }
 
-.portaltype-report #content .content-header #article-language {
+.content-header #article-language {
     margin-top: 7%;
 }
 
-.portaltype-report #content .inline-content-header #article-language {
+.inline-content-header #article-language {
     display: none;
 }
 
-.portaltype-report #content .content-header #tip-article-language {
+.content-header #tip-article-language {
     margin-top: 6%;
 }
 
-.portaltype-report #content .documentDescription {
+#content .documentDescription {
     float: right;
     width: 30%;
 }
 
-.portaltype-report #content .moreFiles {
+.moreFiles {
     display: block;
     float: right;
     width: 30%;
     margin-top: 2em;
 }
 
-.portaltype-report #content-core p,
-.portaltype-report #content-core li {
+#content-core p,
+#content-core li {
     font-size: 115%;
 }
 
-.portaltype-report #content .eea-tabs-panel .page {
+.eea-tabs-panel .page {
     margin-left: 0;
 }
 
-.portaltype-report #content #languageCodes li {
+#languageCodes li {
     font-size: inherit;
 }
 
-.portaltype-report #content .pdfjs #toolbarViewerMiddle {
+.pdfjs #toolbarViewerMiddle {
     left: 57%;
 }
 
-.portaltype-report #content .publicationHidden {
+.publicationHidden {
     display: none;
 }
 
-.portaltype-report #content .documentByLine {
+#content .documentByLine {
     max-width: 100%;
 }
 
-#content .pdfjs #sidebarContainer {
+.pdf-viewer-disabled .publicationDescription,
+.pdf-viewer-disabled .documentDescription,
+.pdf-viewer-disabled .inline-content-header {
+    width: 100%;
+    float: none;
+}
+
+.pdf-viewer-disabled .moreFiles {
+    display: none;
+}
+
+.pdf-viewer-disabled > .content-header #tip-article-language {
+    margin-top: 25%;
+}
+
+.pdf-viewer-disabled > .content-header #article-language {
+    margin-top: 28%;
+}
+
+div > .portalMessage {
+    width: 84%;
+}
+
+.inline-content-header .eea-available-version {
+    display: none;
+}
+
+.pdf-right-alignment {
+    float:right;
+    width:30%;
+    display:block;
+}
+
+.pdf-left-alignment {
+    float: left;
+    width:100%;
+}
+
+.pdfjs .sidebarOpen .findbar {
+    padding: 0;
+}
+
+.sidebarOpen #mainContainer .findbar .toolbarButton {
+    margin-left: 0;
+}
+
+.sidebarOpen .findbar #findInput {
     width: 20%;
 }
 
-#content .pdfjs #toolbarSidebar {
-    width: 100%;
-}
-
-#content .pdfjs #sidebarContent {
-    width: 100%;
-}
-
-#content .pdfjs #outlineView {
-    padding-right: 0;
-    padding-left: 4px;
-}
-
-#content .pdfjs #outlineView,
-#content .pdfjs #attachmentsView {
-    width: 96%;
-}
-
-html[dir='ltr'] #content .pdfjs .outlineWithDeepNesting>.outlineItem,
-html[dir='ltr'] #content .pdfjs .outlineItem>.outlineItems {
+.sidebarOpen .findbar .toolbarLabel {
+    font-size: 10px;
     margin-left: 0;
-}
-
-html[dir='ltr'] #content .pdfjs .outlineItem>a {
-    padding-left: 0;
-}
-
-#content .pdfjs .outlineItem>a,
-#content .pdfjs .attachmentsItem>button {
-    font-size: 11px;
-}
-
-#content .pdfjs #thumbnailView {
-    padding: 10px 0 0;
-}
-
-html[dir='ltr'] #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
-    left: 20%;
-    width: 80% !important;
-}
-
-html[dir='ltr'] #content .pdfjs #outerContainer>#mainContainer {
-    width: 100% !important;
-}
-
-html #content .pdfjs #outerContainer .dropdownToolbarButton {
-    width: 70%;
-}
-
-html #content .pdfjs #outerContainer.sidebarOpen .dropdownToolbarButton {
-    min-width: 60px !important;
-    width: 50%;
-}
-
-#content .pdfjs .toolbarButtonSpacer {
-    width: 1px;
-}
-
-#content .report-pdf {
-    margin-left: 0;
-}
-
-html[dir='ltr'] #content .pdfjs .findbar {
-    left: 7%;
+    margin-right: 0;
 }
 
 @media (max-width: 840px) {
-    html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer.sidebarOpen>#mainContainer {
-        left: 20%;
-        width: 80% !important;
-    }
-
-    html[dir='ltr'] .portaltype-report #content .pdfjs #outerContainer>#mainContainer {
-        width: 100% !important;
-    }
-
-    html[dir='ltr'] #content .pdfjs .splitToolbarButton:first-child,
-    html[dir='ltr'] #content .pdfjs .toolbarButton:first-child,
-    html[dir='rtl'] #content .pdfjs .splitToolbarButton:last-child,
-    html[dir='rtl'] #content .pdfjs .toolbarButton:last-child {
+    .pdfjs .splitToolbarButton:first-child,
+    .pdfjs .splitToolbarButton:last-child,
+    .pdfjs .toolbarButton:first-child,
+    .pdfjs .toolbarButton:last-child {
         margin-left: 0;
+    }
+
+    .sidebarOpen .findbar .toolbarLabel {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .portaltype-report #content .publicationText .inline-content-header,
-    .portaltype-report #content .publicationText .documentFirstHeading,
-    .portaltype-report #content .publicationText .publicationDescription,
-    .portaltype-report #content .documentDescription,
-    .portaltype-report #content .publicationText .moreFiles {
+    .publicationText .inline-content-header,
+    .publicationText .documentFirstHeading,
+    .publicationText .publicationDescription,
+    .publicationText .moreFiles,
+    #content .documentDescription {
         display: none;
     }
 
-    .portaltype-report #content .content-header {
+    .content-header .documentFirstHeading,
+    .content-header #languageCodes,
+    #content .content-header .documentByLine {
         display: block;
     }
 
-    .portaltype-report #content .publicationText .report-pdf {
+    .pdf-viewer-disabled > .content-header #article-language {
+        margin-top: 0;
+    }
+
+    .content-header {
+        display: block;
+    }
+
+    .publicationText .report-pdf {
+        float: none;
+        width: 100%;
+        display: none;
+    }
+
+    .publicationText .report-files {
+        display: block;
+    }
+
+    #content .publicationHidden {
+        display: block;
+    }
+
+    #content .publicationText .hiddenDesc {
+        display: block;
         float: none;
         width: 100%;
     }
 
-    .portaltype-report #content .publicationText .report-files {
-        display: block;
-    }
-
-    .portaltype-report #content .publicationHidden {
-        display: block;
-    }
-
-    .portaltype-report #content .publicationText .hiddenDesc {
-        display: block;
+    .publicationText .pdf-right-alignment {
         float: none;
-        width: 100%;
+        width:100%;
+        display:block;
+    }
+
+    .publicationText .pdf-left-alignment {
+        float: none;
+        width:100%;
+        display:block;
+        margin-top: 2em;
+    }
+}
+
+@media (max-width: 425px) {
+    #content-core > div > .portalMessage {
+        width: 75%;
     }
 }

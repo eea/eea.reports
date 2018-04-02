@@ -208,12 +208,35 @@ div > .portalMessage {
     width:100%;
 }
 
+.pdfjs .sidebarOpen .findbar {
+    padding: 0;
+}
+
+.sidebarOpen #mainContainer .findbar .toolbarButton {
+    margin-left: 0;
+}
+
+.sidebarOpen .findbar #findInput {
+    width: 20%;
+}
+
+.sidebarOpen .findbar .toolbarLabel {
+    font-size: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 @media (max-width: 840px) {
     .pdfjs .splitToolbarButton:first-child,
     .pdfjs .splitToolbarButton:last-child,
     .pdfjs .toolbarButton:first-child,
     .pdfjs .toolbarButton:last-child {
         margin-left: 0;
+    }
+
+    .sidebarOpen .findbar .toolbarLabel {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 

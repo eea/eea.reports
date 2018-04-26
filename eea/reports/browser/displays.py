@@ -143,10 +143,12 @@ class ReportContainerViewPdf(BrowserView):
         field = self.context.getField('file')
         file = self.context.file
         fname = field.getFilename(self.context)
-
         resp = self.request.RESPONSE
-        resp.setHeader('Filename', fname)
-        resp.setHeader('Content-Type', 'application/pdf')
-        resp.setHeader('Content-Disposition', 'inline; filename="%s"' % fname)
 
+        resp.setHeader('Filename', fname)
+        resp.setHeader('Content-Disposition', 'inline; filename="%s"' % fname)
+        if 'isFirstRequest' in self.request.form.keys():
+            return resp        
+
+        resp.setHeader('Content-Type', 'application/pdf')
         return file

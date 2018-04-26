@@ -1,6 +1,12 @@
 Changelog
 =========
 
+8.5 - (2018-04-27)
+------------------
+* Change: Modified the pdf view so that the filename request receives the
+  correct filename
+  [petchesi-iulian refs #94520]
+
 8.4 - (2018-03-19)
 ------------------
 * Feature: Modified portal messages styling and moved the see older versions

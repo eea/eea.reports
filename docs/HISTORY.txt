@@ -1,6 +1,9 @@
 Changelog
 =========
 
+8.6-dev0 - (unreleased)
+---------------------
+
 8.5 - (2018-04-27)
 ------------------
 * Upgrade step: Added upgrade step, plone.app.caching needs to be reimported,
@@ -403,4 +406,3 @@ Changelog
 1.0 (2009-11-09)
 ----------------
 * Initial release
-

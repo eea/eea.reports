@@ -19,4 +19,12 @@
     title="EEA Reports setup various" description="Setup EEA Reports"
     handler="eea.reports.setuphandlers.installVocabularies" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade eea.reports to v8.5"
+      description="Re-run plone.app.caching steps manually"
+      source="4.0"
+      destination="8.5"
+      handler=".upgrades.upgrades.upgrade_to_85"
+      profile="eea.reports:default" />
+
 </configure>

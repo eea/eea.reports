@@ -38,7 +38,7 @@ Products" section in "Site Setup".
 
 You can download a sample buildout at:
 
-http://svn.eionet.europa.eu/repositories/Zope/trunk/eea.reports/buildouts/plone4/
+https://github.com/eea/eea.reports/tree/master/buildouts/plone4
 
 
 Dependencies

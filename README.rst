@@ -34,7 +34,7 @@ To get started you will simply need to add the package to your "eggs" and
 "eea.reports" package using the quick-installer or via the "Add-on
 Products" section in "Site Setup".
 
-.. _`zc.buildout`: http://pypi.python.org/pypi/zc.buildout/
+.. _`zc.buildout`: https://pypi.python.org/pypi/zc.buildout/
 
 You can download a sample buildout at:
 

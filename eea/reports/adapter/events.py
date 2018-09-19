@@ -1,6 +1,7 @@
 """ Events
 """
 import logging
+from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
@@ -57,7 +58,7 @@ def _get_themes_from_keywords(instance, keywords):
 
 def parse_metadata(obj, evt):
     """ EVENT
-        called on new file upload. Tries to import pdf metadata.
+        called on new file upload. Tries to save the pdf metadata title.
     """
     update_main = evt.update_main
     if not update_main:
@@ -65,30 +66,13 @@ def parse_metadata(obj, evt):
 
     pdfparser = getUtility(IPDFMetadataParser)
     metadata = pdfparser.parse(evt.data)
+
     if not metadata:
         return
 
-    # Do not modify effective date
-    metadata['effectiveDate'] = obj.getEffectiveDate()
-
-    # Get themes from keywords
-    keywords = metadata.get('subject', ())
-    themes = _get_themes_from_keywords(obj, keywords)
-    if themes:
-        metadata['themes'] = themes
-
-    for key, value in metadata.items():
-        field = obj.getField(key)
-        if not field:
-            continue
-        if not value:
-            continue
-        try:
-            field.getMutator(obj)(value)
-        except Exception, err:
-            logger.warn("Invalid key - value: %s - %s", key, value)
-            logger.exception(err)
-            continue
+    metadata_title = metadata.get('title', '')
+    anno = IAnnotations(obj)
+    anno['pdf.metadata.title'] = metadata_title
 
 #
 # Report initialize

@@ -10,22 +10,35 @@
 <div metal:fill-slot="content-core">
 <metal:content define-macro="content-core"
      tal:define="older_versions view/does_replace; newer_versions view/is_replaced_by;pdf_enabled python: not view.is_pdf()">
-    <script tal:condition="pdf_enabled">
-      var page_content = document.getElementById('content');
-      page_content.classList.add('pdf-viewer-disabled');
-    </script>
+  <script tal:condition="pdf_enabled">
+    var page_content = document.getElementById('content');
+    page_content.classList.add('pdf-viewer-disabled');
+  </script>
 
-   <tal:order define="
-      poo_field       python:here.getField('published_online_only');
-      poo_value       python:poo_field.getAccessor(here)();"
-      tal:condition="python:poo_value">
+  <tal:pdf_metadata define="pdf_metadata_title python:view.check_pdf_metadata()"
+                    condition="python:not isAnon and pdf_metadata_title != None">
+    <dl class="portalMessage warning publicationMessage">
+      <dt class="portletHeader">
+        Note: The Title of the PDF metadata is different from the Title of the Publication in CMS!
+      </dt>
+      <dd>
+        <ul>
+          <li>Title in PDF: <tal:title content="pdf_metadata_title" /></li>
+          <li>Title in Plone: <tal:title content="context/Title" /></li>
+        </ul>
+      </dd>
+    </dl>
+  </tal:pdf_metadata>
 
-      <div class="portalMessage informationMessage">
-        <span i18n:translate=""
-                     tal:condition="poo_value">This report is being published online only. No printed edition of this report will be produced.</span>
-      </div>
-
-   </tal:order>
+  <tal:order define="poo_field python:here.getField('published_online_only');
+                     poo_value python:poo_field.getAccessor(here)();"
+             condition="python:poo_value">
+    <div class="portalMessage informationMessage">
+      <span i18n:translate="" tal:condition="poo_value">
+        This report is being published online only. No printed edition of this report will be produced.
+      </span>
+    </div>
+  </tal:order>
 
   <dl class="portalMessage warning publicationMessage"
     tal:condition="newer_versions">

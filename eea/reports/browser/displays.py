@@ -1,5 +1,6 @@
 """ Displayes
 """
+from zope.annotation import IAnnotations
 from zope.component import getAdapter
 from eea.reports.relations.interfaces import IGroupRelations
 from Products.Five import BrowserView
@@ -113,6 +114,17 @@ class ReportContainerView(BrowserView):
         else:
             file = self.context.file
         return file.getContentType() in ['application/pdf']
+
+    def check_pdf_metadata(self):
+        """ Verify if the PDF metadata title is equal with the one from Plone
+        """
+        anno = IAnnotations(self.context)
+        metadata_title = anno.get('pdf.metadata.title', None)
+
+        if metadata_title != self.context.Title() and metadata_title != None:
+            return metadata_title
+        else:
+            return None
 
 
 class ReportContainerDownload(BrowserView):

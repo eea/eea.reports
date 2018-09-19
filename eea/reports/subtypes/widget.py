@@ -23,9 +23,6 @@ class ReportFileWidget(FileWidget):
 
         value, res = res
 
-        meta = form.get('%s_update_meta_input' % field.getName(), None)
-        if meta:
-            res['_update_main_'] = True
         return value, res
 
 

@@ -52,11 +52,10 @@ class SchemaExtender(object):
                 languageIndependent=False,
                 required=False,
                 validators=(('isNonEmptyFile', V_REQUIRED),
-                              ('checkFileMaxSize', V_REQUIRED)),
+                            ('checkFileMaxSize', V_REQUIRED)),
                 widget=widget.ReportFileWidget(
                     label=_('Publication file'),
                     description=_('Fill in the publication file'),
-                    helper_js=('widgets/update_metadata.js',),
                     macro='widgets/report_file',
                     i18n_domain='eea',
                     ),

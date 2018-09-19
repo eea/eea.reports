@@ -1,5 +1,6 @@
 """ PDF Syncronizer
 """
+from zope.annotation import IAnnotations
 from zope.component import queryUtility, getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from Products.statusmessages.interfaces import IStatusMessage
@@ -94,4 +95,6 @@ class Syncronizer(object):
         pdf = updater.update(value.index_html(), metadata)
         kwargs = {'_migration_': True, 'filename': filename}
         field.getMutator(self.context)(pdf, **kwargs)
+        anno = IAnnotations(self.context)
+        anno['pdf.metadata.title'] = self.context.Title()
         self._redirect('PDF publication file metadata updated')

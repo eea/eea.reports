@@ -60,30 +60,11 @@
   <input type="file" size="30"
     tal:attributes="
     name string:${fieldName}_file;
-    onchange string:file_changed('${fieldName}_update_meta', '${fieldName}_update_meta_input');
     id string:${fieldName}_file;" />
   <script type="text/javascript"
     tal:define="
     isDisabled python:test(accessor() and size!=0, 'true', 'false')"
     tal:content="string: document.getElementById('${fieldName}_file').disabled=$isDisabled;">js</script>
-  <div class="field"
-    tal:attributes="
-    id string:${fieldName}_update_meta"><input
-      class="noborder" type="checkbox" checked="checked"
-      tal:attributes="
-      id string:${fieldName}_update_meta_input;
-      name string:${fieldName}_update_meta_input;
-      onclick string:toggle_fields(this, 'title', 'description');
-      checked python:value;" />
-    <label tal:attributes="for string:${fieldName}_update_meta_input;"
-      i18n:translate="">Automatically update
-      properties from pdf publication file metadata?</label></div>
-  <script type="text/javascript"
-    tal:content="string:
-          jQuery(function($){
-              display_div('${fieldName}_update_meta', 'none');
-          });
-    ">js</script>
 </metal:define>
 
 <metal:define define-macro="view">

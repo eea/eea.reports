@@ -152,13 +152,10 @@ class ReportFileField(ExtensionField, ExtensionFieldMixin, BlobField):
         """
         is_value = value and value != "DELETE_FILE"
 
-        # Handle update title and description checkbox
-        update_main = kwargs.pop('_update_main_', False)
-
         # Handle migration
         migration = kwargs.pop('_migration_', False)
         if is_value and not migration:
-            notify(FileUploadedEvent(instance, value, update_main))
+            notify(FileUploadedEvent(instance, value, True))
 
         BlobField.set(self, instance, value, **kwargs)
 

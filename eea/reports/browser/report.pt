@@ -18,13 +18,13 @@
   <tal:pdf_metadata define="pdf_metadata_title python:view.check_pdf_metadata()"
                     condition="python:not isAnon and pdf_metadata_title != None">
     <dl class="portalMessage warning publicationMessage">
-      <dt class="portletHeader">
+      <dt class="portletHeader" i18n:translate="">
         Note: The Title of the PDF metadata is different from the Title of the Publication in CMS!
       </dt>
       <dd>
         <ul>
-          <li>Title in PDF: <tal:title content="pdf_metadata_title" /></li>
-          <li>Title in Plone: <tal:title content="context/Title" /></li>
+          <li><span i18n:translate="">Title in PDF:</span> <tal:title content="pdf_metadata_title" /></li>
+          <li><span i18n:translate="">Title in Plone:</span> <tal:title content="context/Title" /></li>
         </ul>
       </dd>
     </dl>

@@ -1,6 +1,17 @@
 Changelog
 =========
 
+8.6 - (2018-09-21)
+---------------------
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+* Feature: implemented portal message to inform if the PDF metadata Title is
+  different then the Title from the Plone.
+  [alecghica refs #97572]
+* Change: removed "Automatically fill from publication pdf file metadata"
+  option for Publications 
+  [alecghica refs #97572]
+
 8.5 - (2018-04-27)
 ------------------
 * Upgrade step: Added upgrade step, plone.app.caching needs to be reimported,
@@ -403,4 +414,3 @@ Changelog
 1.0 (2009-11-09)
 ----------------
 * Initial release
-

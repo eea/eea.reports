@@ -8,11 +8,13 @@ class IFileUploadedEvent(IObjectEvent):
     """
     object = Attribute("Report object.")
 
+
 class FileUploadedEvent(object):
-    """Sent if a new file was uploaded."""
+    """ Sent if a new file was uploaded.
+    """
     implements(IFileUploadedEvent)
 
-    def __init__(self, context, data, update_main=False):
+    def __init__(self, context, data, update_main=True):
         self.object = context
         self.data = data
         self.update_main = update_main

@@ -1,9 +1,6 @@
 Changelog
 =========
 
-8.8-dev0 - (unreleased)
----------------------
-
 8.7-dev0 - (unreleased)
 ---------------------
 * Bug fix: fixed publication toc rendering when toc has several levels

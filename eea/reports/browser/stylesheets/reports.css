@@ -5,6 +5,10 @@
     cursor: pointer;
 }
 
+.tree-level-arrow ~ a {
+    display: block !important;
+}
+
 .tree-level-close {
     background: transparent
     url("++resource++publication_images/navigation.png") no-repeat
@@ -98,7 +102,11 @@ body #region-content {
 }
 
 .report-files {
-    display: inline-block;
+    display: block;
+}
+
+.report-files .tree-level-1 {
+   clear:both;
 }
 
 .inline-content-header {
@@ -206,6 +214,13 @@ div > .portalMessage {
 .pdf-left-alignment {
     float: left;
     width:100%;
+}
+
+/* 100603 float report-files when class is precedeed by pdf-left-alignment
+ * avoiding content from spilling into the publication image   
+*/
+.pdf-left-alignment ~ .report-files {
+   float: left;
 }
 
 .pdfjs .sidebarOpen .findbar {

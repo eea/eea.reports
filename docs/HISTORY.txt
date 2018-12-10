@@ -1,6 +1,11 @@
 Changelog
 =========
 
+8.7-dev0 - (unreleased)
+---------------------
+* Bug fix: fixed publication toc rendering when toc has several levels
+  [ichim-david refs #100603]
+
 8.6 - (2018-09-21)
 ---------------------
 * Change: updated URLs pointing to eea.europa.eu with https://

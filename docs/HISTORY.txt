@@ -1,8 +1,8 @@
 Changelog
 =========
 
-8.7-dev0 - (unreleased)
----------------------
+8.7 - (2018-12-10)
+-----------------------
 * Bug fix: fixed publication toc rendering when toc has several levels
   [ichim-david refs #100603]
 
@@ -14,7 +14,7 @@ Changelog
   different then the Title from the Plone.
   [alecghica refs #97572]
 * Change: removed "Automatically fill from publication pdf file metadata"
-  option for Publications 
+  option for Publications
   [alecghica refs #97572]
 
 8.5 - (2018-04-27)

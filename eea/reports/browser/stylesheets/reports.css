@@ -51,14 +51,6 @@
     margin-bottom: 0;
 }
 
-.publicationField {
-    margin-bottom: 0.5em;
-}
-
-.publicationOrder {
-    margin: 2em 0;
-}
-
 .publicationClear {
     clear: left ! important;
     margin-top: 1em ! important;
@@ -144,13 +136,6 @@ body #region-content {
 #content .documentDescription {
     float: right;
     width: 30%;
-}
-
-.moreFiles {
-    display: block;
-    float: right;
-    width: 30%;
-    margin-top: 2em;
 }
 
 #content-core p,
@@ -315,5 +300,11 @@ div > .portalMessage {
 @media (max-width: 425px) {
     #content-core > div > .portalMessage {
         width: 75%;
+    }
+}
+
+@media print {
+    .report-pdf {
+        display: none;
     }
 }

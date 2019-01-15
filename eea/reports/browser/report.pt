@@ -411,17 +411,88 @@
       </div>
 
       <h2 class="pdf-right-alignment" tal:condition="python: not pdf_enabled" i18n:translate="">Download</h2>
-      <li class="pdf-right-alignment" tal:condition="python: not pdf_enabled">
-        <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
-          <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
-          <span tal:content="filename" />
-        </a>
-        <span tal:content="python:'[%s]' % view.size" />
-      </li>
+      <ul class="pdf-right-alignment"> 
+        <li tal:condition="python: not pdf_enabled">
+          <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
+            <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
+            <span tal:content="filename" />
+          </a>
+          <span tal:content="python:'[%s]' % view.size" />
+        </li>
+      </ul>
 
-      <div class="moreFiles">
+      <div class="pdf-right-alignment moreFiles">
         <a i18n:translate="" href="#additional-files">See additional files</a>
       </div>
+
+      <tal:order define="oid_field python:here.getField('order_id');
+                         oid_value python:oid_field.getAccessor(here)();
+                         fs_field python:here.getField('for_sale');
+                         fs_value python:fs_field.getAccessor(here)();
+                         isbn_filed python:here.getField('isbn');
+                         isbn_value python:isbn_filed.getAccessor(here)();
+                         price_field python:here.getField('price');
+                         price_value python:price_field.getAccessor(here)();
+                         oo_field python:here.getField('order_override_text');
+                         oo_value python:oo_field.getAccessor(here)();
+                         oe_field python:here.getField('order_extra_text');
+                         oe_value python:oe_field.getAccessor(here)();"
+                 condition="python:fs_value and oid_value">
+  
+        <tal:order_default condition="not:oo_value">
+          <h2 class="pdf-right-alignment" i18n:translate="">Order information</h2>
+          <p class="pdf-right-alignment">
+            <a href="" tal:define="
+              dquote python:'\x22';
+              oid_value_quoted string:${dquote}${oid_value}${dquote};
+              eubookshop_link python:context.getEUBookshopLink(order_id=oid_value_quoted);"
+              alt="Order a printed copy at EU-Bookshop"
+              tal:attributes="href eubookshop_link"
+              i18n:attributes="alt"
+              i18n:translate="">
+              Order a printed copy online
+            </a> (<span i18n:translate="">EU-Bookshop</span>).
+          </p>
+          <div class="pdf-right-alignment">
+            <div tal:condition="isbn_value">
+              <label for="isbn_filed.name"
+                tal:attributes="
+                for python:isbn_filed.widget.Label(here);
+                title python:isbn_filed.widget.Label(here)"
+                tal:content="python:isbn_filed.widget.Label(here)"></label>:
+              <span tal:content="isbn_value" />
+            </div>
+            <div tal:condition="oid_value">
+              <label for="oid_field.name"
+                tal:attributes="
+                for python:oid_field.widget.Label(here);
+                title python:oid_field.widget.Label(here)"
+                tal:content="python:oid_field.widget.Label(here)"></label>:
+              <span tal:content="oid_value" />
+            </div>
+            <div>
+              <label for="price_field.name"
+                tal:attributes="
+                for python:price_field.widget.Label(here);
+                title python:price_field.widget.Label(here)"
+                tal:content="python:price_field.widget.Label(here)"></label>:
+              <span tal:condition="price_value"
+                tal:content="python:'EUR %.02f' % price_value" />
+              <span tal:condition="not:price_value"
+                tal:content="string:FREE"
+                i18n:translate="" />
+            </div>
+          </div>
+
+          <div class="visualClear"></div>
+        </tal:order_default>
+        <tal:order_override tal:condition="oo_value">
+          <div  class="pdf-right-alignment" tal:content="structure oo_value">Order override text</div>
+        </tal:order_override>
+        <tal:order_extra tal:condition="oe_value">
+          <div  class="pdf-right-alignment" tal:content="structure oe_value">Order extra text</div>
+        </tal:order_extra>
+      </tal:order>
 
       <h2 class="pdf-left-alignment" i18n:translate="">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
@@ -538,80 +609,6 @@
       tr_value python:tr_field.getAccessor(here)();">
       <div tal:content="structure tr_value">Trailer</div>
     </tal:trailer>
-
-    <tal:order define="
-      oid_field       python:here.getField('order_id');
-      oid_value       python:oid_field.getAccessor(here)();
-      fs_field        python:here.getField('for_sale');
-      fs_value        python:fs_field.getAccessor(here)();
-      isbn_filed      python:here.getField('isbn');
-      isbn_value      python:isbn_filed.getAccessor(here)();
-      price_field     python:here.getField('price');
-      price_value     python:price_field.getAccessor(here)();
-      oo_field        python:here.getField('order_override_text');
-      oo_value        python:oo_field.getAccessor(here)();
-      oe_field        python:here.getField('order_extra_text');
-      oe_value        python:oe_field.getAccessor(here)();"
-      tal:condition="python:fs_value and oid_value">
-
-
-
-          <tal:order_default condition="not:oo_value">
-            <div class="publicationOrder">
-              <h2 i18n:translate="">Order information</h2>
-              <p>
-                <a href="" tal:define="
-                  dquote python:'\x22';
-                  oid_value_quoted string:${dquote}${oid_value}${dquote};
-                  eubookshop_link python:context.getEUBookshopLink(order_id=oid_value_quoted);"
-                  alt="Order a printed copy at EU-Bookshop"
-                  tal:attributes="href eubookshop_link"
-                  i18n:attributes="alt"
-                  i18n:translate="">
-                  Order a printed copy online
-                </a> (<span i18n:translate="">EU-Bookshop</span>).
-              </p>
-              <div class="publicationField">
-                <div tal:condition="isbn_value">
-                  <label for="isbn_filed.name"
-                    tal:attributes="
-                    for python:isbn_filed.widget.Label(here);
-                    title python:isbn_filed.widget.Label(here)"
-                    tal:content="python:isbn_filed.widget.Label(here)"></label>:
-                  <span tal:content="isbn_value" />
-                </div>
-                <div tal:condition="oid_value">
-                  <label for="oid_field.name"
-                    tal:attributes="
-                    for python:oid_field.widget.Label(here);
-                    title python:oid_field.widget.Label(here)"
-                    tal:content="python:oid_field.widget.Label(here)"></label>:
-                  <span tal:content="oid_value" />
-                </div>
-                <div>
-                  <label for="price_field.name"
-                    tal:attributes="
-                    for python:price_field.widget.Label(here);
-                    title python:price_field.widget.Label(here)"
-                    tal:content="python:price_field.widget.Label(here)"></label>:
-                  <span tal:condition="price_value"
-                    tal:content="python:'EUR %.02f' % price_value" />
-                  <span tal:condition="not:price_value"
-                    tal:content="string:FREE"
-                    i18n:translate="" />
-                </div>
-              </div>
-
-              <div class="visualClear"></div>
-            </div>
-          </tal:order_default>
-      <tal:order_override tal:condition="oo_value">
-        <div tal:content="structure oo_value">Order override text</div>
-      </tal:order_override>
-      <tal:order_extra tal:condition="oe_value">
-        <div tal:content="structure oe_value">Order extra text</div>
-      </tal:order_extra>
-    </tal:order>
 
     <div class="portalMessage informationMessage"
          tal:condition="older_versions">

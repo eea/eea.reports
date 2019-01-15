@@ -3,6 +3,8 @@ Changelog
 
 8.9-dev0 - (unreleased)
 ---------------------
+* Bug fix: CSS fixes on publication view
+  [alecghica refs #101503]
 
 8.7 - (2018-12-10)
 -----------------------

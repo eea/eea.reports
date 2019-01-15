@@ -411,8 +411,8 @@
       </div>
 
       <h2 class="pdf-right-alignment" tal:condition="python: not pdf_enabled" i18n:translate="">Download</h2>
-      <ul class="pdf-right-alignment"> 
-        <li tal:condition="python: not pdf_enabled">
+      <ul class="pdf-right-alignment" tal:condition="python: not pdf_enabled"> 
+        <li>
           <a tal:attributes="href string:${here/absolute_url}/at_download/file;">
             <img tal:attributes="src string:${here/absolute_url}/pdf.png" />
             <span tal:content="filename" />

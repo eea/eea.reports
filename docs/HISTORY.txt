@@ -1,7 +1,7 @@
 Changelog
 =========
 
-8.9-dev0 - (unreleased)
+8.9 - (2019-01-15)
 ---------------------
 * Bug fix: CSS fixes on publication view
   [alecghica refs #101503]

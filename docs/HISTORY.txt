@@ -1,6 +1,11 @@
 Changelog
 =========
 
+8.9 - (2019-01-15)
+---------------------
+* Bug fix: CSS fixes on publication view
+  [alecghica refs #101503]
+
 8.7 - (2018-12-10)
 -----------------------
 * Bug fix: fixed publication toc rendering when toc has several levels

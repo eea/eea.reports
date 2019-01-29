@@ -1,6 +1,11 @@
 Changelog
 =========
 
+9.0 - (2019-01-28)
+---------------------
+* Jenkins: Add sonarqube step
+  [avoinea refs #101552]
+
 8.9 - (2019-01-15)
 ---------------------
 * Bug fix: CSS fixes on publication view

@@ -30,16 +30,6 @@
     </dl>
   </tal:pdf_metadata>
 
-  <tal:order define="poo_field python:here.getField('published_online_only');
-                     poo_value python:poo_field.getAccessor(here)();"
-             condition="python:poo_value">
-    <div class="portalMessage informationMessage">
-      <span i18n:translate="" tal:condition="poo_value">
-        This report is being published online only. No printed edition of this report will be produced.
-      </span>
-    </div>
-  </tal:order>
-
   <dl class="portalMessage warning publicationMessage"
     tal:condition="newer_versions">
     <dt class="portletHeader" i18n:translate="">
@@ -427,31 +417,22 @@
 
       <tal:order define="oid_field python:here.getField('order_id');
                          oid_value python:oid_field.getAccessor(here)();
-                         fs_field python:here.getField('for_sale');
-                         fs_value python:fs_field.getAccessor(here)();
                          isbn_filed python:here.getField('isbn');
                          isbn_value python:isbn_filed.getAccessor(here)();
-                         price_field python:here.getField('price');
-                         price_value python:price_field.getAccessor(here)();
                          oo_field python:here.getField('order_override_text');
                          oo_value python:oo_field.getAccessor(here)();
                          oe_field python:here.getField('order_extra_text');
                          oe_value python:oe_field.getAccessor(here)();"
-                 condition="python:fs_value and oid_value">
+                 condition="oid_value">
   
         <tal:order_default condition="not:oo_value">
           <h2 class="pdf-right-alignment" i18n:translate="">Order information</h2>
           <p class="pdf-right-alignment">
-            <a href="" tal:define="
-              dquote python:'\x22';
-              oid_value_quoted string:${dquote}${oid_value}${dquote};
-              eubookshop_link python:context.getEUBookshopLink(order_id=oid_value_quoted);"
-              alt="Order a printed copy at EU-Bookshop"
-              tal:attributes="href eubookshop_link"
-              i18n:attributes="alt"
-              i18n:translate="">
-              Order a printed copy online
-            </a> (<span i18n:translate="">EU-Bookshop</span>).
+            <a href="https://publications.europa.eu/en/web/general-publications/publications" 
+               alt="Order a printed copy at EU Publications"
+               i18n:attributes="alt" i18n:translate="">
+              Order a printed copy on the EU Publications website
+            </a>
           </p>
           <div class="pdf-right-alignment">
             <div tal:condition="isbn_value">
@@ -469,18 +450,6 @@
                 title python:oid_field.widget.Label(here)"
                 tal:content="python:oid_field.widget.Label(here)"></label>:
               <span tal:content="oid_value" />
-            </div>
-            <div>
-              <label for="price_field.name"
-                tal:attributes="
-                for python:price_field.widget.Label(here);
-                title python:price_field.widget.Label(here)"
-                tal:content="python:price_field.widget.Label(here)"></label>:
-              <span tal:condition="price_value"
-                tal:content="python:'EUR %.02f' % price_value" />
-              <span tal:condition="not:price_value"
-                tal:content="string:FREE"
-                i18n:translate="" />
             </div>
           </div>
 

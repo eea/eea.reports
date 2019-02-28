@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.2-dev0 - (unreleased)
+---------------------
+
 9.1 - (2019-02-26)
 ---------------------
 * Bug fix: fixed the CSS for "Change language" and publication message display

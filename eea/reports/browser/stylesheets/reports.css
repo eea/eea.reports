@@ -63,6 +63,7 @@
 
 dl.publicationMessage {
     background-color: #f3f3f3;
+    margin-top: 25px;
 }
 
 dl.publicationMessage dt.portletHeader {
@@ -121,8 +122,12 @@ body #region-content {
     display: none;
 }
 
+#plone-document-byline {
+    margin-top: 25px;
+}
+
 .content-header #article-language {
-    margin-top: 7%;
+    margin-top: 0px;
 }
 
 .inline-content-header #article-language {

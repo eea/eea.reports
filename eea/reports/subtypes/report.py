@@ -90,6 +90,7 @@ class SchemaExtender(object):
                     i18n_domain='eea',
                     ),
                 ),
+            # this field is not used anymore
             field.ReportBooleanField('for_sale',
                     schemata='report',
                     languageIndependent=True,
@@ -97,6 +98,7 @@ class SchemaExtender(object):
                     widget=atapi.BooleanWidget(
                         label=_('For sale?'),
                         description=_('Is this publication for sale?'),
+                        condition='python: False',
                         i18n_domain='eea',
                         ),
                     ),
@@ -169,6 +171,7 @@ class SchemaExtender(object):
                         i18n_domain="plone",
                         ),
                     ),
+            # this field is not used anymore
             field.ReportFloatField('price',
                     schemata='report',
                     languageIndependent=True,
@@ -176,6 +179,7 @@ class SchemaExtender(object):
                     widget=atapi.DecimalWidget(
                         label=_(u'Price (Euro)'),
                         description=_(u'Fill in publication price'),
+                        condition="python: False",
                         i18n_domain='eea',
                         ),
                     ),
@@ -204,6 +208,7 @@ class SchemaExtender(object):
                         i18n_domain='eea',
                         ),
                     ),
+            # this field is not used anymore
             field.ReportIntegerField('pages',
                     schemata='report',
                     lanaguageIndependent=False,
@@ -211,6 +216,7 @@ class SchemaExtender(object):
                     widget=atapi.IntegerWidget(
                         label=_(u'Pages'),
                         description=_(u'Fill in total number of pages'),
+                        condition="python: False",
                         i18n_domain='eea',
                         ),
                     ),
@@ -270,6 +276,7 @@ class SchemaExtender(object):
                         i18n_domain='plone',
                         ),
                 ),
+            # this field is not used anymore
             field.ReportBooleanField('published_online_only',
                     schemata='report',
                     languageIndependent=True,
@@ -278,6 +285,7 @@ class SchemaExtender(object):
                         label=_('Published online only'),
                         description=_(
                             'Is this publication published online only?'),
+                        condition="python: False",
                         i18n_domain='eea',
                         ),
                    ),

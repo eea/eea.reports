@@ -56,12 +56,6 @@ Documentation
 See the **doc** directory in this package.
 
 
-API Doc
-=======
-
-http://apidoc.eea.europa.eu/eea.reports-module.html
-
-
 Authors
 =======
 

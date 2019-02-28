@@ -131,8 +131,6 @@ Other properties
     >>> myreport.getField('isbn').getAccessor(myreport)()
     'WETROET-3543-GFSFGDF'
 
-    >>> myreport.getField('pages').getAccessor(myreport)()
-    34
     >>> myreport.getField('trailer').getAccessor(myreport)()
     '<p>Sample trailer</p>'
     >>> myreport.getField('order_override_text').getAccessor(myreport)()

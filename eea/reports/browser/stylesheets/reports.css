@@ -143,11 +143,6 @@ body #region-content {
     width: 30%;
 }
 
-#content-core p,
-#content-core li {
-    font-size: 115%;
-}
-
 .eea-tabs-panel .page {
     margin-left: 0;
 }

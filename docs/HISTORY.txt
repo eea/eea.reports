@@ -3,6 +3,8 @@ Changelog
 
 9.2-dev0 - (unreleased)
 ---------------------
+* Change: Commented out visualclear element in report template
+  [iulianpetchesi refs #107789]
 * Change: removed content p and li enlargement, this can be added in a theme
   css if needed
   [ichim-david refs #106884]

@@ -453,7 +453,7 @@
             </div>
           </div>
 
-          <div class="visualClear"></div>
+          <!--<div class="visualClear"></div>-->
         </tal:order_default>
         <tal:order_override tal:condition="oo_value">
           <div  class="pdf-right-alignment" tal:content="structure oo_value">Order override text</div>

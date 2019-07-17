@@ -196,6 +196,10 @@ div > .portalMessage {
     display:block;
 }
 
+.pdf-right-alignment ul{
+    margin: 0;
+}
+
 .pdf-left-alignment {
     float: left;
     width:100%;

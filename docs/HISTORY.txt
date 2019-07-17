@@ -1,7 +1,7 @@
 Changelog
 =========
 
-9.2-dev0 - (unreleased)
+9.2 - (2019-07-17)
 ---------------------
 * Change: Commented out visualclear element in report template
   [iulianpetchesi refs #107789]

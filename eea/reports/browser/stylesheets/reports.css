@@ -143,11 +143,6 @@ body #region-content {
     width: 30%;
 }
 
-#content-core p,
-#content-core li {
-    font-size: 115%;
-}
-
 .eea-tabs-panel .page {
     margin-left: 0;
 }
@@ -199,6 +194,10 @@ div > .portalMessage {
     float:right;
     width:30%;
     display:block;
+}
+
+.pdf-right-alignment ul{
+    margin: 0;
 }
 
 .pdf-left-alignment {

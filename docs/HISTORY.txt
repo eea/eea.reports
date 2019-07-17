@@ -1,6 +1,14 @@
 Changelog
 =========
 
+9.2 - (2019-07-17)
+---------------------
+* Change: Commented out visualclear element in report template
+  [iulianpetchesi refs #107789]
+* Change: removed content p and li enlargement, this can be added in a theme
+  css if needed
+  [ichim-david refs #106884]
+
 9.1 - (2019-02-26)
 ---------------------
 * Bug fix: fixed the CSS for "Change language" and publication message display

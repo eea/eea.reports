@@ -191,7 +191,7 @@ div > .portalMessage {
 
 .pdf-right-alignment {
     float:right;
-    width:30%;
+    width:29%;
     display:block;
 }
 
@@ -290,6 +290,7 @@ div > .portalMessage {
         float: none;
         width:100%;
         display:block;
+        margin: 0;
     }
 
     .publicationText .pdf-left-alignment {

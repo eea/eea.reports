@@ -2,7 +2,7 @@ Changelog
 =========
 
 9.3-dev0 - (unreleased)
----------------------
+--------------------------
 * Change: reduced width of pdf download area for better wrapping with column
   area
   [ichim-david refs #106884]
@@ -10,7 +10,7 @@ Changelog
   [ichim-david refs #106884]
 
 9.2 - (2019-07-17)
----------------------
+--------------------------
 * Change: Commented out visualclear element in report template
   [iulianpetchesi refs #107789]
 * Change: removed content p and li enlargement, this can be added in a theme
@@ -18,19 +18,19 @@ Changelog
   [ichim-david refs #106884]
 
 9.1 - (2019-02-26)
----------------------
+--------------------------
 * Bug fix: fixed the CSS for "Change language" and publication message display
   [alecghica refs #101834]
 * Feature: removed/hidden metadata related to EU Publications or which was unused
   [alecghica refs #101834]
 
 9.0 - (2019-01-28)
----------------------
+--------------------------
 * Jenkins: Add sonarqube step
   [avoinea refs #101552]
 
 8.9 - (2019-01-15)
----------------------
+--------------------------
 * Bug fix: CSS fixes on publication view
   [alecghica refs #101503]
 
@@ -40,7 +40,7 @@ Changelog
   [ichim-david refs #100603]
 
 8.6 - (2018-09-21)
----------------------
+--------------------------
 * Change: updated URLs pointing to eea.europa.eu with https://
   [alecghica refs #95849]
 * Feature: implemented portal message to inform if the PDF metadata Title is

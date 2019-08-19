@@ -1,6 +1,9 @@
 Changelog
 =========
 
+9.4-dev0 - (unreleased)
+---------------------------
+
 9.3 - (2019-08-16)
 --------------------------
 * Change: reduced width of pdf download area for better wrapping with column

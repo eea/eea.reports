@@ -5,6 +5,18 @@
 
   <genericsetup:upgradeSteps
     source="*"
+    destination="10.0"
+    profile="eea.reports:default">
+
+    <genericsetup:upgradeStep
+      title="Regenerate cover images to higher resolution"
+      handler="eea.reports.upgrades.evolve100.upgrade_cover"
+      />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+    source="*"
     destination="4.0"
     profile="eea.reports:default">
 

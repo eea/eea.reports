@@ -32,7 +32,7 @@ def generate_image(obj, evt):
         called on objectmodified. Tries to generate the cover image.
     """
     generator = getUtility(IPDFCoverImage)
-    image = generator.generate(evt.data)
+    image = generator.generate(evt.data, width=2100, height=2970)
     if not image:
         return
     add_image_file(obj, image)

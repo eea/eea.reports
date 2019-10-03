@@ -7,7 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from eea.reports.events import FileUploadedEvent
 from eea.reports.adapter.events import generate_image
 
-logger = logging.getLogger("eea.facetednavigation")
+logger = logging.getLogger("eea.reports")
 
 
 def upgrade_cover(context):

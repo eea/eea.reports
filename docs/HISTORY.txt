@@ -3,6 +3,10 @@ Changelog
 
 10.0 - (2019-10-02)
 ---------------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for eea.reports (use a dedicated
+  Plone instance as this may take some time).
+  [avoinea refs #109515]
 * Change: Generate high resolution Publication cover image
   [avoinea refs #109515]
 

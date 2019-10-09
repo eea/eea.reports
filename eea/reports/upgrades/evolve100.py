@@ -34,11 +34,11 @@ def upgrade_cover(context):
                 doc,
                 evt
             )
-            continue
+        else:
+            generate_image(doc, evt)
 
-        generate_image(doc, evt)
-        if idx % 20 == 0:
-            logger.info("Fixed %s/%s Publication's cover images", idx, to_do)
+        if idx % 100 == 0:
+            logger.info("Fixing %s/%s Publication's cover images", idx, to_do)
             transaction.savepoint(optimistic=True)
 
     if async_service:

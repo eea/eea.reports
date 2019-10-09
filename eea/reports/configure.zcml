@@ -5,6 +5,7 @@
 
   <includeDependencies package="."/>
 
+  <include package=".async" />
   <include package=".pdf" />
   <include package=".browser" />
   <include package=".adapter" />

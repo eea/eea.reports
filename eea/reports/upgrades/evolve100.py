@@ -2,10 +2,8 @@
 """
 import logging
 import transaction
-from cStringIO import StringIO
 from zope.component import queryUtility
 from Products.CMFCore.utils import getToolByName
-from eea.reports.events import FileUploadedEvent
 from eea.reports.adapter.events import generate_image
 from eea.reports.async import IAsyncService
 logger = logging.getLogger("eea.reports")
@@ -22,8 +20,6 @@ def upgrade_cover(context):
     async_service = queryUtility(IAsyncService)
     for idx, brain in enumerate(brains):
         doc = brain.getObject()
-        data = StringIO(doc.file.data)
-        evt = FileUploadedEvent(doc, data)
 
         # Recreate Publications cover asynchronously via zc.async
         if async_service:
@@ -31,11 +27,10 @@ def upgrade_cover(context):
             async_service.queueJobInQueue(
                 async_queue, ('publications',),
                 generate_image,
-                doc,
-                evt
+                doc
             )
         else:
-            generate_image(doc, evt)
+            generate_image(doc)
 
         if idx % 100 == 0:
             logger.info("Fixing %s/%s Publication's cover images", idx, to_do)

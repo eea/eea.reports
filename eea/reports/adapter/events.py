@@ -1,6 +1,7 @@
 """ Events
 """
 import logging
+from cStringIO import StringIO
 from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
@@ -27,12 +28,16 @@ def add_image_file(obj, image, image_id='cover', image_title='Cover Image'):
     img_obj.setExcludeFromNav(True)
     img_obj.getField('image').getMutator(img_obj)(image)
 
-def generate_image(obj, evt):
+def generate_image(obj, evt=None):
     """ EVENT
         called on objectmodified. Tries to generate the cover image.
     """
     generator = getUtility(IPDFCoverImage)
-    image = generator.generate(evt.data, width=2100, height=2970)
+    if not evt:
+        data = StringIO(obj.file.data)
+    else:
+        data = evt.data
+    image = generator.generate(data, width=2100, height=2970)
     if not image:
         return
     add_image_file(obj, image)

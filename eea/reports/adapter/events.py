@@ -1,6 +1,7 @@
 """ Events
 """
 import logging
+from StringIO import StringIO
 from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 from zope.component import getUtility, queryUtility
@@ -31,8 +32,13 @@ def generate_image(obj, evt=None):
     """ EVENT
         called on objectmodified. Tries to generate the cover image.
     """
+    data = getattr(evt, 'data', None)
+    if not data:
+        blob = getattr(obj, 'file', None)
+        getIterator = getattr(blob, 'getIterator', lambda: StringIO())
+        data = getIterator()
+
     generator = getUtility(IPDFCoverImage)
-    data = getattr(evt, 'data', obj.file.getIterator())
     image = generator.generate(data, width=2100, height=2970)
     if not image:
         return

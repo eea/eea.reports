@@ -9,6 +9,8 @@ Changelog
   [avoinea refs #109515]
 * Change: Generate high resolution Publication cover image
   [avoinea refs #109515]
+* Bug fix: Optimize imgview adapters by moving code from __init__
+  [avoinea refs #109515]
 
 9.3 - (2019-08-16)
 --------------------------

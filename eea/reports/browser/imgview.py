@@ -10,24 +10,26 @@ class ImageView(BrowserView):
     """ Get cover image from folder contents or from canonical folder contents
     """
     implements(IImageView)
+    _img = False
 
-    def __init__(self, context, request):
-        super(ImageView, self).__init__(context, request)
-        self.img = atfolder.FolderImageView(context, request)
-        canonical = context.getCanonical()
-        if context != canonical:
-            self.canonical = atfolder.FolderImageView(canonical, request)
-        else:
-            self.canonical = self.img
+    @property
+    def img(self):
+        """ img
+        """
+        if self._img is False:
+            self._img = atfolder.FolderImageView(self.context, self.request)
+            if not getattr(self._img, 'img', None):
+                canonical = self.context.getCanonical()
+                if self.context != canonical:
+                    self._img = atfolder.FolderImageView(canonical, self.request)
+        return self._img
 
     def display(self, scalename='thumb'):
         """ Display image?
         """
-        return self.img.display(scalename) or self.canonical.display(scalename)
+        return self.img.display(scalename)
 
     def __call__(self, scalename='thumb'):
         if self.img.display(scalename):
             return self.img(scalename)
-        if self.canonical.display(scalename):
-            return self.canonical(scalename)
         raise NotFound(self.request, self.name)

@@ -73,7 +73,7 @@ not the same as original.
     ...
      'subject': [u'nimic', u'simainimic'],
     ...
-     'title': u'Adobe',
+     'title': 'Adobe',
     ...}
 
     >>> out = updater.update(inp, metadata)

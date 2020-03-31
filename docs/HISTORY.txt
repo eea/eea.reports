@@ -3,6 +3,8 @@ Changelog
 
 10.1-dev0 - (unreleased)
 ---------------------------
+* Change: simplify check for metadata_title not being equal to object title
+  [ichimd-david refs #116365]
 
 10.0 - (2019-10-02)
 ---------------------------

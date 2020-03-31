@@ -16,7 +16,7 @@
   </script>
 
   <tal:pdf_metadata define="pdf_metadata_title python:view.check_pdf_metadata()"
-                    condition="python:not isAnon and pdf_metadata_title != None">
+                    condition="python:not isAnon and pdf_metadata_title">
     <dl class="portalMessage warning publicationMessage">
       <dt class="portletHeader" i18n:translate="">
         Note: The Title of the PDF metadata is different from the Title of the Publication in CMS!

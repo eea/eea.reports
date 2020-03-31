@@ -121,7 +121,7 @@ class ReportContainerView(BrowserView):
         anno = IAnnotations(self.context)
         metadata_title = anno.get('pdf.metadata.title', None)
 
-        if metadata_title != self.context.Title() and metadata_title != None:
+        if metadata_title and metadata_title != self.context.Title():
             return metadata_title
         else:
             return None

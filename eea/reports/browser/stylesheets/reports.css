@@ -204,11 +204,12 @@ div > .portalMessage {
     width:100%;
 }
 
-/* 100603 float report-files when class is precedeed by pdf-left-alignment
+/* 100603 float report-files when class is preceded by pdf-left-alignment
  * avoiding content from spilling into the publication image   
 */
 .pdf-left-alignment ~ .report-files {
    float: left;
+    margin-bottom: 1rem; /* 125236 give room for trailer text to follow */
 }
 
 .pdfjs .sidebarOpen .findbar {

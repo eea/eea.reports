@@ -412,7 +412,7 @@
       </ul>
 
       <div class="pdf-right-alignment moreFiles">
-        <a i18n:translate="" href="#additional-files">See additional files</a>
+        <a i18n:translate="" tal:attributes="href string:${here/absolute_url}#additional-files">See additional files</a>
       </div>
 
       <tal:order define="oid_field python:here.getField('order_id');
@@ -463,7 +463,7 @@
         </tal:order_extra>
       </tal:order>
 
-      <h2 class="pdf-left-alignment" i18n:translate="">Additional Files</h2>
+      <h2 class="pdf-left-alignment" i18n:translate="" id="additional-files">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
           <li tal:condition="python:item.portal_type in ['File']">
@@ -576,7 +576,7 @@
     <tal:trailer define="
       tr_field python:here.getField('trailer');
       tr_value python:tr_field.getAccessor(here)();">
-      <div tal:content="structure tr_value">Trailer</div>
+      <div tal:content="structure tr_value" class="visualClear">Trailer</div>
     </tal:trailer>
 
     <div class="portalMessage informationMessage"

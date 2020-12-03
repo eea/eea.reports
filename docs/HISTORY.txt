@@ -3,6 +3,9 @@ Changelog
 
 10.2-dev0 - (unreleased)
 ---------------------------
+* Bug fix: avoid wrong alignment of trailer text field and ensure
+  see additional files link takes you to the right section
+  [ichim-david refs #125236]
 
 10.1 - (2020-03-31)
 ---------------------------

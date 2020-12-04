@@ -463,6 +463,14 @@
         </tal:order_extra>
       </tal:order>
 
+      <tal:trailer define="
+          tr_field python:here.getField('trailer');
+          tr_value python:tr_field.getAccessor(here)();">
+        <div tal:content="structure tr_value" class="pdf-right-alignment trailer-section">
+          Trailer
+        </div>
+      </tal:trailer>
+
       <h2 class="pdf-left-alignment" i18n:translate="" id="additional-files">Additional Files</h2>
       <ul metal:define-macro="folderish" tal:define="level level|python:1;" class="report-files" id="report-files">
         <tal:fileitems repeat="item fileItems">
@@ -573,11 +581,6 @@
       </ul>
     </tal:foldercontents>
 
-    <tal:trailer define="
-      tr_field python:here.getField('trailer');
-      tr_value python:tr_field.getAccessor(here)();">
-      <div tal:content="structure tr_value" class="visualClear">Trailer</div>
-    </tal:trailer>
 
     <div class="portalMessage informationMessage"
          tal:condition="older_versions">

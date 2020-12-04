@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.2-dev0 - (unreleased)
+10.2 - (2020-12-04)
 ---------------------------
 * Bug fix: avoid wrong alignment of trailer text field and ensure
   see additional files link takes you to the right section

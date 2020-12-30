@@ -195,20 +195,25 @@ div > .portalMessage {
     display:block;
 }
 
+.trailer-section {
+    margin-top: 1rem; /* 125236 give room for trailer text to follow */
+}
+
 .pdf-right-alignment ul{
     margin: 0;
 }
 
 .pdf-left-alignment {
     float: left;
-    width:100%;
+    width:70%; /* #125236 ensure Additional Files is left of right-alignment classes */
 }
 
-/* 100603 float report-files when class is precedeed by pdf-left-alignment
+/* 100603 float report-files when class is preceded by pdf-left-alignment
  * avoiding content from spilling into the publication image   
 */
 .pdf-left-alignment ~ .report-files {
    float: left;
+    margin-bottom: 1rem; /* 125236 give room for trailer text to follow */
 }
 
 .pdfjs .sidebarOpen .findbar {

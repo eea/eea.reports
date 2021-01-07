@@ -1,0 +1,21 @@
+<tal:block tal:condition="view/available">
+
+  <tal:defines tal:define="report view/get_report; newer_versions view/is_replaced_by" tal:condition="newer_versions">
+
+    <dl class="portalMessage warning publicationMessage">
+      <dt class="portletHeader" i18n:translate="">
+        Note: new versions of the parent Report are available!
+      </dt>
+      <dd>
+        <ul>
+          <li tal:repeat="brain newer_versions">
+            <a tal:attributes="href brain/getPath" tal:content="brain/Title" />
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    
+    <h1 tal:content="string:${report/Title} - "></h1>
+  </tal:defines>
+
+</tal:block>

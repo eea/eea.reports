@@ -15,7 +15,7 @@
       </dd>
     </dl>
     
-    <h1 tal:content="string:${report/Title} - "></h1>
+    <h1 tal:content="string:${report/Title} &mdash; " class="documentParentHeader"></h1>
   </tal:defines>
 
 </tal:block>

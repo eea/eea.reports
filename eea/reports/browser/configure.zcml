@@ -72,5 +72,14 @@
     for="eea.reports.interfaces.IReportContainerEnhanced"
   />
 
+  <browser:viewlet
+    zcml:condition="installed eea.design"
+    name="eea.newer_report_versions"
+    manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+    class=".viewlets.NewerReportVersionsViewlet"
+    permission="zope2.View"
+    for="*"
+  />
+
 
 </configure>

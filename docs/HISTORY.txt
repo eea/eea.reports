@@ -3,6 +3,10 @@ Changelog
 
 10.2 - (2020-12-04)
 ---------------------------
+* Feature: added newer version portal message to Report children if
+  the Report has a newer version as a viewlet above the content title
+  if we have eea.design installed
+  [ichim-david refs #125423]
 * Bug fix: avoid wrong alignment of trailer text field and ensure
   see additional files link takes you to the right section
   [ichim-david refs #125236]

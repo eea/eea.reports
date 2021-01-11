@@ -2,9 +2,9 @@
 
   <tal:defines tal:define="report view/get_report; newer_versions view/is_replaced_by" tal:condition="newer_versions">
 
-    <dl class="portalMessage warning publicationMessage">
+    <dl class="portalMessage warning publicationMessage publicationDocument">
       <dt class="portletHeader" i18n:translate="">
-        Note: new versions of the parent Report are available!
+        Note: new versions of the publication are available!
       </dt>
       <dd>
         <ul>
@@ -15,7 +15,7 @@
       </dd>
     </dl>
     
-    <h1 tal:content="string:${report/Title} &mdash; " class="documentParentHeader"></h1>
+    <h2 tal:content="string:${report/Title}" class="documentParentHeader publicationDocument"></h2>
   </tal:defines>
 
 </tal:block>

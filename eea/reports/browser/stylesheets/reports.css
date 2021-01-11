@@ -37,7 +37,8 @@
     float: left;
     margin-right: 0.5em;
 }
-/* /used by frontpage.css */
+
+/* used by frontpage.css */
 .publicationText {
     background-color: transparent;
     border-bottom: 1px dotted gray;
@@ -59,19 +60,6 @@
 .publicationText #auto-related {
     padding: 1em;
     margin: 1em 1em 0 0;
-}
-
-dl.publicationMessage {
-    background-color: #f3f3f3;
-    margin-top: 25px;
-}
-
-dl.publicationMessage dt.portletHeader {
-    background-image: none;
-}
-
-dl.publicationMessage dd {
-    clear: both;
 }
 
 /* Overrides for PDF Viewer */
@@ -212,7 +200,7 @@ div > .portalMessage {
  * avoiding content from spilling into the publication image   
 */
 .pdf-left-alignment ~ .report-files {
-   float: left;
+    float: left;
     margin-bottom: 1rem; /* 125236 give room for trailer text to follow */
 }
 

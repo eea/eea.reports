@@ -5,7 +5,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.versions.browser.viewlets import CanonicalURL as ViewletBase
 from plone.app.layout.viewlets import common
 from plone.memoize.instance import memoize
-from zope.component.hooks import getSite
 from zope.component import getAdapter
 from eea.reports.relations.interfaces import IGroupRelations
 

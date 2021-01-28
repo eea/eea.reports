@@ -3,6 +3,8 @@ Changelog
 
 10.3-dev0 - (unreleased)
 ---------------------------
+* Bugfix: Better identify site root in report viewlet
+  [iulianpetchesi refs #107789]
 
 10.2 - (2020-12-04)
 ---------------------------

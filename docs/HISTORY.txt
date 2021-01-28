@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.3-dev0 - (unreleased)
+10.3 - (2021-01-28)
 ---------------------------
 * Bugfix: Better identify site root in report viewlet
   [iulianpetchesi refs #107789]

@@ -61,7 +61,6 @@ class NewerReportVersionsViewlet(common.ViewletBase):
             return None
         obj = self.context
         found = False
-        site = getSite()
         while True:
             obj = obj.aq_parent
     	    if not ISiteRoot.providedBy(obj):

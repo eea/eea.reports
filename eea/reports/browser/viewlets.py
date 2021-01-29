@@ -1,10 +1,10 @@
 """ eea.reports viewlets
 """
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.versions.browser.viewlets import CanonicalURL as ViewletBase
 from plone.app.layout.viewlets import common
 from plone.memoize.instance import memoize
-from zope.component.hooks import getSite
 from zope.component import getAdapter
 from eea.reports.relations.interfaces import IGroupRelations
 
@@ -60,10 +60,9 @@ class NewerReportVersionsViewlet(common.ViewletBase):
             return None
         obj = self.context
         found = False
-        site = getSite()
         while True:
             obj = obj.aq_parent
-            if obj is not site:
+    	    if not ISiteRoot.providedBy(obj):
                 if obj.portal_type == "Report":
                     found = True
                     break

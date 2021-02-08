@@ -3,6 +3,11 @@ Changelog
 
 10.4-dev0 - (unreleased)
 ---------------------------
+* Feature: briefing are now allowed in publication TOC.
+  [alecghica refs #128043]
+* Change: removed references to deprecated 'SOERMessage' and 'SOERKeyFact'
+  content types.
+  [alecghica refs #128043]
 
 10.3 - (2021-01-28)
 ---------------------------

@@ -97,7 +97,7 @@ class ReportContainerView(BrowserView):
         """ Files children
         """
         return self.context.getFolderContents({
-            'portal_type': ['Document', 'File', 'Link', 'Folder']
+            'portal_type': ['Document', 'File', 'Link', 'Folder', 'Fiche']
         })
 
     @property

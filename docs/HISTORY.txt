@@ -1,7 +1,7 @@
 Changelog
 =========
 
-10.4-dev0 - (unreleased)
+10.4 - (2021-02-08)
 ---------------------------
 * Feature: briefing are now allowed in publication TOC.
   [alecghica refs #128043]

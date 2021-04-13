@@ -22,6 +22,16 @@ class ImageView(BrowserView):
                 canonical = self.context.getCanonical()
                 if self.context != canonical:
                     self._img = atfolder.FolderImageView(canonical, self.request)
+
+                for fiche in self.context.getFolderContents(contentFilter={
+                        'portal_type': 'Fiche',
+                        'review_state':['published', 'visible']},
+                        full_objects = True):
+                    if fiche.id == self.context.default_page:
+                        self.request.form['display_fiche_img'] = True
+
+                        self._img = atfolder.FolderImageView(fiche, self.request)
+
         return self._img
 
     def display(self, scalename='thumb'):

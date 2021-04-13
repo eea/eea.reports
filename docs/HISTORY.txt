@@ -3,6 +3,8 @@ Changelog
 
 10.4 - (2021-02-08)
 ---------------------------
+* Change: Display image from fiche for reports
+  [iulianpetchesi refs #128043]
 * Feature: briefing are now allowed in publication TOC.
   [alecghica refs #128043]
 * Change: removed references to deprecated 'SOERMessage' and 'SOERKeyFact'

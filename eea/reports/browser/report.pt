@@ -495,7 +495,7 @@
             </tal:file>
           </li>
 
-          <li tal:condition="python:item.portal_type in ['Document', 'SOERMessage', 'SOERKeyFact']">
+          <li tal:condition="python:item.portal_type in ['Document', 'Fiche']">
             <tal:file define="
               item_type item/portal_type;
               wtool python:here.portal_workflow;
@@ -531,7 +531,7 @@
             </li>
           </tal:link>
 
-          <li tal:condition="python:item.portal_type=='Folder'" tal:attributes="
+          <li tal:condition="python:item.portal_type == 'Folder'" tal:attributes="
             class python:'tree-level-%s' % level">
             <tal:folder define="
               folder item;
